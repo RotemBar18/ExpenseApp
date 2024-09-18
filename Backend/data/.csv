@@ -1,0 +1,41 @@
+ExpenseId,UserId,Name,Amount,Date,Description,Category,isVisible
+,1,Gym membership,399.74,2024-09-09,I had a regular check-up with my doctor.,Health,1
+,2,Tuition,443.92,2024-08-25,I enrolled in a new online course to learn something new.,Education,1
+,3,Pharmacy,496.58,2024-08-20,I had a regular check-up with my doctor.,Health,1
+,4,Concert,170.3,2024-08-28,I went to the cinema and watched a new movie.,Entertainment,1
+,5,Bus fare,224.62,2024-08-14,I booked a flight for an upcoming trip to visit family.,Travel,1
+,1,Household items,319.33,2024-09-09,I made a small donation to a local charity this month.,Miscellaneous,1
+,2,Watch,457.64,2024-08-25,I bought a new watch during my shopping trip.,Shopping,1
+,3,Doctor visit,358.03,2024-08-22,I had a regular check-up with my doctor.,Health,1
+,4,Watch,418.04,2024-08-16,I bought a new watch during my shopping trip.,Shopping,1
+,5,Car repair,394.51,2024-08-24,I made a small donation to a local charity this month.,Miscellaneous,1
+,1,Dinner,105.28,2024-08-15,I had a lovely dinner at a cozy restaurant this week.,Food,1
+,2,Flight ticket,498.33,2024-08-23,I booked a flight for an upcoming trip to visit family.,Travel,1
+,3,Donation,155.49,2024-09-01,I made a small donation to a local charity this month.,Miscellaneous,1
+,4,Grocery shopping,489.92,2024-09-06,I had a lovely dinner at a cozy restaurant this week.,Food,1
+,5,Book purchase,212.39,2024-08-30,I enrolled in a new online course to learn something new.,Education,1
+,1,Book purchase,84.61,2024-08-17,I enrolled in a new online course to learn something new.,Education,1
+,2,Lunch,114.14,2024-09-06,I had a lovely dinner at a cozy restaurant this week.,Food,1
+,3,Pharmacy,444.69,2024-08-26,I had a regular check-up with my doctor.,Health,1
+,4,Online course,199.71,2024-08-16,I enrolled in a new online course to learn something new.,Education,1
+,5,Gym membership,450.5,2024-09-08,I had a regular check-up with my doctor.,Health,1
+,1,Grocery shopping,216.61,2024-09-05,I had a lovely dinner at a cozy restaurant this week.,Food,1
+,2,Internet,291.38,2024-09-07,I paid my monthly internet bill.,Utilities,1
+,3,Concert,18.54,2024-08-14,I went to the cinema and watched a new movie.,Entertainment,1
+,4,Shoes,321.34,2024-08-19,I bought a new shoes during my shopping trip.,Shopping,1
+,5,Concert,213.32,2024-09-04,I went to the cinema and watched a new movie.,Entertainment,1
+,1,Movie ticket,355.47,2024-08-26,I went to the cinema and watched a new movie.,Entertainment,1
+,2,Lunch,239.75,2024-09-09,I had a lovely dinner at a cozy restaurant this week.,Food,1
+,3,Book purchase,197.29,2024-08-29,I enrolled in a new online course to learn something new.,Education,1
+,4,Pharmacy,407.89,2024-08-27,I had a regular check-up with my doctor.,Health,1
+,5,Household items,415.79,2024-08-31,I made a small donation to a local charity this month.,Miscellaneous,1
+,1,Doctor visit,115.07,2024-08-23,I had a regular check-up with my doctor.,Health,1
+,2,Electricity,266.62,2024-09-01,I paid my monthly electricity bill.,Utilities,1
+,3,Doctor visit,91.53,2024-08-25,I had a regular check-up with my doctor.,Health,1
+,4,Electricity,50.99,2024-09-02,I paid my monthly electricity bill.,Utilities,1
+,5,Household items,265.24,2024-08-22,I made a small donation to a local charity this month.,Miscellaneous,1
+,1,Pharmacy,438.44,2024-08-28,I had a regular check-up with my doctor.,Health,1
+,2,Bus fare,208.29,2024-08-25,I booked a flight for an upcoming trip to visit family.,Travel,1
+,3,Bus fare,283.7,2024-08-23,I booked a flight for an upcoming trip to visit family.,Travel,1
+,4,Dinner,22.18,2024-08-29,I had a lovely dinner at a cozy restaurant this week.,Food,1
+,5,Bus fare,116.69,2024-08-28,I booked a flight for an upcoming trip to visit family.,Travel,1
