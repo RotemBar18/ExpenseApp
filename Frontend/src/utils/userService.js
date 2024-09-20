@@ -1,31 +1,45 @@
+import axios from 'axios';
+
 const BASE_URL = 'http://localhost:8081';
 
-
-export const updateUser = async (userId, updatedUserData) => {
+// Fetch user data by userId
+export const fetchUser = async (userId, token) => {
     try {
-        const response = await fetch(`${BASE_URL}/users/${userId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedUserData),
-        });
-
-        // Check if the response is okay
-        if (!response.ok) {
-            throw new Error('Failed to update user');
-        }
-
-        const data = await response.json();
-
-        if (data.success) {
-            return updatedUserData
-        } else {
-            console.error('Failed to update user:', data.message);
-            return null;
-        }
+      const response = await axios.get(`${BASE_URL}/users/Id/${userId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      console.log("User data fetched:", response.data);  // Debug log
+  
+      return response.data.user;  // Return the user data
     } catch (error) {
-        console.error('Error updating user:', error);
-        throw error;  // Re-throw the error to be handled by the caller
+      console.error('Error fetching user data:', error);
+      throw error;
     }
-};
+  };
+
+  export const updateUser = async (userId, updatedUserData, token) => {
+    try {
+      const response =  await axios.put(`${BASE_URL}/users/${userId}`,updatedUserData, // Correctly pass the updated data here
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      console.log(Response.data)
+      if (response.data.success) {
+        return response.data.user; // Return the updated user data
+      } else {
+        console.error('Failed to update user:', response.data.message);
+        return null;
+      }
+    } catch (error) {
+      console.error('Error updating user:', error);
+      throw error;
+    }
+  };

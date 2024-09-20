@@ -26,6 +26,7 @@ export const formatToLocalDate = (utcDateString) => {
 };
 
 export const alterCategoriesToArray = (data) => {
+    console.log(data)
     const newData = data
     newData.DefaultCategories = data.DefaultCategories.split(',');
     return newData

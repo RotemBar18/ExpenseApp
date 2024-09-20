@@ -33,15 +33,15 @@ export const login = async (email, password) => {
             }
         });
         if (response.data.success) {
-            localStorage.setItem('token', response.data.token);
-            alert('Login successful!');
+            return response.data;  // Return the full response with token and userId
         } else {
             alert(response.data.message);
+            return null
         }
-        return response.data
     } catch (error) {
-        console.error("Error during login:", error);
-        throw error;
+        console.error("Error in login request:", error);
+        alert('Login failed. Please try again.');
+        return null;
     }
 
 };

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { updateUser } from '../utils/userService';
+import { updateUser } from '../utils/userService'; // Ensure this is correctly implemented to handle both name and profile picture updates
+import { useDispatch } from 'react-redux'; // Import useDispatch from Redux
 
 const PersonalInfoContainer = styled.div`
   padding-left: 10px;
@@ -59,64 +60,77 @@ const ProfilePic = styled.img`
   border-radius: 50%;
 `;
 
-const PersonalInfoSettings = ({user}) => {
+const PersonalInfoSettings = ({ user }) => {
+  const dispatch = useDispatch(); // Initialize the dispatch function
+
+
   const [isEditing, setIsEditing] = useState({
-    name: false,
+    Name: false,
     profilePic: false,
   });
   const [personalInfo, setPersonalInfo] = useState({
-    name: user.name,
-    profilePic: user.profilePic || 'default_profile_pic_url', // Fallback to default profile pic
+    Name: user.Name,
+    profilePic: user.ProfilePic || 'default_profile_pic_url', // Fallback to default profile pic
   });
 
+  // Update the component when the user changes
   useEffect(() => {
-    console.log('User state has been updated:', user);
+    setPersonalInfo({
+      Name: user.Name,
+      profilePic: user.ProfilePic,
+    });
   }, [user]);
 
   const handleEditToggle = (field) => {
-    setIsEditing({ ...isEditing, [field]: !isEditing[field] });
+    setIsEditing((prevState) => ({
+      ...prevState,
+      [field]: !prevState[field],
+    }));
   };
 
   const handleInputChange = (field, value) => {
-    setPersonalInfo({ ...personalInfo, [field]: value });
+    setPersonalInfo((prevState) => ({
+      ...prevState,
+      [field]: value,
+    }));
   };
 
-  const handleSave = (field) => {
-    handleUserUpdate({ [field]: personalInfo[field] });
-    handleEditToggle(field);
+  const handleSave = async (field) => {
+    try {
+      const updatedUserData = {
+        ...user, // Send all existing user data
+        ...personalInfo, // Include any updated fields
+      };
+
+      const updatedUserFromServer = await updateUser(user.Id, updatedUserData);
+
+      if (updatedUserFromServer) {
+        setPersonalInfo({
+          Name: updatedUserFromServer.Name || personalInfo.Name,
+          profilePic: updatedUserFromServer.ProfilePic || personalInfo.profilePic,
+        });
+        dispatch({ type: 'UPDATE_USER_SUCCESS', payload: updatedUserData });
+        console.log('User updated successfully:', updatedUserFromServer);
+      } else {
+        console.error('Failed to update user');
+      }
+    } catch (error) {
+      console.error('Error updating user:', error);
+    } finally {
+      handleEditToggle(field); // Close the edit mode regardless of success
+    }
   };
 
   const handleProfilePicChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = () => setPersonalInfo({ ...personalInfo, profilePic: reader.result });
-      reader.readAsDataURL(file); // You might need to upload the file instead of converting it to base64.
-    }
-  };
-
-  const handleUserUpdate = async (updatedUser) => {
-    console.log('User to update:', user.Id);
-    try {
-      const updatedUserData = {
-        name: updatedUser.name || personalInfo.name, // Use updated name or fallback to current value
-        profilePic: updatedUser.profilePic || personalInfo.profilePic, // Use updated profile pic or fallback to current value
-      };
-
-      const updatedUserFromServer = await updateUser(user.Id, updatedUserData);
-
-      if (updatedUserFromServer) {
-        setUser((prevUser) => ({
-          ...prevUser,
-          name: updatedUserFromServer.name || prevUser.name, // Fallback to existing values if something is missing
-          profilePic: updatedUserFromServer.profilePic || prevUser.profilePic,
+      reader.onload = () =>
+        setPersonalInfo((prevState) => ({
+          ...prevState,
+          profilePic: reader.result, // Display preview
         }));
-        console.log('User updated successfully');
-      } else {
-        console.error('Failed to update user');
-      }
-    } catch (error) {
-      console.error('Error updating user:', error);
+      reader.readAsDataURL(file); // For preview; ideally, upload the file to the server directly
     }
   };
 
@@ -147,20 +161,20 @@ const PersonalInfoSettings = ({user}) => {
       <Section>
         <SectionLabel>Name</SectionLabel>
         <SectionValue>
-          {isEditing.name ? (
+          {isEditing.Name ? (
             <>
               <InputField
                 type="text"
-                value={personalInfo.name} // Display the current user's name
-                onChange={(e) => handleInputChange('name', e.target.value)}
+                value={personalInfo.Name} // Display the current user's name
+                onChange={(e) => handleInputChange('Name', e.target.value)}
                 placeholder={user.Name} // Placeholder shows the current name
               />
-              <SaveButton onClick={() => handleSave('name')}>Save</SaveButton>
+              <SaveButton onClick={() => handleSave('Name')}>Save</SaveButton>
             </>
           ) : (
             <>
-              {personalInfo.name}
-              <EditButton onClick={() => handleEditToggle('name')}>Edit</EditButton>
+              {personalInfo.Name}
+              <EditButton onClick={() => handleEditToggle('Name')}>Edit</EditButton>
             </>
           )}
         </SectionValue>

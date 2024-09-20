@@ -3,21 +3,20 @@ import { alterCategoriesToArray } from './utilService'
 const BASE_URL = 'http://localhost:8081';
 
 
-export const fetchPreferences = async (token, userId) => {
+export const fetchPreferences = async (userId, token) => {
     try {
         const response = await axios.get(`${BASE_URL}/preferences/${userId}`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
-            }
+                'Content-Type': 'application/json',
+            },
         });
         const newResponse = alterCategoriesToArray(response.data)
-        return newResponse;
+        return newResponse;  // Return preferences data
     } catch (error) {
-        console.error('Error fetching preferences:', error);
-        throw error;
+        throw new Error('Error fetching preferences');
     }
 };
-
 export const updatePreferences = async (token, userId, preferences) => {
     try {
         const response = await axios.put(`${BASE_URL}/preferences/${userId}`, preferences, {

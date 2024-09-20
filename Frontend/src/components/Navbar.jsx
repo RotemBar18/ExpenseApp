@@ -1,23 +1,24 @@
 // src/components/Navbar.jsx
 import {RightBorder, BottomBorder, TopBorder, NavLink,UserImage, NavItem, Nav,UserProfile,UserName, NavMenu,  Logo } from './NavbarElements';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
-const Navbar = ({ user, preferences, expenses }) => {
-
-
+const Navbar = () => {
     const navigate = useNavigate();
-
+    const { user } = useAuth(); // Use the custom hook to get user and preferences
+  
+   
     const goToStatistics = () => {
-        navigate('/statistics', { state: { user: user, expenses: expenses, preferences: preferences } }); // Pass the expenses to the statistics page
+        navigate('/statistics'); // Pass the expenses to the statistics page
     };
     const goToMain = () => {
-        navigate('/main', { state: { user: user, expenses: expenses, preferences: preferences } });
+        navigate('/main');
     };
     const goToSettings = () => {
-        navigate('/settings', { state: { user: user, expenses: expenses, preferences: preferences } });
+        navigate('/settings');
     };
     const goToExpenses = () => {
-        navigate('/expenses', { state: { user: user, expenses: expenses, preferences: preferences } });
+        navigate('/expenses');
     };
 
 
@@ -30,9 +31,8 @@ const Navbar = ({ user, preferences, expenses }) => {
 
             <NavMenu >
                 <UserProfile >
-                    <UserImage src='https://via.placeholder.com/80'/>
-                    <UserName >{user.Name}</UserName>
-                </UserProfile>
+                <UserImage src={user.ProfilePic || 'https://via.placeholder.com/80'} alt="Profile" />
+                <UserName>{user.Name || 'Guest'}</UserName>                </UserProfile>
                 <NavItem onClick={goToMain}>
                     <NavLink >MyBoard</NavLink>
                 </NavItem>

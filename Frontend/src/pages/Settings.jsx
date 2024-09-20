@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
 import { updatePreferences } from '../utils/preferenceService';
 import { processString } from "../utils/utilService";
 import SettingsBoard from "../components/SettingsBoard";
+import useExpenses from '../hooks/useExpenses'
+import useAuth from "../hooks/useAuth";
+
 const PageContainer = styled.div`
     background-color:#0a0a0a;
     position:fixed;
@@ -17,17 +18,9 @@ const PageContainer = styled.div`
 
 
 const Settings = () => {
-    const location = useLocation();
-    const expenses = location.state?.expenses || [];
-    const user = location.state?.user || [];
-    const token = localStorage.getItem('token');
-    const [preferences, setPreferences] = useState(location.state?.preferences || {
-        ExpensesThemeColor: "#ffffff",
-        DefaultCategories: ['Food', 'Health', 'Entertainment', 'Miscellaneous']
-    });
-    console.log(preferences)
-    console.log(user)
-    console.log(expenses)
+    const { user, preferences, userId } = useAuth(); // Use the custom hook to get user and preferences
+    const { expenses} = useExpenses(userId);
+  
    
     const handleAddCategory = (newCategory) => {
         onSetPreferences(newCategory)

@@ -1,9 +1,9 @@
 import React from "react";
 import ExpenseList from "../components/ExpenseList";
-import { useLocation } from "react-router-dom";
 import useExpenses from '../hooks/useExpenses';
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
+import useAuth from '../hooks/useAuth';  // Import the custom hook
 
 const ExpensePageContainer = styled.div`
     width:100%;
@@ -17,15 +17,19 @@ const ExpensePageContainer = styled.div`
 
 
 const Expenses = () => {
-    const location = useLocation();
-    const preferences = location.state?.preferences || {};
-    const user = location.state?.user || {};
-    const { expenses, loading, error, reloadExpenses, deleteExpense, updateExpense } = useExpenses(user.Id);
+  const { user, preferences, userId } = useAuth(); // Use the custom hook to get user and preferences
+  const { expenses, deleteExpense, updateExpense } = useExpenses(userId);
+
+  console.log('Redux user:', user);  
+  console.log('Redux preferences:', preferences);  
+
+ 
+
 
     if (!user) {
         return <div>Loading user data...</div>;
     }
-    console.log(user); // Now you have access to the user on this page
+    console.log(user); 
 
     const handleDeleteExpense = (expenseId) => {
         deleteExpense(expenseId)
@@ -37,7 +41,7 @@ const Expenses = () => {
 
     return (
         <ExpensePageContainer>
-            <Navbar user={user} preferences={preferences} expenses={expenses} />
+            <Navbar  expenses={expenses} preferences={preferences} user={user}  />
             <ExpenseList
                 categories={preferences.DefaultCategories}
                 expenses={expenses}

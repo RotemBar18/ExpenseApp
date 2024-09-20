@@ -5,6 +5,7 @@ import password_icon from "./assets/password.png";
 import email_icon from "./assets/email.png";
 import { useNavigate } from "react-router-dom";
 import { handleAuthSubmit } from '../utils/authHandlers'; 
+import { useDispatch } from "react-redux";  // Import useDispatch from Redux
 
 
 const Header = styled.div`
@@ -143,6 +144,8 @@ const StyledInput = styled.input`
 const Signup = () => {
   const [action, setAction] = useState("Sign Up");
   const navigate = useNavigate();
+  const dispatch = useDispatch();  // Use Redux dispatch
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -154,7 +157,7 @@ const Signup = () => {
   }, [action]);
 
   const handleSubmit = (event) => {
-    handleAuthSubmit(event ,action, email, password, name, navigate, setAction);
+    handleAuthSubmit(event, action, email, password, name, navigate, dispatch, setAction);  // Include dispatch here
   };
   
   const handleSwitch = (newAction) => {

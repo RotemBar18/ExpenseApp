@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Navbar from '../components/Navbar';
 import StatsBoard from '../components/StatsBoard';
-import { useLocation } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
+import useExpenses from '../hooks/useExpenses';
 
 const PageContainer = styled.div`
     width:100%;
@@ -16,17 +17,14 @@ const PageContainer = styled.div`
 
 
 const Statistics = () => {
-    const location = useLocation();
-    const expenses = location.state?.expenses || [];
-    const preferences = location.state?.preferences || {};
-    const user = location.state?.user || {};
-    console.log(expenses)
-    console.log(preferences)
-    console.log(user)
+    const { user, preferences, userId } = useAuth(); // Use the custom hook to get user and preferences
+    const { expenses} = useExpenses(userId);
+  
+   
 
     return (
         <PageContainer>
-            <Navbar user={user}  expenses={expenses} preferences={preferences} />
+            <Navbar user={user} expenses={expenses} preferences={preferences} />
             <StatsBoard expenses={expenses} />
         </PageContainer>
     );

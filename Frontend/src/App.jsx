@@ -8,6 +8,10 @@ import Signup from './components/signup';
 import Expenses from './pages/ExpensesPage';
 import MainPage from './pages/mainpage';
 import { createGlobalStyle } from 'styled-components';
+import React from 'react';
+import { Provider } from 'react-redux';
+import store from './redux/store';  // Import the store
+
 
 const GlobalStyle = createGlobalStyle`
 @font-face {
@@ -48,7 +52,7 @@ body {
 function App() {
   
   return (
-    <>
+    <Provider store={store}>
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -58,7 +62,7 @@ function App() {
         <Route path="/main" element={<MainPage />} />
         <Route path="/sign-up" element={<Signup />} />
       </Routes>
-    </>
+    </Provider>
   );
 }
 
