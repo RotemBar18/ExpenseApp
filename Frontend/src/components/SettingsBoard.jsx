@@ -1,79 +1,91 @@
-// src/components/MainBoard.jsx
+// src/components/SettingsBoard.jsx
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components'; // Import useTheme to access the theme
 import PersonalInfoSettings from './PersonalInfoSettings';
 import LoginAndSecuritySettings from './LoginAndSecuritySettings';
 import CustomizationSettings from './CustomizationSettings';
 
 const SettingBoardContainer = styled.div`
-    padding-left:250px;
-    padding-top: 80px;
-    margin-left:40px;
-
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-left:2%;
+  margin-top:1%;
 `;
-const HeaderContainer = styled.div`
+
+const HeaderContainer = styled.div``;
+
+const HeaderChoices = styled.div`
+  display: flex;
 `;
 
-
-const HeaderChoises = styled.div`
-    display:flex;
-    gap:20px;
-`;
 const SettingsContainer = styled.div`
   display: flex;
-`
+`;
 
 const HeaderText = styled.span`
-    display: flex;
-padding:10px;
-    align-items: center;
-    color: ${(props) => (props.selected ? '#00d3a9' : '#bbbbbb')};
-    cursor: pointer;
-    border-radius:10px 10px 0px 0px;
-    
-    &:hover {
-        background-color: #333;
-        
-    }
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  color: ${(props) => (props.selected ? props.theme.buttonBackground : props.theme.navBarTextColor)}; // Dynamic color based on selection and theme
+  cursor: pointer;
+background-color: ${(props) => props.theme.navBarBackground}; // Theme-based hover background
+  
+  &:hover {
+    background-color: ${(props) => props.theme.buttonHoverBackground}; // Theme-based hover background
+    color: ${(props) => props.theme.buttonHoverTextColor}; // Theme-based hover text color
+  }
+      &:last-child {
+    border-radius: 0px 10px 10px 0px  ; // Full 10px border radius on all corners for the last child
+  }      
+    &:first-child {
+    margin-left:10px;
+    border-radius: 10px 0px  0px 10px ; // Full 10px border radius on all corners for the last child
+  }
+`;
 
-    &:hover {
-        color: #00d3a9;
-    }
-`
-const SettingsBoard = ({user ,preferences}) => {
-    const [SettingsKind, setSettingsKind] = useState("personal")
-    
+const SettingsBoard = ({ user, preferences }) => {
+    const theme = useTheme(); // Access the current theme from ThemeProvider
+    const [settingsKind, setSettingsKind] = useState("personal");
+
     return (
         <SettingBoardContainer>
             <HeaderContainer>
-                <h1 style={{paddingLeft:'10px'}}>Settings</h1>
-                <HeaderChoises>
-                    <HeaderText onClick={() => setSettingsKind("personal")}>
+                <h1 style={{ paddingLeft: '10px', color: theme.headerTextColor }}>Settings</h1> {/* Use theme header text color */}
+                <HeaderChoices>
+                    <HeaderText
+                        onClick={() => setSettingsKind("personal")}
+                        selected={settingsKind === "personal"}
+                        theme={theme}
+                    >
                         Personal Info
                     </HeaderText>
-                    <HeaderText onClick={() => setSettingsKind("security")}>
+                    <HeaderText
+                        onClick={() => setSettingsKind("security")}
+                        selected={settingsKind === "security"}
+                        theme={theme}
+                    >
                         Login & Security
                     </HeaderText>
-                    <HeaderText onClick={() => setSettingsKind("customize")}>
+                    <HeaderText
+                        onClick={() => setSettingsKind("customize")}
+                        selected={settingsKind === "customize"}
+                        theme={theme}
+                    >
                         Customization
                     </HeaderText>
-                </HeaderChoises>
+                </HeaderChoices>
             </HeaderContainer>
             <SettingsContainer>
-
-                {
-                    SettingsKind === "security" ? (
-                        <LoginAndSecuritySettings user={user} />
-                    ) : SettingsKind === "personal" ? (
-                        <PersonalInfoSettings user={user} />
-                    ) : (
-                        <CustomizationSettings  preferences={preferences}/>
-                    )
-                }
-
+                {settingsKind === "security" ? (
+                    <LoginAndSecuritySettings user={user} />
+                ) : settingsKind === "personal" ? (
+                    <PersonalInfoSettings user={user} />
+                ) : (
+                    <CustomizationSettings preferences={preferences} />
+                )}
             </SettingsContainer>
-
-
         </SettingBoardContainer>
     );
 };

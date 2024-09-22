@@ -5,9 +5,12 @@ import ExpenseBarChart from '../charts/ExpenseBarChart'
 
 
 const StatsBoardContainer = styled.div`
-    padding-left:250px;
-    height:100%;
-    padding-top: 80px;
+display:flex;
+flex-wrap: wrap;
+gap:40px;
+align-items: center;
+width:100%;
+justify-content: space-around;
 
 `;
 const StatsBoard = ({ expenses }) => {

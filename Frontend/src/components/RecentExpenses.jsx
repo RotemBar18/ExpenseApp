@@ -3,26 +3,26 @@ import styled from 'styled-components';
 
 const ExpenseListContainer = styled.div`
   padding: 10px;
-  color:#bbbbbb ;
-  background-color:#1b1b1b;
-  display:flex;
-  flex-direction:column;
+  color: ${(props) => props.theme.headerTextColor}; // Light theme text color
+  background-color: ${(props) => props.theme.modalBackground}; // Light theme modal background
+  display: flex;
+  flex-direction: column;
   border-radius: 10px;
   max-height: 200px;
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.5);
   overflow-x: hidden;
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 `;
 
-const ExpensesTable = styled.ul` 
+const ExpensesTable = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
-    overflow-y: auto;
+  overflow-y: auto;
   max-height: 400px;
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Header = styled.div`
@@ -30,41 +30,44 @@ const Header = styled.div`
   margin-bottom: 5px;
   font-size: 18px;
   font-weight: 800;
-  border-bottom: 1px solid #585858;
+  border-bottom: 1px solid ${(props) => props.theme.border}; // Using theme border color
 `;
 
 const ExpenceHeader = styled.div`
-display:flex;
-justify-content: flex-start;
-
+  display: flex;
+  justify-content: flex-start;
 `;
-
 
 const HeaderText = styled.div`
   font-weight: 800;
-  min-width:15ch;
+  min-width: 15ch;
   overflow: hidden;
-  margin-right:33px;
+  margin-right: 33px;
+  color: ${(props) => props.theme.modalTextColor}; // Header text color
 `;
+
 const HeaderPrice = styled.div`
   font-weight: 800;
+  color: ${(props) => props.theme.modalTextColor}; // Header text color
 `;
+
 const Expense = styled.div`
   display: flex;
-  cursor:pointer;
-;`
+  cursor: pointer;
+  color: ${(props) => props.theme.modalTextColor}; // Expense text color
+`;
 
 const ExpenseAmount = styled.div`
-  text-overflow:ellipsis;
-  
+  text-overflow: ellipsis;
+  color: ${(props) => props.theme.modalTextColor}; // Amount text color
 `;
 
 const ExpenseText = styled.div`
-  text-overflow:ellipsis;
-  min-width:15ch;
-  margin-right:40px;
+  text-overflow: ellipsis;
+  min-width: 15ch;
+  margin-right: 40px;
+  color: ${(props) => props.theme.modalTextColor}; // Expense text color
 `;
-
 const RecentExpenses = ({ expenses }) => {
     const expensesForDisplay = expenses.slice(-5).reverse();
 

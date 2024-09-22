@@ -1,23 +1,22 @@
 import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 import { format } from 'date-fns';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components'; // Import useTheme from styled-components
 
 const currentMonthName = new Date().toLocaleString('en-US', { month: 'long' });
 
 const ChartContainer = styled.div`
-height: 30vh;
+  height: 30vh;
   width: 85%;
   margin: 20px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #1b1b1b;
+  background-color: ${(props) => props.theme.modalBackground}; 
   padding: 5px 20px 40px 20px;
   border-radius: 10px;
-  
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 `;
-
 
 const getAllDaysInMonth = (month, year) => {
   const date = new Date(year, month, 1);
@@ -29,14 +28,12 @@ const getAllDaysInMonth = (month, year) => {
   return days;
 };
 
-// Helper function to group expenses by day and category for the current month
 const groupExpensesByDayAndCategory = (expenses) => {
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth();
   const allDays = getAllDaysInMonth(currentMonth, currentYear);
   const groupedData = allDays.map(day => {
     const categories = {};
-
     expenses.forEach((expense) => {
       const expenseDate = format(new Date(expense.Date), 'yyyy-MM-dd');
       if (expenseDate === day) {
@@ -48,9 +45,8 @@ const groupExpensesByDayAndCategory = (expenses) => {
       }
     });
     const formattedDay = format(new Date(day), 'dd/MM');
-
     return {
-      day: formattedDay,  // Use the new format here
+      day: formattedDay,
       ...categories,
     };
   });
@@ -58,41 +54,49 @@ const groupExpensesByDayAndCategory = (expenses) => {
 };
 
 const DailyExpensesChart = ({ expenses }) => {
+  const theme = useTheme(); // Use the theme from the context
   const dailyData = groupExpensesByDayAndCategory(expenses);
   const categories = Array.from(new Set(expenses.map(exp => exp.Category || 'Unknown')));
-  const theme = {
+
+  const nivoTheme = {
     axis: {
       ticks: {
-        text: {
-          fill: '#bbbbbb', // Change axis label color to white
-        },
+        text: { fill: theme.headerTextColor || '#bbbbbb' },
       },
       legend: {
-        text: {
-          fill: '#bbbbbb', // Change axis legend color to white
-        },
+        text: { fill: theme.headerTextColor || '#bbbbbb' },
       },
     },
     grid: {
       line: {
-        stroke: '#ffffff', // Change grid line color to white
+        stroke: theme.headerTextColor, // You can adjust this if needed
         strokeWidth: 2,
+      },
+    },
+    tooltip: {
+      container: {
+        background: theme.modalBackground, // Light background for tooltips
+        color: theme.modalTextColor, // Dark text for readability
+        borderRadius: '4px',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
       },
     },
   };
 
   return (
     <ChartContainer>
-      <h3 style={{ color: '#bbbbbb', textAlign: 'center', borderBottom: '2px solid #bbbbbb', paddingBottom: '10px' }}>{currentMonthName}'s Expenses:</h3>
+      <h3 style={{ color: theme.headerTextColor, textAlign: 'center', borderBottom: `2px solid ${theme.border}`, paddingBottom: '10px' }}>
+        {currentMonthName}'s Expenses:
+      </h3>
       <ResponsiveBar
         data={dailyData}
-        keys={categories}  // The category names
-        indexBy="day"  // The days of the month
-        margin={{ top: 30, bottom: 100, left: 60, right: 15 }}  // Adjust margins for a better layout
+        keys={categories}
+        indexBy="day"
+        margin={{ top: 30, bottom: 100, left: 60, right: 15 }}
         padding={0.3}
         valueScale={{ type: 'linear' }}
         indexScale={{ type: 'band', round: true }}
-        colors={{ scheme: 'yellow_green' }}  // Customize the color scheme
+        colors={theme.chartColors || { scheme: 'greens' }} // Use theme-specific chart colors
         axisBottom={{
           tickSize: 5,
           tickPadding: 5,
@@ -109,13 +113,15 @@ const DailyExpensesChart = ({ expenses }) => {
           legendOffset: -55,
           format: value => `$${value.toFixed(1)}`,
         }}
-        label={(d) => `$${d.value.toFixed(2)}`}
+        labelSkipWidth={12}
+        labelSkipHeight={12}
+        labelTextColor={theme.buttonTextColor} // Use theme text color
         enableLabel={false}
-        legends={[]}  // Remove legends
+        legends={[]}
         animate={true}
         motionStiffness={90}
         motionDamping={15}
-        theme={theme}
+        theme={nivoTheme}
       />
     </ChartContainer>
   );

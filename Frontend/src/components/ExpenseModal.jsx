@@ -15,21 +15,13 @@ const ModalBack = styled.div`
   z-index: 1000; /* Ensures the modal is on top */
 `;
 
-const CloseButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-`;
+// Main modal container
 const BoardContainer = styled.div`
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-    background: white;
+  background: ${(props) => props.theme.modalBackground};
   border-radius: 10px;
   padding: 20px;
   width: 400px;
@@ -38,52 +30,81 @@ const BoardContainer = styled.div`
   position: relative;
 `;
 
+// Close button for the modal
+const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: ${(props) => props.theme.modalTextColor}; /* Ensure close button is visible */
+`;
+
+// Section inside the modal for individual details
 const DetailSection = styled.div`
   padding: 10px;
-  background: white;
+  background: ${(props) => props.theme.modalBackground};
   border-radius: 5px;
 `;
 
+// Titles for each input section
 const DetailTitle = styled.h3`
   margin: 0;
   font-size: 18px;
-  color: #333;
+  color: ${(props) => props.theme.headerTextColor};
 `;
 
-const DetailText = styled.textarea`
-  margin: 5px 0;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-`;
+// Various input fields for expense details
 const DetailInput = styled.input`
   margin: 5px 0;
   padding: 8px;
   font-size: 16px;
-  border: 1px solid #ddd;
+  border: 1px solid ${(props) => props.theme.inputBorderColor};
   border-radius: 4px;
+  color: ${(props) => props.theme.inputTextColor};
+  background: ${(props) => props.theme.inputBackground};
 `;
+
+// Select dropdown for categories
 const DetailSelect = styled.select`
   margin: 5px 0;
   padding: 8px;
   font-size: 16px;
-  border: 1px solid #ddd;
+  border: 1px solid ${(props) => props.theme.inputBorderColor};
   border-radius: 4px;
+  color: ${(props) => props.theme.inputTextColor};
+  background: ${(props) => props.theme.inputBackground};
 `;
+
+// Text area for the description
+const DetailText = styled.textarea`
+  margin: 5px 0;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid ${(props) => props.theme.inputBorderColor};
+  border-radius: 4px;
+  color: ${(props) => props.theme.inputTextColor};
+  background: ${(props) => props.theme.inputBackground};
+`;
+
+// Button group for save and cancel
 const ButtonGroup = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 10px;
 `;
+
+// Buttons with primary and secondary styles
 const Button = styled.button`
   padding: 8px 12px;
   font-size: 16px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  background-color: ${props => (props.primary ? '#007bff' : '#6c757d')};
-  color: white;
+  background-color: ${(props) => (props.primary ? props.theme.buttonBackground : props.theme.inputBackground)};
+  color: ${(props) => (props.primary ? props.theme.buttonTextColor : props.theme.inputTextColor)};
   &:hover {
     opacity: 0.8;
   }
@@ -91,87 +112,89 @@ const Button = styled.button`
 
 
 const ExpenseModal = ({ categories, isOpen, onClose, onUpdate, initialData }) => {
-    const [expense, setExpense] = useState(initialData);
-    useEffect(() => {
-        if (initialData) {
-            setExpense({
-                ...initialData,
-                Date: formatToLocalDate(initialData.Date),
-            });
-        }
-    }, [initialData, isOpen]);
+  const [expense, setExpense] = useState(initialData);
+  useEffect(() => {
+    if (initialData) {
+      setExpense({
+        ...initialData,
+        Date: formatToLocalDate(initialData.Date),
+      });
+    }
+  }, [initialData, isOpen]);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        const formattedValue =
-            name === "Date" ? formatDateToUTC(value) : value;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const formattedValue =
+      name === "Date" ? formatDateToUTC(value) : value;
 
 
-        setExpense((prev) => ({ ...prev, [name]: formattedValue }));
-    };
+    setExpense((prev) => ({ ...prev, [name]: formattedValue }));
+  };
 
-    const handleSubmit = (e) => {
-        onUpdate(expense)
-        onClose()
-        e.preventDefault();
-    };
-    if (!isOpen) return null;
-    return (
-        <ModalBack onClick={onClose} >
-            <BoardContainer onClick={e => e.stopPropagation()}>
-                <CloseButton onClick={onClose}>✕</CloseButton>
-                <DetailSection>
-                    <DetailTitle>Name</DetailTitle>
-                    <DetailInput
-                        name="Name"
-                        value={expense.Name}
-                        onChange={handleChange}
-                    />
-                </DetailSection>
-                <DetailSection>
-                    <DetailTitle>Amount</DetailTitle>
-                    <DetailInput
-                        name="Amount"
-                        type="number"
-                        value={expense.Amount}
-                        onChange={handleChange}
-                    />
-                </DetailSection>
-                <DetailSection>
-                    <DetailTitle>Category</DetailTitle>
-                    <DetailSelect name="Category" value={expense.Category} onChange={handleChange}>
-                        {categories.map((category) => (
-                            <option key={category} value={category}>
-                                {category}
-                            </option>
-                        ))}
-                    </DetailSelect>
-                </DetailSection>
-                <DetailSection>
-                    <DetailTitle>Date</DetailTitle>
-                    <DetailInput
-                        name="Date"
-                        type="date"
-                        value={expense.Date ? expense.Date.slice(0, 10) : ""}
-                        onChange={handleChange}
-                    />
-                </DetailSection>
-                <DetailSection>
-                    <DetailTitle>Description</DetailTitle>
-                    <DetailText
-                        name="Description"
-                        value={expense.Description}
-                        onChange={handleChange}
-                    />
-                </DetailSection>
-                <ButtonGroup>
-                    <Button primary onClick={handleSubmit}>Save</Button>
-                    <Button onClick={onClose}>Cancel</Button>
-                </ButtonGroup>
-            </BoardContainer>
+  const handleSubmit = (e) => {
+    onUpdate(expense)
+    onClose()
+    e.preventDefault();
+  };
+  if (!isOpen) return null;
+  return (
+    <ModalBack onClick={onClose} >
+      <BoardContainer onClick={e => e.stopPropagation()}>
+        <CloseButton onClick={onClose}>✕</CloseButton>
+        <DetailSection>
+          <DetailTitle>Name</DetailTitle>
+          <DetailInput
+            name="Name"
+            value={expense.Name}
+            onChange={handleChange}
+          />
+        </DetailSection>
+        <DetailSection>
+          <DetailTitle>Amount</DetailTitle>
+          <DetailInput
+            name="Amount"
+            type="number"
+            value={expense.Amount}
+            onChange={handleChange}
+          />
+        </DetailSection>
+        <DetailSection>
+          <DetailTitle>Category</DetailTitle>
+          <DetailSelect name="Category" value={expense.Category} onChange={handleChange}>
+            {categories
+              .filter((cat) => cat !== 'Manage Categories:   ') // Filter out the unwanted category
+              .map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              ))}
+          </DetailSelect>
+        </DetailSection>
+        <DetailSection>
+          <DetailTitle>Date</DetailTitle>
+          <DetailInput
+            name="Date"
+            type="date"
+            value={expense.Date ? expense.Date.slice(0, 10) : ""}
+            onChange={handleChange}
+          />
+        </DetailSection>
+        <DetailSection>
+          <DetailTitle>Description</DetailTitle>
+          <DetailText
+            name="Description"
+            value={expense.Description}
+            onChange={handleChange}
+          />
+        </DetailSection>
+        <ButtonGroup>
+          <Button primary onClick={handleSubmit}>Save</Button>
+          <Button onClick={onClose}>Cancel</Button>
+        </ButtonGroup>
+      </BoardContainer>
 
-        </ModalBack>
-    );
+    </ModalBack>
+  );
 };
 
 export default ExpenseModal;

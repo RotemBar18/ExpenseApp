@@ -5,6 +5,9 @@ import { useDispatch } from 'react-redux'; // Import useDispatch from Redux
 
 const PersonalInfoContainer = styled.div`
   padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  color: ${(props) => props.theme.modalTextColor}; // Use theme-based colors
 `;
 
 const Section = styled.div`
@@ -13,21 +16,25 @@ const Section = styled.div`
   display: flex;
   gap: 20px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid ${(props) => props.theme.border}; // Use theme for borders
 `;
 
 const SectionLabel = styled.div`
   font-weight: bold;
+  color: ${(props) => props.theme.headerTextColor}; // Use theme-based text color
 `;
 
 const SectionValue = styled.div`
   color: #555;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 const EditButton = styled.button`
   background: none;
   border: none;
-  color: #007bff;
+  color: ${(props) => props.theme.buttonBackground};
   cursor: pointer;
 
   &:hover {
@@ -39,18 +46,21 @@ const InputField = styled.input`
   padding: 5px;
   margin: 5px 0;
   width: 60%;
+  border: 1px solid ${(props) => props.theme.inputBorderColor};
+  border-radius: 4px;
+  font-size: 14px;
 `;
 
 const SaveButton = styled.button`
   padding: 5px 10px;
-  background-color: #007bff;
-  color: white;
+  background-color: ${(props) => props.theme.buttonBackground};
+  color: ${(props) => props.theme.buttonTextColor};
   border: none;
   border-radius: 4px;
   cursor: pointer;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: ${(props) => props.theme.buttonHoverBackground};
   }
 `;
 
@@ -58,8 +68,8 @@ const ProfilePic = styled.img`
   width: 80px;
   height: 80px;
   border-radius: 50%;
+  margin-bottom: 10px;
 `;
-
 const PersonalInfoSettings = ({ user }) => {
   const dispatch = useDispatch(); // Initialize the dispatch function
 

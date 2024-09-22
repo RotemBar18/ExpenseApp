@@ -1,8 +1,9 @@
 import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 import styled from 'styled-components';
+import { useTheme } from 'styled-components'; // Import the useTheme hook
 
-// Get the total expenses for each month and category of the current year
+// Function to group expenses by month and category
 const groupExpensesByMonthAndCategory = (expenses) => {
   const currentYear = new Date().getFullYear();
   const months = [
@@ -10,9 +11,8 @@ const groupExpensesByMonthAndCategory = (expenses) => {
     'July', 'August', 'September', 'October', 'November', 'December',
   ];
 
-  const categories = Array.from(new Set(expenses.map(exp => exp.Category || 'Unknown'))); // Get unique categories
+  const categories = Array.from(new Set(expenses.map(exp => exp.Category || 'Unknown')));
 
-  // Group expenses by month and category
   const groupedData = months.map((month, index) => {
     const dataForMonth = { month };
 
@@ -30,7 +30,6 @@ const groupExpensesByMonthAndCategory = (expenses) => {
       }
     });
 
-    // Ensure that all categories have a value, even if it's 0
     categories.forEach(category => {
       if (!dataForMonth[category]) {
         dataForMonth[category] = 0;
@@ -50,7 +49,7 @@ const ChartContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #1b1b1b;
+background-color: ${(props) => props.theme.modalBackground};
   padding: 5px 20px 40px 20px;
   border-radius: 10px;
 `;
@@ -58,41 +57,47 @@ const ChartContainer = styled.div`
 const MonthlyExpensesChart = ({ expenses }) => {
   const { groupedData, categories } = groupExpensesByMonthAndCategory(expenses);
   const currentYear = new Date().getFullYear();
-  
-  const theme = {
+  const theme = useTheme(); // Access the current theme
+
+  const nivoTheme = {
     axis: {
       ticks: {
-        text: {
-          fill: '#bbbbbb',
-        },
+        text: { fill: theme.headerTextColor || '#bbbbbb' },
       },
       legend: {
-        text: {
-          fill: '#bbbbbb',
-        },
+        text: { fill: theme.headerTextColor || '#bbbbbb' },
       },
     },
     grid: {
       line: {
-        stroke: '#ffffff',
+        stroke: theme.headerTextColor, // You can adjust this if needed
         strokeWidth: 2,
+      },
+    },
+    tooltip: {
+      container: {
+        background: theme.modalBackground, // Light background for tooltips
+        color: theme.modalTextColor, // Dark text for readability
+        borderRadius: '4px',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
       },
     },
   };
 
   return (
     <ChartContainer>
-      <h3 style={{ color: '#bbbbbb', textAlign: 'center', borderBottom: '2px solid #bbbbbb', paddingBottom: '10px' }}>
-      {`${currentYear} Expenses:`}      </h3>
+      <h3 style={{ color: theme.headerTextColor,textAlign: 'center', borderBottom: '2px solid #bbbbbb', paddingBottom: '10px' }}>
+        {`${currentYear} Expenses:`}
+      </h3>
       <ResponsiveBar
         data={groupedData}
-        keys={categories} // Categories as keys
-        indexBy="month" // Group by month name
+        keys={categories}
+        indexBy="month"
         margin={{ top: 30, bottom: 100, left: 60, right: 15 }}
         padding={0.1}
         valueScale={{ type: 'linear' }}
         indexScale={{ type: 'band', round: true }}
-        colors={{ scheme: 'yellow_green_blue' }} // Customize the color scheme
+        colors={theme.chartColors} // Use colors from the theme
         axisBottom={{
           tickSize: 5,
           tickPadding: 5,
@@ -131,7 +136,7 @@ const MonthlyExpensesChart = ({ expenses }) => {
         labelSkipHeight={15}
         motionStiffness={90}
         motionDamping={15}
-        theme={theme}
+        theme={nivoTheme}
       />
     </ChartContainer>
   );

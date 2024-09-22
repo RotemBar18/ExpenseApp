@@ -9,50 +9,51 @@ const ExpenseContainer = styled.div`
 `
 
 const ExpenseItem = styled.li`
-  padding: 15px; 
-  border-bottom: 1px solid #aa88aa;
+  padding: 15px;
+  border-bottom: 1px solid ${(props) => props.theme.border};
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  margin-right:10px;
-  transition: background-color 0.3s,border-radius:0.1s;
-  cursor:pointer;
+  margin-right: 10px;
+  transition: background-color 0.3s, border-radius 0.1s;
+  cursor: pointer;
+    border-radius: 5px;
+
   &:hover {
-    border-radius:10px;
-    background-color: ${(props) => props.color == 'white' ? 'white' : 'black'};
-    color: ${(props) => props.color == 'white' ? 'black' : 'white'};
+    background-color: ${(props) => props.theme.buttonHoverBackground};
+    color: ${(props) => props.theme.buttonHoverTextColor};
   }
 `;
 
-
 const ExpenseText = styled.div`
- display: inline-block;
+  display: inline-block;
   pointer-events: none;
   width: 10ch;
   overflow: hidden;
-  text-overflow: ellipsis; 
-  white-space: nowrap; 
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: ${(props) => props.theme.textColor};
 `;
 
 const Buttons = styled.div`
   display: flex;
   gap: 10px;
-  padding :1px;
+  padding: 1px;
 `;
 
 const Img = styled.img`
-    max-width:20px;
-    transition: scale 0.3s;
-    cursor:pointer;
+  max-width: 20px;
+  transition: scale 0.3s;
+  cursor: pointer;
   &:hover {
-     transform: scale(1.3);
-    }
-    &:active {
-      transform: scale(1);
-   }
-      
+    transform: scale(1.3);
+  }
+  &:active {
+    transform: scale(1);
+  }
 `;
+
 
 const Expense = ({ color, expense, onDelete, onUpdate, categories }) => {
   const [isExpenseModalOpen, setIsExpenseModalOpen] = useState(false);

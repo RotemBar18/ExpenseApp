@@ -1,16 +1,17 @@
-// src/components/ManageCategories.jsx
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import useAuth from '../hooks/useAuth'; // Import the custom hook
 
+// Main container for managing categories
 const ManageCategoriesContainer = styled.div`
-  padding: 5px;
-  border-radius: 8px;
-  max-width: 300px; /* Optional: Adjust to fit your layout */
-  margin: auto;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  background-color: ${(props) => props.theme.background};
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 `;
 
-
+// Category list styling with custom scrollbars
 const CategoryList = styled.ul`
   list-style: none;
   padding: 0;
@@ -18,98 +19,95 @@ const CategoryList = styled.ul`
   max-height: 200px;
   overflow-y: auto;
   border: none;
+  color: ${(props) => props.theme.modalTextColor};
 
-  /* Custom scrollbar styling */
   &::-webkit-scrollbar {
     width: 8px;
-    
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #666666;
+    background-color: ${(props) => props.theme.scrollBarThumb};
     border-radius: 4px;
   }
 
   &::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
-        border-radius: 4px;
-
+    background-color: ${(props) => props.theme.scrollBarTrack};
+    border-radius: 4px;
   }
 `;
 
+// Individual category item with special styling for highlighted categories
 const CategoryItem = styled.li`
   display: flex;
   justify-content: space-between;
   padding: 8px 12px;
-  border: none;
-  &:last-child {
-    border-bottom: none;
-  }
-    ${(props) =>
+  border-bottom: 1px solid ${(props) => (props.special ? props.theme.border : 'transparent')};
+
+  ${(props) =>
     props.special &&
     `
       font-weight: bold;
-      padding: 5px;
-      margin: 0px 12px;
-      border-bottom: 1px solid #ddd;
     `}
 `;
 
+// Form for adding new categories
 const AddCategoryForm = styled.form`
   display: flex;
   gap: 10px;
-  margin-top: 0px;
-  padding:0px 12px;
+  margin-top: 10px;
+  padding: 0px 12px;
 `;
 
+// Input field for adding categories
 const Input = styled.input`
   padding: 8px;
   flex: 1;
-  border: 1px solid #ddd;
+  border: 1px solid ${(props) => props.theme.inputBorderColor};
   border-radius: 4px;
   outline: none;
 
   &:focus {
+    border-color: ${(props) => props.theme.buttonBackground};
   }
 `;
 
+// Button styling for general buttons and adding categories
 const Button = styled.button`
   padding: 8px;
-  color: #666;
+  background-color: ${(props) => props.theme.buttonBackground};
+  color: ${(props) => props.theme.buttonTextColor};
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: red;
-    color: #222;
-
+    background-color: ${(props) => props.theme.buttonHoverBackground};
+    color: ${(props) => props.theme.buttonHoverTextColor};
   }
 `;
-const AddButton = styled.button`
-  padding: 8px;
-  color: #666;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+
+// Separate button for adding categories to allow independent styles
+const AddButton = styled(Button)`
+  background-color: ${(props) => props.theme.navBarBackground};
+  color: ${(props) => props.theme.navBarTextColor};
 
   &:hover {
-    background-color: #666666;
-    color: #dddddd;
-
+    background-color: ${(props) => props.theme.buttonHoverBackground};
   }
 `;
-
 
 const ManageCategories = ({ onUpdatePreferences }) => {
   const [categories, setCategories] = useState([]);
-  const [newCategory, setNewCategory] = useState();
+  const [newCategory, setNewCategory] = useState('');
   const { preferences } = useAuth(); // Get preferences from useAuth
 
   useEffect(() => {
-    setCategories(Array.isArray(preferences.DefaultCategories) ? preferences.DefaultCategories : []);
+    setCategories(
+      Array.isArray(preferences.DefaultCategories)
+        ? preferences.DefaultCategories
+        : []
+    );
   }, [preferences]);
 
   const handleAddCategory = (e) => {
@@ -123,22 +121,27 @@ const ManageCategories = ({ onUpdatePreferences }) => {
   };
 
   const handleDeleteCategory = (category) => {
-    // Filter out the selected category
-    const updatedCategories = categories.filter((cat) => cat !== category && cat.trim() !== "");
+    const updatedCategories = categories.filter(
+      (cat) => cat !== category && cat.trim() !== ''
+    );
     setCategories(updatedCategories);
     onUpdatePreferences({ DefaultCategories: updatedCategories });
   };
+
   return (
     <ManageCategoriesContainer>
       <CategoryList>
-        {Array.isArray(categories) ? (
+        {categories.length > 0 ? (
           categories.map((category, index) => (
             <CategoryItem
               key={index}
-              special={category === 'Manage Categories:   '}>
+              special={category === 'Manage Categories:   '}
+            >
               {category}
               {category !== 'Manage Categories:   ' && (
-                <Button onClick={() => handleDeleteCategory(category)}>Remove</Button>
+                <Button onClick={() => handleDeleteCategory(category)}>
+                  Remove
+                </Button>
               )}
             </CategoryItem>
           ))

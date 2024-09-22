@@ -5,7 +5,7 @@ import YearlyExpensesChart from './YearlyExpensesChart'
 import styled from 'styled-components';
 
 const ExpenseChartsContainer = styled.div`
-width:94%;
+width:90%;
 display:grid;
 grid-template-columns: repeat(4, 1fr);
 grid-template-rows: repeat(2, 1fr);
@@ -22,7 +22,6 @@ const ChartBottom = styled.div`
 const ChartRight = styled.div`
   grid-column: 3/span 2;  /* Spans across the first 3 columns */
   grid-row: 1  / span 2;
-width:80%;
 height:100%;
 `;
 

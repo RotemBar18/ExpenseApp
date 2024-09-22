@@ -7,16 +7,19 @@ import useAuth from '../hooks/useAuth';
 
 const PageContainer = styled.div`
   display: flex;
+  height: 100%;
   width: 100%;
+
 `;
 
 const MainPage = () => {
-  const { user, preferences, userId } = useAuth(); // Use the custom hook to get user and preferences
+  const { preferences, userId } = useAuth(); // Use the custom hook to get user and preferences
   const { expenses, loading: expensesLoading, error, reloadExpenses, deleteExpense, updateExpense } = useExpenses(userId);
 
   return (
     <PageContainer>
       <Navbar  />
+      
       <MainBoard
         categories={preferences.DefaultCategories}
         expensesThemeColor={preferences.ExpensesThemeColor}

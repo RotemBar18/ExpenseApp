@@ -7,7 +7,6 @@ const initialState = {
 };
 
 const preferencesReducer = (state = initialState, action) => {
-  console.log('Action received in reducer:', action);  // Log every action
 
   switch (action.type) {
       case 'LOADING_PREFERENCES':

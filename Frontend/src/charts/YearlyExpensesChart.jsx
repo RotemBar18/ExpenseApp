@@ -10,18 +10,18 @@ import {
   CartesianGrid,
 } from 'recharts';
 import { format } from 'date-fns';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components'; // Import useTheme from styled-components
 
 // Styled component for the chart container
 const ChartContainer = styled.div`
   height: 625px;  
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #1b1b1b;
+  background-color: ${(props) => props.theme.modalBackground}; // Use theme background
   border-radius: 10px;
   padding: 20px;
-  padding-bottom:33px;
+  padding-bottom: 33px;
 `;
 
 // Function to generate data with all days and months included, even if no expenses
@@ -34,7 +34,7 @@ const getAllDaysAndMonths = () => {
       daysInMonth.push({
         month,
         day: date.getDate(),
-        amount: 0, // Default to 0 when there is no expense
+        amount: 0,
       });
       date.setDate(date.getDate() + 1);
     }
@@ -56,7 +56,7 @@ const prepareData = (expenses) => {
       (d) => d.month === month && d.day === day
     );
     if (existingDay) {
-      existingDay.amount += amount; // Sum expenses for the same day
+      existingDay.amount += amount;
     }
   });
 
@@ -66,51 +66,46 @@ const prepareData = (expenses) => {
 const VerticalBubbleChart = ({ expenses }) => {
   const data = prepareData(expenses);
   const currentYear = new Date().getFullYear();
+  const theme = useTheme(); // Access the current theme
 
   return (
     <ChartContainer>
-      <h3 style={{ color: '#bbbbbb', borderBottom: '1px solid' }}>{currentYear}</h3>
+      <h3 style={{ color: theme.headerTextColor, borderBottom: `1px solid ${theme.border}` }}>
+        {currentYear}
+      </h3>
       <ResponsiveContainer>
-        <ScatterChart 
-        margin={{ top: 10, right: 10, left: -20, bottom: 30 }}
-          layout="vertical">
-          <CartesianGrid />
-
-          {/* Y-axis: Days of the month */}
+        <ScatterChart
+          margin={{ top: 10, right: 10, left: -20, bottom: 30 }}
+          layout="vertical"
+        >
+          <CartesianGrid stroke={theme.border} /> {/* Use theme border color */}
           <YAxis
             type="number"
             dataKey="day"
             name="Day"
-            ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]} // Days 1 to 31
+            ticks={[...Array(31).keys()].map(i => i + 1)}
             domain={[1, 31]}
             tickFormatter={(tick) => `Day ${tick}`}
-            tick={{ fill: '#bbbbbb', fontSize: 8 }}  // Smaller tick labels
+            tick={{ fill: theme.headerTextColor, fontSize: 8 }}
           />
-
-          {/* X-axis: First letter of the month */}
           <XAxis
             type="number"
             dataKey="month"
             name="Month"
             ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
-            tickFormatter={(tick) => format(new Date(2023, tick - 1), 'MMM')[0]} // Show only first letter
+            tickFormatter={(tick) => format(new Date(2023, tick - 1), 'MMM')[0]}
             domain={[1, 12]}
-            tick={{ fill: '#bbbbbb', fontSize: 10 }}  // Smaller tick labels
+            tick={{ fill: theme.headerTextColor, fontSize: 10 }}
           />
-
-          {/* Z-axis: Amount, used to size the bubbles */}
           <ZAxis
             type="number"
             dataKey="amount"
-            range={[10, 250]}  // Adjust the range for bubble sizes
+            range={[10, 250]}
             name="Amount"
             unit="$"
           />
-
           <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-
-          {/* Scatter plot for the bubbles */}
-          <Scatter name="Expenses" data={data} fill="#82ca9d" />
+          <Scatter name="Expenses" data={data} fill={theme.chartColors[0]} /> {/* Use the first chart color */}
         </ScatterChart>
       </ResponsiveContainer>
     </ChartContainer>

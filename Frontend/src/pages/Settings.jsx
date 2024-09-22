@@ -4,14 +4,12 @@ import SettingsBoard from "../components/SettingsBoard";
 import useAuth from "../hooks/useAuth";
 
 const PageContainer = styled.div`
-    background-color:#0a0a0a;
-    position:fixed;
-    width:100vw;
-    top:0;
-    left:0;
-    height:60vw;
-    color:#dddddd;
+  display: flex;
+  height: 100%;
+  width: 100%;
+
 `;
+
 
 
 const Settings = () => {

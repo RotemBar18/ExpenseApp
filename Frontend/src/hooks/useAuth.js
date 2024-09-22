@@ -12,8 +12,6 @@ const useAuth = () => {
   const preferences = useSelector((state) => state.preferences);
   const userId = user?.Id || getUserIdFromToken(token);
 
-  console.log('Default Categories:', preferences.DefaultCategories);
-
 
   useEffect(() => {
     if (token && !user.Id) {

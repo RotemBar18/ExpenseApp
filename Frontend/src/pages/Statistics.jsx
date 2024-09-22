@@ -6,14 +6,12 @@ import useAuth from '../hooks/useAuth';
 import useExpenses from '../hooks/useExpenses';
 
 const PageContainer = styled.div`
-    width:100%;
-    background-color:#0a0a0a;
-    position:fixed;
-    top:0;
-    left:0;
-    height:100%;
-    color:#bbbbbb;
+  display: flex;
+  height: 100%;
+  width: 100%;
+
 `;
+
 
 
 const Statistics = () => {

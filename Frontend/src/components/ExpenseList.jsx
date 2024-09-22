@@ -1,92 +1,108 @@
 import styled from 'styled-components';
 import Expense from './Expense';
-import { useState ,useEffect} from 'react';
-import {  filterAndSortExpenses } from '../utils/sortAndFilterService';
+import { useState, useEffect } from 'react';
+import { filterAndSortExpenses } from '../utils/sortAndFilterService';
 import FilterModal from './FilterExpensesModal';
 
+const Boardcontainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+  width: 100%;
+  justify-content: space-around;
+`;
+
 const ExpenseListContainer = styled.div`
-  position: fixed;
-    display:flex;
-    color:#bbbbbb;
-    flex-direction: column;
-    align-items: flex-start;
-  background-color:#1b1b1b;
-    margin-left:290px;
-    font-family: Poppins;
-    margin-top:120px;
-    padding:20px;
-    border-radius:10px;
-    gap:40px;
-      
+  color: ${(props) => props.theme.modalTextColor};
+  background-color: ${(props) => props.theme.modalBackground};
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
+  border-radius: 10px;
+  gap: 40px;
+  max-height: 400px;
+  overflow-y: auto;
 
-
- ::-webkit-scrollbar {
+  /* Scrollbar styling */
+  &::-webkit-scrollbar {
     width: 8px;
   }
 
-  ::-webkit-scrollbar-track {
-   background:background:${(props) => props.color === 'black' ? '#555' : '#aaa'};;
-    margin-top:10px;
+  &::-webkit-scrollbar-track {
+    background: ${(props) => props.theme.scrollBarTrack};
     border-radius: 10px;
   }
 
-  ::-webkit-scrollbar-thumb {
-  width:80%;
-      background:${(props) => props.color === 'black' ? '#333' : '#ccc'};
+  &::-webkit-scrollbar-thumb {
+    background: ${(props) => props.theme.scrollBarThumb};
     border-radius: 10px;
   }
 
-  ::-webkit-scrollbar-thumb:hover {
-    background:${(props) => props.color === 'black' ? '#555' : '#aaa'};
-    cursor:pointer;
+  &::-webkit-scrollbar-thumb:hover {
+    background: ${(props) => props.theme.scrollBarThumbHover || props.theme.scrollBarThumb};
+    cursor: pointer;
   }
 `;
 
-const ExpensesTable = styled.ul` 
+const ExpensesTable = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
-    overflow-y: auto;
-  max-height: 400px;
-
 `;
 
 const Header = styled.h3`
   margin: 0;
   padding-bottom: 15px;
-  border-bottom: 2px solid;
+  border-bottom: 2px solid ${(props) => props.theme.border};
   font-size: 1.5em;
+  color: ${(props) => props.theme.headerTextColor};
 `;
 
 const ExpenceHeader = styled.div`
-display:flex;
-padding:15px;
-gap:60px;
-
+  display: flex;
+  padding: 15px;
+  gap: 60px;
 `;
-
 
 const HeaderText = styled.div`
   font-weight: 600;
   overflow: hidden;
   text-align: center;
-  border-bottom: 1px solid;
-  padding-bottom:2px;
-  
+  border-bottom: 1px solid ${(props) => props.theme.border};
+  padding-bottom: 2px;
 `;
 
 const SelectContainer = styled.div`
-  display:flex;
+  display: flex;
+  align-items: center;
+    justify-content: space-around;
 `;
+
 const SortSelect = styled.select`
   margin: 10px;
   padding: 8px;
   font-size: 16px;
+  background-color: ${(props) => props.theme.inputBackground};
+  color: ${(props) => props.theme.inputTextColor};
+  border: 1px solid ${(props) => props.theme.inputBorderColor};
+  border-radius: 5px;
 `;
 
-
 const AmountSelect = styled.div`
-  margin-bottom: 15px;
+`;
+const Button = styled.button`
+   padding: 5px;
+   border:none;
+    cursor: pointer;
+    background-color: ${(props) => props.theme.buttonBackground};
+   color: ${(props) => props.theme.buttonTextColor};
+    height:100%;
+    &:hover {
+   color: ${(props) => props.theme.buttonHoverTextColor};
+    background-color: ${(props) => props.theme.buttonHoverBackground};
+    }
 `;
 
 const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
@@ -142,15 +158,24 @@ const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
   const expensesForDisplay = filteredAndSortedExpenses.slice(-numExpensesToShow).reverse();
 
   return (
-    <>
+    <Boardcontainer>
       <ExpenseListContainer
       >
         <Header>Expenses
-          <button onClick={() => setIsFilterModalOpen(true)}>Filter</button>
 
         </Header>
 
         <SelectContainer>
+
+   
+          <SortSelect value={sortOption} onChange={(e) => setSortOption(e.target.value)}>
+            <option value="date-asc">Date (Newest First)</option>
+            <option value="date-desc">Date (Oldest First)</option>
+            <option value="amount-asc">Amount (High to Low)</option>
+            <option value="amount-desc">Amount (Low to High)</option>
+            <option value="category-asc">Category (Z-A)</option>
+            <option value="category-desc">Category (A-Z)</option>
+          </SortSelect>
           <AmountSelect>
             <select id="numExpenses" value={numExpensesToShow} onChange={handleNumExpensesChange}>
               <option value="10">10</option>
@@ -160,14 +185,8 @@ const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
               <option value="0">All</option>
             </select>
           </AmountSelect>
-          <SortSelect value={sortOption} onChange={(e) => setSortOption(e.target.value)}>
-            <option value="date-asc">Date (Newest First)</option>
-            <option value="date-desc">Date (Oldest First)</option>
-            <option value="amount-asc">Amount (High to Low)</option>
-            <option value="amount-desc">Amount (Low to High)</option>
-            <option value="category-asc">Category (Z-A)</option>
-            <option value="category-desc">Category (A-Z)</option>
-          </SortSelect>
+        <Button onClick={() => setIsFilterModalOpen(true)}>Filter</Button>
+
         </SelectContainer>
 
         <ExpensesTable>
@@ -202,7 +221,7 @@ const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
           categories={categories}
         />
       </ExpenseListContainer>
-    </>
+    </Boardcontainer>
   );
 };
 

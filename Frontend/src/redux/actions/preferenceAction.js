@@ -7,16 +7,13 @@ export const fetchUserPreferences = (userId, token) => async (dispatch) => {
       const preferencesData = await fetchPreferences(userId, token);
   
       if (Array.isArray(preferencesData.DefaultCategories)) {
-        console.log('111',preferencesData.DefaultCategories)
         let cleanedCategories = preferencesData.DefaultCategories.map(categoryString => {
           let cleanedCategory = categoryString.replace(/^\[|\]$/g, '').replace(/['"]+/g, '');
           return cleanedCategory;
         });
         if (cleanedCategories.length  === 1 && cleanedCategories[0] === ''){
           cleanedCategories[0] = 'Manage Categories:   '
-        console.log('222',cleanedCategories)
         }
-        console.log('333',cleanedCategories,cleanedCategories.length ,cleanedCategories[0])
 
         preferencesData.DefaultCategories = cleanedCategories;
       }
