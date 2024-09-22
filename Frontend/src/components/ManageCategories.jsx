@@ -1,107 +1,162 @@
-import React, { useState } from 'react';
+// src/components/ManageCategories.jsx
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import useAuth from '../hooks/useAuth'; // Import the custom hook
 
 const ManageCategoriesContainer = styled.div`
-    text-align: left;
-    width:200px;
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius:10px;
-`;
-const Header = styled.h2`
-    margin-bottom: 10px;
-    border-radius: 5px;
-    font-size: 11px;
+  padding: 5px;
+  border-radius: 8px;
+  max-width: 300px; /* Optional: Adjust to fit your layout */
+  margin: auto;
 `;
 
-const ExpenseInput = styled.input`
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 11px;
-`;
-
-const AddButton = styled.button`
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    background-color: #6A956A;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.1s ease;
-    font-family: 'comic sans ms';
-
-    &:hover {  
-        color: #386238;
-    }
-    &:active {
-        transform: translateY(4px);
-    }
-`;
 
 const CategoryList = styled.ul`
-    list-style-type: none;
-    padding: 0;
-`;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  border: none;
 
-const CategoryListItem = styled.li`
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-`;
-
-const CategoryDeleteButton = styled.button`
-    background-color: #FF6347;
-    border: none;
-    color: white;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-
-    &:hover {
-        background-color: #FF4500;
-    }
-`;
-
-const ManageCategories = ({ preferences, onAddCategory, onDeleteCategory }) => {
-    const [newCategory, setNewCategory] = useState(''); // New category input
-    const categories = preferences.DefaultCategories
+  /* Custom scrollbar styling */
+  &::-webkit-scrollbar {
+    width: 8px;
     
-    const handleAddCategory = () => {
-        if (newCategory && !categories.includes(newCategory)) {
-            onAddCategory(newCategory);
-            setNewCategory('');
-        }
-    };
+  }
 
-    return (
-        <ManageCategoriesContainer>
-            <Header>Manage Categories</Header>
-            <ExpenseInput
-                type="text"
-                placeholder="New Category"
-                value={newCategory}
-                onChange={(e) => setNewCategory(e.target.value)}
-            />
-            <AddButton type="button" onClick={handleAddCategory}>
-                Add Category
-            </AddButton>
+  &::-webkit-scrollbar-thumb {
+    background-color: #666666;
+    border-radius: 4px;
+  }
 
-            <CategoryList>
-                {categories.map((cat) => (
-                    <CategoryListItem key={cat}>
-                        {cat}
-                        <CategoryDeleteButton onClick={() => onDeleteCategory(cat)}>
-                            Delete
-                        </CategoryDeleteButton>
-                    </CategoryListItem>
-                ))}
-            </CategoryList>
-        </ManageCategoriesContainer>
-    );
+  &::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+        border-radius: 4px;
+
+  }
+`;
+
+const CategoryItem = styled.li`
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border: none;
+  &:last-child {
+    border-bottom: none;
+  }
+    ${(props) =>
+    props.special &&
+    `
+      font-weight: bold;
+      padding: 5px;
+      margin: 0px 12px;
+      border-bottom: 1px solid #ddd;
+    `}
+`;
+
+const AddCategoryForm = styled.form`
+  display: flex;
+  gap: 10px;
+  margin-top: 0px;
+  padding:0px 12px;
+`;
+
+const Input = styled.input`
+  padding: 8px;
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+
+  &:focus {
+  }
+`;
+
+const Button = styled.button`
+  padding: 8px;
+  color: #666;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: red;
+    color: #222;
+
+  }
+`;
+const AddButton = styled.button`
+  padding: 8px;
+  color: #666;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #666666;
+    color: #dddddd;
+
+  }
+`;
+
+
+const ManageCategories = ({ onUpdatePreferences }) => {
+  const [categories, setCategories] = useState([]);
+  const [newCategory, setNewCategory] = useState();
+  const { preferences } = useAuth(); // Get preferences from useAuth
+
+  useEffect(() => {
+    setCategories(Array.isArray(preferences.DefaultCategories) ? preferences.DefaultCategories : []);
+  }, [preferences]);
+
+  const handleAddCategory = (e) => {
+    e.preventDefault();
+    if (newCategory && !categories.includes(newCategory)) {
+      const updatedCategories = [...categories, newCategory];
+      setCategories(updatedCategories);
+      onUpdatePreferences({ DefaultCategories: updatedCategories });
+      setNewCategory('');
+    }
+  };
+
+  const handleDeleteCategory = (category) => {
+    // Filter out the selected category
+    const updatedCategories = categories.filter((cat) => cat !== category && cat.trim() !== "");
+    setCategories(updatedCategories);
+    onUpdatePreferences({ DefaultCategories: updatedCategories });
+  };
+  return (
+    <ManageCategoriesContainer>
+      <CategoryList>
+        {Array.isArray(categories) ? (
+          categories.map((category, index) => (
+            <CategoryItem
+              key={index}
+              special={category === 'Manage Categories:   '}>
+              {category}
+              {category !== 'Manage Categories:   ' && (
+                <Button onClick={() => handleDeleteCategory(category)}>Remove</Button>
+              )}
+            </CategoryItem>
+          ))
+        ) : (
+          <p>No categories available</p>
+        )}
+      </CategoryList>
+      <AddCategoryForm onSubmit={handleAddCategory}>
+        <Input
+          type="text"
+          value={newCategory}
+          onChange={(e) => setNewCategory(e.target.value)}
+          placeholder="Add new category"
+        />
+        <AddButton type="submit">Add Category</AddButton>
+      </AddCategoryForm>
+    </ManageCategoriesContainer>
+  );
 };
 
 export default ManageCategories;

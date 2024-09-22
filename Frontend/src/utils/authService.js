@@ -63,7 +63,6 @@ export const createDefaultPreferences = async (email) => {
                 ExpensesThemeColor: "#ffffff",
                 DefaultCategories: '["Food", "Health", "Entertainment", "Miscellaneous"]'
             };
-            console.log(response.data)
             postDefaultPreferences(token, userId, defaultPreferences);
             return response.data.userId;
         } else {
@@ -75,7 +74,6 @@ export const createDefaultPreferences = async (email) => {
     }
 };
 export const fetchUser = async (userId) => {
-    console.log(userId)
     try {
         const response = await axios.get(`${BASE_URL}/users/Id/${userId}`, {
             headers: {

@@ -12,7 +12,6 @@ export const fetchUser = async (userId, token) => {
         },
       });
   
-      console.log("User data fetched:", response.data);  // Debug log
   
       return response.data.user;  // Return the user data
     } catch (error) {
@@ -31,7 +30,6 @@ export const fetchUser = async (userId, token) => {
           },
         }
       );
-      console.log(Response.data)
       if (response.data.success) {
         return response.data.user; // Return the updated user data
       } else {

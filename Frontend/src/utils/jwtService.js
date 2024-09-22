@@ -5,7 +5,6 @@ export const getUserIdFromToken = (token) => {
             return payload.userId; // Ensure the token contains a userId field
         }
     } catch (error) {
-        console.log('ff')
         console.error("Error decoding token:", error); // Log any errors in decoding
     }
     return null;

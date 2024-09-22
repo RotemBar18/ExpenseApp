@@ -72,8 +72,6 @@ app.post('/signup', async (req, res) => {
 
 app.post('/login', async (req, res) => {
     const { Email: email, Password: password } = req.body;
-    console.log("Email:", email);
-    console.log("Password:", password);
 
     if (!password || !email) {
         return res.status(400).json({ success: false, message: 'All fields are required.' });
@@ -81,13 +79,11 @@ app.post('/login', async (req, res) => {
 
     // Hash the password and log it to compare with the database
     const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
-    console.log("Hashed Password:", hashedPassword);
 
     try {
         // Query the database for the user with the hashed password
         const [results] = await req.db.query('SELECT Id FROM users WHERE Email = ? AND Password = ?', [email, hashedPassword]);
 
-        console.log("Query Results:", results);  // Log the results to ensure query works
 
         if (results.length > 0) {
             const userId = results[0].Id;
@@ -105,7 +101,6 @@ app.post('/login', async (req, res) => {
 
 app.get("/users/:email", async (req, res) => {
     const { email } = req.params;
-    console.log(email)
     if (!email) {
         return res.status(400).json({ error: "Email is required" }); // Error if email is not provided
     }
@@ -129,7 +124,6 @@ app.put('/users/:id', async (req, res) => {
     try {
         const { id } = req.params; // Get the user ID from the URL
         const { Name, Email, Password, ProfilePic } = req.body; // Get updated user data from the request body
-        console.log(Name, Email, Password, ProfilePic, id);
 
         // Update query
         const query = `
@@ -161,10 +155,8 @@ app.put('/users/:id', async (req, res) => {
 
 
 app.get("/users/Id/:id", async (req, res) => {
-    console.log(req.params)
 
     const { id } = req.params;
-    console.log(id)
 
 
     const sql = "SELECT * FROM users WHERE Id = ?"; try {

@@ -14,17 +14,15 @@ const userReducer = (state = initialState, action) => {
                 loading: true,
             };
         case 'SET_USER_DATA':
-            console.log("Setting user data in reducer:", action.payload);  // Debug
             return {
                 ...state,
                 ...action.payload,
                 loading: false,  // Stop loading once data is fetched
             };
         case 'UPDATE_USER_SUCCESS':  // Handle the user update success case
-            return {
-                ...state,
-                ...action.payload,  // Update state with the new user data
-            };
+            const updatedState = { ...state, ...action.payload };
+            return updatedState;
+
         case 'SET_USER_ERROR':
             return {
                 ...state,

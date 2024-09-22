@@ -2,12 +2,10 @@ import { fetchUser, updateUser } from "../../utils/userService";  // Import the 
 
 // Redux action to fetch user data
 export const fetchUserData = (userId, token) => async (dispatch) => {
-  console.log("Dispatching fetchUserData for userId:", userId);  // Debug log
   dispatch({ type: 'LOADING' });
 
   try {
     const userData = await fetchUser(userId, token);  // Use the service function
-    console.log("User data fetched:", userData);  // Debug log
     dispatch({ type: 'SET_USER_DATA', payload: userData });
   } catch (error) {
     console.error("Error in fetchUserData:", error);  // Debug log

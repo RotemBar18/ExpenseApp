@@ -1,4 +1,4 @@
-// src/hooks/useAuth.js
+// useAuth.js
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserData } from '../redux/actions/userActions';
@@ -10,15 +10,25 @@ const useAuth = () => {
   const token = localStorage.getItem('token');
   const user = useSelector((state) => state.user);
   const preferences = useSelector((state) => state.preferences);
-  
   const userId = user?.Id || getUserIdFromToken(token);
 
-  // Fetch user and preferences if not loaded
+  console.log('Default Categories:', preferences.DefaultCategories);
+
+
   useEffect(() => {
     if (token && !user.Id) {
+      console.log('Fetching user data...');
       dispatch(fetchUserData(userId, token));
     }
-    if (token && userId && !preferences.DefaultCategories) {
+
+    if (
+      token &&
+      userId &&
+      (preferences.loading || // If preferences are still loading
+       !preferences.DefaultCategories || // If DefaultCategories are missing
+       (Array.isArray(preferences.DefaultCategories) && preferences.DefaultCategories.length === 0)) // If DefaultCategories is empty array
+    ) {
+      console.log('Fetching user preferences...');
       dispatch(fetchUserPreferences(userId, token));
     }
   }, [dispatch, token, userId, user.Id, preferences.DefaultCategories]);

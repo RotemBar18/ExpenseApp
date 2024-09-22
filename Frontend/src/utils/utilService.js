@@ -26,7 +26,6 @@ export const formatToLocalDate = (utcDateString) => {
 };
 
 export const alterCategoriesToArray = (data) => {
-    console.log(data)
     const newData = data
     newData.DefaultCategories = data.DefaultCategories.split(',');
     return newData
@@ -40,7 +39,6 @@ export const isHexColor=(str)=> {
 
 
 export const processString = (str) => {
-    console.log(str)
     if (typeof(str)=='object'){
         return "object"
     }

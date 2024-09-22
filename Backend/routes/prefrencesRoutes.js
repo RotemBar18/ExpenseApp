@@ -40,7 +40,6 @@ router.get('/:userId', verifyToken, async (req, res) => {
             return res.status(404).json({ message: 'Preferences not found' });
         }
 
-        console.log('Preferences retrieved:', preferences[0]);
         res.status(200).json(preferences[0]);
     } catch (error) {
         console.error('Error fetching preferences:', error);
@@ -60,8 +59,7 @@ router.put('/:userId', verifyToken, async (req, res) => {
 
         await req.db.query(query, [ExpensesThemeColor, DefaultCategories, userId]);
 
-        console.log('Preferences updated successfully for userId:', userId);
-        res.status(200).json({ message: 'Preferences updated successfully' });
+        res.status(200).json({ success: true, preferences: req.body, message: 'preferences updated successfully' });
     } catch (error) {
         console.error('Error updating preferences:', error);
         res.status(500).json({ message: 'Error updating preferences' });

@@ -4,7 +4,6 @@ const BASE_URL = 'http://localhost:8081';
 
 export const fetchExpenses = async (token,Id) => {
     try {
-        console.log(Id)
         const response = await axios.get(`${BASE_URL}/expenses/${Id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -38,7 +37,6 @@ export const deleteExpenseById = async (token, expenseId) => {
                 'Authorization': `Bearer ${token}`,
             }
         });
-        console.log('didIt', expenseId)
         return response.data;
     } catch (error) {
         console.error('Error deleting expense:', error);

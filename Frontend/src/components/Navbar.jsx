@@ -6,7 +6,7 @@ import useAuth from '../hooks/useAuth';
 const Navbar = () => {
     const navigate = useNavigate();
     const { user } = useAuth(); // Use the custom hook to get user and preferences
-  
+
    
     const goToStatistics = () => {
         navigate('/statistics'); // Pass the expenses to the statistics page

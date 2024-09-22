@@ -92,7 +92,6 @@ const Button = styled.button`
 
 const ExpenseModal = ({ categories, isOpen, onClose, onUpdate, initialData }) => {
     const [expense, setExpense] = useState(initialData);
-    console.log(categories)
     useEffect(() => {
         if (initialData) {
             setExpense({

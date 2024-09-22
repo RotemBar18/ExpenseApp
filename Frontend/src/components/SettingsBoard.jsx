@@ -1,7 +1,6 @@
 // src/components/MainBoard.jsx
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ManageCategories from './ManageCategories';
 import PersonalInfoSettings from './PersonalInfoSettings';
 import LoginAndSecuritySettings from './LoginAndSecuritySettings';
 import CustomizationSettings from './CustomizationSettings';
@@ -22,7 +21,6 @@ const HeaderChoises = styled.div`
 `;
 const SettingsContainer = styled.div`
   display: flex;
-  flex-direction: column;
 `
 
 const HeaderText = styled.span`
@@ -42,10 +40,9 @@ padding:10px;
         color: #00d3a9;
     }
 `
-const SettingsBoard = ({user, preferences,onAddCategory, onDeleteCategory, categories }) => {
+const SettingsBoard = ({user ,preferences}) => {
     const [SettingsKind, setSettingsKind] = useState("personal")
     
-    console.log(user)
     return (
         <SettingBoardContainer>
             <HeaderContainer>
@@ -70,7 +67,7 @@ const SettingsBoard = ({user, preferences,onAddCategory, onDeleteCategory, categ
                     ) : SettingsKind === "personal" ? (
                         <PersonalInfoSettings user={user} />
                     ) : (
-                        <CustomizationSettings onAddCategory={onAddCategory} onDeleteCategory={onDeleteCategory} preferences={preferences}  />
+                        <CustomizationSettings  preferences={preferences}/>
                     )
                 }
 

@@ -90,7 +90,6 @@ const AddExpense = ({ categories, userId, onAdd, onClose }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const token = localStorage.getItem('token');
-        console.log(categories)
 
         const newExpense = {
             Name: name,
@@ -115,7 +114,7 @@ const AddExpense = ({ categories, userId, onAdd, onClose }) => {
 
 
     return (
-        < div style={{display:'flex'}}>
+        < div style={{ display: 'flex' }}>
             <ModalBack onClick={onClose} />
             <AddExpenseContainer>
                 <Header>Add New Expense</Header>
@@ -137,11 +136,13 @@ const AddExpense = ({ categories, userId, onAdd, onClose }) => {
                         required
                     >
                         <option value="" disabled hidden>Select Category</option>
-                        {categories.map((cat) => (
-                            <option key={cat} value={cat}>
-                                {cat}
-                            </option>
-                        ))}
+                        {categories
+                            .filter((cat) => cat !== 'Manage Categories:   ') // Filter out the unwanted category
+                            .map((cat) => (
+                                <option key={cat} value={cat}>
+                                    {cat}
+                                </option>
+                            ))}
                     </ExpenseSelect>
 
                     <ExpenseInput

@@ -11,7 +11,6 @@ const useExpenses = (userId) => {
         const token = localStorage.getItem('token');
         try {
             const expenseData = await fetchExpenses(token, userId);
-            console.log('Fetched expenses:', expenseData);  // Log fetched data
             setExpenses(expenseData);
         } catch (error) {
             setError(error);
@@ -35,7 +34,6 @@ const useExpenses = (userId) => {
 
     const updateExpense = async (expense) => {
         const token = localStorage.getItem('token');
-        console.log('Token:', token);  // Log the token
 
         try {
             await updateExpenseById(token, expense);  // Ensure this function correctly sends `expense` with an `id`

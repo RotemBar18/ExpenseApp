@@ -63,21 +63,21 @@ const ProfilePic = styled.img`
 const PersonalInfoSettings = ({ user }) => {
   const dispatch = useDispatch(); // Initialize the dispatch function
 
-
   const [isEditing, setIsEditing] = useState({
     Name: false,
-    profilePic: false,
+    ProfilePic: false,
   });
+
   const [personalInfo, setPersonalInfo] = useState({
     Name: user.Name,
-    profilePic: user.ProfilePic || 'default_profile_pic_url', // Fallback to default profile pic
+    ProfilePic: user.ProfilePic || 'default_profile_pic_url', // Fallback to default profile pic
   });
 
   // Update the component when the user changes
   useEffect(() => {
     setPersonalInfo({
       Name: user.Name,
-      profilePic: user.ProfilePic,
+      ProfilePic: user.ProfilePic,
     });
   }, [user]);
 
@@ -105,12 +105,13 @@ const PersonalInfoSettings = ({ user }) => {
       const updatedUserFromServer = await updateUser(user.Id, updatedUserData);
 
       if (updatedUserFromServer) {
+        
+        // Update the local state and Redux store with the new data
         setPersonalInfo({
           Name: updatedUserFromServer.Name || personalInfo.Name,
-          profilePic: updatedUserFromServer.ProfilePic || personalInfo.profilePic,
+          ProfilePic: updatedUserFromServer.ProfilePic || personalInfo.ProfilePic,
         });
-        dispatch({ type: 'UPDATE_USER_SUCCESS', payload: updatedUserData });
-        console.log('User updated successfully:', updatedUserFromServer);
+        dispatch({ type: 'UPDATE_USER_SUCCESS', payload: updatedUserFromServer });
       } else {
         console.error('Failed to update user');
       }
@@ -120,20 +121,38 @@ const PersonalInfoSettings = ({ user }) => {
       handleEditToggle(field); // Close the edit mode regardless of success
     }
   };
-
-  const handleProfilePicChange = (e) => {
+  
+  const handleProfilePicChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () =>
-        setPersonalInfo((prevState) => ({
-          ...prevState,
-          profilePic: reader.result, // Display preview
-        }));
-      reader.readAsDataURL(file); // For preview; ideally, upload the file to the server directly
+      const formData = new FormData();
+      formData.append('file', file); // Append the file
+      formData.append('upload_preset', 'ProfilePics'); // Replace with your Cloudinary upload preset
+  
+      try {
+        const response = await fetch('https://api.cloudinary.com/v1_1/expenses/image/upload', {
+          method: 'POST',
+          body: formData,
+        });
+  
+        const data = await response.json();
+        if (response.ok) {
+          setPersonalInfo((prevState) => ({
+            ...prevState,
+            ProfilePic: data.secure_url, // Use the returned URL for display
+          }));
+          
+          // Optional: Update the user on the server with the new profile picture URL
+
+        } else {
+          console.error('Error uploading to Cloudinary:', data.error.message);
+        }
+      } catch (error) {
+        console.error('Error uploading profile picture:', error);
+      }
     }
   };
-
+  
   return (
     <PersonalInfoContainer>
       <h2>Personal Info</h2>
@@ -143,16 +162,16 @@ const PersonalInfoSettings = ({ user }) => {
         <SectionLabel>Profile Picture</SectionLabel>
         <SectionValue>
           <ProfilePic
-            src={personalInfo.profilePic} // Show current or default profile picture
+            src={personalInfo.ProfilePic} // Show current or default profile picture
             alt="Profile"
           />
-          {isEditing.profilePic ? (
+          {isEditing.ProfilePic ? (
             <>
               <input type="file" onChange={handleProfilePicChange} />
-              <SaveButton onClick={() => handleSave('profilePic')}>Save</SaveButton>
+              <SaveButton onClick={() => handleSave('ProfilePic')}>Save</SaveButton>
             </>
           ) : (
-            <EditButton onClick={() => handleEditToggle('profilePic')}>Edit</EditButton>
+            <EditButton onClick={() => handleEditToggle('ProfilePic')}>Edit</EditButton>
           )}
         </SectionValue>
       </Section>
