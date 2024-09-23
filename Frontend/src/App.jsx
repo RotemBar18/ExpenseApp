@@ -5,7 +5,7 @@ import Statistics from './pages/Statistics';
 import Settings from "./pages/Settings";
 import Signup from './components/signup';
 import Expenses from './pages/ExpensesPage';
-import MainPage from './pages/Mainpage';
+import MainPage from './pages/MainPage';
 import ReportsPage from './pages/ReportsPage';
 import { createGlobalStyle } from 'styled-components';
 import React from 'react';
