@@ -10,21 +10,19 @@ import {
   CartesianGrid,
 } from 'recharts';
 import { format } from 'date-fns';
-import styled, { useTheme } from 'styled-components'; // Import useTheme from styled-components
+import styled, { useTheme } from 'styled-components';
 
-// Styled component for the chart container
 const ChartContainer = styled.div`
   height: 625px;  
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${(props) => props.theme.modalBackground}; // Use theme background
+  background-color: ${(props) => props.theme.modalBackground}; 
   border-radius: 10px;
   padding: 20px;
   padding-bottom: 33px;
 `;
 
-// Function to generate data with all days and months included, even if no expenses
 const getAllDaysAndMonths = () => {
   const currentYear = new Date().getFullYear();
   const daysInMonth = [];
@@ -42,7 +40,6 @@ const getAllDaysAndMonths = () => {
   return daysInMonth;
 };
 
-// Helper function to group expenses by day and category for the current month
 const prepareData = (expenses) => {
   const allDaysAndMonths = getAllDaysAndMonths();
 
@@ -66,7 +63,7 @@ const prepareData = (expenses) => {
 const VerticalBubbleChart = ({ expenses }) => {
   const data = prepareData(expenses);
   const currentYear = new Date().getFullYear();
-  const theme = useTheme(); // Access the current theme
+  const theme = useTheme();
 
   return (
     <ChartContainer>

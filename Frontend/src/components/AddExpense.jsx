@@ -95,7 +95,7 @@ const AddExpense = ({ categories, userId, onAdd, onClose }) => {
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState(''); // Selected category
+  const [category, setCategory] = useState(''); 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -137,7 +137,7 @@ const AddExpense = ({ categories, userId, onAdd, onClose }) => {
             required>
             <option value="" disabled hidden>Select Category</option>
             {categories
-              .filter((cat) => cat !== 'Manage Categories:   ') // Filter out the unwanted category
+              .filter((cat) => cat !== 'Manage Categories:   ') 
               .map((cat) => (
                 <option key={cat} value={cat}>
                   {cat}

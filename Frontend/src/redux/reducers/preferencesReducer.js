@@ -1,4 +1,3 @@
-// preferencesReducer.js
 const initialState = {
   ExpensesThemeColor: '',
   DefaultCategories: [],

@@ -1,4 +1,3 @@
-// reportsReducer.js
 const initialState = {
   reports: [],
   loading: false,
@@ -24,7 +23,6 @@ const reportsReducer = (state = initialState, action) => {
         ...state,
         reports: state.reports.filter((report) => report.ReportId !== action.payload),
       };
-    // Other cases like loading, error, etc.
     default:
       return state;
   }

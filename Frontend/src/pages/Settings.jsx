@@ -13,7 +13,7 @@ const PageContainer = styled.div`
 
 
 const Settings = () => {
-    const { preferences,user} = useAuth(); // Use the custom hook to get user and preferences
+    const { preferences,user} = useAuth();
    
 
 

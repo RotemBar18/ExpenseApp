@@ -1,9 +1,8 @@
 import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 import styled from 'styled-components';
-import { useTheme } from 'styled-components'; // Import the useTheme hook
+import { useTheme } from 'styled-components';
 
-// Function to group expenses by month and category
 const groupExpensesByMonthAndCategory = (expenses) => {
   const currentYear = new Date().getFullYear();
   const months = [
@@ -57,7 +56,7 @@ background-color: ${(props) => props.theme.modalBackground};
 const MonthlyExpensesChart = ({ expenses }) => {
   const { groupedData, categories } = groupExpensesByMonthAndCategory(expenses);
   const currentYear = new Date().getFullYear();
-  const theme = useTheme(); // Access the current theme
+  const theme = useTheme();
 
   const nivoTheme = {
     axis: {
@@ -70,14 +69,14 @@ const MonthlyExpensesChart = ({ expenses }) => {
     },
     grid: {
       line: {
-        stroke: theme.headerTextColor, // You can adjust this if needed
+        stroke: theme.headerTextColor, 
         strokeWidth: 2,
       },
     },
     tooltip: {
       container: {
-        background: theme.modalBackground, // Light background for tooltips
-        color: theme.modalTextColor, // Dark text for readability
+        background: theme.modalBackground,  
+        color: theme.modalTextColor, 
         borderRadius: '4px',
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
       },
@@ -97,7 +96,7 @@ const MonthlyExpensesChart = ({ expenses }) => {
         padding={0.1}
         valueScale={{ type: 'linear' }}
         indexScale={{ type: 'band', round: true }}
-        colors={theme.chartColors} // Use colors from the theme
+        colors={theme.chartColors}
         axisBottom={{
           tickSize: 5,
           tickPadding: 5,

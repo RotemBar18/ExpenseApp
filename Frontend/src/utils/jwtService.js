@@ -1,11 +1,11 @@
 export const getUserIdFromToken = (token) => {
     try {
         if (token) {
-            const payload = JSON.parse(atob(token.split('.')[1])); // Decode token payload
-            return payload.userId; // Ensure the token contains a userId field
+            const payload = JSON.parse(atob(token.split('.')[1]));
+            return payload.userId;
         }
     } catch (error) {
-        console.error("Error decoding token:", error); // Log any errors in decoding
+        console.error("Error decoding token:", error); 
     }
     return null;
 };

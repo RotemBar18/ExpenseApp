@@ -1,4 +1,3 @@
-// src/App.jsx
 import './App.css';
 import { Routes, Route } from "react-router-dom";
 import Home from './pages/homepage';
@@ -11,8 +10,8 @@ import ReportsPage from './pages/ReportsPage';
 import { createGlobalStyle } from 'styled-components';
 import React from 'react';
 import { Provider } from 'react-redux';
-import store from './redux/store';  // Import the store
-import ThemeProviderWrapper from './components/ThemeProviderWrapper';  // Import the ThemeProviderWrapper
+import store from './redux/store'; 
+import ThemeProviderWrapper from './components/ThemeProviderWrapper';  
 
 const GlobalStyle = createGlobalStyle`
   @font-face {

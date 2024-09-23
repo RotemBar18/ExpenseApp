@@ -15,7 +15,6 @@ const ModalBack = styled.div`
   z-index: 1000; /* Ensures the modal is on top */
 `;
 
-// Main modal container
 const BoardContainer = styled.div`
   border-radius: 10px;
   display: flex;
@@ -30,7 +29,6 @@ const BoardContainer = styled.div`
   position: relative;
 `;
 
-// Close button for the modal
 const CloseButton = styled.button`
   position: absolute;
   top: 10px;
@@ -42,21 +40,18 @@ const CloseButton = styled.button`
   color: ${(props) => props.theme.modalTextColor}; /* Ensure close button is visible */
 `;
 
-// Section inside the modal for individual details
 const DetailSection = styled.div`
   padding: 10px;
   background: ${(props) => props.theme.modalBackground};
   border-radius: 5px;
 `;
 
-// Titles for each input section
 const DetailTitle = styled.h3`
   margin: 0;
   font-size: 18px;
   color: ${(props) => props.theme.headerTextColor};
 `;
 
-// Various input fields for expense details
 const DetailInput = styled.input`
   margin: 5px 0;
   padding: 8px;
@@ -67,7 +62,6 @@ const DetailInput = styled.input`
   background: ${(props) => props.theme.inputBackground};
 `;
 
-// Select dropdown for categories
 const DetailSelect = styled.select`
   margin: 5px 0;
   padding: 8px;
@@ -78,7 +72,6 @@ const DetailSelect = styled.select`
   background: ${(props) => props.theme.inputBackground};
 `;
 
-// Text area for the description
 const DetailText = styled.textarea`
   margin: 5px 0;
   padding: 8px;
@@ -89,14 +82,12 @@ const DetailText = styled.textarea`
   background: ${(props) => props.theme.inputBackground};
 `;
 
-// Button group for save and cancel
 const ButtonGroup = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 10px;
 `;
 
-// Buttons with primary and secondary styles
 const Button = styled.button`
   padding: 8px 12px;
   font-size: 16px;
@@ -162,7 +153,7 @@ const ExpenseModal = ({ categories, isOpen, onClose, onUpdate, initialData }) =>
           <DetailTitle>Category</DetailTitle>
           <DetailSelect name="Category" value={expense.Category} onChange={handleChange}>
             {categories
-              .filter((cat) => cat !== 'Manage Categories:   ') // Filter out the unwanted category
+              .filter((cat) => cat !== 'Manage Categories:   ')  
               .map((cat) => (
                 <option key={cat} value={cat}>
                   {cat}

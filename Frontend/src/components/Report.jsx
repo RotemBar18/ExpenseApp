@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ReportModal from './ReportModal'; // Import the ReportModal component
+import ReportModal from './ReportModal';
 
 const ReportCard = styled.div`
   background: ${(props) => props.theme.modalBackground};

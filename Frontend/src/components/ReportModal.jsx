@@ -87,22 +87,19 @@ const Button = styled.button`
 `;
 
 const ReportModal = ({ report, onClose }) => {
-  // Parse the report fields
   const parsedCategories = JSON.parse(report.Categories);
   const parsedMonths = JSON.parse(report.Months);
   const parsedYears = JSON.parse(report.Years);
   const parsedReportData = JSON.parse(report.ReportData);
 
-  // Calculate the total amount from the expenses
   const totalAmount = parsedReportData.reduce((total, expense) => total + parseFloat(expense.Amount), 0);
 
-  // Function to export the report to Excel with specific fields and date formatted as DD/MM/YYYY
   const exportToExcel = () => {
     const formattedData = parsedReportData.map((expense) => ({
       Name: expense.Name,
       Amount: parseFloat(expense.Amount).toFixed(2),
       Category: expense.Category,
-      Date: format(new Date(expense.Date), 'dd/MM/yyyy'), // Format the date to DD/MM/YYYY
+      Date: format(new Date(expense.Date), 'dd/MM/yyyy'),
     }));
 
     const worksheet = XLSX.utils.json_to_sheet(formattedData);
@@ -111,7 +108,6 @@ const ReportModal = ({ report, onClose }) => {
     XLSX.writeFile(workbook, `${report.ReportName}.xlsx`);
   };
 
-  // Function to print the report
   const printReport = () => {
     window.print();
   };

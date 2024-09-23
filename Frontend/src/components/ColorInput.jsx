@@ -46,7 +46,7 @@ const ColorInput = ({ mountBgColor, onColorChange }) => {
 
   const handleIconClick = () => {
     if (colorInputRef.current) {
-      colorInputRef.current.click(); // Trigger the hidden color input click
+      colorInputRef.current.click();  
     }
   };
 

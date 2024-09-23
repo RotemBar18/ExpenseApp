@@ -5,7 +5,7 @@ import password_icon from "./assets/password.png";
 import email_icon from "./assets/email.png";
 import { useNavigate } from "react-router-dom";
 import { handleAuthSubmit } from '../utils/authHandlers'; 
-import { useDispatch } from "react-redux";  // Import useDispatch from Redux
+import { useDispatch } from "react-redux"; 
 
 
 const Header = styled.div`
@@ -107,7 +107,7 @@ const Span = styled.span`
   font-weight:700;
 
     &:hover {
-    color: ${props => (props.isActive ? '#aa88aa' : '#88aa88')}; /* Darker shade on hover */
+    color: ${props => (props.isActive ? '#aa88aa' : '#88aa88')}; 
   }
 `;
 const ChangeMode = styled.div`
@@ -144,7 +144,7 @@ const StyledInput = styled.input`
 const Signup = () => {
   const [action, setAction] = useState("Sign Up");
   const navigate = useNavigate();
-  const dispatch = useDispatch();  // Use Redux dispatch
+  const dispatch = useDispatch(); 
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -157,7 +157,7 @@ const Signup = () => {
   }, [action]);
 
   const handleSubmit = (event) => {
-    handleAuthSubmit(event, action, email, password, name, navigate, dispatch, setAction);  // Include dispatch here
+    handleAuthSubmit(event, action, email, password, name, navigate, dispatch, setAction); 
   };
   
   const handleSwitch = (newAction) => {

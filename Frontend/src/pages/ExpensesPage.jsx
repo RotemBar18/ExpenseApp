@@ -3,7 +3,7 @@ import ExpenseList from "../components/ExpenseList";
 import useExpenses from '../hooks/useExpenses';
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
-import useAuth from '../hooks/useAuth';  // Import the custom hook
+import useAuth from '../hooks/useAuth';  
 
 const ExpensePageContainer = styled.div`
   display: flex;

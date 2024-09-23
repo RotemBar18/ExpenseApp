@@ -17,9 +17,9 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.payload,
-                loading: false,  // Stop loading once data is fetched
+                loading: false,  
             };
-        case 'UPDATE_USER_SUCCESS':  // Handle the user update success case
+        case 'UPDATE_USER_SUCCESS':
             const updatedState = { ...state, ...action.payload };
             return updatedState;
 

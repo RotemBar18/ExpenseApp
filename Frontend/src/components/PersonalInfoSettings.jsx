@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { updateUser } from '../utils/userService'; // Ensure this is correctly implemented to handle both name and profile picture updates
-import { useDispatch } from 'react-redux'; // Import useDispatch from Redux
+import { updateUser } from '../utils/userService'; 
+import { useDispatch } from 'react-redux';
 
 const PersonalInfoContainer = styled.div`
   padding-left: 10px;
   display: flex;
   flex-direction: column;
-  color: ${(props) => props.theme.modalTextColor}; // Use theme-based colors
+  color: ${(props) => props.theme.modalTextColor};
 `;
 
 const Section = styled.div`
@@ -17,12 +17,12 @@ const Section = styled.div`
   flex-direction:column;
   gap: 20px;
   padding-bottom: 10px;
-  border-bottom: 1px solid ${(props) => props.theme.border}; // Use theme for borders
+  border-bottom: 1px solid ${(props) => props.theme.border};  
 `;
 
 const SectionLabel = styled.div`
   font-weight: bold;
-  color: ${(props) => props.theme.headerTextColor}; // Use theme-based text color
+  color: ${(props) => props.theme.headerTextColor};
 `;
 
 const SectionValue = styled.div`
@@ -73,7 +73,7 @@ const ProfilePic = styled.img`
   margin-bottom: 10px;
 `;
 const PersonalInfoSettings = ({ user }) => {
-  const dispatch = useDispatch(); // Initialize the dispatch function
+  const dispatch = useDispatch();
 
   const [isEditing, setIsEditing] = useState({
     Name: false,
@@ -82,10 +82,9 @@ const PersonalInfoSettings = ({ user }) => {
 
   const [personalInfo, setPersonalInfo] = useState({
     Name: user.Name,
-    ProfilePic: user.ProfilePic || 'default_profile_pic_url', // Fallback to default profile pic
+    ProfilePic: user.ProfilePic || 'default_profile_pic_url',  
   });
 
-  // Update the component when the user changes
   useEffect(() => {
     setPersonalInfo({
       Name: user.Name,
@@ -110,15 +109,14 @@ const PersonalInfoSettings = ({ user }) => {
   const handleSave = async (field) => {
     try {
       const updatedUserData = {
-        ...user, // Send all existing user data
-        ...personalInfo, // Include any updated fields
+        ...user,
+        ...personalInfo, 
       };
 
       const updatedUserFromServer = await updateUser(user.Id, updatedUserData);
 
       if (updatedUserFromServer) {
 
-        // Update the local state and Redux store with the new data
         setPersonalInfo({
           Name: updatedUserFromServer.Name || personalInfo.Name,
           ProfilePic: updatedUserFromServer.ProfilePic || personalInfo.ProfilePic,
@@ -130,7 +128,7 @@ const PersonalInfoSettings = ({ user }) => {
     } catch (error) {
       console.error('Error updating user:', error);
     } finally {
-      handleEditToggle(field); // Close the edit mode regardless of success
+      handleEditToggle(field);
     }
   };
 
@@ -138,8 +136,8 @@ const PersonalInfoSettings = ({ user }) => {
     const file = e.target.files[0];
     if (file) {
       const formData = new FormData();
-      formData.append('file', file); // Append the file
-      formData.append('upload_preset', 'ProfilePics'); // Replace with your Cloudinary upload preset
+      formData.append('file', file);
+      formData.append('upload_preset', 'ProfilePics'); 
 
       try {
         const response = await fetch('https://api.cloudinary.com/v1_1/expenses/image/upload', {
@@ -151,10 +149,10 @@ const PersonalInfoSettings = ({ user }) => {
         if (response.ok) {
           setPersonalInfo((prevState) => ({
             ...prevState,
-            ProfilePic: data.secure_url, // Use the returned URL for display
+            ProfilePic: data.secure_url,
           }));
 
-          // Optional: Update the user on the server with the new profile picture URL
+         
 
         } else {
           console.error('Error uploading to Cloudinary:', data.error.message);

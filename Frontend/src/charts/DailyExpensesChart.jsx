@@ -1,7 +1,7 @@
 import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 import { format } from 'date-fns';
-import styled, { useTheme } from 'styled-components'; // Import useTheme from styled-components
+import styled, { useTheme } from 'styled-components'; 
 
 const currentMonthName = new Date().toLocaleString('en-US', { month: 'long' });
 
@@ -54,7 +54,7 @@ const groupExpensesByDayAndCategory = (expenses) => {
 };
 
 const DailyExpensesChart = ({ expenses }) => {
-  const theme = useTheme(); // Use the theme from the context
+  const theme = useTheme();  
   const dailyData = groupExpensesByDayAndCategory(expenses);
   const categories = Array.from(new Set(expenses.map(exp => exp.Category || 'Unknown')));
 
@@ -69,14 +69,14 @@ const DailyExpensesChart = ({ expenses }) => {
     },
     grid: {
       line: {
-        stroke: theme.headerTextColor, // You can adjust this if needed
+        stroke: theme.headerTextColor,
         strokeWidth: 2,
       },
     },
     tooltip: {
       container: {
-        background: theme.modalBackground, // Light background for tooltips
-        color: theme.modalTextColor, // Dark text for readability
+        background: theme.modalBackground, 
+        color: theme.modalTextColor,
         borderRadius: '4px',
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
       },
@@ -96,7 +96,7 @@ const DailyExpensesChart = ({ expenses }) => {
         padding={0.3}
         valueScale={{ type: 'linear' }}
         indexScale={{ type: 'band', round: true }}
-        colors={theme.chartColors || { scheme: 'greens' }} // Use theme-specific chart colors
+        colors={theme.chartColors || { scheme: 'greens' }} 
         axisBottom={{
           tickSize: 5,
           tickPadding: 5,
@@ -115,7 +115,7 @@ const DailyExpensesChart = ({ expenses }) => {
         }}
         labelSkipWidth={12}
         labelSkipHeight={12}
-        labelTextColor={theme.buttonTextColor} // Use theme text color
+        labelTextColor={theme.buttonTextColor}
         enableLabel={false}
         legends={[]}
         animate={true}

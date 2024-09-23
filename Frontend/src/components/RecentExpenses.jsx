@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const ExpenseListContainer = styled.div`
   padding: 10px;
-  color: ${(props) => props.theme.headerTextColor}; // Light theme text color
-  background-color: ${(props) => props.theme.modalBackground}; // Light theme modal background
+  color: ${(props) => props.theme.headerTextColor};
+  background-color: ${(props) => props.theme.modalBackground}; 
   display: flex;
   flex-direction: column;
   border-radius: 10px;
@@ -30,7 +30,7 @@ const Header = styled.div`
   margin-bottom: 5px;
   font-size: 18px;
   font-weight: 800;
-  border-bottom: 1px solid ${(props) => props.theme.border}; // Using theme border color
+  border-bottom: 1px solid ${(props) => props.theme.border};
 `;
 
 const ExpenceHeader = styled.div`
@@ -43,36 +43,35 @@ const HeaderText = styled.div`
   min-width: 15ch;
   overflow: hidden;
   margin-right: 33px;
-  color: ${(props) => props.theme.modalTextColor}; // Header text color
+  color: ${(props) => props.theme.modalTextColor};
 `;
 
 const HeaderPrice = styled.div`
   font-weight: 800;
-  color: ${(props) => props.theme.modalTextColor}; // Header text color
+  color: ${(props) => props.theme.modalTextColor};
 `;
 
 const Expense = styled.div`
   display: flex;
   cursor: pointer;
-  color: ${(props) => props.theme.modalTextColor}; // Expense text color
+  color: ${(props) => props.theme.modalTextColor};
 `;
 
 const ExpenseAmount = styled.div`
   text-overflow: ellipsis;
-  color: ${(props) => props.theme.modalTextColor}; // Amount text color
+  color: ${(props) => props.theme.modalTextColor};
 `;
 
 const ExpenseText = styled.div`
   text-overflow: ellipsis;
   min-width: 15ch;
   margin-right: 40px;
-  color: ${(props) => props.theme.modalTextColor}; // Expense text color
+  color: ${(props) => props.theme.modalTextColor};
 `;
 const RecentExpenses = ({ expenses }) => {
-  console.log(expenses)
     const expensesForDisplay = [...expenses]
-    .sort((a, b) => new Date(b.Date) - new Date(a.Date)) // Sort by date descending
-    .slice(0, 5); // Get the last 5 entries
+    .sort((a, b) => new Date(b.Date) - new Date(a.Date))
+    .slice(0, 5);
 
     return (
         <>

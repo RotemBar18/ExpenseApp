@@ -20,7 +20,7 @@ export const fetchUserPreferences = (userId, token) => async (dispatch) => {
   
       dispatch({ type: 'SET_PREFERENCES_DATA', payload: preferencesData });
     } catch (error) {
-      console.error('Error fetching preferences:', error);  // Log the error
+      console.error('Error fetching preferences:', error);  
       dispatch({ type: 'SET_PREFERENCES_ERROR', payload: error.message });
     }
   };
@@ -32,27 +32,19 @@ export const updateUserPreferences = (userId, token, updatedPreferences) => asyn
   dispatch({ type: 'LOADING_PREFERENCES' });
 
   try {
-      // Log initial updatedPreferences to verify the incoming data structure
-      console.log('Updating Preferences:', updatedPreferences);
 
-      // Ensure DefaultCategories is an array; parse if necessary
       if (!Array.isArray(updatedPreferences.DefaultCategories)) {
           throw new Error('DefaultCategories must be an array during update.');
       }
 
-      // Send update request, stringify DefaultCategories as required by the backend
       const response = await updatePreferences(userId, token, {
           ...updatedPreferences,
-          DefaultCategories: JSON.stringify(updatedPreferences.DefaultCategories), // Convert to JSON string before sending
+          DefaultCategories: JSON.stringify(updatedPreferences.DefaultCategories),
       });
 
-      // Log response to ensure update was successful
-      console.log('Response from updatePreferences:', response);
       response.preferences.DefaultCategories = JSON.parse(response.preferences.DefaultCategories);
-      console.log('Response from updatePreferences:', response);
 
       if (response.success) {
-          // Dispatch the updated preferences to the reducer
           dispatch({ type: 'SET_PREFERENCES_DATA', payload: response.preferences });
       } else {
           throw new Error('Failed to update preferences');

@@ -1,10 +1,9 @@
-// src/components/ReportsList.jsx 
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserReports, deleteExistingReport } from '../redux/actions/reportsActions'; // Import actions
+import { fetchUserReports, deleteExistingReport } from '../redux/actions/reportsActions';
 import useAuth from '../hooks/useAuth';
-import Report from './Report'; // Import the Report component
+import Report from './Report'; 
 const ReportsContainer = styled.div`
   padding: 20px;
   display: flex;
@@ -18,8 +17,8 @@ const ReportsContainer = styled.div`
 
 const ReportsList = () => {
   const dispatch = useDispatch();
-  const { userId, token } = useAuth(); // Fetch userId and token from auth hook
-  const reports = useSelector((state) => state.reports.reports); // Adjust based on your Redux state structure
+  const { userId, token } = useAuth();
+  const reports = useSelector((state) => state.reports.reports); 
 
   useEffect(() => {
     dispatch(fetchUserReports(userId, token));
@@ -31,7 +30,6 @@ const ReportsList = () => {
     }
   };
 
-  console.log('Reports fetched from Redux:', reports); // Log to verify the reports array
 
   return (
     <ReportsContainer>
@@ -40,7 +38,7 @@ const ReportsList = () => {
       ) : (
         reports.map((report, index) => (
           <Report
-            key={`${report.ReportId}-${index}`} // Use a combination of ReportId and index as a fallback
+            key={`${report.ReportId}-${index}`}  
             report={report}
             onDelete={() => handleDeleteReport(report.ReportId)}
           />

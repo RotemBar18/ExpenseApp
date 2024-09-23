@@ -33,7 +33,7 @@ export const login = async (email, password) => {
             }
         });
         if (response.data.success) {
-            return response.data;  // Return the full response with token and userId
+            return response.data;
         } else {
             alert(response.data.message);
             return null
@@ -51,7 +51,6 @@ export const createDefaultPreferences = async (email) => {
 
     try {
         const response = await axios.get(`${BASE_URL}/users/${email}`, {
-            // Pass email as query parameter
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -83,10 +82,10 @@ export const fetchUser = async (userId) => {
         if (response.status === 200) {
             return response.data.user
         } else {
-            alert(response.data.error); // Alert in case of a non-200 status
+            alert(response.data.error); 
         }
     } catch (error) {
         console.error("Error fetching user ID:", error);
-        throw error; // Rethrow the error to handle it elsewhere
+        throw error; 
     }
 };

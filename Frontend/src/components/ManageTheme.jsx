@@ -1,10 +1,9 @@
-// src/components/ManageTheme.jsx
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { updateUserPreferences } from '../redux/actions/preferenceAction'; // Adjust import path as needed
-import { themes } from '../styles/themes'; // Import predefined themes
-import useAuth from '../hooks/useAuth'; // Import your custom hook for user and preferences
+import { updateUserPreferences } from '../redux/actions/preferenceAction';
+import { themes } from '../styles/themes';
+import useAuth from '../hooks/useAuth';
 
 const ManageThemeContainer = styled.div`
   padding: 20px;
@@ -38,7 +37,7 @@ const Label = styled.label`
 `;
 
 const ManageTheme = () => {
-  const { user, token, preferences } = useAuth(); // Get user and token from your auth hook
+  const { user, token, preferences } = useAuth();  
   const dispatch = useDispatch();
   const [selectedTheme, setSelectedTheme] = useState(preferences.ExpensesThemeColor || 'Light');
 

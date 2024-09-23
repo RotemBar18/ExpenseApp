@@ -1,7 +1,6 @@
 import axios from 'axios';
 const BASE_URL = 'http://localhost:8081/reports';
 
-// Fetch all reports for a specific user
 export const fetchReports = async (userId, token) => {
   try {
     const response = await axios.get(`${BASE_URL}/${userId}`, {
@@ -17,7 +16,6 @@ export const fetchReports = async (userId, token) => {
   }
 };
 
-// Fetch a specific report by its ID
 export const fetchReportById = async (userId, reportId, token) => {
   try {
     const response = await axios.get(`${BASE_URL}/${userId}/${reportId}`, {
@@ -33,7 +31,6 @@ export const fetchReportById = async (userId, reportId, token) => {
   }
 };
 
-// Create a new report
 export const createReport = async (userId, reportData, token) => {
   try {
     const response = await axios.post(`${BASE_URL}/${userId}`, reportData, {
@@ -49,7 +46,6 @@ export const createReport = async (userId, reportData, token) => {
   }
 };
 
-// Update an existing report
 export const updateReport = async (userId, reportId, updatedReportData, token) => {
   try {
     const response = await axios.put(`${BASE_URL}/${userId}/${reportId}`, updatedReportData, {
@@ -65,7 +61,6 @@ export const updateReport = async (userId, reportId, updatedReportData, token) =
   }
 };
 
-// Delete a report
 export const deleteReport = async (userId, reportId, token) => {
   try {
     const response = await axios.delete(`${BASE_URL}/${userId}/${reportId}`, {

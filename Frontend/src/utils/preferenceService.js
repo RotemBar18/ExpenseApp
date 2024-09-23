@@ -12,10 +12,9 @@ export const fetchPreferences = async (userId, token) => {
             },
         });
 
-        console.log(response.data)
         const newResponse = alterCategoriesToArray(response.data)
 
-        return newResponse;  // Return preferences data
+        return newResponse; 
     } catch (error) {
         throw new Error('Error fetching preferences');
     }
@@ -32,12 +31,12 @@ export const updatePreferences = async (userId, token, preferences) => {
         });
 
         if (response.status !== 200) {
-            throw new Error('Failed to update preferences'); // Ensure error is thrown on failure
+            throw new Error('Failed to update preferences');  
         }
         return response.data
     } catch (error) {
         console.error('Error updating preferences:', error.message);
-        throw new Error('Error updating preferences'); // Throw an error to be caught in the action creator
+        throw new Error('Error updating preferences'); 
     }
 };
 

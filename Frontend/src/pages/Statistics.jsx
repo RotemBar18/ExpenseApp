@@ -15,7 +15,7 @@ const PageContainer = styled.div`
 
 
 const Statistics = () => {
-    const { user, preferences, userId } = useAuth(); // Use the custom hook to get user and preferences
+    const { user, preferences, userId } = useAuth();
     const { expenses} = useExpenses(userId);
   
    

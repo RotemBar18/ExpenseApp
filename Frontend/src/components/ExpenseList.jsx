@@ -113,7 +113,7 @@ const Button = styled.button`
 
 const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
   const [numExpensesToShow, setNumExpensesToShow] = useState(10);
-  const [sortOption, setSortOption] = useState('date-asc'); // Default sorting option
+  const [sortOption, setSortOption] = useState('date-asc');
   const [filterOptions, setFilterOptions] = useState({});
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   

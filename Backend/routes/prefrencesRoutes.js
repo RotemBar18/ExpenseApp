@@ -21,7 +21,7 @@ const verifyToken = (req, res, next) => {
 
     jwt.verify(token, jwtSecret, (err, decoded) => {
         if (err) {
-            console.error('Error verifying token:', err); // Log the error for debugging
+            console.error('Error verifying token:', err); 
             return res.status(500).json({ message: 'Failed to authenticate token.' });
         }
 
@@ -30,10 +30,9 @@ const verifyToken = (req, res, next) => {
     });
 };
 
-// GET user preferences by userId
 router.get('/:userId', verifyToken, async (req, res) => {
     try {
-        const userId = req.userId;  // Extract the userId from the token
+        const userId = req.userId;
         const [preferences] = await req.db.query('SELECT * FROM user_preferences WHERE UserId = ?', [userId]);
 
         if (preferences.length === 0) {
@@ -49,8 +48,8 @@ router.get('/:userId', verifyToken, async (req, res) => {
 
 router.put('/:userId', verifyToken, async (req, res) => {
     try {
-        const userId = req.userId;  // Extract the userId from the token
-        const { ExpensesThemeColor, DefaultCategories } = req.body;  // Get preferences from the request body
+        const userId = req.userId;
+        const { ExpensesThemeColor, DefaultCategories } = req.body; 
         const query = `
             UPDATE user_preferences 
             SET ExpensesThemeColor = ?, DefaultCategories = ?
@@ -68,10 +67,9 @@ router.put('/:userId', verifyToken, async (req, res) => {
 
 router.post('/:userId', verifyToken, async (req, res) => {
     try {
-        const {userId} = req.params;  // Extract the userId from the token
-        const { ExpensesThemeColor, DefaultCategories } = req.body;  // Get preferences from the request body
+        const {userId} = req.params;  
+        const { ExpensesThemeColor, DefaultCategories } = req.body;  
 
-        // Ensure that `DefaultCategories` is stored as a JSON string
         const query = `
             INSERT INTO user_preferences (UserId, ExpensesThemeColor, DefaultCategories) 
             VALUES (?, ?, ?)

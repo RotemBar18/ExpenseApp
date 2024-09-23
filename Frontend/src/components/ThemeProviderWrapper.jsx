@@ -1,10 +1,8 @@
-// src/components/ThemeProviderWrapper.jsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { getTheme } from '../styles/themes'; // Import your themes file
-import useAuth from '../hooks/useAuth'; // Hook to fetch user preferences
+import { getTheme } from '../styles/themes';
+import useAuth from '../hooks/useAuth'; 
 
-// Create a Theme Context
 const ThemeContext = createContext();
 
 export const useTheme = () => useContext(ThemeContext);

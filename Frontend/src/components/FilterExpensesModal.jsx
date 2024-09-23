@@ -82,13 +82,13 @@ const FilterModal = ({ expenses, isOpen, onClose, onApplyFilter }) => {
 
     const handleApplyFilter = () => {
         const filterValues = {
-            category: selectedCategory || null, // Use null if no category is selected
+            category: selectedCategory || null, 
             dateRange: {
-                start: startDate || null, // Use null if start date is empty
-                end: endDate || null,    // Use null if end date is empty
+                start: startDate || null, 
+                end: endDate || null,    
             },
-            minAmount: minAmount !== '' ? parseFloat(minAmount) : null, // Use null if minAmount is empty
-            maxAmount: maxAmount !== '' ? parseFloat(maxAmount) : null, // Use null if maxAmount is empty
+            minAmount: minAmount !== '' ? parseFloat(minAmount) : null, 
+            maxAmount: maxAmount !== '' ? parseFloat(maxAmount) : null,
         };
 
         onApplyFilter(filterValues);

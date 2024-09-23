@@ -1,7 +1,6 @@
-// src/components/Navbar.jsx
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
-import styled from 'styled-components'; // Import ThemeProvider
+import styled from 'styled-components';  
 
 export const Nav = styled.nav`
     background-color: ${(props) => props.theme.navBarBackground};
@@ -15,7 +14,6 @@ export const Nav = styled.nav`
     border-right: 1px solid ${(props) => props.theme.buttonBackground};
 `;
 
-// Profile section at the top of the sidebar
 export const UserProfile = styled.div`
     display: flex;
     flex-direction: column;
@@ -34,7 +32,6 @@ export const UserName = styled.p`
     font-size: 18px;
 `;
 
-// Navigation menu container
 export const NavMenu = styled.ul`
     list-style-type: none;
     width: 100%;
@@ -42,7 +39,6 @@ export const NavMenu = styled.ul`
     margin: 0;
 `;
 
-// Navigation menu item
 export const NavItem = styled.li`
     padding: 15px;
     display: flex;
@@ -57,7 +53,6 @@ export const NavItem = styled.li`
     }
 `;
 
-// Navigation link (applies to the text and icon)
 export const NavLink = styled.span`
     text-decoration: none;
     display: flex;
@@ -70,7 +65,6 @@ export const NavLink = styled.span`
    
 `;
 
-// Hamburger menu for mobile view
 export const Hamburger = styled.div`
     display: none;
     font-size: 1.5rem;
@@ -85,7 +79,6 @@ export const Hamburger = styled.div`
     }
 `;
 
-// Logo container for branding or app name
 export const Logo = styled.span`
     color: ${(props) => props.theme.navBarTextColor};
     font-size: 1.5rem;
@@ -94,7 +87,7 @@ export const Logo = styled.span`
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const { user, preferences } = useAuth(); // Get user and preferences from custom hook
+    const { user, preferences } = useAuth();
     const goToStatistics = () => {
         navigate('/statistics');
     };
@@ -112,7 +105,6 @@ const Navbar = () => {
     };
 
     return (
-        // Wrap Nav component with ThemeProvider and pass the correct theme object
             <Nav>
                 <Logo>Expense Tracker</Logo>
                 <NavMenu>

@@ -1,6 +1,5 @@
-// src/components/SettingsBoard.jsx
 import React, { useState } from 'react';
-import styled, { useTheme } from 'styled-components'; // Import useTheme to access the theme
+import styled, { useTheme } from 'styled-components';  
 import PersonalInfoSettings from './PersonalInfoSettings';
 import LoginAndSecuritySettings from './LoginAndSecuritySettings';
 import CustomizationSettings from './CustomizationSettings';
@@ -30,25 +29,25 @@ const HeaderText = styled.span`
   display: flex;
   padding: 10px;
   align-items: center;
-  color: ${(props) => (props.selected ? props.theme.buttonHoverTextColor : props.theme.navBarTextColor)}; // Dynamic color based on selection and theme
+  color: ${(props) => (props.selected ? props.theme.buttonHoverTextColor : props.theme.navBarTextColor)};
   cursor: pointer;
-background-color: ${(props) => (props.selected ? props.theme.buttonHoverBackground : props.theme.navBarBackground)}; // Theme-based hover background
+background-color: ${(props) => (props.selected ? props.theme.buttonHoverBackground : props.theme.navBarBackground)}; 
   
   &:hover {
-    background-color: ${(props) => props.theme.buttonHoverBackground}; // Theme-based hover background
-    color: ${(props) => props.theme.buttonHoverTextColor}; // Theme-based hover text color
+    background-color: ${(props) => props.theme.buttonHoverBackground};
+    color: ${(props) => props.theme.buttonHoverTextColor}; 
   }
       &:last-child {
-    border-radius: 0px 10px 10px 0px  ; // Full 10px border radius on all corners for the last child
+    border-radius: 0px 10px 10px 0px  ;
   }      
     &:first-child {
     margin-left:10px;
-    border-radius: 10px 0px  0px 10px ; // Full 10px border radius on all corners for the last child
+    border-radius: 10px 0px  0px 10px ;
   }
 `;
 
 const SettingsBoard = ({ user, preferences }) => {
-  const theme = useTheme(); // Access the current theme from ThemeProvider
+  const theme = useTheme(); 
   const [settingsKind, setSettingsKind] = useState("personal");
 
   return (

@@ -34,15 +34,15 @@ const FormSection = styled.div`
   gap: 10px;
   align-items: center;
     & > :nth-child(1) {
-    flex: 0 0 12%; // First child takes up 20% width
+    flex: 0 0 12%;
   }
 
   & > :nth-child(2) {
-    flex: 0 0 10%; // Second child takes up 10% width
+    flex: 0 0 10%;
   }
 
   & > :nth-child(3) {
-    flex: 0 0 78%; // Third child takes up 70% width
+    flex: 0 0 78%;
   }
 `;
 const SelectAll = styled.div`
@@ -147,7 +147,6 @@ const CreateReport = ({ onClose }) => {
     'July', 'August', 'September', 'October', 'November', 'December',
   ];
 
-  // Helper function to filter available months, years, and categories based on the current selections
   const filterOptions = () => {
     const categories = [...new Set(expenses.map((expense) => expense.Category).filter(Boolean))];
     const filteredCategories = categories.filter((category) =>

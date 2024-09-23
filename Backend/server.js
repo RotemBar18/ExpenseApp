@@ -41,7 +41,7 @@ app.use('/reports', (req, res, next) => {
 app.get("/users", async (req, res) => {
     const sql = "SELECT * FROM users";
     try {
-        const [data] = await req.db.query(sql); // Use await and async to fetch users
+        const [data] = await req.db.query(sql);
         res.json(data);
     } catch (err) {
         res.status(500).json(err);
@@ -81,11 +81,9 @@ app.post('/login', async (req, res) => {
         return res.status(400).json({ success: false, message: 'All fields are required.' });
     }
 
-    // Hash the password and log it to compare with the database
     const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
 
     try {
-        // Query the database for the user with the hashed password
         const [results] = await req.db.query('SELECT Id FROM users WHERE Email = ? AND Password = ?', [email, hashedPassword]);
 
 
@@ -106,30 +104,29 @@ app.post('/login', async (req, res) => {
 app.get("/users/:email", async (req, res) => {
     const { email } = req.params;
     if (!email) {
-        return res.status(400).json({ error: "Email is required" }); // Error if email is not provided
+        return res.status(400).json({ error: "Email is required" });
     }
 
     const sql = "SELECT Id FROM users WHERE Email = ?";
     try {
         const [rows] = await req.db.query(sql, [email]);
         if (rows.length > 0) {
-            return res.status(200).json({ userId: rows[0].Id }); // Return the user's Id as JSON
+            return res.status(200).json({ userId: rows[0].Id });
         } else {
-            return res.status(404).json({ error: "User not found" }); // Return 404 if the user was not found
+            return res.status(404).json({ error: "User not found" }); 
         }
     } catch (error) {
         console.error('Error fetching user ID:', error);
-        return res.status(500).json({ error: "Internal server error" }); // Return 500 on server error
+        return res.status(500).json({ error: "Internal server error" }); 
     }
 
 });
 
 app.put('/users/:id', async (req, res) => {
     try {
-        const { id } = req.params; // Get the user ID from the URL
-        const { Name, Email, Password, ProfilePic } = req.body; // Get updated user data from the request body
+        const { id } = req.params;
+        const { Name, Email, Password, ProfilePic } = req.body; 
 
-        // Update query
         const query = `
             UPDATE users 
             SET Name = ?, Email = ?, Password = ?, ProfilePic = ?
@@ -137,18 +134,14 @@ app.put('/users/:id', async (req, res) => {
         `;
         const values = [Name, Email, Password, ProfilePic, id];
 
-        // Execute the query with the new values
         const [result] = await req.db.query(query, values);
 
-        // Check if the user with the given ID exists
         if (result.affectedRows === 0) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        // Fetch the updated user data to send back in the response
         const [updatedUser] = await req.db.query('SELECT * FROM users WHERE Id = ?', [id]);
 
-        // Send the updated user back in the response
         res.json({ success: true, user: updatedUser[0], message: 'User updated successfully' });
     } catch (error) {
         console.error(error);

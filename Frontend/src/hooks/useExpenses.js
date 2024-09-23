@@ -16,7 +16,7 @@ const useExpenses = (userId) => {
             setError(error);
             console.error('Error fetching expenses:', error);
         } finally {
-            setLoading(false);  // Ensure loading is set to false
+            setLoading(false); 
         }
     };
 
@@ -29,14 +29,14 @@ const useExpenses = (userId) => {
             setError(error);
             console.error('Error deleting expense:', error);
         }
-        loadExpenses();  // Reload expenses after deletion
+        loadExpenses(); 
     };
 
     const updateExpense = async (expense) => {
         const token = localStorage.getItem('token');
 
         try {
-            await updateExpenseById(token, expense);  // Ensure this function correctly sends `expense` with an `id`
+            await updateExpenseById(token, expense); 
             setExpenses((prevExpenses) =>
                 prevExpenses.map((exp) =>
                     exp.ExpenseId === expense.ExpenseId ? { ...exp, ...expense } : exp
@@ -47,14 +47,14 @@ const useExpenses = (userId) => {
             console.error('Error updating expense:', error);
         }
 
-        loadExpenses();  // Reload expenses after update
+        loadExpenses(); 
     };
 
     useEffect(() => {
         if (userId) {
-            loadExpenses();  // Only load expenses if userId is available
+            loadExpenses();  
         }
-    }, [userId]);  // Add userId to the dependency array to ensure the effect runs when it changes
+    }, [userId]); 
 
     return { expenses, loading, error, reloadExpenses: loadExpenses, deleteExpense, updateExpense };
 };

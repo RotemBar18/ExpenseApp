@@ -3,7 +3,6 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const { jwtSecret } = require('../config/config.js');
 
-// Middleware to verify JWT token
 const verifyToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
 
@@ -28,7 +27,6 @@ const verifyToken = (req, res, next) => {
     });
 };
 
-// GET all reports for a user
 router.get('/:userId', verifyToken, async (req, res) => {
     try {
         const userId = req.userId;
@@ -48,7 +46,6 @@ router.get('/:userId', verifyToken, async (req, res) => {
     }
 });
 
-// GET a specific report by reportId
 router.get('/:userId/:reportId', verifyToken, async (req, res) => {
     try {
         const { reportId } = req.params;
@@ -69,7 +66,6 @@ router.get('/:userId/:reportId', verifyToken, async (req, res) => {
     }
 });
 
-// CREATE a new report for the user
 router.post('/:userId', verifyToken, async (req, res) => {
     try {
         const userId = req.userId;
@@ -81,15 +77,14 @@ router.post('/:userId', verifyToken, async (req, res) => {
             VALUES (?, ?, ?, ?, ?, ?, ?)
         `;
 
-        // Note: The order of the parameters matches the order in the SQL query
         const [insertResult]= await req.db.query(query, [
             userId,
             name,
             JSON.stringify(categories),
             JSON.stringify(months),
             JSON.stringify(years),
-            createdAt, // CreatedAt should come before ReportData in the order
-            JSON.stringify(reportData), // ReportData comes last in the order
+            createdAt, 
+            JSON.stringify(reportData), 
         ]);
         const newReportId = insertResult.insertId;
 
@@ -104,7 +99,6 @@ router.post('/:userId', verifyToken, async (req, res) => {
 });
 
 
-// UPDATE an existing report
 router.put('/:userId/:reportId', verifyToken, async (req, res) => {
     try {
         const userId = req.userId;
@@ -136,7 +130,6 @@ router.put('/:userId/:reportId', verifyToken, async (req, res) => {
     }
 });
 
-// DELETE a report
 router.delete('/:userId/:reportId', verifyToken, async (req, res) => {
     try {
         const userId = req.userId;

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import useAuth from '../hooks/useAuth'; // Import the custom hook
+import useAuth from '../hooks/useAuth'; 
 
-// Main container for managing categories
 const ManageCategoriesContainer = styled.div`
   border-radius: 10px;
   padding:0px 0px 10px 0px ;
@@ -11,7 +10,6 @@ const ManageCategoriesContainer = styled.div`
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 `;
 
-// Category list styling with custom scrollbars
 const CategoryList = styled.ul`
   list-style: none;
   padding: 0;
@@ -36,7 +34,6 @@ const CategoryList = styled.ul`
   }
 `;
 
-// Individual category item with special styling for highlighted categories
 const CategoryItem = styled.li`
   display: flex;
   justify-content: space-between;
@@ -50,7 +47,6 @@ const CategoryItem = styled.li`
     `}
 `;
 
-// Form for adding new categories
 const AddCategoryForm = styled.form`
   display: flex;
   gap: 10px;
@@ -58,7 +54,6 @@ const AddCategoryForm = styled.form`
   padding: 0px 12px;
 `;
 
-// Input field for adding categories
 const Input = styled.input`
   padding: 8px;
   flex: 1;
@@ -71,7 +66,6 @@ const Input = styled.input`
   }
 `;
 
-// Button styling for general buttons and adding categories
 const Button = styled.button`
   padding: 8px;
   background-color: ${(props) => props.theme.navBarBackground};
@@ -87,7 +81,6 @@ const Button = styled.button`
   }
 `;
 
-// Separate button for adding categories to allow independent styles
 const AddButton = styled(Button)`
   background-color: ${(props) => props.theme.navBarBackground};
   color: ${(props) => props.theme.navBarTextColor};
@@ -100,7 +93,7 @@ const AddButton = styled(Button)`
 const ManageCategories = ({ onUpdatePreferences }) => {
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState('');
-  const { preferences } = useAuth(); // Get preferences from useAuth
+  const { preferences } = useAuth();
 
   useEffect(() => {
     setCategories(
