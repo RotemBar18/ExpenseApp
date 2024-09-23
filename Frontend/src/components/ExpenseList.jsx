@@ -6,24 +6,28 @@ import FilterModal from './FilterExpensesModal';
 
 const Boardcontainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
+  flex-direction: column;
   align-items: center;
   width: 100%;
-  justify-content: space-around;
+  margin: 0 auto; 
+    background-color: ${(props) => props.theme.background};
+  padding:20px;
+  justify-content: center;
 `;
 
 const ExpenseListContainer = styled.div`
   color: ${(props) => props.theme.modalTextColor};
   background-color: ${(props) => props.theme.modalBackground};
+  display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   font-family: 'Poppins', sans-serif;
   padding: 20px;
   border-radius: 10px;
-  gap: 40px;
-  max-height: 400px;
+  width: 95%; /* Adjusted to make it occupy more space */
+  max-height: 80vh;
   overflow-y: auto;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Optional: Add shadow for emphasis */
 
   /* Scrollbar styling */
   &::-webkit-scrollbar {
@@ -56,28 +60,28 @@ const Header = styled.h3`
   margin: 0;
   padding-bottom: 15px;
   border-bottom: 2px solid ${(props) => props.theme.border};
-  font-size: 1.5em;
+  font-size: 1.8em; /* Slightly larger font to emphasize it */
   color: ${(props) => props.theme.headerTextColor};
 `;
 
 const ExpenceHeader = styled.div`
   display: flex;
   padding: 15px;
-  gap: 60px;
+    justify-content: space-between;
+
 `;
 
 const HeaderText = styled.div`
-  font-weight: 600;
-  overflow: hidden;
-  text-align: center;
-  border-bottom: 1px solid ${(props) => props.theme.border};
-  padding-bottom: 2px;
+    border-bottom: 1px solid ${(props) => props.theme.border};
+  width:20%;
+
 `;
 
 const SelectContainer = styled.div`
   display: flex;
   align-items: center;
-    justify-content: space-around;
+  gap:4%;
+  padding: 10px 0; /* Added padding for better spacing */
 `;
 
 const SortSelect = styled.select`
@@ -92,17 +96,19 @@ const SortSelect = styled.select`
 
 const AmountSelect = styled.div`
 `;
+
 const Button = styled.button`
-   padding: 5px;
-   border:none;
-    cursor: pointer;
-    background-color: ${(props) => props.theme.buttonBackground};
-   color: ${(props) => props.theme.buttonTextColor};
-    height:100%;
-    &:hover {
-   color: ${(props) => props.theme.buttonHoverTextColor};
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  background-color: ${(props) => props.theme.buttonBackground};
+  color: ${(props) => props.theme.buttonTextColor};
+  border-radius: 5px;
+
+  &:hover {
+    color: ${(props) => props.theme.buttonHoverTextColor};
     background-color: ${(props) => props.theme.buttonHoverBackground};
-    }
+  }
 `;
 
 const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
@@ -128,10 +134,6 @@ const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
   const handleUpdate = (updatedExpense) => {
     onUpdate(updatedExpense);
     setIsModalOpen(false);
-  };
-
-  const handleSortChange = (event) => {
-    setSortOption(event.target.value);
   };
 
   const handleFilterApply = (newFilterOptions) => {
@@ -166,7 +168,6 @@ const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
         </Header>
 
         <SelectContainer>
-
    
           <SortSelect value={sortOption} onChange={(e) => setSortOption(e.target.value)}>
             <option value="date-asc">Date (Newest First)</option>
@@ -199,6 +200,9 @@ const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
             </HeaderText>
             <HeaderText >
               Price
+            </HeaderText>
+            <HeaderText style={{border:'none',width:'2.5%'}}>
+              
             </HeaderText>
           </ExpenceHeader>
           {expensesForDisplay.map((expense, index) => (

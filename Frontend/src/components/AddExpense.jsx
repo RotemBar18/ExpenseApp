@@ -129,17 +129,8 @@ const AddExpense = ({ categories, userId, onAdd, onClose }) => {
       <AddExpenseContainer>
         <Header>Add New Expense</Header>
         <Form onSubmit={handleSubmit}>
-          <ExpenseInput
-            type="text"
-            name="name"
-            placeholder="Expense Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-
-          {/* Category Dropdown */}
-          <ExpenseSelect
+         
+        <ExpenseSelect
             name="category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
@@ -153,6 +144,17 @@ const AddExpense = ({ categories, userId, onAdd, onClose }) => {
                 </option>
               ))}
           </ExpenseSelect>
+          
+          <ExpenseInput
+            type="text"
+            name="name"
+            placeholder="Expense Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+
+      
 
           <ExpenseInput
             type="number"

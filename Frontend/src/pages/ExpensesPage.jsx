@@ -15,7 +15,7 @@ const ExpensePageContainer = styled.div`
 
 
 const Expenses = () => {
-  const { user, preferences, userId } = useAuth(); // Use the custom hook to get user and preferences
+  const { user, preferences, userId } = useAuth(); 
   const { expenses, deleteExpense, updateExpense } = useExpenses(userId);
 
 

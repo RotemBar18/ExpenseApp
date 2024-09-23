@@ -14,6 +14,7 @@ const Section = styled.div`
   margin-bottom: 20px;
   width: 80ch;
   display: flex;
+  flex-direction:column;
   gap: 20px;
   padding-bottom: 10px;
   border-bottom: 1px solid ${(props) => props.theme.border}; // Use theme for borders
@@ -27,8 +28,9 @@ const SectionLabel = styled.div`
 const SectionValue = styled.div`
   color: #555;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-direction: row;
+  gap: 30px;
+  align-items: center;
 `;
 
 const EditButton = styled.button`
@@ -45,7 +47,7 @@ const EditButton = styled.button`
 const InputField = styled.input`
   padding: 5px;
   margin: 5px 0;
-  width: 60%;
+  width: 20%;
   border: 1px solid ${(props) => props.theme.inputBorderColor};
   border-radius: 4px;
   font-size: 14px;
@@ -115,7 +117,7 @@ const PersonalInfoSettings = ({ user }) => {
       const updatedUserFromServer = await updateUser(user.Id, updatedUserData);
 
       if (updatedUserFromServer) {
-        
+
         // Update the local state and Redux store with the new data
         setPersonalInfo({
           Name: updatedUserFromServer.Name || personalInfo.Name,
@@ -131,27 +133,27 @@ const PersonalInfoSettings = ({ user }) => {
       handleEditToggle(field); // Close the edit mode regardless of success
     }
   };
-  
+
   const handleProfilePicChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
       const formData = new FormData();
       formData.append('file', file); // Append the file
       formData.append('upload_preset', 'ProfilePics'); // Replace with your Cloudinary upload preset
-  
+
       try {
         const response = await fetch('https://api.cloudinary.com/v1_1/expenses/image/upload', {
           method: 'POST',
           body: formData,
         });
-  
+
         const data = await response.json();
         if (response.ok) {
           setPersonalInfo((prevState) => ({
             ...prevState,
             ProfilePic: data.secure_url, // Use the returned URL for display
           }));
-          
+
           // Optional: Update the user on the server with the new profile picture URL
 
         } else {
@@ -162,22 +164,21 @@ const PersonalInfoSettings = ({ user }) => {
       }
     }
   };
-  
+
   return (
     <PersonalInfoContainer>
       <h2>Personal Info</h2>
 
-      {/* Profile Picture Section */}
       <Section>
         <SectionLabel>Profile Picture</SectionLabel>
         <SectionValue>
           <ProfilePic
-            src={personalInfo.ProfilePic} // Show current or default profile picture
+            src={personalInfo.ProfilePic}
             alt="Profile"
           />
           {isEditing.ProfilePic ? (
             <>
-              <input type="file" onChange={handleProfilePicChange} />
+              <InputField style={{border:'none'}} type="file" onChange={handleProfilePicChange} />
               <SaveButton onClick={() => handleSave('ProfilePic')}>Save</SaveButton>
             </>
           ) : (
@@ -186,7 +187,6 @@ const PersonalInfoSettings = ({ user }) => {
         </SectionValue>
       </Section>
 
-      {/* Name Section */}
       <Section>
         <SectionLabel>Name</SectionLabel>
         <SectionValue>
@@ -194,9 +194,9 @@ const PersonalInfoSettings = ({ user }) => {
             <>
               <InputField
                 type="text"
-                value={personalInfo.Name} // Display the current user's name
+                value={personalInfo.Name}
                 onChange={(e) => handleInputChange('Name', e.target.value)}
-                placeholder={user.Name} // Placeholder shows the current name
+                placeholder={user.Name}
               />
               <SaveButton onClick={() => handleSave('Name')}>Save</SaveButton>
             </>

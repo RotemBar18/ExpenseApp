@@ -69,7 +69,10 @@ const ExpenseText = styled.div`
   color: ${(props) => props.theme.modalTextColor}; // Expense text color
 `;
 const RecentExpenses = ({ expenses }) => {
-    const expensesForDisplay = expenses.slice(-5).reverse();
+  console.log(expenses)
+    const expensesForDisplay = [...expenses]
+    .sort((a, b) => new Date(b.Date) - new Date(a.Date)) // Sort by date descending
+    .slice(0, 5); // Get the last 5 entries
 
     return (
         <>

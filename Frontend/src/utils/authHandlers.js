@@ -3,6 +3,7 @@ import { createDefaultPreferences } from './authService';
 import { fetchUserData } from '../redux/actions/userActions';
 import { getUserIdFromToken } from './jwtService';
 import { fetchUserPreferences } from '../redux/actions/preferenceAction';
+import { fetchUserReports } from '../redux/actions/reportsActions';
 
 export const handleAuthSubmit = async (event, action, email, password, name, navigate, dispatch, setAction) => {
     event.preventDefault();
@@ -19,7 +20,8 @@ export const handleAuthSubmit = async (event, action, email, password, name, nav
 
           dispatch(fetchUserData(userId, token));
           dispatch(fetchUserPreferences(userId, token));
-
+          dispatch(fetchUserReports(userId,token))
+          
           alert('Login successful!');
           navigate("/main");
         } else {

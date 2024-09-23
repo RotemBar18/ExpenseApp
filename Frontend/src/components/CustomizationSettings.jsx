@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ManageCategories from './ManageCategories';
+import ManageTheme from './ManageTheme';
 import useAuth from '../hooks/useAuth'; // Import your hook for user and preferences
 import { useDispatch } from 'react-redux';
 import { updateUserPreferences } from '../redux/actions/preferenceAction'; // Import your action for updating preferences
@@ -10,6 +11,7 @@ const CustomizationContainer = styled.div`
    padding-left: 10px;
   display: flex;
   flex-direction: column;
+  gap:20px;
   color: ${(props) => props.theme.modalTextColor}; // Use theme-based colors
 
 `;
@@ -38,7 +40,8 @@ const CustomizationSettings = ({ preferences }) => {
 
   return (
     <CustomizationContainer>
-      <ManageCategories preferences={preferences} onUpdatePreferences={handleUpdatePreferences} />
+      <ManageCategories />
+      <ManageTheme />
     </CustomizationContainer>
   );
 };

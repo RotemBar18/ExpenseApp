@@ -9,7 +9,7 @@ const ExpenseContainer = styled.div`
 `
 
 const ExpenseItem = styled.li`
-  padding: 15px;
+  padding: 1%;
   border-bottom: 1px solid ${(props) => props.theme.border};
   display: flex;
   justify-content: space-between;
@@ -29,7 +29,7 @@ const ExpenseItem = styled.li`
 const ExpenseText = styled.div`
   display: inline-block;
   pointer-events: none;
-  width: 10ch;
+  width: 40%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

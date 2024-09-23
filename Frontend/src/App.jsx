@@ -7,6 +7,7 @@ import Settings from "./pages/Settings";
 import Signup from './components/signup';
 import Expenses from './pages/ExpensesPage';
 import MainPage from './pages/mainpage';
+import ReportsPage from './pages/ReportsPage';
 import { createGlobalStyle } from 'styled-components';
 import React from 'react';
 import { Provider } from 'react-redux';
@@ -54,11 +55,12 @@ function App() {
         <GlobalStyle />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/statistics" element={<Statistics />} />
-          <Route path="/expenses" element={<Expenses />} />
+          <Route path="/Statistics" element={<Statistics />} />
+          <Route path="/Expenses" element={<Expenses />} />
           <Route path="/Settings" element={<Settings />} />
-          <Route path="/main" element={<MainPage />} />
-          <Route path="/sign-up" element={<Signup />} />
+          <Route path="/Main" element={<MainPage />} />
+          <Route path="/Sign-up" element={<Signup />} />
+          <Route path="/Reports" element={<ReportsPage />} />
         </Routes>
       </ThemeProviderWrapper>
     </Provider>

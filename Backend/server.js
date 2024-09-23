@@ -1,6 +1,7 @@
 require('dotenv').config();
 const expenseRoutes = require('./routes/expenseRoutes');
 const preferencesRoutes = require('./routes/prefrencesRoutes')
+const reportsRoutes = require('./routes/reportsRoutes.js')
 const express = require('express');
 const cors = require('cors');
 const crypto = require('crypto');
@@ -31,7 +32,10 @@ app.use('/preferences', (req, res, next) => {
     next();
 }, preferencesRoutes);
 
-app.use('/preferences', preferencesRoutes);
+app.use('/reports', (req, res, next) => {
+    next();
+}, reportsRoutes);
+
 
 
 app.get("/users", async (req, res) => {

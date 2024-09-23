@@ -4,8 +4,8 @@ import useAuth from '../hooks/useAuth'; // Import the custom hook
 
 // Main container for managing categories
 const ManageCategoriesContainer = styled.div`
-  padding: 20px;
   border-radius: 10px;
+  padding:0px 0px 10px 0px ;
   margin-top: 20px;
   background-color: ${(props) => props.theme.background};
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
@@ -74,8 +74,8 @@ const Input = styled.input`
 // Button styling for general buttons and adding categories
 const Button = styled.button`
   padding: 8px;
-  background-color: ${(props) => props.theme.buttonBackground};
-  color: ${(props) => props.theme.buttonTextColor};
+  background-color: ${(props) => props.theme.navBarBackground};
+  color: ${(props) => props.theme.navBarTextColor};
   border: none;
   border-radius: 4px;
   cursor: pointer;

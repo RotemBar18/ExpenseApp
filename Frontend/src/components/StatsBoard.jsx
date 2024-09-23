@@ -9,15 +9,16 @@ display:flex;
 flex-wrap: wrap;
 gap:40px;
 align-items: center;
-width:100%;
+  width: 100%;
 justify-content: space-around;
+background-color: ${(props) => props.theme.background};
 
 `;
 const StatsBoard = ({ expenses }) => {
 
     return (
         <StatsBoardContainer>
-            <ExpenseBarChart  expenses={expenses} />
+            <ExpenseBarChart expenses={expenses} />
         </StatsBoardContainer>
     );
 };

@@ -1,5 +1,4 @@
-import { fetchPreferences } from "../../utils/preferenceService";
-import { updatePreferences } from "../../utils/preferenceService"; // Import the service function
+import { fetchPreferences ,updatePreferences} from "../../utils/preferenceService";
 
 export const fetchUserPreferences = (userId, token) => async (dispatch) => {
     dispatch({ type: 'LOADING_PREFERENCES' });

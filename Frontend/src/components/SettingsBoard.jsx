@@ -10,8 +10,10 @@ const SettingBoardContainer = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   width: 100%;
-  margin-left:2%;
-  margin-top:1%;
+  padding-left:2%;
+  padding-top:1%;
+background-color: ${(props) => props.theme.background};
+
 `;
 
 const HeaderContainer = styled.div``;
@@ -28,9 +30,9 @@ const HeaderText = styled.span`
   display: flex;
   padding: 10px;
   align-items: center;
-  color: ${(props) => (props.selected ? props.theme.buttonBackground : props.theme.navBarTextColor)}; // Dynamic color based on selection and theme
+  color: ${(props) => (props.selected ? props.theme.buttonHoverTextColor : props.theme.navBarTextColor)}; // Dynamic color based on selection and theme
   cursor: pointer;
-background-color: ${(props) => props.theme.navBarBackground}; // Theme-based hover background
+background-color: ${(props) => (props.selected ? props.theme.buttonHoverBackground : props.theme.navBarBackground)}; // Theme-based hover background
   
   &:hover {
     background-color: ${(props) => props.theme.buttonHoverBackground}; // Theme-based hover background
@@ -46,48 +48,48 @@ background-color: ${(props) => props.theme.navBarBackground}; // Theme-based hov
 `;
 
 const SettingsBoard = ({ user, preferences }) => {
-    const theme = useTheme(); // Access the current theme from ThemeProvider
-    const [settingsKind, setSettingsKind] = useState("personal");
+  const theme = useTheme(); // Access the current theme from ThemeProvider
+  const [settingsKind, setSettingsKind] = useState("personal");
 
-    return (
-        <SettingBoardContainer>
-            <HeaderContainer>
-                <h1 style={{ paddingLeft: '10px', color: theme.headerTextColor }}>Settings</h1> {/* Use theme header text color */}
-                <HeaderChoices>
-                    <HeaderText
-                        onClick={() => setSettingsKind("personal")}
-                        selected={settingsKind === "personal"}
-                        theme={theme}
-                    >
-                        Personal Info
-                    </HeaderText>
-                    <HeaderText
-                        onClick={() => setSettingsKind("security")}
-                        selected={settingsKind === "security"}
-                        theme={theme}
-                    >
-                        Login & Security
-                    </HeaderText>
-                    <HeaderText
-                        onClick={() => setSettingsKind("customize")}
-                        selected={settingsKind === "customize"}
-                        theme={theme}
-                    >
-                        Customization
-                    </HeaderText>
-                </HeaderChoices>
-            </HeaderContainer>
-            <SettingsContainer>
-                {settingsKind === "security" ? (
-                    <LoginAndSecuritySettings user={user} />
-                ) : settingsKind === "personal" ? (
-                    <PersonalInfoSettings user={user} />
-                ) : (
-                    <CustomizationSettings preferences={preferences} />
-                )}
-            </SettingsContainer>
-        </SettingBoardContainer>
-    );
+  return (
+    <SettingBoardContainer>
+      <HeaderContainer>
+        <h1 style={{ paddingLeft: '10px', color: theme.headerTextColor }}>Settings</h1> {/* Use theme header text color */}
+        <HeaderChoices>
+          <HeaderText
+            onClick={() => setSettingsKind("personal")}
+            selected={settingsKind === "personal"}
+            theme={theme}
+          >
+            Personal Info
+          </HeaderText>
+          <HeaderText
+            onClick={() => setSettingsKind("security")}
+            selected={settingsKind === "security"}
+            theme={theme}
+          >
+            Login & Security
+          </HeaderText>
+          <HeaderText
+            onClick={() => setSettingsKind("customize")}
+            selected={settingsKind === "customize"}
+            theme={theme}
+          >
+            Customization
+          </HeaderText>
+        </HeaderChoices>
+      </HeaderContainer>
+      <SettingsContainer>
+        {settingsKind === "security" ? (
+          <LoginAndSecuritySettings user={user} />
+        ) : settingsKind === "personal" ? (
+          <PersonalInfoSettings user={user} />
+        ) : (
+          <CustomizationSettings preferences={preferences} />
+        )}
+      </SettingsContainer>
+    </SettingBoardContainer>
+  );
 };
 
 export default SettingsBoard;

@@ -12,6 +12,7 @@ export const Nav = styled.nav`
     z-index: 1000;
     padding-top: 40px;
     width:20%;
+    border-right: 1px solid ${(props) => props.theme.buttonBackground};
 `;
 
 // Profile section at the top of the sidebar
@@ -105,6 +106,9 @@ const Navbar = () => {
     };
     const goToExpenses = () => {
         navigate('/expenses');
+    };   
+    const goToReports = () => {
+        navigate('/Reports');
     };
 
     return (
@@ -124,6 +128,9 @@ const Navbar = () => {
                     </NavItem>
                     <NavItem onClick={goToStatistics}>
                         <NavLink>Statistics</NavLink>
+                    </NavItem>
+                    <NavItem onClick={goToReports}>
+                        <NavLink>Reports</NavLink>
                     </NavItem>
                     <NavItem onClick={goToSettings}>
                         <NavLink>Settings</NavLink>
