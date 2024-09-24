@@ -31,6 +31,7 @@ export const handleAuthSubmit = async (event, action, email, password, name, nav
         const response = await signup(name, password, email);
         if (response.success) {
           setAction("Login");
+          console.log(response)
           createDefaultPreferences(email);
           alert("Sign-up successful! Please log in.");
         } else {

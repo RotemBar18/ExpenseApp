@@ -61,7 +61,7 @@ export const createDefaultPreferences = async (email) => {
             const userId = response.data.userId;
             const token = localStorage.getItem('token');
             const defaultPreferences = {
-                ExpensesThemeColor: "#ffffff",
+                ExpensesThemeColor: "Light",
                 DefaultCategories: '["Food", "Health", "Entertainment", "Miscellaneous"]'
             };
             postDefaultPreferences(token, userId, defaultPreferences);

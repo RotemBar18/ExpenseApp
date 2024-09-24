@@ -50,7 +50,7 @@ const GlobalStyle = createGlobalStyle`
 function App() {
   return (
     <Provider store={store}>
-      <ThemeProviderWrapper> {/* Wrap your app with the ThemeProviderWrapper */}
+      <ThemeProviderWrapper> 
         <GlobalStyle />
         <Routes>
           <Route path="/" element={<Home />} />
