@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { postDefaultPreferences } from './preferenceService'
-const BASE_URL = 'https://expenseapp-production.up.railway.app';
-
+const BASE_URL = process.env.NODE_ENV === 'development' 
+    ? 'http://localhost:8081' 
+    : 'https://expenseapp-production.up.railway.app';
+    
 export const signup = async (name, password, email) => {
     try {
         const response = await axios.post(`${BASE_URL}/signup`, {

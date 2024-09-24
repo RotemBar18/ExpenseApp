@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { alterCategoriesToArray } from './utilService'
-const BASE_URL = 'https://expenseapp-production.up.railway.app';
-
+const BASE_URL = process.env.NODE_ENV === 'development' 
+    ? 'http://localhost:8081' 
+    : 'https://expenseapp-production.up.railway.app';
 
 export const fetchPreferences = async (userId, token) => {
     try {
