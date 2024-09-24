@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BASE_URL = 'http://localhost:8081';
+const BASE_URL = 'https://expenseapp-production.up.railway.app';
 
 
 export const fetchExpenses = async (token,Id) => {

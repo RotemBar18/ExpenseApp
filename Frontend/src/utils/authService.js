@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { postDefaultPreferences } from './preferenceService'
-const BASE_URL = 'http://localhost:8081';
+const BASE_URL = 'https://expenseapp-production.up.railway.app';
 
 export const signup = async (name, password, email) => {
     try {

@@ -1,9 +1,9 @@
 import axios from 'axios';
-const BASE_URL = 'http://localhost:8081/reports';
+const BASE_URL = 'https://expenseapp-production.up.railway.app';
 
 export const fetchReports = async (userId, token) => {
   try {
-    const response = await axios.get(`${BASE_URL}/${userId}`, {
+    const response = await axios.get(`${BASE_URL}/reports/${userId}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ export const fetchReports = async (userId, token) => {
 
 export const fetchReportById = async (userId, reportId, token) => {
   try {
-    const response = await axios.get(`${BASE_URL}/${userId}/${reportId}`, {
+    const response = await axios.get(`${BASE_URL}/reports/${userId}/${reportId}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ export const fetchReportById = async (userId, reportId, token) => {
 
 export const createReport = async (userId, reportData, token) => {
   try {
-    const response = await axios.post(`${BASE_URL}/${userId}`, reportData, {
+    const response = await axios.post(`${BASE_URL}/reports/${userId}`, reportData, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ export const createReport = async (userId, reportData, token) => {
 
 export const updateReport = async (userId, reportId, updatedReportData, token) => {
   try {
-    const response = await axios.put(`${BASE_URL}/${userId}/${reportId}`, updatedReportData, {
+    const response = await axios.put(`${BASE_URL}/reports/${userId}/${reportId}`, updatedReportData, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ export const updateReport = async (userId, reportId, updatedReportData, token) =
 
 export const deleteReport = async (userId, reportId, token) => {
   try {
-    const response = await axios.delete(`${BASE_URL}/${userId}/${reportId}`, {
+    const response = await axios.delete(`${BASE_URL}/reports/${userId}/${reportId}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
