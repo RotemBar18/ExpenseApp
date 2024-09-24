@@ -50,10 +50,8 @@ router.get('/:userId/:reportId', verifyToken, async (req, res) => {
     try {
         const { reportId } = req.params;
         const userId = req.userId;
-        console.log('Fetching report:', { userId, reportId });
 
         const [report] = await req.db.query('SELECT * FROM reports WHERE UserId = ? AND ReportId = ?', [userId, reportId]);
-        console.log('Fetched report:', report);
 
         if (report.length === 0) {
             return res.status(404).json({ message: 'Report not found' });

@@ -45,8 +45,9 @@ const QuickAccessBtn = styled.button`
 const MainBoard = ({ categories, userId, expenses, reloadExpenses }) => {
   const [quickAccessKind, setQuickAccessKind] = useState('');
 
-  const handleAddExpense = async (newExpense) => {
+  const handleAddExpense = async () => {
     try {
+      closeModal()
       reloadExpenses();
     } catch (error) {
       console.error('Error adding expense:', error);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { formatDateToUTC, formatToLocalDate } from '../utils/utilService';
+import { formatDateForMySQL , formatToLocalDate } from '../utils/utilService';
 
 const ModalBack = styled.div`
   position: fixed;
@@ -104,6 +104,8 @@ const Button = styled.button`
 
 const ExpenseModal = ({ categories, isOpen, onClose, onUpdate, initialData }) => {
   const [expense, setExpense] = useState(initialData);
+  const [currCategory] = useState(expense.Category);
+
   useEffect(() => {
     if (initialData) {
       setExpense({
@@ -115,14 +117,17 @@ const ExpenseModal = ({ categories, isOpen, onClose, onUpdate, initialData }) =>
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name,value)
     const formattedValue =
-      name === "Date" ? formatDateToUTC(value) : value;
+      name === "Date" ? formatDateForMySQL(value) : value;
 
 
     setExpense((prev) => ({ ...prev, [name]: formattedValue }));
+    console.log(expense)
   };
 
   const handleSubmit = (e) => {
+    console.log(expense)
     onUpdate(expense)
     onClose()
     e.preventDefault();
@@ -152,8 +157,11 @@ const ExpenseModal = ({ categories, isOpen, onClose, onUpdate, initialData }) =>
         <DetailSection>
           <DetailTitle>Category</DetailTitle>
           <DetailSelect name="Category" value={expense.Category} onChange={handleChange}>
+              <option key={currCategory} value={currCategory}>
+                  {currCategory}
+                </option>
             {categories
-              .filter((cat) => cat !== 'Manage Categories:   ')  
+              .filter((cat) => cat !== 'Manage Categories:   '&& cat !== currCategory)  
               .map((cat) => (
                 <option key={cat} value={cat}>
                   {cat}

@@ -30,7 +30,6 @@ export const fetchUserPreferences = (userId, token) => async (dispatch) => {
 
 export const updateUserPreferences = (userId, token, updatedPreferences) => async (dispatch) => {
   dispatch({ type: 'LOADING_PREFERENCES' });
-
   try {
 
       if (!Array.isArray(updatedPreferences.DefaultCategories)) {

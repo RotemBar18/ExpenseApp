@@ -24,19 +24,13 @@ const CustomizationSettings = ({ preferences }) => {
   }, [preferences]);
 
   const handleUpdatePreferences = (newPreferences) => {
-    const mergedPreferences = {
-      ExpensesThemeColor: newPreferences.ExpensesThemeColor || updatedPreferences.ExpensesThemeColor,
-      DefaultCategories: newPreferences.DefaultCategories,
-    };
-
-
-    setUpdatedPreferences(mergedPreferences); 
-    dispatch(updateUserPreferences(user.Id, token, mergedPreferences)); 
+    setUpdatedPreferences(newPreferences); 
+    dispatch(updateUserPreferences(user.Id, token, newPreferences)); 
   };
 
   return (
     <CustomizationContainer>
-      <ManageCategories />
+      <ManageCategories onUpdatePreferences={handleUpdatePreferences}/>
       <ManageTheme />
     </CustomizationContainer>
   );

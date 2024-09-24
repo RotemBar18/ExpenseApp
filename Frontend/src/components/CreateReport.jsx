@@ -270,7 +270,7 @@ const CreateReport = ({ onClose }) => {
       months: selectedMonths,
       years: selectedYears,
       reportData: filteredExpenses,
-      createdAt: new Date().toISOString(),
+      createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
     };
 
     dispatch(saveReport(userId, newReport, token));

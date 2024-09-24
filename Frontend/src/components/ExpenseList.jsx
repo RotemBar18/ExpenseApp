@@ -133,7 +133,6 @@ const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
 
   const handleUpdate = (updatedExpense) => {
     onUpdate(updatedExpense);
-    setIsModalOpen(false);
   };
 
   const handleFilterApply = (newFilterOptions) => {

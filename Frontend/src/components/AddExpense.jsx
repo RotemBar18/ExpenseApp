@@ -110,8 +110,8 @@ const AddExpense = ({ categories, userId, onAdd, onClose }) => {
     };
 
     try {
-      const response = await addExpense(token, newExpense);
-      onAdd(response);
+      await addExpense(token, newExpense);
+      onAdd();
       setName('');
       setAmount('');
       setCategory('');

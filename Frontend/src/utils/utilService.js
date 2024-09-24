@@ -9,13 +9,16 @@ export const getTextColorBasedOnBackground = (bgColor) => {
 
     return brightness < 0.5 ? 'white' : 'black';
 };
-export const formatDateToUTC = (dateString) => {
-    const date = new Date(dateString);
-    const utcYear = date.getUTCFullYear();
-    const utcMonth = String(date.getUTCMonth() + 1).padStart(2, '0');
-    const utcDay = String(date.getUTCDate()).padStart(2, '0');
-    return `${utcYear}-${utcMonth}-${utcDay}T00:00:00.000Z`;
-};
+export const formatDateForMySQL = (date) => {
+        const formattedDate = new Date(date);
+        const year = formattedDate.getFullYear();
+        const month = String(formattedDate.getMonth() + 1).padStart(2, '0');
+        const day = String(formattedDate.getDate()).padStart(2, '0');
+        const hours = String(formattedDate.getHours()).padStart(2, '0');
+        const minutes = String(formattedDate.getMinutes()).padStart(2, '0');
+        const seconds = String(formattedDate.getSeconds()).padStart(2, '0');
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+      };
 
 export const formatToLocalDate = (utcDateString) => {
     const localDate = new Date(utcDateString);

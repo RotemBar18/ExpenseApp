@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import useAuth from '../hooks/useAuth'; 
+import useAuth from '../hooks/useAuth';
 
 const ManageCategoriesContainer = styled.div`
   border-radius: 10px;
@@ -107,8 +107,11 @@ const ManageCategories = ({ onUpdatePreferences }) => {
     e.preventDefault();
     if (newCategory && !categories.includes(newCategory)) {
       const updatedCategories = [...categories, newCategory];
+      onUpdatePreferences({
+        ExpensesThemeColor: preferences.ExpensesThemeColor,
+        DefaultCategories: updatedCategories
+      });
       setCategories(updatedCategories);
-      onUpdatePreferences({ DefaultCategories: updatedCategories });
       setNewCategory('');
     }
   };
@@ -118,7 +121,10 @@ const ManageCategories = ({ onUpdatePreferences }) => {
       (cat) => cat !== category && cat.trim() !== ''
     );
     setCategories(updatedCategories);
-    onUpdatePreferences({ DefaultCategories: updatedCategories });
+    onUpdatePreferences({
+      ExpensesThemeColor: preferences.ExpensesThemeColor,
+      DefaultCategories: updatedCategories
+    });
   };
 
   return (
