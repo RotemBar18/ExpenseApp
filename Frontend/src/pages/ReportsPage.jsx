@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import CreateReport from '../components/CreateReport';
 import ReportsList from '../components/ReportsList';
 import styled from 'styled-components';
-import Navbar from '../components/Navbar';
+import CreateReportModal from '../components/CreateReportModal';
 
 const PageContainer = styled.div`
   display: flex;
@@ -13,7 +12,7 @@ const PageContainer = styled.div`
 
 const ReportsContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   width: 100%;
   background-color: ${(props) => props.theme.background}; 
 `;
@@ -21,7 +20,7 @@ const ReportsContainer = styled.div`
 const Button = styled.button`
   padding: 10px;
   width: 100%;
-  font-size: 40px;
+  font-size: 3rem;
   color: ${(props) => props.theme.buttonTextColor};
   background-color: ${(props) => props.theme.buttonBackground};
   border: none;
@@ -31,7 +30,10 @@ const Button = styled.button`
   &:hover {
 opacity:0.8;
   }
+ @media (max-width: 768px) {
+  font-size: 2rem;
 
+  }
 
 `;
 
@@ -48,12 +50,11 @@ const ReportsPage = () => {
 
     return (
         <PageContainer>
-            <Navbar />
             <ReportsContainer>
 
                 <Button onClick={handleOpenCreateReport}>&#43; Create Report &#43; 
                 </Button>
-                {isCreateReportOpen && <CreateReport onClose={handleCloseCreateReport} />}
+                {isCreateReportOpen && <CreateReportModal onClose={handleCloseCreateReport} />}
                 <ReportsList />
 
             </ReportsContainer>

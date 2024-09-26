@@ -1,7 +1,6 @@
 import React from "react";
 import ExpenseList from "../components/ExpenseList";
 import useExpenses from '../hooks/useExpenses';
-import Navbar from "../components/Navbar";
 import styled from "styled-components";
 import useAuth from '../hooks/useAuth';  
 
@@ -36,7 +35,6 @@ const Expenses = () => {
 
     return (
         <ExpensePageContainer>
-            <Navbar  expenses={expenses} preferences={preferences} user={user}  />
             <ExpenseList
                 categories={preferences.DefaultCategories}
                 expenses={expenses}

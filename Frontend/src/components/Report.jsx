@@ -13,53 +13,76 @@ const ReportCard = styled.div`
   justify-content: space-between;
   width: 20%;
   text-align: center;
-  position: relative;
+  margin: 10px;
+
+  @media (max-width: 1024px) {
+    width: 30%;
+  }
+
+  @media (max-width: 768px) {
+    width: 45%;
+  }
+
+  @media (max-width: 480px) {
+    width: 90%;
+  }
 `;
 
 const ReportTitle = styled.h3`
   margin: 0;
-  color: ${(props) => props.theme.headerTextColor };
+  color: ${(props) => props.theme.headerTextColor};
   white-space: nowrap;
   text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 1.2em;
+
+  @media (max-width: 480px) {
+    font-size: 1em;
+  }
 `;
 
 const Btns = styled.div`
-margin-top:20px;
+  margin-top: 20px;
   display: flex;
   width: 100%;
   justify-content: space-around;
+  gap: 10px;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 5px;
+  }
 `;
 
 const Button = styled.button`
   border: none;
-  
   border-radius: 5px;
   cursor: pointer;
-  background-color: ${(props) => props.theme.buttonBackground };
-  color: ${(props) => props.theme.buttonTextColor };
+  background-color: ${(props) => props.theme.buttonBackground};
+  color: ${(props) => props.theme.buttonTextColor};
   padding: 10px 15px;
+  transition: opacity 0.3s;
 
   &:hover {
     opacity: 0.8;
   }
+
+  @media (max-width: 480px) {
+    padding: 8px 12px;
+  }
 `;
 
-const ViewReportButton = styled.button`
+const ViewReportButton = styled(Button)`
   padding: 10px 15px;
-  background-color: ${(props) => props.theme.buttonBackground };
-  color: ${(props) => props.theme.buttonTextColor };
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
 
- &:hover {
-    opacity: 0.8;
+  @media (max-width: 480px) {
+    padding: 8px 12px;
   }
 `;
 
 const Report = ({ report, onDelete }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   const handleViewReport = () => {
     setIsModalOpen(true);
   };

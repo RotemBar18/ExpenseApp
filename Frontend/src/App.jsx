@@ -1,3 +1,4 @@
+// src/App.js
 import './App.css';
 import { Routes, Route } from "react-router-dom";
 import Home from './pages/homepage';
@@ -11,7 +12,8 @@ import { createGlobalStyle } from 'styled-components';
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from './redux/store'; 
-import ThemeProviderWrapper from './components/ThemeProviderWrapper';  
+import ThemeProviderWrapper from './components/ThemeProviderWrapper';
+import Layout from './components/Layout';  // Import the Layout component
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -54,12 +56,13 @@ function App() {
         <GlobalStyle />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Statistics" element={<Statistics />} />
-          <Route path="/Expenses" element={<Expenses />} />
-          <Route path="/Settings" element={<Settings />} />
-          <Route path="/Main" element={<MainPage />} />
-          <Route path="/Sign-up" element={<Signup />} />
-          <Route path="/Reports" element={<ReportsPage />} />
+          <Route element={<Layout />}>
+            <Route path="/statistics" element={<Statistics />} />
+            <Route path="/expenses" element={<Expenses />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/main" element={<MainPage />} />
+            <Route path="/reports" element={<ReportsPage />} />
+          </Route>
         </Routes>
       </ThemeProviderWrapper>
     </Provider>
@@ -67,3 +70,4 @@ function App() {
 }
 
 export default App;
+

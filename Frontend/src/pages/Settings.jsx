@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import styled from "styled-components";
 import SettingsBoard from "../components/SettingsBoard";
 import useAuth from "../hooks/useAuth";
@@ -19,7 +18,6 @@ const Settings = () => {
 
     return (
         <PageContainer>
-            <Navbar />
             <SettingsBoard user={user} preferences={preferences}/>
         </PageContainer>
     )

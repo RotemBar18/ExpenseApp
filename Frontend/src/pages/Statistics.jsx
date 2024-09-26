@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Navbar from '../components/Navbar';
 import StatsBoard from '../components/StatsBoard';
 import useAuth from '../hooks/useAuth';
 import useExpenses from '../hooks/useExpenses';
@@ -22,7 +21,6 @@ const Statistics = () => {
 
     return (
         <PageContainer>
-            <Navbar user={user} expenses={expenses} preferences={preferences} />
             <StatsBoard expenses={expenses} />
         </PageContainer>
     );

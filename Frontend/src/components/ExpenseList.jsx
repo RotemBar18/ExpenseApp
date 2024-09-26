@@ -9,9 +9,9 @@ const Boardcontainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin: 0 auto; 
-    background-color: ${(props) => props.theme.background};
-  padding:20px;
+  margin: 0 auto;
+  background-color: ${(props) => props.theme.background};
+  padding: 20px;
   justify-content: center;
 `;
 
@@ -24,12 +24,11 @@ const ExpenseListContainer = styled.div`
   font-family: 'Poppins', sans-serif;
   padding: 20px;
   border-radius: 10px;
-  width: 95%; /* Adjusted to make it occupy more space */
+  width: 95%;
   max-height: 80vh;
   overflow-y: auto;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Optional: Add shadow for emphasis */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
 
-  /* Scrollbar styling */
   &::-webkit-scrollbar {
     width: 8px;
   }
@@ -60,28 +59,26 @@ const Header = styled.h3`
   margin: 0;
   padding-bottom: 15px;
   border-bottom: 2px solid ${(props) => props.theme.border};
-  font-size: 1.8em; /* Slightly larger font to emphasize it */
+  font-size: 1.8em;
   color: ${(props) => props.theme.headerTextColor};
 `;
 
 const ExpenceHeader = styled.div`
   display: flex;
   padding: 15px;
-    justify-content: space-between;
-
+  justify-content: space-between;
 `;
 
 const HeaderText = styled.div`
-    border-bottom: 1px solid ${(props) => props.theme.border};
-  width:20%;
-
+  border-bottom: 1px solid ${(props) => props.theme.border};
+  width: 20%;
 `;
 
 const SelectContainer = styled.div`
   display: flex;
   align-items: center;
-  gap:4%;
-  padding: 10px 0; /* Added padding for better spacing */
+  gap: 4%;
+  padding: 10px 0;
 `;
 
 const SortSelect = styled.select`
@@ -94,7 +91,14 @@ const SortSelect = styled.select`
   border-radius: 5px;
 `;
 
-const AmountSelect = styled.div`
+const SearchInput = styled.input`
+  padding: 8px;
+  margin: 10px;
+  font-size: 16px;
+  border: 1px solid ${(props) => props.theme.inputBorderColor};
+  border-radius: 5px;
+  background-color: ${(props) => props.theme.inputBackground};
+  color: ${(props) => props.theme.inputTextColor};
 `;
 
 const Button = styled.button`
@@ -116,20 +120,25 @@ const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
   const [sortOption, setSortOption] = useState('date-asc');
   const [filterOptions, setFilterOptions] = useState({});
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
-  
+  const [searchQuery, setSearchQuery] = useState('');
+
   const defaultFilterOptions = {
     category: '',
     dateRange: { start: '1990-01-01', end: '2220-01-01' },
     minAmount: 0,
     maxAmount: Number.MAX_VALUE,
   };
+
   useEffect(() => {
     setFilterOptions(defaultFilterOptions);
     setSortOption('date-asc');
-  }, []);  
+  }, []);
 
-
-  const filteredAndSortedExpenses = filterAndSortExpenses(expenses, filterOptions, sortOption);
+  const filteredAndSortedExpenses = filterAndSortExpenses(expenses, filterOptions, sortOption).filter(
+    (expense) =>
+      expense.Name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      expense.Category.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const handleUpdate = (updatedExpense) => {
     onUpdate(updatedExpense);
@@ -137,19 +146,18 @@ const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
 
   const handleFilterApply = (newFilterOptions) => {
     const { category, dateRange, minAmount, maxAmount } = newFilterOptions;
-    
+
     const updatedFilterOptions = {
-      category: category || '', 
+      category: category || '',
       dateRange: {
-        start: dateRange.start || "1997-01-01",  
-        end: dateRange.end || new Date().toISOString().split('T')[0],  
+        start: dateRange.start || '1997-01-01',
+        end: dateRange.end || new Date().toISOString().split('T')[0],
       },
-      minAmount: minAmount !== '' ? parseFloat(minAmount) : 0, 
-      maxAmount: maxAmount !== '' ? parseFloat(maxAmount) : Number.MAX_VALUE, 
+      minAmount: minAmount !== '' ? parseFloat(minAmount) : 0,
+      maxAmount: maxAmount !== '' ? parseFloat(maxAmount) : Number.MAX_VALUE,
     };
     setFilterOptions(updatedFilterOptions);
   };
-
 
   const handleNumExpensesChange = (e) => {
     const value = e.target.value === 'all' ? expenses.length : parseInt(e.target.value);
@@ -160,14 +168,17 @@ const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
 
   return (
     <Boardcontainer>
-      <ExpenseListContainer
-      >
-        <Header>Expenses
-
-        </Header>
+      <ExpenseListContainer>
+        <Header>Expenses</Header>
 
         <SelectContainer>
-   
+          <SearchInput
+            type="text"
+            placeholder="Search by name or category..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+
           <SortSelect value={sortOption} onChange={(e) => setSortOption(e.target.value)}>
             <option value="date-asc">Date (Newest First)</option>
             <option value="date-desc">Date (Oldest First)</option>
@@ -176,34 +187,26 @@ const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
             <option value="category-asc">Category (Z-A)</option>
             <option value="category-desc">Category (A-Z)</option>
           </SortSelect>
-          <AmountSelect>
-            <select id="numExpenses" value={numExpensesToShow} onChange={handleNumExpensesChange}>
-              <option value="10">10</option>
-              <option value="25">25</option>
-              <option value="50">50</option>
-              <option value="100">100</option>
-              <option value="0">All</option>
-            </select>
-          </AmountSelect>
-        <Button onClick={() => setIsFilterModalOpen(true)}>Filter</Button>
 
+          <select id="numExpenses" value={numExpensesToShow} onChange={handleNumExpensesChange}>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="0">All</option>
+          </select>
+
+          <Button onClick={() => setIsFilterModalOpen(true)}>Filter</Button>
         </SelectContainer>
 
         <ExpensesTable>
           <ExpenceHeader>
-            <HeaderText >
-              Name
-            </HeaderText>
-            <HeaderText >
-              Category
-            </HeaderText>
-            <HeaderText >
-              Price
-            </HeaderText>
-            <HeaderText style={{border:'none',width:'2.5%'}}>
-              
-            </HeaderText>
+            <HeaderText>Name</HeaderText>
+            <HeaderText>Category</HeaderText>
+            <HeaderText>Price</HeaderText>
+            <HeaderText style={{ border: 'none', width: '2.5%' }}></HeaderText>
           </ExpenceHeader>
+
           {expensesForDisplay.map((expense, index) => (
             <Expense
               categories={categories}
@@ -212,10 +215,10 @@ const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
               onDelete={onDelete}
               expense={expense}
               onUpdate={handleUpdate}
-            >
-            </Expense>
+            />
           ))}
         </ExpensesTable>
+
         <FilterModal
           expenses={expenses}
           isOpen={isFilterModalOpen}

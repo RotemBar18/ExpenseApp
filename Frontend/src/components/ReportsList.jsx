@@ -5,15 +5,27 @@ import { fetchUserReports, deleteExistingReport } from '../redux/actions/reports
 import useAuth from '../hooks/useAuth';
 import Report from './Report'; 
 const ReportsContainer = styled.div`
-  padding: 20px;
+  padding: 40px;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-    justify-content: flex-start;
+  justify-content: flex-start;
   gap: 20px;
   height:100%;
   background-color: ${(props) => props.theme.background};
-`;
+  
+  @media (max-width: 768px) {
+  justify-content: center;
+  flex-wrap:nowrap;
+  }
+
+    @media (max-width: 550px) {
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+  }
+  `;
+
 
 const ReportsList = () => {
   const dispatch = useDispatch();
