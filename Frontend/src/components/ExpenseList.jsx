@@ -13,6 +13,10 @@ const Boardcontainer = styled.div`
   background-color: ${(props) => props.theme.background};
   padding: 20px;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    padding: 0px;
+  }
 `;
 
 const ExpenseListContainer = styled.div`
@@ -28,6 +32,13 @@ const ExpenseListContainer = styled.div`
   max-height: 80vh;
   overflow-y: auto;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+
+
+  @media (max-width: 1000px) {
+    padding: 15px;
+    width:80%;
+
+  }
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -51,7 +62,7 @@ const ExpenseListContainer = styled.div`
 
 const ExpensesTable = styled.ul`
   list-style: none;
-  padding: 0;
+  padding: 0px 10px;
   margin: 0;
 `;
 
@@ -61,17 +72,28 @@ const Header = styled.h3`
   border-bottom: 2px solid ${(props) => props.theme.border};
   font-size: 1.8em;
   color: ${(props) => props.theme.headerTextColor};
+
+  @media (max-width: 768px) {
+    font-size: 1.5em;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.2em;
+  }
 `;
 
 const ExpenceHeader = styled.div`
   display: flex;
-  padding: 15px;
+  margin-right: 10px;
+  padding: 1%;
   justify-content: space-between;
+
 `;
 
 const HeaderText = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.border};
-  width: 20%;
+  width: 30%;
+
 `;
 
 const SelectContainer = styled.div`
@@ -79,26 +101,42 @@ const SelectContainer = styled.div`
   align-items: center;
   gap: 4%;
   padding: 10px 0;
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    align-items: baseline;
+    gap: 10px;
+  }
 `;
 
 const SortSelect = styled.select`
   margin: 10px;
   padding: 8px;
-  font-size: 16px;
+  font-size: 1rem;
   background-color: ${(props) => props.theme.inputBackground};
   color: ${(props) => props.theme.inputTextColor};
   border: 1px solid ${(props) => props.theme.inputBorderColor};
   border-radius: 5px;
+
+  @media (max-width: 768px) {
+    width: 50%;
+    font-size: 0.8rem;
+  }
 `;
 
 const SearchInput = styled.input`
   padding: 8px;
   margin: 10px;
-  font-size: 16px;
+  font-size: 1rem;
   border: 1px solid ${(props) => props.theme.inputBorderColor};
   border-radius: 5px;
   background-color: ${(props) => props.theme.inputBackground};
   color: ${(props) => props.theme.inputTextColor};
+
+  @media (max-width: 768px) {
+    width: 50%;
+    font-size: 0.8rem;
+  }
 `;
 
 const Button = styled.button`
@@ -113,8 +151,12 @@ const Button = styled.button`
     color: ${(props) => props.theme.buttonHoverTextColor};
     background-color: ${(props) => props.theme.buttonHoverBackground};
   }
-`;
 
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 8px;
+  }
+`;
 const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
   const [numExpensesToShow, setNumExpensesToShow] = useState(10);
   const [sortOption, setSortOption] = useState('date-asc');
@@ -204,7 +246,7 @@ const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
             <HeaderText>Name</HeaderText>
             <HeaderText>Category</HeaderText>
             <HeaderText>Price</HeaderText>
-            <HeaderText style={{ border: 'none', width: '2.5%' }}></HeaderText>
+            <HeaderText style={{ border: 'none', width: '20px', height: '20px' }}></HeaderText>
           </ExpenceHeader>
 
           {expensesForDisplay.map((expense, index) => (

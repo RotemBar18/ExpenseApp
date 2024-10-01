@@ -15,7 +15,7 @@ const ExpenseListContainer = styled.div`
   justify-content: center;
 `;
 
-const ExpensesTable = styled.ul`
+const ExpensesTable = styled.div`
   list-style: none;
   padding: 0;
   margin: 0;
@@ -28,21 +28,20 @@ const ExpensesTable = styled.ul`
 const Header = styled.div`
   margin: 0;
   margin-bottom: 5px;
-  font-size: 18px;
+  font-size: 1.5rem;
   font-weight: 800;
   border-bottom: 1px solid ${(props) => props.theme.border};
 `;
 
 const ExpenceHeader = styled.div`
   display: flex;
-  justify-content: flex-start;
+justify-content: space-between;
+  width:100%;
 `;
 
 const HeaderText = styled.div`
   font-weight: 800;
-  min-width: 15ch;
   overflow: hidden;
-  margin-right: 33px;
   color: ${(props) => props.theme.modalTextColor};
 `;
 
@@ -53,7 +52,8 @@ const HeaderPrice = styled.div`
 
 const Expense = styled.div`
   display: flex;
-  cursor: pointer;
+  width:100%;
+  justify-content: space-between;
   color: ${(props) => props.theme.modalTextColor};
 `;
 
@@ -63,52 +63,67 @@ const ExpenseAmount = styled.div`
 `;
 
 const ExpenseText = styled.div`
-  text-overflow: ellipsis;
-  min-width: 15ch;
-  margin-right: 40px;
+  display: inline-block;
+    pointer-events: none;
+    width: 15ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   color: ${(props) => props.theme.modalTextColor};
 `;
 const RecentExpenses = ({ expenses }) => {
-    const expensesForDisplay = [...expenses]
+  const expensesForDisplay = [...expenses]
     .sort((a, b) => new Date(b.Date) - new Date(a.Date))
     .slice(0, 5);
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+  };
 
-    return (
-        <>
-            <ExpenseListContainer>
+  return (
+    <>
+      <ExpenseListContainer>
 
-                <ExpensesTable>
-                    <Header>Recent Expenses</Header>
-                    <ExpenceHeader>
-                        <HeaderText >
-                            Name
-                        </HeaderText>
-                        <HeaderText >
-                            Category
-                        </HeaderText>
-                        <HeaderPrice >
-                            Price
-                        </HeaderPrice>
-                    </ExpenceHeader>
-                    {expensesForDisplay.map((expense, index) => (
-                        <Expense
-                            key={expense.ExpenseId}>
-                            <ExpenseText >
-                                {expense.Name}
-                            </ExpenseText>
-                            <ExpenseText>
-                                {expense.Category}
-                            </ExpenseText>
-                            <ExpenseAmount >
-                                ${expense.Amount}
-                            </ExpenseAmount>
+        <ExpensesTable>
+          <Header>Recent Expenses</Header>
+          <ExpenceHeader>
+            <HeaderText >
+              Name
+            </HeaderText>
+            <HeaderText >
+              Category
+            </HeaderText>
+            <HeaderText >
+              Date
+            </HeaderText>
+            <HeaderPrice >
+              Price
+            </HeaderPrice>
+          </ExpenceHeader>
+          {expensesForDisplay.map((expense, index) => (
+            <Expense
+              key={expense.ExpenseId}>
+              <ExpenseText >
+                {expense.Name}
+              </ExpenseText>
+              <ExpenseText>
+                {expense.Category}
+              </ExpenseText>
+              <ExpenseText >
+                {formatDate(expense.Date)}
+              </ExpenseText>
+              <ExpenseAmount >
+                ${expense.Amount}
+              </ExpenseAmount>
 
-                        </Expense>
-                    ))}
-                </ExpensesTable>
-            </ExpenseListContainer>
-        </>
-    );
+
+            </Expense>
+          ))}
+        </ExpensesTable>
+        
+      </ExpenseListContainer>
+    </>
+  );
 };
 
 export default RecentExpenses;

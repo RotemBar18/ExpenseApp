@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserReports, deleteExistingReport } from '../redux/actions/reportsActions';
 import useAuth from '../hooks/useAuth';
 import Report from './Report'; 
+
 const ReportsContainer = styled.div`
   padding: 40px;
   display: flex;
@@ -12,6 +13,7 @@ const ReportsContainer = styled.div`
   justify-content: flex-start;
   gap: 20px;
   height:100%;
+  align-content: flex-start;
   background-color: ${(props) => props.theme.background};
   
   @media (max-width: 768px) {
