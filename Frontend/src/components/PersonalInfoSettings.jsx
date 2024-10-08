@@ -7,15 +7,14 @@ const PersonalInfoContainer = styled.div`
   padding-left: 10px;
   display: flex;
   flex-direction: column;
+  height:100%;
   color: ${(props) => props.theme.modalTextColor};
 `;
 
 const Section = styled.div`
   margin-bottom: 20px;
-  width: 80ch;
   display: flex;
   flex-direction:column;
-  gap: 20px;
   padding-bottom: 10px;
   border-bottom: 1px solid ${(props) => props.theme.border};  
 `;

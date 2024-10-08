@@ -7,12 +7,14 @@ import CustomizationSettings from './CustomizationSettings';
 const SettingBoardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  width: 100%;
   padding-left:2%;
   padding-top:1%;
+  width:100%;
 background-color: ${(props) => props.theme.background};
-
+ @media (max-width: 768px) {
+  padding-left:4%;
+  padding-top:2%;
+  }
 `;
 
 const HeaderContainer = styled.div``;
@@ -22,7 +24,7 @@ const HeaderChoices = styled.div`
 `;
 
 const SettingsContainer = styled.div`
-  display: flex;
+  height:100%;
 `;
 
 const HeaderText = styled.span`

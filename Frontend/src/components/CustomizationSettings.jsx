@@ -7,12 +7,14 @@ import { useDispatch } from 'react-redux';
 import { updateUserPreferences } from '../redux/actions/preferenceAction'; 
 
 const CustomizationContainer = styled.div`
-   padding-left: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
   display: flex;
   flex-direction: column;
   gap:20px;
+  max-height:100%;
+  overflow-y: auto;
   color: ${(props) => props.theme.modalTextColor};
-
 `;
 
 const CustomizationSettings = ({ preferences }) => {

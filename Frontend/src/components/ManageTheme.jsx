@@ -6,13 +6,12 @@ import { themes } from '../styles/themes';
 import useAuth from '../hooks/useAuth';
 
 const ManageThemeContainer = styled.div`
-  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  max-width: 300px;
+  width: 50%;
+  padding:10px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-
+  border-radius: 10px;
 `;
 
 const Select = styled.select`
@@ -23,7 +22,6 @@ const Select = styled.select`
   color: ${(props) => props.theme.inputTextColor};
   font-size: 14px;
   cursor: pointer;
-
   &:focus {
     outline: none;
     border-color: ${(props) => props.theme.buttonBackground};
@@ -32,7 +30,10 @@ const Select = styled.select`
 
 const Label = styled.label`
   font-size: 16px;
-  margin-bottom: 5px;
+  padding: 0px 5px 5px  0px;
+  font-weight:600;
+  margin-bottom:10px;
+  border-bottom: 1px solid ${(props) => ( props.theme.border)};
   color: ${(props) => props.theme.headerTextColor};
 `;
 

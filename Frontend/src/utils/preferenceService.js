@@ -14,7 +14,6 @@ export const fetchPreferences = async (userId, token) => {
         });
 
         const newResponse = alterCategoriesToArray(response.data)
-
         return newResponse; 
     } catch (error) {
         throw new Error('Error fetching preferences');

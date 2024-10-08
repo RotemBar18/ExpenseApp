@@ -4,8 +4,11 @@ import useAuth from '../hooks/useAuth';
 
 const ManageCategoriesContainer = styled.div`
   border-radius: 10px;
-  padding:0px 0px 10px 0px ;
+  padding:0px 10px 10px 0px ;
   margin-top: 20px;
+  width:50%;
+  padding:10px;
+
   background-color: ${(props) => props.theme.background};
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 `;
@@ -41,8 +44,8 @@ const CategoryItem = styled.li`
   border-bottom: 1px solid ${(props) => (props.special ? props.theme.border : 'transparent')};
 
   ${(props) =>
-    props.special &&
-    `
+    props.special &&`
+      padding: 0px 5px 5px  0px;
       font-weight: bold;
     `}
 `;
