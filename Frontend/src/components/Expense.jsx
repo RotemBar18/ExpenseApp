@@ -4,6 +4,7 @@ import deleteIconBlack from "./assets/deleteBlack.png";
 import React from 'react';
 import { useState } from 'react';
 import ExpenseModal from './ExpenseModal'
+import { formatToLocalDatePresent } from '../utils/utilService';
 
 const ExpenseContainer = styled.div`
 `
@@ -34,7 +35,11 @@ const ExpenseText = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   color: ${(props) => props.theme.textColor};
-`;
+
+  @media (max-width: 980px) {
+    font-size: 0.8rem;
+  }
+  `;
 
 const Buttons = styled.div`
   display: flex;
@@ -87,6 +92,9 @@ const Expense = ({ color, expense, onDelete, onUpdate, categories }) => {
         </ExpenseText>
         <ExpenseText>
           {expense.Category}
+        </ExpenseText>
+        <ExpenseText >
+          {formatToLocalDatePresent(expense.Date)}
         </ExpenseText>
         <ExpenseText >
           ${expense.Amount}

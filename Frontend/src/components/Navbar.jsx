@@ -14,9 +14,14 @@ const Nav = styled.nav`
     border-right: 1px solid ${(props) => props.theme.buttonBackground};
     transition: transform 0.3s ease;
     z-index:100;
+   
+    @media (max-width: 1000px) {
+    padding-top: 20px;
+  } 
+
     @media (max-width: 768px) {
     width: 250px;
-    min-height: 100%;
+    height:100%;
     transform: ${(props) => (props.isOpen ? 'translateX(0)' : 'translateX(-100%)')};
     position: fixed;
     top: 0px;
@@ -40,6 +45,18 @@ const ToggleModal = styled.div`
   }
 `;
 
+const Logo = styled.span`
+    color: ${(props) => props.theme.navBarTextColor};
+    font-size: 1.5rem;
+    margin-bottom: 60px;
+    
+    @media (max-width: 1000px) {
+      margin-bottom: 40px;
+    @media (max-width: 768px) {
+    font-size: 1rem;
+      margin-bottom: 20px;
+  }
+`;
 const UserProfile = styled.div`
     display: flex;
     flex-direction: column;
@@ -47,6 +64,11 @@ const UserProfile = styled.div`
     margin-bottom: 40px;
      
     
+    @media (max-width: 1000px) {
+    align-items: center;
+    margin-bottom: 20px;
+    
+  }  
     @media (max-width: 768px) {
     align-items: center;
     margin-bottom: 10px;
@@ -58,7 +80,12 @@ const UserImage = styled.img`
     width: 80px;
     height: 80px;
     border-radius: 50%;
+       
+    @media (max-width: 1000px) {
+    height: 60px;
+    width: 60px;
 
+  } 
     @media (max-width: 768px) {
     width: 40px;
     height: 40px;
@@ -76,18 +103,21 @@ const UserName = styled.p`
   }
 `;
 
-const NavMenu = styled.ul`
-    list-style-type: none;
+const NavMenu = styled.div`
     width: 100%;
+    height: 100%;
     padding: 0;
     margin: 0;
+    display:flex;
+    flex-direction:column;
 `;
 
-const NavItem = styled.li`
-    padding: 15px;
+const NavItem = styled.div`
     display: flex;
+    height: 100%;
     align-items: center;
     cursor: pointer;
+    justify-content: center;
     background-color: ${(props) => props.theme.buttonBackground};
    color: ${(props) => props.theme.buttonTextColor};
     
@@ -95,15 +125,15 @@ const NavItem = styled.li`
    color: ${(props) => props.theme.buttonHoverTextColor};
     background-color: ${(props) => props.theme.buttonHoverBackground};
     }
-  @media (max-width: 768px) {
-    justify-content: center;
-  }
+  
 `;
 
 const NavLink = styled.span`
     text-decoration: none;
     display: flex;
     font-size: 1rem;
+    justify-content: center;
+
     width: 70%;
     cursor:pointer;
     border:none;
@@ -129,14 +159,7 @@ z-index :1001;
   }
 `;
 
-const Logo = styled.span`
-    color: ${(props) => props.theme.navBarTextColor};
-    font-size: 1.5rem;
-    margin-bottom: 60px;
-      @media (max-width: 768px) {
-    margin-bottom: 20px;
-  }
-`;
+
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -173,11 +196,12 @@ const Navbar = () => {
       <Nav isOpen={isOpen}>
         <Logo>Expense Tracker</Logo>
 
-        <NavMenu>
+       
           <UserProfile>
             <UserImage src={user.ProfilePic || 'https://via.placeholder.com/80'} alt="Profile" />
             <UserName>{user.Name || 'Guest'}</UserName>
           </UserProfile>
+          <NavMenu>
           <NavItem onClick={goToMain}>
             <NavLink>MyBoard</NavLink>
           </NavItem>

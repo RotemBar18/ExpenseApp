@@ -180,7 +180,7 @@ const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
     (expense) =>
       expense.Name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       expense.Category.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  )
 
   const handleUpdate = (updatedExpense) => {
     onUpdate(updatedExpense);
@@ -193,7 +193,7 @@ const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
       category: category || '',
       dateRange: {
         start: dateRange.start || '1997-01-01',
-        end: dateRange.end || new Date().toISOString().split('T')[0],
+        end: dateRange.end || '2220-01-01',
       },
       minAmount: minAmount !== '' ? parseFloat(minAmount) : 0,
       maxAmount: maxAmount !== '' ? parseFloat(maxAmount) : Number.MAX_VALUE,
@@ -207,7 +207,6 @@ const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
   };
 
   const expensesForDisplay = filteredAndSortedExpenses.slice(-numExpensesToShow).reverse();
-
   return (
     <Boardcontainer>
       <ExpenseListContainer>
@@ -245,6 +244,7 @@ const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
           <ExpenceHeader>
             <HeaderText>Name</HeaderText>
             <HeaderText>Category</HeaderText>
+            <HeaderText>Date</HeaderText>
             <HeaderText>Price</HeaderText>
             <HeaderText style={{ border: 'none', width: '20px', height: '20px' }}></HeaderText>
           </ExpenceHeader>

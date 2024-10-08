@@ -115,8 +115,6 @@ const RecentExpenses = ({ expenses }) => {
               <ExpenseAmount >
                 ${expense.Amount}
               </ExpenseAmount>
-
-
             </Expense>
           ))}
         </ExpensesTable>
