@@ -1,17 +1,15 @@
-// src/App.js
 import './App.css';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import Home from './pages/homepage';
 import Statistics from './pages/Statistics';
 import Settings from "./pages/Settings";
-import Signup from './components/signup';
 import Expenses from './pages/ExpensesPage';
 import MainPage from './pages/MainPage';
 import ReportsPage from './pages/ReportsPage';
 import { createGlobalStyle } from 'styled-components';
 import React from 'react';
 import { Provider } from 'react-redux';
-import store from './redux/store'; 
+import store from './redux/store';
 import ThemeProviderWrapper from './components/ThemeProviderWrapper';
 import Layout from './components/Layout';  // Import the Layout component
 
@@ -52,18 +50,22 @@ const GlobalStyle = createGlobalStyle`
 function App() {
   return (
     <Provider store={store}>
-      <ThemeProviderWrapper> 
+      <ThemeProviderWrapper>
         <GlobalStyle />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route element={<Layout />}>
-            <Route path="/statistics" element={<Statistics />} />
-            <Route path="/expenses" element={<Expenses />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/main" element={<MainPage />} />
-            <Route path="/reports" element={<ReportsPage />} />
-          </Route>
-        </Routes>
+        <Router>
+
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route element={<Layout />}>
+              <Route path="/statistics" element={<Statistics />} />
+              <Route path="/expenses" element={<Expenses />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/main" element={<MainPage />} />
+              <Route path="/reports" element={<ReportsPage />} />
+            </Route>
+          </Routes>
+        </Router>
+
       </ThemeProviderWrapper>
     </Provider>
   );
