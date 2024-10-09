@@ -142,7 +142,7 @@ const StyledInput = styled.input`
 `;
 
 const Signup = () => {
-  const [action, setAction] = useState("Sign Up");
+  const [action, setAction] = useState("Login");
   const navigate = useNavigate();
   const dispatch = useDispatch(); 
 

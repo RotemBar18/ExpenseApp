@@ -7,6 +7,7 @@ const DataContainer = styled.div`
   flex-direction: row;
   gap: 20px;
   width:90%;
+  justify-content: space-between;
 `;
 
 const DataCard = styled.div`
