@@ -31,7 +31,7 @@ const ExpenseListContainer = styled.div`
   width: 95%;
   max-height: 80vh;
   overflow-y: auto;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
 
 
   @media (max-width: 1000px) {

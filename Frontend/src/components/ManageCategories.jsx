@@ -10,7 +10,7 @@ const ManageCategoriesContainer = styled.div`
   padding:10px;
 
   background-color: ${(props) => props.theme.background};
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
 `;
 
 const CategoryList = styled.ul`

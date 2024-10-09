@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import AddExpense from './AddExpense';
 import RecentExpenses from './RecentExpenses';
 import styled from 'styled-components';
-
+import GeneralDataBoard from './GeneralDataBoard'
 const MainBoardContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction:column;
   gap: 40px;
   align-items: center;
   width: 100%;
@@ -18,17 +18,18 @@ const MainBoardContainer = styled.div`
 
 const QuickAccessBoard = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  background-color: ${(props) => props.theme.modalBackground};
-  padding: 10px;
+  padding:10px 0px;
   border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  width:90%;
 `;
 
-const QuickAccessBtn = styled.button`
+const QuickAccessBtn = styled.div`
   cursor: pointer;
-  padding: 10px 20px;
+  padding: 10px 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+
   font-size: 14px;
   color: ${(props) => props.theme.buttonTextColor};
   background-color: ${(props) => props.theme.buttonBackground}; 
@@ -73,6 +74,8 @@ const MainBoard = ({ categories, userId, expenses, reloadExpenses }) => {
           + Add Expense +
         </QuickAccessBtn>
       </QuickAccessBoard>
+
+      <GeneralDataBoard expenses={expenses}/>
 
       <RecentExpenses categories={categories} expenses={expenses} />
     </MainBoardContainer>
