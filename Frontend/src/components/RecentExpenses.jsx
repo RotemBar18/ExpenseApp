@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import React, { useState } from "react";
 
 const ExpenseListContainer = styled.div`
   color: ${(props) => props.theme.headerTextColor};
@@ -17,19 +17,16 @@ const ExpenseListContainer = styled.div`
 
 const ExpensesTable = styled.div`
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 10px;
   overflow-y: auto;
-  max-height: 400px;
   display: flex;
   flex-direction: column;
   width:90%;
-
 `;
 
 const Header = styled.div`
-  margin-bottom: 5px;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 800;
   border-bottom: 1px solid ${(props) => props.theme.border};
 `;
@@ -39,6 +36,7 @@ const ExpenceHeader = styled.div`
 justify-content: flex-start;
   width:100%;
 `;
+
 
 const HeaderText = styled.div`
 width:25%;
@@ -101,12 +99,25 @@ const ExpenseText = styled.div`
   color: ${(props) => props.theme.modalTextColor};
 `;
 const RecentExpenses = ({ expenses }) => {
+  const [hoveredExpense, setHoveredExpense] = useState(null);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+
   const expensesForDisplay = [...expenses]
     .sort((a, b) => new Date(b.Date) - new Date(a.Date))
     .slice(0, 5);
+  
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options);
+  };
+  
+  const handleMouseEnter = (expense) => {
+    setHoveredExpense(expense);
+    setTooltipVisible(true);
+  };
+
+  const handleMouseLeave = () => {
+    setTooltipVisible(false);
   };
 
   return (

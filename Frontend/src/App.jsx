@@ -18,29 +18,29 @@ import Layout from './components/Layout';  // Import the Layout component
 const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Poppins';
-    src: url('./src/components/assets/fonts/Poppins-Regular.ttf') format('truetype');
+    src: url('/fonts/Poppins-Regular.ttf') format('truetype');
     font-weight: 400; 
     font-style: normal;
   }
 
   @font-face {
     font-family: 'Poppins';
-    src: url('./src/components/assets/fonts/Poppins-Bold.ttf') format('truetype');
-    font-weight: 700; /* Bold */
+    src: url('/fonts/Poppins-Bold.ttf') format('truetype');
+    font-weight: 700; 
     font-style: normal;
   }
 
   @font-face {
     font-family: 'Poppins';
-    src: url('./src/components/assets/fonts/Poppins-Black.ttf') format('truetype');
-    font-weight: 900; /* Black */
+    src: url('/fonts/Poppins-Black.ttf') format('truetype');
+    font-weight: 900; 
     font-style: normal;
   }
 
   @font-face {
     font-family: 'Poppins';
-    src: url('./src/components/assets/fonts/Poppins-ExtraBold.ttf') format('truetype');
-    font-weight: 800; /* Extra Bold */
+    src: url('/fonts/Poppins-ExtraBold.ttf') format('truetype');
+    font-weight: 800; 
     font-style: normal;
   }
 
