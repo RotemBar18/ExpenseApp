@@ -89,9 +89,9 @@ const ExpenseDate = styled.div`
 const ExpenseCategory = styled.div`
   font-size: 0.5rem;
 margin-right:10px;
-  color: ${(props) => props.theme.navBarTextColor};
+  color: ${(props) => props.theme.tagColor};
   text-align: center;
-  background-color: ${(props) => props.theme.buttonBackground};
+  background-color: ${(props) => props.theme.tagBackground};
 border-radius:25px;
 padding:2px 10px ;
 `;
@@ -99,7 +99,6 @@ padding:2px 10px ;
 const ExpenseAmount = styled.div`
   font-weight: 600;
   font-size: 0.8rem;
-
   color: ${(props) => props.theme.modalTextColor};
   text-align: right;
 `;

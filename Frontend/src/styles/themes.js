@@ -4,7 +4,7 @@ export const themes = {
     background: '#f5f7fa', // Light blue-grey instead of pure white
     navBarBackground: '#dfe3e8', // Light grey with a blue hint
     navBarTextColor: '#2e3a45', // Dark blue-grey for contrast
-    buttonBackground: '#42a5f5', // Soft blue for button color
+    buttonBackground: '#2563EB', // Soft blue for button color
     buttonTextColor: '#ffffff',
     buttonHoverBackground: '#1e88e5', // Darker blue for hover
     buttonHoverTextColor: '#ffffff',
@@ -19,6 +19,8 @@ export const themes = {
     scrollBarThumb: '#90caf9', // Light blue for scrollbar thumb
     scrollBarTrack: '#e0e0e0',
     chartColors: ['#42a5f5', '#29b6f6', '#66bb6a', '#ef5350'], // Blue-focused chart colors
+    tagBackground:'#42a5f5',
+    tagColor:'#FFFFFF',
   },
   
   Dark: {
@@ -41,6 +43,8 @@ export const themes = {
     scrollBarThumb: '#888888', // Lighten the scrollbar thumb
     scrollBarTrack: '#474747', // Brighter scrollbar track
     chartColors: ['#66bb6a', '#29b6f6', '#ef5350', '#ffca28'], // Keep vibrant chart colors for contrast
+    tagBackground:'#42a5f5',
+    tagColor:'#FFFFFF',
   },
   
   Green: {
@@ -63,6 +67,8 @@ export const themes = {
     scrollBarThumb: '#66bb6a',
     scrollBarTrack: '#f0f8f5',
     chartColors: ['#388e3c', '#66bb6a', '#81c784', '#a5d6a7'],
+    tagBackground:'#42a5f5',
+    tagColor:'#FFFFFF',
   },
   Blue: {
     name: 'Blue',
@@ -84,6 +90,8 @@ export const themes = {
     scrollBarThumb: '#42a5f5',
     scrollBarTrack: '#e3f2fd',
     chartColors: ['#1e88e5', '#42a5f5', '#90caf9', '#bbdefb'],
+    tagBackground:'#42a5f5',
+    tagColor:'#FFFFFF',
   },
   Red: {
     name: 'Red',
@@ -105,6 +113,8 @@ export const themes = {
     scrollBarThumb: '#ef5350',
     scrollBarTrack: '#ffebee',
     chartColors: ['#e53935', '#ef5350', '#ff7043', '#ff8a65'],
+    tagBackground:'#42a5f5',
+    tagColor:'#FFFFFF',
   },
   Purple: {
     name: 'Purple',
@@ -126,6 +136,8 @@ export const themes = {
     scrollBarThumb: '#8e24aa',
     scrollBarTrack: '#f3e5f5',
     chartColors: ['#ab47bc', '#ce93d8', '#ba68c8', '#8e24aa'],
+    tagBackground:'#42a5f5',
+    tagColor:'#FFFFFF',
   },
   Teal: {
     name: 'Teal',
@@ -147,6 +159,8 @@ export const themes = {
     scrollBarThumb: '#00897b',
     scrollBarTrack: '#e0f7fa',
     chartColors: ['#00796b', '#00897b', '#4db6ac', '#80cbc4'],
+    tagBackground:'#42a5f5',
+    tagColor:'#FFFFFF',
   },
   Orange: {
     name: 'Orange',
@@ -168,6 +182,8 @@ export const themes = {
     scrollBarThumb: '#ff7043',
     scrollBarTrack: '#fff3e0',
     chartColors: ['#ff5722', '#ff7043', '#ff8a65', '#ffab91'],
+    tagBackground:'#42a5f5',
+    tagColor:'#FFFFFF',
   },
   TealOrangeGrey: {
     name: 'TealOrangeGrey',
@@ -189,6 +205,8 @@ export const themes = {
     scrollBarThumb: '#FF7043',
     scrollBarTrack: '#f7f7f7',
     chartColors: ['#004D40', '#FF7043', '#00897B'],
+    tagBackground:'#42a5f5',
+    tagColor:'#FFFFFF',
   },
   BlueWhiteYellow: {
     name: 'BlueWhiteYellow',
@@ -210,6 +228,8 @@ export const themes = {
     scrollBarThumb: '#FFD600',
     scrollBarTrack: '#ffffff',
     chartColors: ['#1A237E', '#FFD600', '#4FC3F7'],
+    tagBackground:'#42a5f5',
+    tagColor:'#FFFFFF',
   },
   DarkGreyPinkBlue: {
     name: 'DarkGreyPinkBlue',
@@ -231,6 +251,8 @@ export const themes = {
     scrollBarThumb: '#EC407A',
     scrollBarTrack: '#FAFAFA',
     chartColors: ['#424242', '#EC407A', '#29B6F6'],
+    tagBackground:'#42a5f5',
+    tagColor:'#FFFFFF',
   },
 };
 

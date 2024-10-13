@@ -3,36 +3,43 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserReports, deleteExistingReport } from '../redux/actions/reportsActions';
 import useAuth from '../hooks/useAuth';
-import Report from './Report'; 
+import Report from './Report';
 
 const ReportsContainer = styled.div`
-  padding: 40px;
+  margin: 20px;
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 20px;
-  height:100%;
-  align-content: flex-start;
+  padding-right:10px;
+  flex-direction:column;
   background-color: ${(props) => props.theme.background};
-  
-  @media (max-width: 768px) {
-  justify-content: center;
-  flex-wrap:nowrap;
-  }
+  overflow-y:auto;
+&::-webkit-scrollbar {
+  width: 8px;
+}
 
-    @media (max-width: 550px) {
-    flex-direction:column;
-    align-items:center;
-    justify-content:flex-start;
-  }
-  `;
+&::-webkit-scrollbar-track {
+  background: ${(props) => props.theme.scrollBarTrack};
+  border-radius: 10px;
+  
+  
+}
+
+&::-webkit-scrollbar-thumb {
+  background: ${(props) => props.theme.scrollBarThumb};
+  border-radius: 10px;
+  
+}
+
+&::-webkit-scrollbar-thumb:hover {
+  background: ${(props) => props.theme.scrollBarThumbHover || props.theme.scrollBarThumb};
+  cursor: pointer;
+}
+`;
 
 
 const ReportsList = () => {
   const dispatch = useDispatch();
   const { userId, token } = useAuth();
-  const reports = useSelector((state) => state.reports.reports); 
+  const reports = useSelector((state) => state.reports.reports);
 
   useEffect(() => {
     dispatch(fetchUserReports(userId, token));
@@ -52,7 +59,7 @@ const ReportsList = () => {
       ) : (
         reports.map((report, index) => (
           <Report
-            key={`${report.ReportId}-${index}`}  
+            key={`${report.ReportId}-${index}`}
             report={report}
             onDelete={() => handleDeleteReport(report.ReportId)}
           />

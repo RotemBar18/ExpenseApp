@@ -60,8 +60,8 @@ const ItemName = styled.div`
 
 const ExpenseCategory = styled.div`
   font-size: 0.4rem;
-  color: ${(props) => props.theme.navBarTextColor};
-  background-color: ${(props) => props.theme.buttonBackground};
+  color: ${(props) => props.theme.tagColor};
+  background-color: ${(props) => props.theme.tagBackground};
   padding: 1px 5px;
   border-radius: 25px;
   margin-right: 2px;

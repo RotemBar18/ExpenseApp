@@ -28,7 +28,7 @@ const PageContainer = styled.div`
 &::-webkit-scrollbar-thumb:hover {
   background: ${(props) => props.theme.scrollBarThumbHover || props.theme.scrollBarThumb};
   cursor: pointer;
-}s
+}
 `;
 
 const MainPage = () => {
