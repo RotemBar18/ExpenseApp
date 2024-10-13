@@ -7,6 +7,8 @@ const InsightsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height:100%;
+  justify-content: space-between;
 `;
 
 const ExpenseList = styled.div`

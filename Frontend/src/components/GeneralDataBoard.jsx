@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import MonthlyInsights from "./MonthlyInsights";
 import DailyInsights from "./DailyInsights";
-import WeeklyInsights from "./WeeklyInsights";
+import ExpenseBreakdown from "./ExpenseBreakdown";
 import { getSuffix } from "../utils/utilService";
 
 const DataContainer = styled.div`
@@ -15,20 +15,23 @@ const DataCard = styled.div`
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
-  flex-grow: 1; /* Default flex-grow for all DataCards */
   background-color: ${(props) => props.theme.modalBackground};
 
   /* Targeting specific class names for each child */
   &.daily {
+  display:flex;
+  flex-direction:column;
     flex-grow: 1;
+
   }
 
   &.weekly {
-    flex-grow: 2; /* Weekly card will grow more */
+    flex-grow: 2;
   }
 
   &.monthly {
     flex-grow: 1;
+  
   }
 `;
 
@@ -54,8 +57,8 @@ const GeneralDataBoard = ({ expenses }) => {
       </DataCard>
 
       <DataCard className="weekly">
-        <CardTitle>Last 7 Days</CardTitle>
-        <WeeklyInsights expenses={expenses} />
+        <CardTitle>Expenses Breakdown</CardTitle>
+        <ExpenseBreakdown expenses={expenses} />
       </DataCard>
       <DataCard className="monthly">
         <CardTitle>{currentMonthName}</CardTitle>

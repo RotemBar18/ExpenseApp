@@ -1,36 +1,27 @@
 import styled from 'styled-components';
 import Signup from '../components/signup';
 import React from 'react';
+import LogoBg from '../components/assets/logo1.jpg'
 
-const HomeContainer = styled.div`
-    display:flex;
-    flex-direction: column ;
-    
+const PageContainer = styled.div`
+  height: 100vh;
+  width: 100vw;
+  background: url(${LogoBg}) center;
+  background-size: cover; /* Make sure the image covers the entire page */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4); /* Darken the background */
+  }
 `;
-const HeaderContainer = styled.div`
-    display:flex;
-    flex-direction: column ;
-    justify-content:space_around;
-    background-color:#d0e0d0;
-  
-`;
-const Header = styled.h1`
-  color:#6A956A;
-  text-align: center;
-  line-height: 18px;
-  text-transform: capitalize;
-  text-shadow: 2px 1px 0px #6E6E6E;
-`;
-const Img = styled.img`
-  max-width:100px;
-`;
-const ImgContainer = styled.div`
-  display:flex;
-  justify-content:center;
-  order:;
-`;
-
-
 
 
 
@@ -38,17 +29,9 @@ const Home = () => {
 
 
   return (
-    <HomeContainer>
-      <HeaderContainer>
-        <Header>
-          Start Tracking Today!
-        </Header>
-        <ImgContainer>
-          <Img src='/images/LOGO.png' alt="" style={{ objectFit: "contain" }} />
-        </ImgContainer>
-      </HeaderContainer>
+    <PageContainer>
       <Signup />
-    </HomeContainer>
+    </PageContainer>
   );
 };
 

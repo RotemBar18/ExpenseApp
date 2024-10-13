@@ -7,137 +7,112 @@ import { useNavigate } from "react-router-dom";
 import { handleAuthSubmit } from '../utils/authHandlers'; 
 import { useDispatch } from "react-redux"; 
 
+const PageContainer = styled.div`
+  display: flex;
+`;
 
-const Header = styled.div`
+const FormContainer = styled.div`
+  background: rgba(255, 255, 255, 0.8);
+  padding: 40px 50px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
 `;
 
-const Text = styled.h1`
-  color: #779977;
-  font-size: 40px;
-  font-weight: 700;
-  font-family: 'Garamond';
+const Header = styled.div`
+  text-align: center;
+  margin-bottom: 30px;
+`;
 
+const Title = styled.h1`
+  color: #fff;
+  font-size: 40px;
+  font-family: 'Poppins', sans-serif;
+  color: #334e68;
 `;
 
 const Underline = styled.div`
-  width: 10%;
+  width: 50px;
   height: 4px;
-  background: #779977;
+  background: #6c91c2;
   border-radius: 9px;
-`;
-
-const SignupContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  background: #ffffff;
-  padding-bottom: 30px;
+  margin: 10px auto;
 `;
 
 const Inputs = styled.div`
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
+  width: 100%;
 `;
 
 const Input = styled.div`
   display: flex;
   align-items: center;
-  margin: auto auto 10px auto;
-  width:54% ;
-  height: 40px;
-  background: #eaeaea;
-  border-radius: 10px;
+  margin: 15px 0;
+  width: 100%;
+  height: 50px;
+  background: #f5f5f5;
+  border-radius: 30px;
+  padding: 0 15px;
+  box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
-const Img = styled.img`
-  max-width:50px;
-  max-height:30px;
+
+const StyledInput = styled.input`
+  width: 90%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #333;
+  padding-left: 10px;
+
+  &::placeholder {
+    color: #bdbdbd;
+  }
+`;
+
+const Icon = styled.img`
+  width: 20px;
+  height: 20px;
 `;
 
 const SubmitContainer = styled.div`
   display: flex;
-  margin:  auto;
-  margin-top: 10px;
-`;
-
-const Submit = styled.button`
-  transition: all 0.3s ease;
-  display: flex;
   justify-content: center;
-  font-family: 'comic sans ms';
-  align-items: center;
-  width: 210px;
-  height: 50px;
+  margin-top: 20px;
+`;
+
+const SubmitButton = styled.button`
+  background-color: #6c91c2;
   color: #fff;
-  background: ${props => (props.isActive ? '#88aa88' : '#ffffff')}; /* Adjust colors as needed */
-  border-radius: 15px;
-  font-size: 19px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none; /* Remove default border */
-  outline: none; /* Remove default focus outline */
-  &:focus {
-    outline: none; /* Ensure focus outline is removed */
-  }
-    &:hover {
-    background: ${props => (props.isActive ? '#885588' : '#aa88aa')}; /* Darker shade on hover */
-  }
-        &:active{
-        transition: all 0.1s ease;
-        transform:translatey(4px);
-    }
-`;
-
-const Span = styled.span`
-  letter-spacing: 1px;
-  display:flex;
-  flex-direction:column;
-  color: #225522;
-  cursor: pointer;
-  text-align: center;
-  margin-bottom: 3px;
-  width:180px;
-  color: #885588;
-  font-size: 14px;
-  font-family: 'Garamond';
-  font-weight:700;
-
-    &:hover {
-    color: ${props => (props.isActive ? '#aa88aa' : '#88aa88')}; 
-  }
-`;
-const ChangeMode = styled.div`
-  display:flex;
-  flex-direction:column;
-  align-items: center;
-`;
-
-
-
-const MForm = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
-
-
-const StyledInput = styled.input`
-  height: 50px;
-  width: 400px;
-  background: transparent;
+  padding: 15px 30px;
+  border-radius: 30px;
   border: none;
-  outline: none;
-  color: #797979;
-  font-size: 19px;
-  padding-left: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 200px;
 
-  &::placeholder {
-    color: #a9a9a9
-    font-style: italic; 
-    font-size: 17px;
+  &:hover {
+    background-color: #5583a9;
+  }
+
+  &:active {
+    transform: translateY(3px);
+  }
+`;
+
+const SwitchMode = styled.div`
+  margin-top: 20px;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
   }
 `;
 
@@ -159,79 +134,66 @@ const Signup = () => {
   const handleSubmit = (event) => {
     handleAuthSubmit(event, action, email, password, name, navigate, dispatch, setAction); 
   };
-  
+
   const handleSwitch = (newAction) => {
     setAction(newAction);
   };
 
   return (
-    <SignupContainer>
-      <Header>
-        <Text>{action}</Text>
-        <Underline />
-      </Header>
-      <MForm onSubmit={handleSubmit}>
-        <Inputs>
-          {action === "Login" ? null : (
+    <PageContainer>
+      <FormContainer>
+        <Header>
+          <Title>{action}</Title>
+          <Underline />
+        </Header>
+        <form onSubmit={handleSubmit}>
+          <Inputs>
+            {action === "Login" ? null : (
+              <Input>
+                <StyledInput
+                  value={name}
+                  type="text"
+                  placeholder="Name"
+                  required
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <Icon src={user_icon} alt="User Icon" />
+              </Input>
+            )}
             <Input>
               <StyledInput
-                value={name}
-                type="text"
-                placeholder="Name"
+                value={email}
+                type="email"
+                placeholder="Email"
                 required
-                onChange={(e) => setName(e.target.value)}>
-
-              </StyledInput>
-
-              <Img src={user_icon} alt="" />
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <Icon src={email_icon} alt="Email Icon" />
             </Input>
-          )}
-          <Input>
-            <StyledInput
-              value={email}
-              type="email"
-              placeholder="Email"
-              required
-              onChange={(e) => setEmail(e.target.value)}>
-            </StyledInput>
-            <Img src={email_icon} alt="" />
-          </Input>
-          <Input >
-            <StyledInput
-              value={password}
-              type="password"
-              placeholder="Password"
-              required
-              minLength="8"
-              maxLength="15"
-              onChange={(e) => setPassword(e.target.value)}>
-            </StyledInput>
-            <Img src={password_icon} alt="" />
-          </Input>
-        </Inputs>
-        <ChangeMode>
-          {action === "Sign Up" ? null : (
-            <Span> Lost Password? </Span>)}
-          {action === "Sign Up" ?
-            <Span onClick={() => handleSwitch("Login")}>Already registered?</Span> :
-            <Span onClick={() => handleSwitch("Sign Up")}>Not registerd yet? </Span>
-          }
-
-        </ChangeMode>
-
-        <SubmitContainer>
-          {action === "Sign Up" ?
-            <Submit type="submit" isActive={action === 'Sign Up'}>
-              Sign Up
-            </Submit> : null}
-          {action === "Login" ?
-            <Submit type="submit" isActive={action === 'Login'} >
-              Log in
-            </Submit> : null}
-        </SubmitContainer>
-
-      </MForm>
-    </SignupContainer >
+            <Input>
+              <StyledInput
+                value={password}
+                type="password"
+                placeholder="Password"
+                required
+                minLength="8"
+                maxLength="15"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Icon src={password_icon} alt="Password Icon" />
+            </Input>
+          </Inputs>
+          <SubmitContainer>
+            <SubmitButton type="submit">
+              {action === "Sign Up" ? "Sign Up" : "Log in"}
+            </SubmitButton>
+          </SubmitContainer>
+          <SwitchMode onClick={() => handleSwitch(action === "Sign Up" ? "Login" : "Sign Up")}>
+            {action === "Sign Up" ? "Already registered?" : "Not registered yet?"}
+          </SwitchMode>
+        </form>
+      </FormContainer>
+    </PageContainer>
   );
 };
 
