@@ -10,14 +10,11 @@ const InsightsContainer = styled.div`
 `;
 
 const ExpenseList = styled.div`
-  list-style: none;
   width: 100%;
-  margin: 0;
+  padding: 0 5px ;
   overflow-y: auto;
   height: 80px;
-      padding: 0px 5px;
-
-
+  
   &::-webkit-scrollbar {
     width: 8px;
   }
@@ -46,6 +43,7 @@ const ExpenseItem = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.border};
   font-size: 0.8rem;
   width: 100%;
+
   &:last-child {
     border-bottom: none;
   }
@@ -54,7 +52,7 @@ const ExpenseItem = styled.div`
 
 const ItemName = styled.div`
   display: flex;
-  flex-grow:2;
+  flex-grow: 2;
   font-size: 0.7rem;
   font-weight: 500;
   color: ${(props) => props.theme.headerTextColor};
@@ -71,6 +69,7 @@ const ExpenseCategory = styled.div`
 
 const ItemAmount = styled.div`
   color: ${(props) => props.theme.headerTextColor};
+  text-align: right;
 `;
 
 const NoExpensesMessage = styled.div`
@@ -81,30 +80,31 @@ const NoExpensesMessage = styled.div`
 
 const TotalAmount = styled.div`
   margin-top: 10px;
-  padding-top: 5px;
   font-size:0.8rem;
+  padding-top: 5px;
   font-weight: bold;
   text-align: right;
   width: 100%;
   color: ${(props) => props.theme.headerTextColor};
 `;
 
-const DailyInsights = ({ expenses }) => {
+const WeeklyInsights = ({ expenses }) => {
   const today = new Date();
-  const currentDateString = today.toISOString().split("T")[0]; // Format YYYY-MM-DD
+  const lastWeek = new Date();
+  lastWeek.setDate(today.getDate() - 7);
 
-  const todaysExpenses = expenses.filter((expense) => {
+  const last7DaysExpenses = expenses.filter((expense) => {
     const expenseDate = new Date(expense.Date);
-    return expenseDate.toISOString().split("T")[0] === currentDateString; // Compare dates
+    return expenseDate >= lastWeek && expenseDate <= today;
   });
 
-  const totalAmount = todaysExpenses.reduce((total, expense) => total + parseFloat(expense.Amount), 0);
+  const totalAmount = last7DaysExpenses.reduce((total, expense) => total + parseFloat(expense.Amount), 0);
 
   return (
     <InsightsContainer>
       <ExpenseList>
-        {todaysExpenses.length > 0 ? (
-          todaysExpenses.map((expense, index) => (
+        {last7DaysExpenses.length > 0 ? (
+          last7DaysExpenses.map((expense, index) => (
             <ExpenseItem key={index}>
               <ItemName>{expense.Name}</ItemName>
               <ExpenseCategory>{expense.Category}</ExpenseCategory>
@@ -112,14 +112,14 @@ const DailyInsights = ({ expenses }) => {
             </ExpenseItem>
           ))
         ) : (
-          <NoExpensesMessage>No expenses for today.</NoExpensesMessage>
+          <NoExpensesMessage>No expenses in the last 7 days.</NoExpensesMessage>
         )}
       </ExpenseList>
-      {todaysExpenses.length > 0 && (
+      {last7DaysExpenses.length > 0 && (
         <TotalAmount>Total: ${totalAmount.toFixed(2)}</TotalAmount>
       )}
     </InsightsContainer>
   );
 };
 
-export default DailyInsights;
+export default WeeklyInsights;

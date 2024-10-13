@@ -1,24 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
-import ExpenseBarChart from '../charts/ExpenseBarChart'
-
+import DailyExpensesChart from '../charts/MonthlyExpensesChart';
+import MonthlyExpensesChart from '../charts/YearlyExpensesChart';
+import YearlyExpensesChart from '../charts/FullYearExpensesChart'
 
 const StatsBoardContainer = styled.div`
 display:flex;
-flex-wrap: wrap;
-gap:40px;
 align-items: center;
-  width: 100%;
+flex-direction: column;
+width: 100%;
 justify-content: space-around;
-background-color: ${(props) => props.theme.background};
 
 `;
 const StatsBoard = ({ expenses }) => {
 
     return (
         <StatsBoardContainer>
-            <ExpenseBarChart expenses={expenses} />
-        </StatsBoardContainer>
+            <DailyExpensesChart expenses={expenses} />
+            <MonthlyExpensesChart expenses={expenses} />
+            <YearlyExpensesChart expenses={expenses} />
+            </StatsBoardContainer>
     );
 };
 

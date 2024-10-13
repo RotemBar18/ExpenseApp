@@ -7,53 +7,36 @@ const ExpenseListContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 5px;
-  max-height: 200px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
   overflow-x: hidden;
   align-items: center;
-  width:90%;
   justify-content: center;
+  padding: 15px;
+  width:50%;
 `;
 
 const ExpensesTable = styled.div`
   list-style: none;
   margin: 0;
-  padding: 10px;
+  padding: 0px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  width:90%;
+  width: 100%;
 `;
 
 const Header = styled.div`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 800;
-  border-bottom: 1px solid ${(props) => props.theme.border};
+  border-bottom: 2px solid ${(props) => props.theme.border};
+  text-align: center;
 `;
 
-const ExpenceHeader = styled.div`
-  display: flex;
-justify-content: flex-start;
-  width:100%;
-`;
-
-
-const HeaderText = styled.div`
-width:25%;
-  font-weight: 800;
-  color: ${(props) => props.theme.modalTextColor};
-`;
-
-const HeaderPrice = styled.div`
-  font-weight: 800;
-  color: ${(props) => props.theme.modalTextColor};
-`;
 const Expenses = styled.div`
-display:flex;
-flex-direction:column;
-overflow-y:auto;
-width:100%;
-
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding:0 10px;
   &::-webkit-scrollbar {
     width: 8px;
   }
@@ -72,99 +55,83 @@ width:100%;
     background: ${(props) => props.theme.scrollBarThumbHover || props.theme.scrollBarThumb};
     cursor: pointer;
   }
- 
 `;
 
-
 const Expense = styled.div`
-display: flex;
-justify-content: flex-start;
-color: ${(props) => props.theme.modalTextColor};
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  width: 100%;
+  border-bottom: 1px solid ${(props) => props.theme.border};
+  transition: background-color 0.3s;
+
+`;
+
+const ExpenseDetails = styled.div`
+  display: flex;
+  flex-grow:2;
+  flex-direction: column;
+  justify-content: center;
+  `;
+
+const ExpenseName = styled.div`
+  font-weight: 700;
+  color: ${(props) => props.theme.modalTextColor};
+  font-size: 0.8rem;
+`;
+
+const ExpenseDate = styled.div`
+  font-weight: 400;
+  font-size: 0.6rem;
+  color: ${(props) => props.theme.border};
+`;
+
+const ExpenseCategory = styled.div`
+  font-size: 0.5rem;
+margin-right:10px;
+  color: ${(props) => props.theme.navBarTextColor};
+  text-align: center;
+  background-color: ${(props) => props.theme.buttonBackground};
+border-radius:25px;
+padding:2px 10px ;
 `;
 
 const ExpenseAmount = styled.div`
-  text-overflow: ellipsis
-  width:25%;
-  color: ${(props) => props.theme.modalTextColor};
-`;
-
-const ExpenseText = styled.div`
-  display: inline-block;
-    pointer-events: none;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  width:25%;
+  font-weight: 600;
+  font-size: 0.8rem;
 
   color: ${(props) => props.theme.modalTextColor};
+  text-align: right;
 `;
+
 const RecentExpenses = ({ expenses }) => {
-  const [hoveredExpense, setHoveredExpense] = useState(null);
-  const [tooltipVisible, setTooltipVisible] = useState(false);
-
   const expensesForDisplay = [...expenses]
     .sort((a, b) => new Date(b.Date) - new Date(a.Date))
     .slice(0, 5);
-  
+
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options);
   };
-  
-  const handleMouseEnter = (expense) => {
-    setHoveredExpense(expense);
-    setTooltipVisible(true);
-  };
-
-  const handleMouseLeave = () => {
-    setTooltipVisible(false);
-  };
 
   return (
-    <>
-      <ExpenseListContainer>
-
-        <ExpensesTable>
-          <Header>Recent Expenses</Header>
-          <ExpenceHeader>
-            <HeaderText >
-              Name
-            </HeaderText>
-            <HeaderText >
-              Category
-            </HeaderText>
-            <HeaderText >
-              Date
-            </HeaderText>
-            <HeaderPrice >
-              Price
-            </HeaderPrice>
-          </ExpenceHeader>
-          <Expenses>
-
-            {expensesForDisplay.map((expense, index) => (
-              <Expense
-                key={expense.ExpenseId}>
-                <ExpenseText >
-                  {expense.Name}
-                </ExpenseText>
-                <ExpenseText>
-                  {expense.Category}
-                </ExpenseText>
-                <ExpenseText >
-                  {formatDate(expense.Date)}
-                </ExpenseText>
-                <ExpenseAmount >
-                  ${expense.Amount}
-                </ExpenseAmount>
-              </Expense>
-            ))}
-          </Expenses>
-
-        </ExpensesTable>
-
-      </ExpenseListContainer>
-    </>
+    <ExpenseListContainer>
+      <ExpensesTable>
+        <Header>Recent Expenses</Header>
+        <Expenses>
+          {expensesForDisplay.map((expense, index) => (
+            <Expense key={expense.ExpenseId}>
+              <ExpenseDetails>
+                <ExpenseName>{expense.Name}</ExpenseName>
+                <ExpenseDate>{formatDate(expense.Date)}</ExpenseDate>
+              </ExpenseDetails>
+              <ExpenseCategory>{expense.Category}</ExpenseCategory>
+              <ExpenseAmount>${expense.Amount}</ExpenseAmount>
+            </Expense>
+          ))}
+        </Expenses>
+      </ExpensesTable>
+    </ExpenseListContainer>
   );
 };
 

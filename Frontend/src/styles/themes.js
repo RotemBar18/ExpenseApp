@@ -1,65 +1,67 @@
 export const themes = {
   Light: {
     name: 'Light',
-    background: '#ffffff',
-    navBarBackground: '#f0f0f0',
-    navBarTextColor: '#343a40',
-    buttonBackground: '#b0bec5',
+    background: '#f5f7fa', // Light blue-grey instead of pure white
+    navBarBackground: '#dfe3e8', // Light grey with a blue hint
+    navBarTextColor: '#2e3a45', // Dark blue-grey for contrast
+    buttonBackground: '#42a5f5', // Soft blue for button color
     buttonTextColor: '#ffffff',
-    buttonHoverBackground: '#78909c',
+    buttonHoverBackground: '#1e88e5', // Darker blue for hover
     buttonHoverTextColor: '#ffffff',
     inputBackground: '#ffffff',
-    inputTextColor: '#495057',
-    inputBorderColor: '#ced4da',
-    headerBackground: '#f3f4f6',
-    headerTextColor: '#212529',
-    modalBackground: '#f7f7f7',
+    inputTextColor: '#2e3a45', // Dark blue-grey for input text
+    inputBorderColor: '#b0bec5', // Softer blueish-grey for borders
+    headerBackground: '#dfe3e8', // Match navbar with light blue-grey
+    headerTextColor: '#2e3a45', // Darker blue-grey for text
+    modalBackground: '#ffffff', // Keep modals white
     modalTextColor: '#495057',
-    border: '#dee2e6',
-    scrollBarThumb: '#adb5bd',
-    scrollBarTrack: '#f8f9fa',
-    chartColors: ['#b0bec5', '#78909c', '#cfd8dc', '#90a4ae'],
+    border: '#cfd8dc', // Softer grey for borders
+    scrollBarThumb: '#90caf9', // Light blue for scrollbar thumb
+    scrollBarTrack: '#e0e0e0',
+    chartColors: ['#42a5f5', '#29b6f6', '#66bb6a', '#ef5350'], // Blue-focused chart colors
   },
+  
   Dark: {
     name: 'Dark',
-    background: '#1b1b1b',
-    navBarBackground: '#333333',
-    navBarTextColor: '#e4e6eb',
-    buttonBackground: '#444444',
+    background: '#2f2f2f', // Brightened dark grey background
+    navBarBackground: '#474747', // Slightly brighter grey for the navbar
+    navBarTextColor: '#f1f1f1', // Light grey for contrast
+    buttonBackground: '#666666', // Medium grey for buttons
     buttonTextColor: '#ffffff',
-    buttonHoverBackground: '#555555',
+    buttonHoverBackground: '#777777', // Brightened hover color
     buttonHoverTextColor: '#222222',
-    inputBackground: '#2c2c2c',
+    inputBackground: '#424242', // Slightly brighter input background
     inputTextColor: '#e4e6eb',
-    inputBorderColor: '#555555',
-    headerBackground: '#3b3b3b',
-    headerTextColor: '#f1f1f1',
-    modalBackground: '#262626',
+    inputBorderColor: '#666666', // Brighter border color
+    headerBackground: '#474747', // Match navbar with brighter grey
+    headerTextColor: '#f1f1f1', // Light grey for contrast
+    modalBackground: '#3a3a3a', // Brighter modal background
     modalTextColor: '#d3d3d3',
-    border: '#444444',
-    scrollBarThumb: '#606060',
-    scrollBarTrack: '#2e2e2e',
-    chartColors: ['#66bb6a', '#29b6f6', '#ef5350', '#ffca28'],
+    border: '#777777', // Brighter borders to match the theme
+    scrollBarThumb: '#888888', // Lighten the scrollbar thumb
+    scrollBarTrack: '#474747', // Brighter scrollbar track
+    chartColors: ['#66bb6a', '#29b6f6', '#ef5350', '#ffca28'], // Keep vibrant chart colors for contrast
   },
+  
   Green: {
     name: 'Green',
-    background: '#e8f5e9',
-    navBarBackground: '#66bb6a',
+    background: '#f0f8f5', // Softer light green
+    navBarBackground: '#66bb6a', // Green navbar
     navBarTextColor: '#ffffff',
-    buttonBackground: '#388e3c',
+    buttonBackground: '#388e3c', // Darker green buttons
     buttonTextColor: '#ffffff',
-    buttonHoverBackground: '#2e7d32',
+    buttonHoverBackground: '#2e7d32', // Dark green hover
     buttonHoverTextColor: '#ffffff',
     inputBackground: '#ffffff',
     inputTextColor: '#2e7d32',
     inputBorderColor: '#a5d6a7',
-    headerBackground: '#c8e6c9',
+    headerBackground: '#e0f0e9', // Lighter green for header
     headerTextColor: '#1b5e20',
-    modalBackground: '#dcedc8',
+    modalBackground: '#e8f5e9',
     modalTextColor: '#2e7d32',
     border: '#a5d6a7',
     scrollBarThumb: '#66bb6a',
-    scrollBarTrack: '#e8f5e9',
+    scrollBarTrack: '#f0f8f5',
     chartColors: ['#388e3c', '#66bb6a', '#81c784', '#a5d6a7'],
   },
   Blue: {
@@ -166,6 +168,69 @@ export const themes = {
     scrollBarThumb: '#ff7043',
     scrollBarTrack: '#fff3e0',
     chartColors: ['#ff5722', '#ff7043', '#ff8a65', '#ffab91'],
+  },
+  TealOrangeGrey: {
+    name: 'TealOrangeGrey',
+    background: '#f7f7f7',
+    navBarBackground: '#004D40',
+    navBarTextColor: '#ffffff',
+    buttonBackground: '#FF7043',
+    buttonTextColor: '#ffffff',
+    buttonHoverBackground: '#FF5722',
+    buttonHoverTextColor: '#ffffff',
+    inputBackground: '#ffffff',
+    inputTextColor: '#004D40',
+    inputBorderColor: '#80CBC4',
+    headerBackground: '#E0F2F1',
+    headerTextColor: '#004D40',
+    modalBackground: '#F7F7F7',
+    modalTextColor: '#004D40',
+    border: '#80CBC4',
+    scrollBarThumb: '#FF7043',
+    scrollBarTrack: '#f7f7f7',
+    chartColors: ['#004D40', '#FF7043', '#00897B'],
+  },
+  BlueWhiteYellow: {
+    name: 'BlueWhiteYellow',
+    background: '#FFFFFF',
+    navBarBackground: '#1A237E',
+    navBarTextColor: '#ffffff',
+    buttonBackground: '#FFD600',
+    buttonTextColor: '#ffffff',
+    buttonHoverBackground: '#FFEB3B',
+    buttonHoverTextColor: '#ffffff',
+    inputBackground: '#ffffff',
+    inputTextColor: '#1A237E',
+    inputBorderColor: '#4FC3F7',
+    headerBackground: '#E3F2FD',
+    headerTextColor: '#1A237E',
+    modalBackground: '#F3F4F6',
+    modalTextColor: '#1A237E',
+    border: '#BBDEFB',
+    scrollBarThumb: '#FFD600',
+    scrollBarTrack: '#ffffff',
+    chartColors: ['#1A237E', '#FFD600', '#4FC3F7'],
+  },
+  DarkGreyPinkBlue: {
+    name: 'DarkGreyPinkBlue',
+    background: '#FAFAFA',
+    navBarBackground: '#424242',
+    navBarTextColor: '#ffffff',
+    buttonBackground: '#EC407A',
+    buttonTextColor: '#ffffff',
+    buttonHoverBackground: '#E91E63',
+    buttonHoverTextColor: '#ffffff',
+    inputBackground: '#ffffff',
+    inputTextColor: '#424242',
+    inputBorderColor: '#BDBDBD',
+    headerBackground: '#F8BBD0',
+    headerTextColor: '#E91E63',
+    modalBackground: '#FAFAFA',
+    modalTextColor: '#424242',
+    border: '#BDBDBD',
+    scrollBarThumb: '#EC407A',
+    scrollBarTrack: '#FAFAFA',
+    chartColors: ['#424242', '#EC407A', '#29B6F6'],
   },
 };
 

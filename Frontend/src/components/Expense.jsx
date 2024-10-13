@@ -10,13 +10,13 @@ const ExpenseContainer = styled.div`
 `
 
 const ExpenseItem = styled.li`
-  padding: 1%;
+  padding: 4px 0;
+  padding-right:5px;
   border-bottom: 1px solid ${(props) => props.theme.border};
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
-  margin-right: 10px;
+  gap: 15px;
   transition: background-color 0.3s, border-radius 0.1s;
   cursor: pointer;
     border-radius: 5px;
@@ -34,11 +34,10 @@ const ExpenseText = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+    font-size: 0.8rem;
+
   color: ${(props) => props.theme.textColor};
 
-  @media (max-width: 980px) {
-    font-size: 0.8rem;
-  }
   `;
 
 const Buttons = styled.div`

@@ -9,14 +9,11 @@ const Boardcontainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin: 0 auto;
+  height: 100%;
   background-color: ${(props) => props.theme.background};
-  padding: 20px;
   justify-content: center;
+overflow-y:hidden;
 
-  @media (max-width: 768px) {
-    padding: 0px;
-  }
 `;
 
 const ExpenseListContainer = styled.div`
@@ -26,108 +23,141 @@ const ExpenseListContainer = styled.div`
   flex-direction: column;
   align-items: stretch;
   font-family: 'Poppins', sans-serif;
-  padding: 20px;
-  border-radius: 10px;
-  width: 95%;
-  max-height: 80vh;
-  overflow-y: auto;
+  border-radius: 5px;
+  width:90%;
+  height:90%;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
 
 
   @media (max-width: 1000px) {
-    padding: 15px;
+
+    @media (max-width: 768px) {
     width:80%;
 
+    }
   }
 
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: ${(props) => props.theme.scrollBarTrack};
-    border-radius: 10px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: ${(props) => props.theme.scrollBarThumb};
-    border-radius: 10px;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: ${(props) => props.theme.scrollBarThumbHover || props.theme.scrollBarThumb};
-    cursor: pointer;
-  }
 `;
-
 const ExpensesTable = styled.ul`
   list-style: none;
-  padding: 0px 10px;
+  padding: 0px;
   margin: 0;
+  height:65%;
+    @media (max-width: 780px) {
+      height:45%;
+
+    }    
+    @media (max-width: 450px) {
+      height:35%;
+    }
+`;
+const Expenses = styled.ul`
+padding: 10px;
+height:100%;
+overflow-y:auto;
+&::-webkit-scrollbar {
+  width: 8px;
+}
+
+&::-webkit-scrollbar-track {
+  background: ${(props) => props.theme.scrollBarTrack};
+  border-radius: 10px;
+  
+  
+}
+
+&::-webkit-scrollbar-thumb {
+  background: ${(props) => props.theme.scrollBarThumb};
+  border-radius: 10px;
+  
+}
+
+&::-webkit-scrollbar-thumb:hover {
+  background: ${(props) => props.theme.scrollBarThumbHover || props.theme.scrollBarThumb};
+  cursor: pointer;
+}
 `;
 
+
 const Header = styled.h3`
+padding: 10px;
   margin: 0;
-  padding-bottom: 15px;
-  border-bottom: 2px solid ${(props) => props.theme.border};
-  font-size: 1.8em;
+  border-bottom: 3px solid ${(props) => props.theme.border};
+  font-size: 1.3rem;
   color: ${(props) => props.theme.headerTextColor};
 
   @media (max-width: 768px) {
-    font-size: 1.5em;
+    font-size: 1.3rem;
   }
 
   @media (max-width: 480px) {
-    font-size: 1.2em;
+    font-size: 1.3rem;
   }
 `;
 
 const ExpenceHeader = styled.div`
+  padding: 4px 0;
+  padding-right:5px;
+  border-bottom: 2px solid ${(props) => props.theme.border};
   display: flex;
-  margin-right: 10px;
-  padding: 1%;
   justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  transition: background-color 0.3s, border-radius 0.1s;
+  cursor: pointer;
+  margin-right:37px;
+padding:0 10px;
 
 `;
 
 const HeaderText = styled.div`
-  border-bottom: 1px solid ${(props) => props.theme.border};
-  width: 30%;
-
-`;
+  display: inline-block;
+  pointer-events: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+width:40%;
+  color: ${(props) => props.theme.textColor};
+  `;
 
 const SelectContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 4%;
-  padding: 10px 0;
+padding: 10px;
+    gap: 20px;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 780px) {
     flex-direction: column;
     align-items: baseline;
-    gap: 10px;
+    gap:5px;
+
   }
 `;
 
 const SortSelect = styled.select`
-  margin: 10px;
-  padding: 8px;
-  font-size: 1rem;
+padding: 8px 5px;
+  font-size: 0.8rem;
   background-color: ${(props) => props.theme.inputBackground};
   color: ${(props) => props.theme.inputTextColor};
   border: 1px solid ${(props) => props.theme.inputBorderColor};
   border-radius: 5px;
-
   @media (max-width: 768px) {
     width: 50%;
-    font-size: 0.8rem;
+    font-size: 0.6rem;
   }
+`; const Select = styled.select`
+padding: 8px 5px;
+font-size: 0.8rem;
+color: ${(props) => props.theme.inputTextColor};
+border: 1px solid ${(props) => props.theme.inputBorderColor};
+border-radius: 5px;
+  cursor: pointer;
+
 `;
 
 const SearchInput = styled.input`
-  padding: 8px;
-  margin: 10px;
-  font-size: 1rem;
+padding: 8px 5px;
+font-size: 0.8rem;
   border: 1px solid ${(props) => props.theme.inputBorderColor};
   border-radius: 5px;
   background-color: ${(props) => props.theme.inputBackground};
@@ -140,9 +170,11 @@ const SearchInput = styled.input`
 `;
 
 const Button = styled.button`
-  padding: 5px 10px;
+  padding: 8px 5px;
   border: none;
   cursor: pointer;
+font-size: 0.8rem;
+
   background-color: ${(props) => props.theme.buttonBackground};
   color: ${(props) => props.theme.buttonTextColor};
   border-radius: 5px;
@@ -229,13 +261,13 @@ const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
             <option value="category-desc">Category (A-Z)</option>
           </SortSelect>
 
-          <select id="numExpenses" value={numExpensesToShow} onChange={handleNumExpensesChange}>
+          <Select id="numExpenses" value={numExpensesToShow} onChange={handleNumExpensesChange}>
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="50">50</option>
             <option value="100">100</option>
             <option value="0">All</option>
-          </select>
+          </Select>
 
           <Button onClick={() => setIsFilterModalOpen(true)}>Filter</Button>
         </SelectContainer>
@@ -246,19 +278,21 @@ const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
             <HeaderText>Category</HeaderText>
             <HeaderText>Date</HeaderText>
             <HeaderText>Price</HeaderText>
-            <HeaderText style={{ border: 'none', width: '20px', height: '20px' }}></HeaderText>
           </ExpenceHeader>
+          <Expenses>
 
-          {expensesForDisplay.map((expense, index) => (
-            <Expense
-              categories={categories}
-              key={expense.ExpenseId}
-              index={index}
-              onDelete={onDelete}
-              expense={expense}
-              onUpdate={handleUpdate}
-            />
-          ))}
+            {expensesForDisplay.map((expense, index) => (
+              <Expense
+                categories={categories}
+                key={expense.ExpenseId}
+                index={index}
+                onDelete={onDelete}
+                expense={expense}
+                onUpdate={handleUpdate}
+              />
+            ))}
+          </Expenses>
+
         </ExpensesTable>
 
         <FilterModal

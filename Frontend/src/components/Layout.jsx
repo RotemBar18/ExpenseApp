@@ -6,7 +6,11 @@ import styled from 'styled-components';
 
 const LayoutContainer = styled.div`
   display: flex;
-height:100%;
+  height:100%;
+
+  @media (max-width: 450px) {
+    flex-direction:column;
+  }
 `;
 
 const Content = styled.div`
@@ -15,14 +19,14 @@ const Content = styled.div`
 `;
 
 const Layout = () => {
-    return (
-        <LayoutContainer>
-            <Navbar />
-            <Content>
-                <Outlet />
-            </Content>
-        </LayoutContainer>
-    );
+  return (
+    <LayoutContainer>
+      <Navbar />
+      <Content>
+        <Outlet />
+      </Content>
+    </LayoutContainer>
+  );
 };
 
 export default Layout;

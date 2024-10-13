@@ -15,7 +15,7 @@ const ModalBack = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${(props) => props.theme.modalBackground};
-  opacity: 0.5;
+  opacity: 0.8;
   z-index: 1;
 `;
 
@@ -29,7 +29,7 @@ const AddExpenseContainer = styled.div`
   border-radius: 10px;
   max-width: 280px;
   width: 250px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
   z-index: 2; /* Ensure it appears above the overlay */
 `;
 

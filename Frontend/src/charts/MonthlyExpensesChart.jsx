@@ -1,62 +1,57 @@
 import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
-import styled from 'styled-components';
-import { useTheme } from 'styled-components';
+import { format } from 'date-fns';
+import styled, { useTheme } from 'styled-components'; 
 
-const groupExpensesByMonthAndCategory = (expenses) => {
-  const currentYear = new Date().getFullYear();
-  const months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December',
-  ];
-
-  const categories = Array.from(new Set(expenses.map(exp => exp.Category || 'Unknown')));
-
-  const groupedData = months.map((month, index) => {
-    const dataForMonth = { month };
-
-    expenses.forEach(expense => {
-      const expenseDate = new Date(expense.Date);
-      const expenseYear = expenseDate.getFullYear();
-      const expenseMonth = expenseDate.getMonth();
-      const category = expense.Category || 'Unknown';
-
-      if (expenseYear === currentYear && expenseMonth === index) {
-        if (!dataForMonth[category]) {
-          dataForMonth[category] = 0;
-        }
-        dataForMonth[category] += parseFloat(expense.Amount);
-      }
-    });
-
-    categories.forEach(category => {
-      if (!dataForMonth[category]) {
-        dataForMonth[category] = 0;
-      }
-    });
-
-    return dataForMonth;
-  });
-
-  return { groupedData, categories };
-};
+const currentMonthName = new Date().toLocaleString('en-US', { month: 'long' });
 
 const ChartContainer = styled.div`
-  height: 30vh;
-  width: 85%;
-  margin: 20px auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-background-color: ${(props) => props.theme.modalBackground};
-  padding: 5px 20px 40px 20px;
-  border-radius: 10px;
+  height: 50%;
+  width: 80%;
+  margin: 20px;
+background-color: ${(props) => props.theme.background};
+
 `;
 
-const MonthlyExpensesChart = ({ expenses }) => {
-  const { groupedData, categories } = groupExpensesByMonthAndCategory(expenses);
+const getAllDaysInMonth = (month, year) => {
+  const date = new Date(year, month, 1);
+  const days = [];
+  while (date.getMonth() === month) {
+    days.push(format(new Date(date), 'yyyy-MM-dd'));
+    date.setDate(date.getDate() + 1);
+  }
+  return days;
+};
+
+const groupExpensesByDayAndCategory = (expenses) => {
   const currentYear = new Date().getFullYear();
-  const theme = useTheme();
+  const currentMonth = new Date().getMonth();
+  const allDays = getAllDaysInMonth(currentMonth, currentYear);
+  const groupedData = allDays.map(day => {
+    const categories = {};
+    expenses.forEach((expense) => {
+      const expenseDate = format(new Date(expense.Date), 'yyyy-MM-dd');
+      if (expenseDate === day) {
+        const category = expense.Category || 'Unknown';
+        if (!categories[category]) {
+          categories[category] = 0;
+        }
+        categories[category] += parseFloat(expense.Amount);
+      }
+    });
+    const formattedDay = format(new Date(day), 'dd/MM');
+    return {
+      day: formattedDay,
+      ...categories,
+    };
+  });
+  return groupedData;
+};
+
+const DailyExpensesChart = ({ expenses }) => {
+  const theme = useTheme();  
+  const dailyData = groupExpensesByDayAndCategory(expenses);
+  const categories = Array.from(new Set(expenses.map(exp => exp.Category || 'Unknown')));
 
   const nivoTheme = {
     axis: {
@@ -69,14 +64,14 @@ const MonthlyExpensesChart = ({ expenses }) => {
     },
     grid: {
       line: {
-        stroke: theme.headerTextColor, 
+        stroke: theme.headerTextColor,
         strokeWidth: 2,
       },
     },
     tooltip: {
       container: {
-        background: theme.modalBackground,  
-        color: theme.modalTextColor, 
+        background: theme.modalBackground, 
+        color: theme.modalTextColor,
         borderRadius: '4px',
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
       },
@@ -85,54 +80,40 @@ const MonthlyExpensesChart = ({ expenses }) => {
 
   return (
     <ChartContainer>
-      <h3 style={{ color: theme.headerTextColor,textAlign: 'center', borderBottom: '2px solid #bbbbbb', paddingBottom: '10px' }}>
-        {`${currentYear} Expenses:`}
+      <h3 style={{ color: theme.headerTextColor, borderBottom: `1px solid ${theme.border}` }}>
+        {currentMonthName}'s Expenses:
       </h3>
       <ResponsiveBar
-        data={groupedData}
+        data={dailyData}
         keys={categories}
-        indexBy="month"
+        indexBy="day"
         margin={{ top: 30, bottom: 100, left: 60, right: 15 }}
-        padding={0.1}
+        padding={0.3}
         valueScale={{ type: 'linear' }}
         indexScale={{ type: 'band', round: true }}
-        colors={theme.chartColors}
+        colors={theme.chartColors || { scheme: 'greens' }} 
         axisBottom={{
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 45,
-          legend: 'Month',
+          legend: 'Date',
           legendPosition: 'middle',
           legendOffset: 45,
         }}
         axisLeft={{
-          tickSize: 5,
-          tickPadding: 5,
+          tickSize: 1,
+          tickPadding: 2,
           legend: 'Amount Spent ($)',
           legendPosition: 'middle',
           legendOffset: -55,
           format: value => `$${value.toFixed(1)}`,
         }}
-        legends={[
-          {
-            dataFrom: 'keys',
-            anchor: 'bottom-right',
-            direction: 'column',
-            justify: false,
-            translateX: 120,
-            translateY: 0,
-            itemsSpacing: 2,
-            itemWidth: 100,
-            itemHeight: 20,
-            itemDirection: 'left-to-right',
-            symbolSize: 20,
-            itemTextColor: '#bbbbbb',
-          },
-        ]}
-        label={({ id }) => `${id}`}
+        labelSkipWidth={12}
+        labelSkipHeight={12}
+        labelTextColor={theme.buttonTextColor}
+        enableLabel={false}
+        legends={[]}
         animate={true}
-        labelSkipWidth={70}
-        labelSkipHeight={15}
         motionStiffness={90}
         motionDamping={15}
         theme={nivoTheme}
@@ -141,4 +122,4 @@ const MonthlyExpensesChart = ({ expenses }) => {
   );
 };
 
-export default MonthlyExpensesChart;
+export default DailyExpensesChart;

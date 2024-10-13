@@ -1,85 +1,91 @@
-import React, { useState } from 'react';
-import AddExpense from './AddExpense';
-import RecentExpenses from './RecentExpenses';
-import styled from 'styled-components';
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import AddExpense from './AddExpense'
 import GeneralDataBoard from './GeneralDataBoard'
+import RecentExpenses from './RecentExpenses'
+
 const MainBoardContainer = styled.div`
   display: flex;
-  flex-direction:column;
-  gap: 40px;
-  align-items: center;
+  flex-direction: column;
   width: 100%;
-  justify-content: space-around;
-  background-color: ${(props) => props.theme.background}; 
+  margin: 0 auto;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-`;
+  gap: 20px;
+  background-color: ${props => props.theme.background};
+  color: ${props => props.theme.textColor};
+  
+`
 
-const QuickAccessBoard = styled.div`
+const Header = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding:10px 0px;
-  border-radius: 8px;
-  width:90%;
-`;
+  justify-content: space-between;
+  width: 100%;
+  gap:10px;
+  align-items: stretch;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+`
 
-const QuickAccessBtn = styled.div`
-  cursor: pointer;
-  padding: 10px 10px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
 
-  font-size: 14px;
-  color: ${(props) => props.theme.buttonTextColor};
-  background-color: ${(props) => props.theme.buttonBackground}; 
+const AddButton = styled.button`
+  background-color: ${props => props.theme.buttonBackground};
+  color: ${props => props.theme.buttonTextColor};
   border: none;
   border-radius: 5px;
-  transition: background-color 0.3s ease;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 
   &:hover {
-    background-color: ${(props) => props.theme.buttonHoverBackground}; 
-    color: ${(props) => props.theme.buttonHoverTextColor};
+    background-color: ${props => props.theme.buttonHoverBackground};
   }
-`;
 
-const MainBoard = ({ categories, userId, expenses, reloadExpenses }) => {
-  const [quickAccessKind, setQuickAccessKind] = useState('');
+`
+
+export default function MainBoard({ categories, expensesThemeColor, userId, expenses, loading, error, reloadExpenses, updateExpense, deleteExpense }) {
+  const [showAddExpense, setShowAddExpense] = useState(false)
+
+  const handleUpdateExpense = (expense) => {
+    updateExpense(expense);
+  };
 
   const handleAddExpense = async () => {
     try {
-      closeModal()
+      setShowAddExpense(false)
       reloadExpenses();
     } catch (error) {
       console.error('Error adding expense:', error);
     }
   };
 
-  const closeModal = () => {
-    setQuickAccessKind(null);
-  };
-
   return (
     <MainBoardContainer>
-      {quickAccessKind === 'addExpense' && (
+      <Header>
+        <AddButton onClick={() => setShowAddExpense(true)}>
+          Add Expense
+        </AddButton>
+        <GeneralDataBoard expenses={expenses} />
+
+      </Header>
+
+      <RecentExpenses
+        categories={categories}
+        expenses={expenses}
+        onUpdate={handleUpdateExpense} />
+
+      {showAddExpense && (
         <AddExpense
-          categories={categories}
-          userId={userId}
           onAdd={handleAddExpense}
-          onClose={closeModal}
+          categories={categories}
+          expensesThemeColor={expensesThemeColor}
+          userId={userId}
+          onClose={() => setShowAddExpense(false)}
+          onExpenseAdded={reloadExpenses}
         />
       )}
-      <QuickAccessBoard>
-        <QuickAccessBtn onClick={() => setQuickAccessKind('addExpense')}>
-          + Add Expense +
-        </QuickAccessBtn>
-      </QuickAccessBoard>
-
-      <GeneralDataBoard expenses={expenses}/>
-
-      <RecentExpenses categories={categories} expenses={expenses} />
     </MainBoardContainer>
-  );
-};
-
-export default MainBoard;
+  )
+}
