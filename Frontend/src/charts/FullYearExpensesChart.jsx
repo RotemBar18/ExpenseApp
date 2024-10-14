@@ -16,9 +16,10 @@ const ChartContainer = styled.div`
   height: 700px;  
   width:80%;
   background-color: ${(props) => props.theme.background};
-
 `;
-
+const Header = styled.h3`
+  margin:0;
+`;
 const getAllDaysAndMonths = () => {
   const currentYear = new Date().getFullYear();
   const daysInMonth = [];
@@ -63,9 +64,9 @@ const VerticalBubbleChart = ({ expenses }) => {
 
   return (
     <ChartContainer>
-      <h3 style={{ color: theme.headerTextColor, borderBottom: `1px solid ${theme.border}` }}>
+      <Header style={{ color: theme.headerTextColor, borderBottom: `1px solid ${theme.border}` }}>
         {currentYear}
-      </h3>
+      </Header>
       <ResponsiveContainer>
         <ScatterChart
           margin={{ top: 10, right: 10, left: -20, bottom: 30 }}

@@ -87,7 +87,7 @@ const ExpenseDate = styled.div`
 `;
 
 const ExpenseCategory = styled.div`
-  font-size: 0.5rem;
+  font-size: 0.6rem;
 margin-right:10px;
   color: ${(props) => props.theme.tagColor};
   text-align: center;

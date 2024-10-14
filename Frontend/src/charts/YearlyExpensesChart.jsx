@@ -44,9 +44,11 @@ const groupExpensesByMonthAndCategory = (expenses) => {
 const ChartContainer = styled.div`
    height: 50%;
   width: 80%;
-  margin: 20px ;
 background-color: ${(props) => props.theme.background};
 
+`;
+const Header = styled.h3`
+  margin:0;
 `;
 
 const MonthlyExpensesChart = ({ expenses }) => {
@@ -81,9 +83,9 @@ const MonthlyExpensesChart = ({ expenses }) => {
 
   return (
     <ChartContainer>
-      <h3 style={{ color: theme.headerTextColor, borderBottom: `1px solid ${theme.border}` }}>
+      <Header style={{ color: theme.headerTextColor, borderBottom: `1px solid ${theme.border}` }}>
         {currentYear} Expenses:
-      </h3>
+      </Header>
       <ResponsiveBar
         data={groupedData}
         keys={categories}

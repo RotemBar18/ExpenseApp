@@ -16,7 +16,7 @@ const ExpenseList = styled.div`
   width: 100%;
   margin: 0;
   overflow-y: auto;
-  height: 80px;
+  max-height: 120px;
       padding: 0px 5px;
 
 
@@ -82,8 +82,6 @@ const NoExpensesMessage = styled.div`
 `;
 
 const TotalAmount = styled.div`
-  margin-top: 10px;
-  padding-top: 5px;
   font-size:0.8rem;
   font-weight: bold;
   text-align: right;

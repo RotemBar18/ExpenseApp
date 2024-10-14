@@ -8,11 +8,14 @@ const currentMonthName = new Date().toLocaleString('en-US', { month: 'long' });
 const ChartContainer = styled.div`
   height: 50%;
   width: 80%;
-  margin: 20px;
+  margin-top: 20px;
+
 background-color: ${(props) => props.theme.background};
 
 `;
-
+const Header = styled.h3`
+  margin:0;
+`;
 const getAllDaysInMonth = (month, year) => {
   const date = new Date(year, month, 1);
   const days = [];
@@ -80,14 +83,14 @@ const DailyExpensesChart = ({ expenses }) => {
 
   return (
     <ChartContainer>
-      <h3 style={{ color: theme.headerTextColor, borderBottom: `1px solid ${theme.border}` }}>
+      <Header style={{ color: theme.headerTextColor, borderBottom: `1px solid ${theme.border}` }}>
         {currentMonthName}'s Expenses:
-      </h3>
+      </Header>
       <ResponsiveBar
         data={dailyData}
         keys={categories}
         indexBy="day"
-        margin={{ top: 30, bottom: 100, left: 60, right: 15 }}
+        margin={{ top: 30, bottom: 80, left: 60, right: 15 }}
         padding={0.3}
         valueScale={{ type: 'linear' }}
         indexScale={{ type: 'band', round: true }}
