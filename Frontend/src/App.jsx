@@ -1,6 +1,6 @@
 import './App.css';
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
-import  HomePage from './pages/HomePage';
+import HomePage from './pages/HomePage';
 import Statistics from './pages/Statistics';
 import Settings from "./pages/Settings";
 import Expenses from './pages/ExpensesPage';
@@ -11,7 +11,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import ThemeProviderWrapper from './components/ThemeProviderWrapper';
-import Layout from './components/Layout';  // Import the Layout component
+import Layout from './components/Layout'; 
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
