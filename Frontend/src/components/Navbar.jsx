@@ -10,7 +10,7 @@ const NavContainer = styled.nav`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: ${props => props.isOpen ? '1rem' : ' 1rem 0'};
+  padding: ${props => props.isOpen ? '20px' : ' 20px 0'};
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   transition: width 0.3s ease;
   overflow: hidden;

@@ -7,12 +7,10 @@ import FilterModal from './FilterExpensesModal';
 const Boardcontainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
   height: 100%;
   background-color: ${(props) => props.theme.background};
-  justify-content: center;
-overflow-y:hidden;
+  overflow-y:hidden;
 
 `;
 
@@ -24,25 +22,15 @@ const ExpenseListContainer = styled.div`
   align-items: stretch;
   font-family: 'Poppins', sans-serif;
   border-radius: 5px;
-  width:90%;
-  height:90%;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
-
-
-  @media (max-width: 1000px) {
-
-    @media (max-width: 768px) {
-    width:80%;
-
-    }
-  }
-
+  width:100%;
+  height:100%;
 `;
+
 const ExpensesTable = styled.ul`
   list-style: none;
   padding: 0px;
   margin: 0;
-  height:65%;
+  height:70%;
     @media (max-width: 780px) {
       height:45%;
 
@@ -52,7 +40,7 @@ const ExpensesTable = styled.ul`
     }
 `;
 const Expenses = styled.ul`
-padding: 10px;
+padding: 10px 20px;
 height:100%;
 overflow-y:auto;
 &::-webkit-scrollbar {
@@ -80,10 +68,9 @@ overflow-y:auto;
 
 
 const Header = styled.h3`
-padding: 10px;
+padding: 20px 20px 0 ;
   margin: 0;
-  border-bottom: 3px solid ${(props) => props.theme.border};
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   color: ${(props) => props.theme.headerTextColor};
 
   @media (max-width: 768px) {
@@ -96,8 +83,6 @@ padding: 10px;
 `;
 
 const ExpenceHeader = styled.div`
-  padding: 4px 0;
-  padding-right:5px;
   border-bottom: 2px solid ${(props) => props.theme.border};
   display: flex;
   justify-content: space-between;
@@ -105,8 +90,8 @@ const ExpenceHeader = styled.div`
   gap: 15px;
   transition: background-color 0.3s, border-radius 0.1s;
   cursor: pointer;
-  margin-right:37px;
-padding:0 10px;
+  margin:0 20px;
+  padding-right:37px;
 
 `;
 
@@ -123,8 +108,8 @@ width:40%;
 const SelectContainer = styled.div`
   display: flex;
   align-items: center;
-padding: 10px;
     gap: 20px;
+  margin:10px 20px;
 
   @media (max-width: 780px) {
     flex-direction: column;

@@ -8,7 +8,7 @@ import useAuth from '../hooks/useAuth';
 const ManageThemeContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width:30%;
   padding:10px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
   border-radius: 10px;

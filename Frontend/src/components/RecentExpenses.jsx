@@ -13,6 +13,7 @@ const ExpenseListContainer = styled.div`
   justify-content: center;
   padding: 15px;
   width:50%;
+  height:100%;
 `;
 
 const ExpensesTable = styled.div`

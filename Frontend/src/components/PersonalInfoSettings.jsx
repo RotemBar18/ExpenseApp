@@ -4,11 +4,12 @@ import { updateUser } from '../utils/userService';
 import { useDispatch } from 'react-redux';
 
 const PersonalInfoContainer = styled.div`
-  padding-left: 10px;
   display: flex;
   flex-direction: column;
   height:100%;
   color: ${(props) => props.theme.modalTextColor};
+  padding:0 20px;
+
 `;
 
 const Section = styled.div`

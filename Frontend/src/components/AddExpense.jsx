@@ -2,54 +2,35 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { addExpense } from '../utils/expenseService';
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  position:fixed;
-`;
-
-const ModalBack = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: ${(props) => props.theme.modalBackground};
-  opacity: 0.8;
-  z-index: 1;
-`;
 
 const AddExpenseContainer = styled.div`
-  position: fixed; /* Position fixed to stay in place relative to the viewport */
-  top: 50%; /* Center vertically */
-  left: 50%; /* Center horizontally */
-  transform: translate(-50%, -50%); /* Offset by 50% of its height and width to truly center it */
-  padding: 20px;
   background-color: ${(props) => props.theme.background};
   border-radius: 10px;
-  max-width: 280px;
-  width: 250px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
-  z-index: 2; /* Ensure it appears above the overlay */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+padding:10px;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100%;
 `;
 
 const Header = styled.div`
   margin: 0;
   padding-bottom: 15px;
-  font-size: 1.5em;
+  font-size: 1em;
+  font-weight: bold;
   color: ${(props) => props.theme.headerTextColor};
+  &:hover{
+  cursor:pointer;
+  }
 `;
 
 const ExpenseInput = styled.input`
-  padding: 10px;
-  width: 90%;
+  padding: 5px;
   margin-bottom: 10px;
   border: 1px solid ${(props) => props.theme.inputBorderColor};
   border-radius: 5px;
@@ -59,7 +40,7 @@ const ExpenseInput = styled.input`
 `;
 
 const ExpenseSelect = styled.select`
-  padding: 10px;
+  padding: 5px;
   width: 100%;
   margin-bottom: 10px;
   border: 1px solid ${(props) => props.theme.inputBorderColor};
@@ -68,12 +49,15 @@ const ExpenseSelect = styled.select`
   color: ${({ value, theme }) => (value === '' ? theme.inputTextColor : 'black')};
   background-color: ${(props) => props.theme.inputBackground};
 `;
+const Buttons = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
-const AddButton = styled.button`
-  padding: 10px 20px;
-  font-size: 16px;
+const ButtonBase = styled.button`
+  padding: 2px 8px;
+  font-size: 1rem;
   color: ${(props) => props.theme.buttonTextColor};
-  background-color: ${(props) => props.theme.buttonBackground};
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -81,21 +65,33 @@ const AddButton = styled.button`
   font-family: 'Poppins', sans-serif;
 
   &:hover {
-    background-color: ${(props) => props.theme.buttonHoverBackground};
     color: ${(props) => props.theme.buttonHoverTextColor};
   }
+`;
 
-  &:active {
-    transform: translateY(4px);
+const AddButton = styled(ButtonBase)`
+  background-color: ${(props) => props.theme.buttonBackground};
+
+  &:hover {
+    background-color: ${(props) => props.theme.buttonHoverBackground};
   }
 `;
+
+const CloseButton = styled(ButtonBase)`
+  background-color: red;
+
+  &:hover {
+    opacity: 0.6;
+  }
+`;
+
 
 
 const AddExpense = ({ categories, userId, onAdd, onClose }) => {
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState(''); 
+  const [category, setCategory] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -124,58 +120,60 @@ const AddExpense = ({ categories, userId, onAdd, onClose }) => {
 
 
   return (
-    < Container style={{ display: 'flex' }}>
-      <ModalBack onClick={onClose} />
-      <AddExpenseContainer>
-        <Header>Add New Expense</Header>
-        <Form onSubmit={handleSubmit}>
-         
+    <AddExpenseContainer>
+      <Header>Add New Expense</Header>
+      <Form onSubmit={handleSubmit}>
+
         <ExpenseSelect
-            name="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            required>
-            <option value="" disabled hidden>Select Category</option>
-            {categories
-              .filter((cat) => cat !== 'Manage Categories:   ') 
-              .map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-          </ExpenseSelect>
-          
-          <ExpenseInput
-            type="text"
-            name="name"
-            placeholder="Expense Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
+          name="category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          required>
+          <option value="" disabled hidden>Select Category</option>
+          {categories
+            .filter((cat) => cat !== 'Manage Categories:   ')
+            .map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+        </ExpenseSelect>
 
-      
-
-          <ExpenseInput
-            type="number"
-            name="amount"
-            placeholder="Amount"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            required
-          />
-          <ExpenseInput
-            type="text"
-            placeholder="Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <AddButton type="submit">Add Expense</AddButton>
-        </Form>
+        <ExpenseInput
+          type="text"
+          name="name"
+          placeholder="Expense Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
 
 
-      </AddExpenseContainer>
-    </Container>
+
+        <ExpenseInput
+          type="number"
+          name="amount"
+          placeholder="Amount"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          required
+        />
+        <ExpenseInput
+          type="text"
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+
+        <Buttons>
+          <AddButton type="submit">Add</AddButton>
+          <CloseButton onClick={onClose}>Cancel</CloseButton>
+        </Buttons>
+
+      </Form>
+
+
+    </AddExpenseContainer>
   );
 };
 

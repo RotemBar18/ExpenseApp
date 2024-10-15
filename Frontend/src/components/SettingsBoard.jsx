@@ -7,20 +7,26 @@ import CustomizationSettings from './CustomizationSettings';
 const SettingBoardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding-left:2%;
-  padding-top:1%;
   width:100%;
-background-color: ${(props) => props.theme.background};
- @media (max-width: 768px) {
-  padding-left:4%;
-  padding-top:2%;
-  }
+  height:100%;
+  background-color: ${(props) => props.theme.background};
 `;
 
-const HeaderContainer = styled.div``;
+const HeaderContainer = styled.div`
+`;
+
+const Title = styled.h1`
+  padding:20px 20px;
+  margin:0;
+  font-size: 1.5rem;
+  padding-left: '10px';
+  color: ${(props) => props.theme.headerTextColor};
+
+`;
 
 const HeaderChoices = styled.div`
   display: flex;
+  padding:0 20px;
 `;
 
 const SettingsContainer = styled.div`
@@ -43,8 +49,7 @@ background-color: ${(props) => (props.selected ? props.theme.buttonHoverBackgrou
     border-radius: 0px 10px 10px 0px  ;
   }      
     &:first-child {
-    margin-left:10px;
-    border-radius: 10px 0px  0px 10px ;
+    border-radius: 0px 0px  0px 0px ;
   }
 `;
 
@@ -55,7 +60,7 @@ const SettingsBoard = ({ user, preferences }) => {
   return (
     <SettingBoardContainer>
       <HeaderContainer>
-        <h1 style={{ paddingLeft: '10px', color: theme.headerTextColor }}>Settings</h1> {/* Use theme header text color */}
+        <Title >Settings</Title> {/* Use theme header text color */}
         <HeaderChoices>
           <HeaderText
             onClick={() => setSettingsKind("personal")}
@@ -64,13 +69,7 @@ const SettingsBoard = ({ user, preferences }) => {
           >
             Personal Info
           </HeaderText>
-          <HeaderText
-            onClick={() => setSettingsKind("security")}
-            selected={settingsKind === "security"}
-            theme={theme}
-          >
-            Login & Security
-          </HeaderText>
+        
           <HeaderText
             onClick={() => setSettingsKind("customize")}
             selected={settingsKind === "customize"}

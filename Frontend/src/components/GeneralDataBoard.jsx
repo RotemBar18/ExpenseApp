@@ -25,14 +25,10 @@ const DataCard = styled.div`
 
   }
 
-  &.weekly {
+  &.breakdown {
     flex-grow: 2;
   }
 
-  &.monthly {
-    flex-grow: 1;
-  
-  }
 `;
 
 const CardTitle = styled.div`
@@ -43,7 +39,7 @@ const CardTitle = styled.div`
 `;
 
 
-const GeneralDataBoard = ({ expenses }) => {
+const GeneralDataBoard = ({ expenses,onFilterChange }) => {
   const today = new Date();
 
   const currentMonthName = today.toLocaleString('en-US', { month: 'long' });
@@ -56,16 +52,17 @@ const GeneralDataBoard = ({ expenses }) => {
         <DailyInsights expenses={expenses} />
       </DataCard>
 
-      <DataCard className="weekly">
+      <DataCard className="breakdown">
         <CardTitle>Expenses Breakdown</CardTitle>
-        <ExpenseBreakdown expenses={expenses} />
+        <ExpenseBreakdown expenses={expenses}  onFilterChange={onFilterChange}/>
       </DataCard>
-      <DataCard className="monthly">
-        <CardTitle>{currentMonthName}</CardTitle>
-        <MonthlyInsights expenses={expenses} />
-      </DataCard>
+    
     </DataContainer>
   );
+  
 };
 
+
 export default GeneralDataBoard;
+
+

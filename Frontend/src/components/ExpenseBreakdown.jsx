@@ -1,13 +1,20 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
 const InsightsContainer = styled.div`
   border-radius: 5px;
-  padding: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: ${(props) => props.theme.modalBackground};
+  padding: 20px;
+`;
+
+const SelectSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 10px;
 `;
 
 const Select = styled.select`
@@ -22,22 +29,19 @@ const Select = styled.select`
 const List = styled.div`
   height: 80px;
   overflow-y: auto;
-  width: 97%;
+  width: 100%;
   padding-right: 5px;
   &::-webkit-scrollbar {
     width: 8px;
   }
-
   &::-webkit-scrollbar-track {
     background: ${(props) => props.theme.scrollBarTrack};
     border-radius: 10px;
   }
-
   &::-webkit-scrollbar-thumb {
     background: ${(props) => props.theme.scrollBarThumb};
     border-radius: 10px;
   }
-
   &::-webkit-scrollbar-thumb:hover {
     background: ${(props) => props.theme.scrollBarThumbHover || props.theme.scrollBarThumb};
     cursor: pointer;
@@ -92,7 +96,7 @@ const getExpensesByCategory = (expenses) => {
   }, {});
 };
 
-const ExpenseBreakdown = ({ expenses }) => {
+const ExpenseBreakdown = ({ expenses, onFilterChange }) => {
   const [timeRange, setTimeRange] = useState("This Week");
   const [groupedExpenses, setGroupedExpenses] = useState({});
 
@@ -103,10 +107,10 @@ const ExpenseBreakdown = ({ expenses }) => {
     if (timeRange === "This Week") {
       filterStartDate = new Date();
       filterStartDate.setDate(today.getDate() - 7); // Last 7 days
-      filterEndDate = today; // End is today
+      filterEndDate = today;
     } else if (timeRange === "This Month") {
       filterStartDate = new Date(today.getFullYear(), today.getMonth(), 1); // Start of the month
-      filterEndDate = new Date(today.getFullYear(), today.getMonth() + 1, 0); // Last day of the month
+      filterEndDate = new Date(today.getFullYear(), today.getMonth() + 1, 0); // End of the month
     }
 
     const filteredExpenses = expenses.filter((expense) => {
@@ -115,35 +119,52 @@ const ExpenseBreakdown = ({ expenses }) => {
     });
 
     const grouped = getExpensesByCategory(filteredExpenses);
-    setGroupedExpenses(grouped);
-  }, [expenses, timeRange]);
+
+    if (JSON.stringify(grouped) !== JSON.stringify(groupedExpenses)) {
+      setGroupedExpenses(grouped);
+    }
+
+    if (onFilterChange) {
+      const groupedArray = Object.keys(grouped).map((category) => ({
+        Category: category,
+        Amount: grouped[category],
+      }));
+    
+      onFilterChange(groupedArray, timeRange);  // Pass grouped data as an array
+    }
+    
+
+  }, [timeRange, expenses]);
+
 
   const totalSpending = Object.values(groupedExpenses).reduce((total, amount) => total + amount, 0);
 
   return (
     <InsightsContainer>
-      <Select value={timeRange} onChange={(e) => setTimeRange(e.target.value)}>
-        <option value="This Week">This Week</option>
-        <option value="This Month">This Month</option>
-      </Select>
-      <List>
-        {Object.keys(groupedExpenses).length > 0 ? (
-          Object.keys(groupedExpenses).map((category) => {
-            const amount = groupedExpenses[category];
-            return (
-              <ItemContainer key={category}>
-                <ItemLabel>{category}</ItemLabel>
-                <Amount>${amount.toFixed(2)}</Amount>
-              </ItemContainer>
-            );
-          })
-        ) : (
-          <NoExpensesMessage>No expenses available for the selected range.</NoExpensesMessage>
+      <SelectSection>
+        <Select value={timeRange} onChange={(e) => setTimeRange(e.target.value)}>
+          <option value="This Week">This Week</option>
+          <option value="This Month">This Month</option>
+        </Select>
+        <List>
+          {Object.keys(groupedExpenses).length > 0 ? (
+            Object.keys(groupedExpenses).map((category) => {
+              const amount = groupedExpenses[category];
+              return (
+                <ItemContainer key={category}>
+                  <ItemLabel>{category}</ItemLabel>
+                  <Amount>${amount.toFixed(2)}</Amount>
+                </ItemContainer>
+              );
+            })
+          ) : (
+            <NoExpensesMessage>No expenses available for the selected range.</NoExpensesMessage>
+          )}
+        </List>
+        {Object.keys(groupedExpenses).length > 0 && (
+          <TotalAmount>Total: ${totalSpending.toFixed(2)}</TotalAmount>
         )}
-      </List>
-      {Object.keys(groupedExpenses).length > 0 && (
-        <TotalAmount>Total: ${totalSpending.toFixed(2)}</TotalAmount>
-      )}
+      </SelectSection>
     </InsightsContainer>
   );
 };
