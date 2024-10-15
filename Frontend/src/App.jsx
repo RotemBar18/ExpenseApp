@@ -1,6 +1,6 @@
 import './App.css';
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
-import  Home from './pages/Homepage';
+import  HomePage from './pages/HomePage';
 import Statistics from './pages/Statistics';
 import Settings from "./pages/Settings";
 import Expenses from './pages/ExpensesPage';
@@ -55,7 +55,7 @@ function App() {
         <Router>
 
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<HomePage />} />
             <Route element={<Layout />}>
               <Route path="/statistics" element={<Statistics />} />
               <Route path="/expenses" element={<Expenses />} />

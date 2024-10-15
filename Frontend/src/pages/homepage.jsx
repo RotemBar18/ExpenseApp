@@ -25,7 +25,7 @@ const PageContainer = styled.div`
 
 
 
-const Home = () => {
+const HomePage = () => {
 
 
   return (
@@ -35,4 +35,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
