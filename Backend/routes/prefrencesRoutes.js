@@ -30,14 +30,10 @@ const verifyToken = (req, res, next) => {
     });
 };
 
-router.get('/:userId', verifyToken, async (req, res) => {
+router.get('/:boardId', verifyToken, async (req, res) => {
     try {
-        const userId = req.userId;
-        const [preferences] = await req.db.query('SELECT * FROM user_preferences WHERE UserId = ?', [userId]);
-
-        if (preferences.length === 0) {
-            return res.status(404).json({ message: 'Preferences not found' });
-        }
+        const boardId =req.params.boardId
+        const [preferences] = await req.db.query('SELECT * FROM board_preferences WHERE ExpenseBoardId = ?', [boardId]);
 
         res.status(200).json(preferences[0]);
     } catch (error) {
@@ -46,17 +42,17 @@ router.get('/:userId', verifyToken, async (req, res) => {
     }
 });
 
-router.put('/:userId', verifyToken, async (req, res) => {
+router.put('/:boardId', async (req, res) => {
     try {
-        const userId = req.userId;
+        const {boardId} = req.params;
         const { ExpensesThemeColor, DefaultCategories } = req.body; 
         const query = `
-            UPDATE user_preferences 
+            UPDATE board_preferences 
             SET ExpensesThemeColor = ?, DefaultCategories = ?
-            WHERE UserId = ?
+            WHERE ExpenseBoardId = ?
         `;
 
-        await req.db.query(query, [ExpensesThemeColor, DefaultCategories, userId]);
+        await req.db.query(query, [ExpensesThemeColor, DefaultCategories, boardId]);
 
         res.status(200).json({ success: true, preferences: req.body, message: 'preferences updated successfully' });
     } catch (error) {
@@ -65,17 +61,17 @@ router.put('/:userId', verifyToken, async (req, res) => {
     }
 });
 
-router.post('/:userId', verifyToken, async (req, res) => {
+router.post('/:boardId', verifyToken, async (req, res) => {
     try {
-        const {userId} = req.params;  
+        const {boardId} = req.params;  
         const { ExpensesThemeColor, DefaultCategories } = req.body;  
 
         const query = `
-            INSERT INTO user_preferences (UserId, ExpensesThemeColor, DefaultCategories) 
+            INSERT INTO board_preferences (ExpenseBoardId, ExpensesThemeColor, DefaultCategories) 
             VALUES (?, ?, ?)
         `;
 
-        await req.db.query(query, [userId, ExpensesThemeColor, DefaultCategories]);
+        await req.db.query(query, [boardId, ExpensesThemeColor, DefaultCategories]);
         res.status(201).json({ message: 'Preferences created successfully' });
     } catch (error) {
         console.error('Error creating preferences:', error);

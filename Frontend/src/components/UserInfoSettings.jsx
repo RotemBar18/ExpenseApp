@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { updateUser } from '../utils/userService'; 
+import { updateUser } from '../utils/userService'; // Replace with user service
+import useAuth from '../hooks/useAuth';
 import { useDispatch } from 'react-redux';
+import { updateUserProfile } from '../redux/actions/userActions'; // Assuming you manage user state in Redux
 
-const PersonalInfoContainer = styled.div`
+const UserInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height:100%;
+  height: 100%;
   color: ${(props) => props.theme.modalTextColor};
-  padding:0 20px;
-
+  padding: 0 20px;
 `;
 
 const Section = styled.div`
+  margin-top: 20px;
   margin-bottom: 20px;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   padding-bottom: 10px;
-  border-bottom: 1px solid ${(props) => props.theme.border};  
+  border-bottom: 1px solid ${(props) => props.theme.border};
 `;
 
 const SectionLabel = styled.div`
@@ -72,21 +74,22 @@ const ProfilePic = styled.img`
   border-radius: 50%;
   margin-bottom: 10px;
 `;
-const PersonalInfoSettings = ({ user }) => {
-  const dispatch = useDispatch();
 
+const UserInfoSettings = () => {
+  const { user, token } = useAuth(); // Assuming useAuth returns user info and token
+  const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState({
     Name: false,
     ProfilePic: false,
   });
 
-  const [personalInfo, setPersonalInfo] = useState({
+  const [userInfo, setUserInfo] = useState({
     Name: user.Name,
-    ProfilePic: user.ProfilePic || 'default_profile_pic_url',  
+    ProfilePic: user.ProfilePic || 'default_profile_pic_url',
   });
 
   useEffect(() => {
-    setPersonalInfo({
+    setUserInfo({
       Name: user.Name,
       ProfilePic: user.ProfilePic,
     });
@@ -100,31 +103,38 @@ const PersonalInfoSettings = ({ user }) => {
   };
 
   const handleInputChange = (field, value) => {
-    setPersonalInfo((prevState) => ({
+    setUserInfo((prevState) => ({
       ...prevState,
       [field]: value,
     }));
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setUserInfo((prevState) => ({
+          ...prevState,
+          ProfilePic: reader.result, // Convert image to base64
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleSave = async (field) => {
     try {
       const updatedUserData = {
         ...user,
-        ...personalInfo, 
+        ...userInfo,
       };
 
-      const updatedUserFromServer = await updateUser(user.Id, updatedUserData);
-
-      if (updatedUserFromServer) {
-
-        setPersonalInfo({
-          Name: updatedUserFromServer.Name || personalInfo.Name,
-          ProfilePic: updatedUserFromServer.ProfilePic || personalInfo.ProfilePic,
-        });
-        dispatch({ type: 'UPDATE_USER_SUCCESS', payload: updatedUserFromServer });
-      } else {
-        console.error('Failed to update user');
-      }
+      setUserInfo({
+        Name: updatedUserData.Name ,
+        ProfilePic: updatedUserData.ProfilePic,
+      });
+      dispatch(updateUserProfile(updatedUserData.Id, token, updatedUserData));
     } catch (error) {
       console.error('Error updating user:', error);
     } finally {
@@ -132,55 +142,27 @@ const PersonalInfoSettings = ({ user }) => {
     }
   };
 
-  const handleProfilePicChange = async (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('upload_preset', 'ProfilePics'); 
-
-      try {
-        const response = await fetch('https://api.cloudinary.com/v1_1/expenses/image/upload', {
-          method: 'POST',
-          body: formData,
-        });
-
-        const data = await response.json();
-        if (response.ok) {
-          setPersonalInfo((prevState) => ({
-            ...prevState,
-            ProfilePic: data.secure_url,
-          }));
-
-         
-
-        } else {
-          console.error('Error uploading to Cloudinary:', data.error.message);
-        }
-      } catch (error) {
-        console.error('Error uploading profile picture:', error);
-      }
-    }
-  };
-
   return (
-    <PersonalInfoContainer>
-      <h2>Personal Info</h2>
-
+    <UserInfoContainer>
       <Section>
         <SectionLabel>Profile Picture</SectionLabel>
         <SectionValue>
-          <ProfilePic
-            src={personalInfo.ProfilePic}
-            alt="Profile"
-          />
+          <ProfilePic src={userInfo.ProfilePic} alt="Profile" />
           {isEditing.ProfilePic ? (
             <>
-              <InputField style={{border:'none'}} type="file" onChange={handleProfilePicChange} />
-              <SaveButton onClick={() => handleSave('ProfilePic')}>Save</SaveButton>
+              <InputField
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
+              <SaveButton onClick={() => handleSave('ProfilePic')}>
+                Save
+              </SaveButton>
             </>
           ) : (
-            <EditButton onClick={() => handleEditToggle('ProfilePic')}>Edit</EditButton>
+            <EditButton onClick={() => handleEditToggle('ProfilePic')}>
+              Edit
+            </EditButton>
           )}
         </SectionValue>
       </Section>
@@ -192,7 +174,7 @@ const PersonalInfoSettings = ({ user }) => {
             <>
               <InputField
                 type="text"
-                value={personalInfo.Name}
+                value={userInfo.Name}
                 onChange={(e) => handleInputChange('Name', e.target.value)}
                 placeholder={user.Name}
               />
@@ -200,14 +182,14 @@ const PersonalInfoSettings = ({ user }) => {
             </>
           ) : (
             <>
-              {personalInfo.Name}
+              {userInfo.Name}
               <EditButton onClick={() => handleEditToggle('Name')}>Edit</EditButton>
             </>
           )}
         </SectionValue>
       </Section>
-    </PersonalInfoContainer>
+    </UserInfoContainer>
   );
 };
 
-export default PersonalInfoSettings;
+export default UserInfoSettings;

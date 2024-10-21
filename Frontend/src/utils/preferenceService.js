@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { alterCategoriesToArray } from './utilService'
-const BASE_URL = process.env.NODE_ENV === 'development' 
-    ? 'http://localhost:8081' 
+const BASE_URL = process.env.NODE_ENV === 'development'
+    ? 'http://localhost:8081'
     : 'https://expenseapp-production.up.railway.app';
 
-export const fetchPreferences = async (userId, token) => {
+export const fetchPreferences = async (boardId, token) => {
     try {
-        const response = await axios.get(`${BASE_URL}/preferences/${userId}`, {
+        const response = await axios.get(`${BASE_URL}/preferences/${boardId}`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
@@ -14,16 +14,16 @@ export const fetchPreferences = async (userId, token) => {
         });
 
         const newResponse = alterCategoriesToArray(response.data)
-        return newResponse; 
+        return newResponse;
     } catch (error) {
         throw new Error('Error fetching preferences');
     }
 };
 
 
-export const updatePreferences = async (userId, token, preferences) => {
+export const updatePreferences = async (boardId, token, preferences) => {
     try {
-        const response = await axios.put(`${BASE_URL}/preferences/${userId}`, preferences, {
+        const response = await axios.put(`${BASE_URL}/preferences/${boardId}`, preferences, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
@@ -31,18 +31,24 @@ export const updatePreferences = async (userId, token, preferences) => {
         });
 
         if (response.status !== 200) {
-            throw new Error('Failed to update preferences');  
+            throw new Error('Failed to update preferences');
         }
         return response.data
     } catch (error) {
         console.error('Error updating preferences:', error.message);
-        throw new Error('Error updating preferences'); 
+        throw new Error('Error updating preferences');
     }
 };
 
-export const postDefaultPreferences = async (token, userId, preferences) => {
+export const createDefaultPreferences = async (boardId) => {
+    const token = localStorage.getItem('token');
+    const defaultPreferences = {
+        ExpensesThemeColor: "Light",
+        DefaultCategories: `["Manage Categories:   ","Food", "Health", "Entertainment", "Miscellaneous"]`
+    };
+
     try {
-        const response = await axios.post(`${BASE_URL}/preferences/${userId}`, preferences, {
+        const response = await axios.post(`${BASE_URL}/preferences/${boardId}`, defaultPreferences, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
@@ -50,8 +56,7 @@ export const postDefaultPreferences = async (token, userId, preferences) => {
         });
         return response.data;
     } catch (error) {
-        console.error('Error updating preferences:', error);
+        console.error('Error creating preferences:', error);
         throw error;
     }
 };
-

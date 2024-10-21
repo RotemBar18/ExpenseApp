@@ -8,6 +8,7 @@ const InsightsContainer = styled.div`
   align-items: center;
   background-color: ${(props) => props.theme.modalBackground};
   padding: 20px;
+  
 `;
 
 const SelectSection = styled.div`

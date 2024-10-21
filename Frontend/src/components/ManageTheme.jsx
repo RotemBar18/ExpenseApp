@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { updateUserPreferences } from '../redux/actions/preferenceAction';
+import { updateBoardPreferences } from '../redux/actions/preferenceAction';
 import { themes } from '../styles/themes';
 import useAuth from '../hooks/useAuth';
-
+import { useSelector } from 'react-redux';
 const ManageThemeContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -37,8 +37,9 @@ const Label = styled.label`
   color: ${(props) => props.theme.headerTextColor};
 `;
 
-const ManageTheme = () => {
-  const { user, token, preferences } = useAuth();  
+const ManageTheme = ({boardId}) => {
+  const {  token } = useAuth();  
+  const preferences = useSelector((state) => state.preferences);
   const dispatch = useDispatch();
   const [selectedTheme, setSelectedTheme] = useState(preferences.ExpensesThemeColor || 'Light');
 
@@ -58,7 +59,7 @@ const ManageTheme = () => {
       ExpensesThemeColor: newPreferences.ExpensesThemeColor || preferences.ExpensesThemeColor,
     };
 
-    dispatch(updateUserPreferences(user.Id, token, mergedPreferences));
+    dispatch(updateBoardPreferences(boardId, token, mergedPreferences));
   };
 
   return (

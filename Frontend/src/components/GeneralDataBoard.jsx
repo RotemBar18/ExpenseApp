@@ -7,7 +7,7 @@ import { getSuffix } from "../utils/utilService";
 const DataContainer = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 20px;
   width: 100%;
 `;
 
@@ -41,8 +41,6 @@ const CardTitle = styled.div`
 
 const GeneralDataBoard = ({ expenses,onFilterChange }) => {
   const today = new Date();
-
-  const currentMonthName = today.toLocaleString('en-US', { month: 'long' });
   const currentDayOfMonth = today.getDate();
   const currDay = today.toLocaleString('en-US', { weekday: 'long' });
   return (

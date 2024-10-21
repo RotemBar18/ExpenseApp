@@ -53,6 +53,7 @@ export const updateExpenseById = async (token, expense) => {
                 'Content-Type': 'application/json'
             }
         });
+        (response.data)
         return response.data;
     } catch (error) {
         console.error('Error updating expense:', error);
@@ -74,4 +75,18 @@ export const totalMonthExpenses = (expenses) => {
   });
 
   return monthlyExpenses; // Return the list of expenses for the current month
+};
+
+export const fetchExpensesForBoard = async (token, boardId) => {
+    try {
+        const response = await axios.get(`${BASE_URL}/expenses/${boardId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching board expenses:', error);
+        throw error;
+    }
 };

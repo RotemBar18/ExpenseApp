@@ -6,24 +6,24 @@ const ChartContainer = styled.div`
   color: ${(props) => props.theme.headerTextColor};
   background-color: ${(props) => props.theme.modalBackground}; 
   display: flex;
+  position:relative;
   flex-direction: column;
   border-radius: 5px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
   align-items: center;
   padding: 15px;
   width: 50%;
-  height: 100%;
 `;
 
 const Title = styled.div`
   display: flex;
-  gap: 10px;
+position:absolute;
+left:20px;
 `;
 
 const BreakdownChart = ({ filteredExpenses, selectedRange }) => {
   const theme = useTheme(); // Access the current theme
   
-  console.log('Filtered Expenses:', filteredExpenses);
 
   const expenseArray = Array.isArray(filteredExpenses) ? filteredExpenses : [];
 
@@ -33,7 +33,6 @@ const BreakdownChart = ({ filteredExpenses, selectedRange }) => {
     value: parseFloat(expense.Amount),   // Parsing the amount as a number
   }));
 
-  console.log('Chart Data:', chartData);  // Log chartData to ensure it's correct
 
   if (chartData.length === 0) {
     return <div>No expenses available for {selectedRange}</div>;
@@ -44,7 +43,7 @@ const BreakdownChart = ({ filteredExpenses, selectedRange }) => {
       <Title>{selectedRange}</Title>
       <ResponsivePie
         data={chartData}
-        margin={{ top: 10, right: 100, bottom: 20, left: -10 }} // Adjust margin for the legend
+        margin={{ top: 10, right: -100, bottom: 10, left: 0 }} // Adjust margin for the legend
         innerRadius={0.4}
         padAngle={1.5}
         cornerRadius={2}
@@ -67,7 +66,7 @@ const BreakdownChart = ({ filteredExpenses, selectedRange }) => {
             anchor: 'right',  // Place the legend on the right side
             direction: 'column',
             justify: false,
-            translateX: 100,
+            translateX: -455,
             translateY: 0,
             itemsSpacing: 2,
             itemWidth: 100,
@@ -80,7 +79,6 @@ const BreakdownChart = ({ filteredExpenses, selectedRange }) => {
           },
         ]}
         tooltip={({ datum }) => {
-          console.log('Tooltip data:', datum);  // Logging the correct data
           return (
             <div style={{ padding: '5px', background: 'white', border: '1px solid #ccc' }}>
               <strong>{datum.label}:</strong> ${datum.value ? datum.value.toFixed(2) : '0.00'}

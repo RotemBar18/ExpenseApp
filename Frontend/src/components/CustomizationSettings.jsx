@@ -4,7 +4,7 @@ import ManageCategories from './ManageCategories';
 import ManageTheme from './ManageTheme';
 import useAuth from '../hooks/useAuth'; 
 import { useDispatch } from 'react-redux';
-import { updateUserPreferences } from '../redux/actions/preferenceAction'; 
+import { updateBoardPreferences } from '../redux/actions/preferenceAction'; 
 
 const CustomizationContainer = styled.div`
   padding-bottom: 10px;
@@ -16,23 +16,24 @@ const CustomizationContainer = styled.div`
   color: ${(props) => props.theme.modalTextColor};
 `;
 
-const CustomizationSettings = ({ preferences }) => {
-  const { user, token } = useAuth(); 
+const CustomizationSettings = ({board, preferences }) => {
+  const {  token } = useAuth(); 
   const dispatch = useDispatch();
   const [updatedPreferences, setUpdatedPreferences] = useState(preferences);
+  const boardId = board.ExpenseBoardId
   useEffect(() => {
     setUpdatedPreferences(preferences);
   }, [preferences]);
 
   const handleUpdatePreferences = (newPreferences) => {
     setUpdatedPreferences(newPreferences); 
-    dispatch(updateUserPreferences(user.Id, token, newPreferences)); 
+    dispatch(updateBoardPreferences(boardId, token, newPreferences)); 
   };
 
   return (
     <CustomizationContainer>
       <ManageCategories onUpdatePreferences={handleUpdatePreferences}/>
-      <ManageTheme />
+      <ManageTheme boardId={boardId} />
     </CustomizationContainer>
   );
 };

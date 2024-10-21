@@ -1,23 +1,23 @@
 import styled from "styled-components";
 import SettingsBoard from "../components/SettingsBoard";
 import useAuth from "../hooks/useAuth";
-
+import { useSelector } from "react-redux";
 const PageContainer = styled.div`
   display: flex;
-  height: 100%;
   width: 100%;
+  
 `;
 
 
 
 const Settings = () => {
     const { preferences,user} = useAuth();
-   
+   const selectedBoard = useSelector((state) => state.board.selectedBoard);
 
 
     return (
         <PageContainer>
-            <SettingsBoard user={user} preferences={preferences}/>
+            <SettingsBoard user={user} board={selectedBoard} preferences={preferences}/>
         </PageContainer>
     )
 };

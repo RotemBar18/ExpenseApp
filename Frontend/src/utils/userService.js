@@ -22,6 +22,9 @@ export const fetchUser = async (userId, token) => {
   };
 
   export const updateUser = async (userId, updatedUserData, token) => {
+    if(!updatedUserData.ProfilePic ){
+      updatedUserData.ProfilePic = ''
+  }
     try {
       const response =  await axios.put(`${BASE_URL}/users/${userId}`,updatedUserData,
         {
@@ -42,3 +45,20 @@ export const fetchUser = async (userId, token) => {
       throw error;
     }
   };
+
+  export const fetchUsers = async (token) => {
+    try {
+      const response = await axios.get(`${BASE_URL}/users`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      return response.data;   
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      throw error;
+    }
+  };
+  

@@ -9,11 +9,8 @@ const ExpenseListContainer = styled.div`
   border-radius: 5px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
   overflow-x: hidden;
-  align-items: center;
-  justify-content: center;
   padding: 15px;
   width:50%;
-  height:100%;
 `;
 
 const ExpensesTable = styled.div`

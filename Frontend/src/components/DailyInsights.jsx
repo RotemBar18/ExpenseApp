@@ -91,12 +91,17 @@ const TotalAmount = styled.div`
 
 const DailyInsights = ({ expenses }) => {
   const today = new Date();
-  const currentDateString = today.toISOString().split("T")[0]; // Format YYYY-MM-DD
+  
+  // Format the current date using local timezone
+  const currentDateString = today.toLocaleDateString('en-CA'); // Format: YYYY-MM-DD
 
+
+  // Filter today's expenses
   const todaysExpenses = expenses.filter((expense) => {
-    const expenseDate = new Date(expense.Date);
-    return expenseDate.toISOString().split("T")[0] === currentDateString; // Compare dates
+    const expenseDate = new Date(expense.Date).toLocaleDateString('en-CA'); // Format the expense date as YYYY-MM-DD
+    return expenseDate === currentDateString; // Compare date parts
   });
+
 
   const totalAmount = todaysExpenses.reduce((total, expense) => total + parseFloat(expense.Amount), 0);
 
@@ -121,5 +126,8 @@ const DailyInsights = ({ expenses }) => {
     </InsightsContainer>
   );
 };
+
+
+
 
 export default DailyInsights;

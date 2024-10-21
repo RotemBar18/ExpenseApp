@@ -10,7 +10,7 @@ const AddExpenseContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-padding:10px;
+  padding:10px;
 `;
 
 const Form = styled.form`
@@ -87,7 +87,7 @@ const CloseButton = styled(ButtonBase)`
 
 
 
-const AddExpense = ({ categories, userId, onAdd, onClose }) => {
+const AddExpense = ({ boardId,categories, userId, onAdd, onClose }) => {
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
   const [description, setDescription] = useState('');
@@ -102,7 +102,8 @@ const AddExpense = ({ categories, userId, onAdd, onClose }) => {
       Amount: amount,
       Category: category,
       Description: description,
-      UserId: userId
+      UserId: userId,
+      ExpenseBoardId: boardId
     };
 
     try {

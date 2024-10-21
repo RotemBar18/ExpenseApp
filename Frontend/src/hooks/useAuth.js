@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserData } from '../redux/actions/userActions';
-import { fetchUserPreferences } from '../redux/actions/preferenceAction';
 import { getUserIdFromToken } from '../utils/jwtService';
 
 const useAuth = () => {
@@ -21,10 +20,9 @@ const useAuth = () => {
       token &&
       userId &&
       (preferences.loading ||
-       !preferences.DefaultCategories || 
-       (Array.isArray(preferences.DefaultCategories) && preferences.DefaultCategories.length === 0)) 
+        !preferences.DefaultCategories ||
+        (Array.isArray(preferences.DefaultCategories) && preferences.DefaultCategories.length === 0))
     ) {
-      dispatch(fetchUserPreferences(userId, token));
     }
   }, [dispatch, token, userId, user.Id, preferences.DefaultCategories]);
 

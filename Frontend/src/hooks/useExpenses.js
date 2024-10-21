@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
-import { fetchExpenses, deleteExpenseById, updateExpenseById } from '../utils/expenseService';
+import { fetchExpensesForBoard, deleteExpenseById, updateExpenseById } from '../utils/expenseService';
 
-const useExpenses = (userId) => {
+const useExpenses = ({boardId,userId}) => {
     const [expenses, setExpenses] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     const loadExpenses = async () => {
+        if (!boardId) return; 
+
         setLoading(true);
         const token = localStorage.getItem('token');
         try {
-            const expenseData = await fetchExpenses(token, userId);
+            const expenseData = await fetchExpensesForBoard(token,boardId);
             setExpenses(expenseData);
         } catch (error) {
             setError(error);

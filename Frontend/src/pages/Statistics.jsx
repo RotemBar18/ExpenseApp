@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import StatsBoard from '../components/StatsBoard';
 import useAuth from '../hooks/useAuth';
 import useExpenses from '../hooks/useExpenses';
+import { useSelector } from 'react-redux';
 
 const PageContainer = styled.div`
   display: flex;
@@ -36,15 +37,19 @@ background-color: ${(props) => props.theme.background};
 
 
 const Statistics = () => {
-    const { user, preferences, userId } = useAuth();
-    const { expenses } = useExpenses(userId);
+  const { userId } = useAuth();
+  const board = useSelector((state) => state.board.selectedBoard); // Get selected board from Redux
+
+  const { expenses, updateExpense, deleteExpense, reloadExpenses } = useExpenses({
+    boardId: board?.ExpenseBoardId, 
+    userId
+  });
 
 
-
-    return (
-        <PageContainer>
-            <StatsBoard expenses={expenses} />
-        </PageContainer>
-    );
+  return (
+    <PageContainer>
+      <StatsBoard expenses={expenses} />
+    </PageContainer>
+  );
 };
 export default Statistics;

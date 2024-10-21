@@ -30,10 +30,8 @@ const verifyToken = (req, res, next) => {
 router.get('/:userId', verifyToken, async (req, res) => {
     try {
         const userId = req.userId;
-        console.log('Fetching reports for userId:', userId);
 
         const [reports] = await req.db.query('SELECT * FROM reports WHERE UserId = ?', [userId]);
-        console.log('Fetched reports:', reports);
 
         if (reports.length === 0) {
             return res.status(404).json({ message: 'No reports found' });
@@ -68,7 +66,6 @@ router.post('/:userId', verifyToken, async (req, res) => {
     try {
         const userId = req.userId;
         const { name, categories, months, years, reportData, createdAt } = req.body;
-        console.log('Creating report with:', { userId, name, categories, months, years, reportData, createdAt });
 
         const query = `
             INSERT INTO reports (UserId, ReportName, Categories, Months, Years, CreatedAt, ReportData) 
@@ -88,7 +85,6 @@ router.post('/:userId', verifyToken, async (req, res) => {
 
         const [newReport] = await req.db.query('SELECT * FROM reports WHERE ReportId = ?', [newReportId]);
 
-        console.log('Report created successfully');
         res.status(201).json({ report: newReport[0] });
     } catch (error) {
         console.error('Error creating report:', error);
@@ -102,7 +98,6 @@ router.put('/:userId/:reportId', verifyToken, async (req, res) => {
         const userId = req.userId;
         const { reportId } = req.params;
         const { name, categories, months, years, expenses } = req.body;
-        console.log('Updating report with:', { userId, reportId, name, categories, months, years, expenses });
 
         const query = `
             UPDATE reports 
@@ -120,7 +115,6 @@ router.put('/:userId/:reportId', verifyToken, async (req, res) => {
             reportId,
         ]);
 
-        console.log('Report updated successfully');
         res.status(200).json({ message: 'Report updated successfully' });
     } catch (error) {
         console.error('Error updating report:', error);
@@ -132,11 +126,9 @@ router.delete('/:userId/:reportId', verifyToken, async (req, res) => {
     try {
         const userId = req.userId;
         const { reportId } = req.params;
-        console.log('Deleting report:', { userId, reportId });
 
         await req.db.query('DELETE FROM reports WHERE UserId = ? AND ReportId = ?', [userId, reportId]);
 
-        console.log('Report deleted successfully');
         res.status(200).json({ message: 'Report deleted successfully' });
     } catch (error) {
         console.error('Error deleting report:', error);

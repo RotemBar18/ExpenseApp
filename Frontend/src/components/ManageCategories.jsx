@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import useAuth from '../hooks/useAuth';
+import { useSelector } from 'react-redux';
 
 const ManageCategoriesContainer = styled.div`
   border-radius: 10px;
@@ -94,7 +94,7 @@ const AddButton = styled(Button)`
 const ManageCategories = ({ onUpdatePreferences }) => {
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState('');
-  const { preferences } = useAuth();
+  const preferences = useSelector((state) => state.preferences);
 
   useEffect(() => {
     setCategories(

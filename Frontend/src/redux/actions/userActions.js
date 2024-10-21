@@ -4,19 +4,18 @@ export const fetchUserData = (userId, token) => async (dispatch) => {
   dispatch({ type: 'LOADING' });
 
   try {
-    const userData = await fetchUser(userId, token); 
+    const userData = await fetchUser(userId, token);
     dispatch({ type: 'SET_USER_DATA', payload: userData });
   } catch (error) {
-    console.error("Error in fetchUserData:", error); 
+    console.error("Error in fetchUserData:", error);
     dispatch({ type: 'SET_USER_ERROR', payload: error.message });
   }
 };
 
 export const updateUserProfile = (userId, token, updatedUserData) => async (dispatch) => {
   dispatch({ type: 'LOADING' });
-
   try {
-    const updatedUser = await updateUser(userId, updatedUserData, token);  // Use the service function
+    const updatedUser = await updateUser(userId, updatedUserData, token);
     if (updatedUser) {
       dispatch({ type: 'UPDATE_USER_SUCCESS', payload: updatedUser });
     } else {
