@@ -107,11 +107,11 @@ const ExpenseBreakdown = ({ expenses, onFilterChange }) => {
 
     if (timeRange === "This Week") {
       filterStartDate = new Date();
-      filterStartDate.setDate(today.getDate() - 7); // Last 7 days
+      filterStartDate.setDate(today.getDate() - 7);
       filterEndDate = today;
     } else if (timeRange === "This Month") {
-      filterStartDate = new Date(today.getFullYear(), today.getMonth(), 1); // Start of the month
-      filterEndDate = new Date(today.getFullYear(), today.getMonth() + 1, 0); // End of the month
+      filterStartDate = new Date(today.getFullYear(), today.getMonth(), 1);
+      filterEndDate = new Date(today.getFullYear(), today.getMonth() + 1, 0); 
     }
 
     const filteredExpenses = expenses.filter((expense) => {
@@ -131,7 +131,7 @@ const ExpenseBreakdown = ({ expenses, onFilterChange }) => {
         Amount: grouped[category],
       }));
     
-      onFilterChange(groupedArray, timeRange);  // Pass grouped data as an array
+      onFilterChange(groupedArray, timeRange); 
     }
     
 

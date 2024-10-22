@@ -3,7 +3,6 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const { jwtSecret } = require('../config/config.js');
 
-// Middleware to verify JWT token
 const verifyToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
 
@@ -28,7 +27,6 @@ const verifyToken = (req, res, next) => {
     });
 };
 
-// POST route to add a board member
 router.post('/', verifyToken, async (req, res) => {
     const { userId, boardId } = req.body;
     try {
@@ -42,7 +40,6 @@ router.post('/', verifyToken, async (req, res) => {
     }
 });
 
-// DELETE route to remove a board member
 router.delete('/', async (req, res) => {
     const { userId, boardId } = req.query;
     try {
@@ -60,7 +57,6 @@ router.delete('/', async (req, res) => {
     }
 });
 
-// GET route to fetch all board members for a specific board
 router.get('/:boardId', verifyToken, async (req, res) => {
     const { boardId } = req.params;
 

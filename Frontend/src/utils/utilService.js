@@ -33,8 +33,8 @@ export const alterCategoriesToArray = (data) => {
 
 export const getSuffix = (day) => {
     const suffixes = ["th", "st", "nd", "rd"];
-    const value = day % 100; // Get the last two digits
-    return suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0]; // Determine suffix
+    const value = day % 100;
+    return suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0];
   };
   
 

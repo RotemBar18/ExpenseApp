@@ -92,14 +92,12 @@ const TotalAmount = styled.div`
 const DailyInsights = ({ expenses }) => {
   const today = new Date();
   
-  // Format the current date using local timezone
-  const currentDateString = today.toLocaleDateString('en-CA'); // Format: YYYY-MM-DD
+  const currentDateString = today.toLocaleDateString('en-CA'); 
 
 
-  // Filter today's expenses
   const todaysExpenses = expenses.filter((expense) => {
-    const expenseDate = new Date(expense.Date).toLocaleDateString('en-CA'); // Format the expense date as YYYY-MM-DD
-    return expenseDate === currentDateString; // Compare date parts
+    const expenseDate = new Date(expense.Date).toLocaleDateString('en-CA');
+    return expenseDate === currentDateString; 
   });
 
 

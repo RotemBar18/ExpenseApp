@@ -38,8 +38,7 @@ background-color: ${(props) => props.theme.background};
 
 const Statistics = () => {
   const { userId } = useAuth();
-  const board = useSelector((state) => state.board.selectedBoard); // Get selected board from Redux
-
+  const board = useSelector((state) => state.board.selectedBoard); 
   const { expenses, updateExpense, deleteExpense, reloadExpenses } = useExpenses({
     boardId: board?.ExpenseBoardId, 
     userId

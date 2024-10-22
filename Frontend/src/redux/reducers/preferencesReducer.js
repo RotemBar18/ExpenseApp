@@ -1,17 +1,15 @@
 const initialState = {
-  ExpensesThemeColor: 'Light', // Default theme color
-  DefaultCategories: ['Food', 'Health', 'Entertainment', 'Miscellaneous'], // Default categories
+  ExpensesThemeColor: 'Light', 
+  DefaultCategories: ['Food', 'Health', 'Entertainment', 'Miscellaneous'], 
   loading: true,
   error: null,
 };
 
-// Helper function to load preferences from localStorage
 const loadPreferencesFromLocalStorage = () => {
   const storedPreferences = localStorage.getItem('preferences');
   return storedPreferences ? JSON.parse(storedPreferences) : initialState;
 };
 
-// Helper function to store preferences in localStorage
 const savePreferencesToLocalStorage = (preferences) => {
   localStorage.setItem('preferences', JSON.stringify(preferences));
 };
@@ -27,11 +25,11 @@ const preferencesReducer = (state = loadPreferencesFromLocalStorage(), action) =
 
     case 'SET_PREFERENCES_DATA':
       const updatedState = { ...state, ...action.payload, loading: false };
-      savePreferencesToLocalStorage(updatedState); // Save updated preferences to localStorage
+      savePreferencesToLocalStorage(updatedState);
       return updatedState;
 
     case 'CLEAR_PREFERENCES':
-      localStorage.removeItem('preferences'); // Clear preferences from localStorage
+      localStorage.removeItem('preferences');
       return {
         ...initialState,
       };

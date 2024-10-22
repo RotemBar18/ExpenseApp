@@ -4,18 +4,14 @@ export const fetchBoardPreferences = (boardId, token) => async (dispatch) => {
   dispatch({ type: 'LOADING_PREFERENCES' });
 
   try {
-    // Check if preferences are already in localStorage
     const storedPreferences = localStorage.getItem(`boardPreferences_${boardId}`);
     
     if (storedPreferences) {
-      // Rehydrate from localStorage
       const preferencesData = JSON.parse(storedPreferences);
       dispatch({ type: 'SET_PREFERENCES_DATA', payload: preferencesData });
     } else {
-      // Fetch from the API if not found in localStorage
       const preferencesData = await fetchPreferences(boardId, token);
 
-      // Clean and format categories
       if (Array.isArray(preferencesData.DefaultCategories)) {
         let cleanedCategories = preferencesData.DefaultCategories.map(categoryString => {
           let cleanedCategory = categoryString.replace(/^\[|\]$/g, '').replace(/['"]+/g, '');

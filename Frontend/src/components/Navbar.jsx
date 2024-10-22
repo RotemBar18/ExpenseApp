@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { Home, DollarSign, BarChart2, FileText, Settings } from 'lucide-react';
+import { Home, DollarSign, BarChart2, FileText, Settings ,ArrowLeft  } from 'lucide-react';
 import useAuth from '../hooks/useAuth';
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { clearPreferences } from '../redux/actions/preferenceAction';
+import { clearBoard } from '../redux/actions/boardActions';
 const NavContainer = styled.nav`
-  background-color: ${props => props.theme.navBarBackground};
+  background-color: ${props => props.board ? props.theme.navBarBackground : '#333'}; /* Default color for board selection */
   width: ${props => props.isOpen ? '200px' : '60px'};
   display: flex;
   flex-direction: column;
@@ -24,7 +25,7 @@ const NavContainer = styled.nav`
 `;
 
 const Logo = styled.div`
-  color: ${props => props.theme.navBarTextColor};
+  color: ${props => props.board ? props.theme.navBarTextColor : '#fff'}; /* Fallback to white if no theme */
   font-size: 1.5rem;
   margin-bottom: 2rem;
   white-space: nowrap;
@@ -39,7 +40,7 @@ const NavItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: ${props => props.isOpen ? 'flex-start' : 'center'};
-  color: ${props => props.theme.navBarTextColor};
+  color: ${props => props.board ? props.theme.navBarTextColor : '#fff'}; /* Fallback to white if no theme */
   padding: 0.75rem;
   margin-bottom: 0.5rem;
   cursor: pointer;
@@ -47,7 +48,7 @@ const NavItem = styled.div`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${props => props.theme.buttonHoverBackground};
+    background-color: ${props => props.board ? props.theme.buttonHoverBackground : '#444'}; /* Fallback hover color */
   }
 
   svg {
@@ -59,6 +60,27 @@ const NavItem = styled.div`
   }
 `;
 
+const Profile = styled.div`
+display:flex;
+height:100px;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Image = styled.img`
+  width: ${props => props.isOpen ? '60px' : '20px'};
+  height: ${props => props.isOpen ? '60px' : '20px'};
+  border-radius: 50%;
+  border: 2px solid ${props => props.board ? props.theme.navBarTextColor : '#00A86B'}; /* Add default border if no theme */
+`;
+
+const Name = styled.span`
+  transform: ${props => props.isOpen ? 'rotate(0deg)  translateY(0px)' : 'rotate(90deg) translateX(20px)'};
+  color: ${props => props.board ? props.theme.navBarTextColor : '#fff'}; /* Fallback to white if no theme */
+  font-size: 0.9rem;
+ 
+`;
+
 const NavText = styled.span`
   white-space: nowrap;
   opacity: ${props => props.isOpen ? 1 : 0};
@@ -66,31 +88,11 @@ const NavText = styled.span`
   display: ${props => props.isOpen ? 'inline' : 'none'};
 `;
 
-const Profile = styled.div`
-  display: ${props => props.isOpen ? 'flex' : 'none'};
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 2rem;
-`;
-
-const Image = styled.img`
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  margin-bottom: 0.5rem;
-`;
-
-const Name = styled.span`
-  color: ${props => props.theme.navBarTextColor};
-  font-size: 0.9rem;
-  white-space: nowrap;
-`;
-
-
 const Navbar = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(window.innerWidth > 764);
   const { user } = useAuth();
+  const dispatch = useDispatch();
   const board = useSelector((state) => state.board.selectedBoard);
 
   useEffect(() => {
@@ -109,12 +111,18 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleBackClick = () => {
+    dispatch(clearPreferences());  
+    dispatch(clearBoard());       
+  };
+
   const navItems = [
     { name: board ? board.Name : 'Board', icon: <Home size={24} />, path: '/main' },
     { name: 'Expenses', icon: <DollarSign size={24} />, path: '/expenses' },
     { name: 'Statistics', icon: <BarChart2 size={24} />, path: '/statistics' },
     { name: 'Reports', icon: <FileText size={24} />, path: '/reports' },
     { name: 'Settings', icon: <Settings size={24} />, path: '/settings' },
+    { name: 'Return', icon: <ArrowLeft size={24} />, path: '/main', func: handleBackClick },
   ];
 
   const altNavItems = [
@@ -123,36 +131,36 @@ const Navbar = () => {
   ];
 
   return (
-    <NavContainer isOpen={isOpen}>
-      <Logo onClick={toggleMenu}>{isOpen ? 'Expense Tracker' : 'ET'}</Logo>
+    <NavContainer isOpen={isOpen} board={board}>
+      <Logo onClick={toggleMenu}  board={board}> {isOpen ? 'Expense Tracker' : 'ET'}</Logo>
 
-      {/* Conditional Rendering Based on Whether a Board is Selected */}
       {board ? (
         <>
-          <Profile isOpen={isOpen}>
-            <Image src={board.ProfilePic || 'https://via.placeholder.com/50'} alt="Profile" />
-            <Name>{board.Name || 'Board'}</Name>
+          <Profile isOpen={isOpen} board={board}>
+            <Image isOpen={isOpen} src={board.ProfilePic || 'https://via.placeholder.com/50'} alt="Profile" board={board} />
+            <Name isOpen={isOpen} board={board}>{board.Name || 'Board'}</Name>
           </Profile>
           {navItems.map((item, index) => (
             <NavItem
               key={index}
               isOpen={isOpen}
+              board={board}
               onClick={() => {
                 navigate(item.path);
                 if (window.innerWidth <= 764) setIsOpen(false);
+                if (item.func) item.func();
               }}
             >
               {item.icon}
-              <NavText isOpen={isOpen}>{item.name}</NavText>
+              <NavText isOpen={isOpen} board={board}>{item.name}</NavText>
             </NavItem>
           ))}
         </>
       ) : (
-        // Render alternate content if no board is selected
         <>
           <Profile isOpen={isOpen}>
-            <Image src={user.ProfilePic || 'https://via.placeholder.com/50'} alt="Profile" />
-            <Name>{user.Name || 'Guest'}</Name>
+            <Image isOpen={isOpen} src={user.ProfilePic || 'https://via.placeholder.com/50'} alt="Profile" />
+            <Name isOpen={isOpen} >{user.Name || 'Guest'}</Name>
           </Profile>
           {altNavItems.map((item, index) => (
             <NavItem

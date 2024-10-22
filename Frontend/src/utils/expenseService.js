@@ -63,10 +63,9 @@ export const updateExpenseById = async (token, expense) => {
 
 export const totalMonthExpenses = (expenses) => {
   const today = new Date();
-  const currentMonth = today.getMonth(); // Get current month (0 = January, 11 = December)
-  const currentYear = today.getFullYear(); // Get current year
+  const currentMonth = today.getMonth(); 
+  const currentYear = today.getFullYear(); 
 
-  // Filter expenses that match the current month and year
   const monthlyExpenses = expenses.filter((expense) => {
     const expenseDate = new Date(expense.Date);
     return (
@@ -74,7 +73,7 @@ export const totalMonthExpenses = (expenses) => {
     );
   });
 
-  return monthlyExpenses; // Return the list of expenses for the current month
+  return monthlyExpenses; 
 };
 
 export const fetchExpensesForBoard = async (token, boardId) => {

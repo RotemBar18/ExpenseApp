@@ -1,7 +1,6 @@
-// boardReducer.js
 
 const initialState = {
-    selectedBoard: JSON.parse(localStorage.getItem('selectedBoard')) || null, // Load from localStorage
+    selectedBoard: JSON.parse(localStorage.getItem('selectedBoard')) || null, 
 };
 
 export default function boardReducer(state = initialState, action) {

@@ -15,7 +15,6 @@ export const filterCategories = (expenses, selectedMonths, selectedYears) => {
 };
 
 export const filterMonths = (expenses, selectedCategories, selectedYears, allMonths) => {
-    // Filter months based on selected categories and years
     const filteredMonths = allMonths.filter((month) =>
       expenses.some((expense) => {
         const expenseDate = new Date(expense.Date);

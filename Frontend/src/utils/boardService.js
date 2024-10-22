@@ -6,6 +6,8 @@ const BASE_URL = process.env.NODE_ENV === 'development'
     ? 'http://localhost:8081'
     : 'https://expenseapp-production.up.railway.app';
 
+
+
 export const fetchBoards = async (token, userId) => {
     try {
         const response = await axios.get(`${BASE_URL}/boards/${userId}`, {
@@ -64,6 +66,24 @@ export const updateBoard = async (boardId, updatedData, token) => {
 
     try {
         const response = await axios.put(`${BASE_URL}/boards/${boardId}`, updatedData, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.status === 200) {
+            throw new Error('Error updating board');
+        }
+        return response.data; 
+    } catch (error) {
+        console.error('Error updating board:', error);
+        throw error;
+    }
+};
+export const deleteBoard = async (boardId, token) => {
+    try {
+        const response = await axios.delete(`${BASE_URL}/boards/${boardId}`,  {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { updateUser } from '../utils/userService'; // Replace with user service
 import useAuth from '../hooks/useAuth';
 import { useDispatch } from 'react-redux';
-import { updateUserProfile } from '../redux/actions/userActions'; // Assuming you manage user state in Redux
+import { updateUserProfile } from '../redux/actions/userActions'; 
 
 const UserInfoContainer = styled.div`
   display: flex;
@@ -76,7 +75,7 @@ const ProfilePic = styled.img`
 `;
 
 const UserInfoSettings = () => {
-  const { user, token } = useAuth(); // Assuming useAuth returns user info and token
+  const { user, token } = useAuth(); 
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState({
     Name: false,
@@ -116,7 +115,7 @@ const UserInfoSettings = () => {
       reader.onloadend = () => {
         setUserInfo((prevState) => ({
           ...prevState,
-          ProfilePic: reader.result, // Convert image to base64
+          ProfilePic: reader.result, 
         }));
       };
       reader.readAsDataURL(file);

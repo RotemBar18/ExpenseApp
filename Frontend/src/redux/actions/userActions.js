@@ -1,4 +1,4 @@
-import { fetchUser, updateUser } from "../../utils/userService";  // Import the service functions
+import { fetchUser, updateUser } from "../../utils/userService";  
 
 export const fetchUserData = (userId, token) => async (dispatch) => {
   dispatch({ type: 'LOADING' });

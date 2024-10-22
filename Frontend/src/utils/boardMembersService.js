@@ -23,7 +23,7 @@ export const addBoardCollaborator = async (token, userId, boardId) => {
 };
 export const removeBoardCollaborator = async (token, userId, boardId) => {
     try {
-        (token, userId, boardId); // Ensure logging the right values
+        (token, userId, boardId); 
         const response = await axios.delete(
             `${BASE_URL}/boardmembers/`,
             {
@@ -31,7 +31,7 @@ export const removeBoardCollaborator = async (token, userId, boardId) => {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
-                params: { userId, boardId } // Pass as query params
+                params: { userId, boardId } 
             }
         );
         return response.data;
@@ -48,7 +48,7 @@ export const fetchCollaborators = async (token, boardId) => {
                 'Authorization': `Bearer ${token}`,
             },
         });
-        return response.data; // Assume the response gives the list of collaborators
+        return response.data; 
     } catch (error) {
         console.error('Error fetching collaborators:', error);
     }

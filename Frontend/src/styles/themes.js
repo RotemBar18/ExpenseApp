@@ -33,25 +33,25 @@ export const themes = {
     tagBackground: '#42a5f5',
     tagColor: '#FFFFFF',
   },
-  Dark: {
+   Dark : {
     name: 'Dark',
-    background: '#2f2f2f',
-    navBarBackground: '#474747',
-    navBarTextColor: '#f1f1f1',
-    buttonBackground: '#666666',
-    buttonTextColor: '#ffffff',
-    buttonHoverBackground: '#777777',
-    buttonHoverTextColor: '#222222',
-    inputBackground: '#424242',
-    inputTextColor: '#e4e6eb',
-    inputBorderColor: '#666666',
-    headerBackground: '#474747',
-    headerTextColor: '#f1f1f1',
-    modalBackground: '#3a3a3a',
-    modalTextColor: '#d3d3d3',
-    border: '#777777',
-    scrollBarThumb: '#888888',
-    scrollBarTrack: '#474747',
+    background: '#1a1a1a',  // Matches BoardContainer background
+    navBarBackground: '#2a2a2a',  // Slightly darker for the nav bar
+    navBarTextColor: '#f1f1f1',  // White for clarity
+    buttonBackground: '#00A86B',  // Matches the green CreateBoardButton
+    buttonTextColor: '#ffffff',  // White text
+    buttonHoverBackground: '#008080',  // Matches CreateBoardButton hover state
+    buttonHoverTextColor: '#ffffff',  // White text on hover
+    inputBackground: '#2a2a2a',  // Matches Input field background
+    inputTextColor: '#ffffff',  // White input text for contrast
+    inputBorderColor: '#00A86B',  // Matches focus state of Input field
+    headerBackground: '#1a1a1a',  // Matches BoardContainer background for header
+    headerTextColor: '#f1f1f1',  // White for text contrast
+    modalBackground: '#3a3a3a',  // Matches BoardItem hover background
+    modalTextColor: '#d3d3d3',  // Light grey text for modals
+    border: '#777777',  // A general border color
+    scrollBarThumb: '#888888',  // Medium grey for scrollbar thumb
+    scrollBarTrack: '#474747',  // Dark grey for the track
     chartColors: [
       '#FF6347',  // Tomato
       '#1E90FF',  // Dodger Blue
@@ -63,10 +63,10 @@ export const themes = {
       '#DA70D6',  // Orchid
       '#20B2AA',  // Light Sea Green
       '#FF4500'   // Orange Red
-   ],   
-    tagBackground:'#42a5f5',
-    tagColor:'#FFFFFF',
-},
+    ],   
+    tagBackground: '#42a5f5',  // Blue for tag background
+    tagColor: '#FFFFFF',  // White text for tags
+  },
 
   Green: {
     name: 'Green',

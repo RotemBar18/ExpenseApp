@@ -8,8 +8,10 @@ const useBoards = (userId) => {
 
   const fetchAllBoards = async () => {
     setLoading(true);
+
     const token = localStorage.getItem('token');
     try {
+      
       const data = await fetchBoards(token, userId);
       setBoards(data);
     } catch (err) {
@@ -39,7 +41,7 @@ const useBoards = (userId) => {
 
   const updateBoard = async (boardId, updatedData) => {
     try {
-      const updatedBoard = await updateBoardService(boardId, updatedData); // Call the update service
+      const updatedBoard = await updateBoardService(boardId, updatedData); 
       setBoards((prevBoards) =>
         prevBoards.map((board) =>
           board.ExpenseBoardId === boardId ? updatedBoard : board

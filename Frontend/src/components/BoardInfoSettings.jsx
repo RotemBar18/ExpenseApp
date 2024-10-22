@@ -4,7 +4,7 @@ import { updateBoard } from '../utils/boardService';
 import { useDispatch } from 'react-redux';
 import { selectBoard } from '../redux/actions/boardActions';
 import useAuth from '../hooks/useAuth';
-import CollaboratorManager from './ManageCollaborators'; // Import the new component
+import BoardCollaborators from './BoardCollaborators';
 
 const BoardInfoContainer = styled.div`
   display: flex;
@@ -117,7 +117,7 @@ const BoardInfoSettings = ({ user, board }) => {
       reader.onloadend = () => {
         setBoardInfo((prevState) => ({
           ...prevState,
-          ProfilePic: reader.result, // Update state with base64 image
+          ProfilePic: reader.result, 
         }));
       };
       reader.readAsDataURL(file);
@@ -197,7 +197,7 @@ const BoardInfoSettings = ({ user, board }) => {
         </SectionValue>
       </Section>
 
-      <CollaboratorManager board={board} user={user} />
+      <BoardCollaborators board={board}  />
     </BoardInfoContainer>
   );
 };

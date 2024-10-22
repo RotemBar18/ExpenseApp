@@ -3,11 +3,8 @@ import styled from 'styled-components';
 import AddExpense from './AddExpense';
 import GeneralDataBoard from './GeneralDataBoard';
 import RecentExpenses from './RecentExpenses';
-import BreakdownChart from '../charts/BreakdownChart'; // Assuming this is the component for the chart
-import useExpenses from '../hooks/useExpenses'; // Hook to fetch expenses
-import { clearBoard } from '../redux/actions/boardActions'; // Import actions
-import { useDispatch } from 'react-redux';
-import { clearPreferences } from '../redux/actions/preferenceAction'; // Clear preferences
+import BreakdownChart from '../charts/BreakdownChart'; 
+import useExpenses from '../hooks/useExpenses'; 
 
 const MainBoardContainer = styled.div`
   display: flex;
@@ -61,15 +58,14 @@ const BackButton = styled.button`
   }
 `;
 
-export default function MainBoard({ handleBackToBoards, board, categories, expensesThemeColor, userId }) {
-  const dispatch = useDispatch();
-  const [showAddExpense, setShowAddExpense] = useState(false); // Toggle AddExpense modal visibility
-  const [filteredExpenses, setFilteredExpenses] = useState([]); // State for filtered expenses
-  const [selectedRange, setSelectedRange] = useState("This Week"); // State for selected range (weekly/monthly)
-  const { expenses, reloadExpenses, updateExpense } = useExpenses({ boardId: board.ExpenseBoardId, userId }); // Fetch expenses for the selected board
+export default function MainBoard({ board, categories, expensesThemeColor, userId }) {
+  const [showAddExpense, setShowAddExpense] = useState(false); 
+  const [filteredExpenses, setFilteredExpenses] = useState([]);
+  const [selectedRange, setSelectedRange] = useState("This Week");
+  const { expenses, reloadExpenses, updateExpense } = useExpenses({ boardId: board.ExpenseBoardId, userId }); 
 
   useEffect(() => {
-    reloadExpenses(); // Fetch expenses when the board changes
+    reloadExpenses(); 
   }, [board.ExpenseBoardId]);
 
   const handleUpdateExpense = (expense) => {
@@ -90,24 +86,18 @@ export default function MainBoard({ handleBackToBoards, board, categories, expen
     setSelectedRange(newSelectedRange);
   };
 
-  // When the user clicks "Back to Board Selection"
-  const handleBackClick = () => {
-    dispatch(clearPreferences());  // Clear preferences from Redux
-    dispatch(clearBoard());        // Clear board selection from Redux
-  };
+
 
   return (
     <MainBoardContainer>
       <Header>
-        <BackButton onClick={handleBackClick}>Back to Board Selection</BackButton>
-
         {showAddExpense ? (
           <AddExpense
             onAdd={handleAddExpense}
             categories={categories}
             expensesThemeColor={expensesThemeColor}
             userId={userId}
-            onClose={() => setShowAddExpense(false)} // Close the modal
+            onClose={() => setShowAddExpense(false)} 
             onExpenseAdded={reloadExpenses}
             boardId={board.ExpenseBoardId}
           />

@@ -1,9 +1,8 @@
-// MonthlyInsights.jsx
 
 import React from "react";
 import styled from "styled-components";
-import { totalMonthExpenses } from "../utils/expenseService"; // Assuming this filters the expenses
-import MonthlyInsightsChart from "../charts/MonthlyInsightsChart"; // Import the chart component
+import { totalMonthExpenses } from "../utils/expenseService"; 
+import MonthlyInsightsChart from "../charts/MonthlyInsightsChart"; 
 
 const InsightsContainer = styled.div`
 display:flex;

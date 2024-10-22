@@ -132,7 +132,6 @@ const CreateReportModal = ({ onClose }) => {
   const [filteredMonths, setFilteredMonths] = useState([]);
   const [filteredYears, setFilteredYears] = useState([]);
 
-  // List of months for the dropdown options
   const monthOptions = [
     { value: 'January', label: 'January' },
     { value: 'February', label: 'February' },
@@ -148,13 +147,11 @@ const CreateReportModal = ({ onClose }) => {
     { value: 'December', label: 'December' },
   ];
 
-  // Convert filtered categories to dropdown options
   const categoryOptions = filteredCategories.map((category) => ({
     value: category,
     label: category,
   }));
 
-  // Consolidated filtering options based on current selections
   const filterOptions = () => {
     const categories = filterCategories(expenses, selectedMonths.map((m) => m.value), selectedYears);
     setFilteredCategories(categories);

@@ -1,7 +1,6 @@
-// src/components/Layout.jsx
 import React from 'react';
-import Navbar from './Navbar'; // Adjust the import path as necessary
-import { Outlet } from 'react-router-dom'; // Import Outlet from React Router
+import Navbar from './Navbar'; 
+import { Outlet } from 'react-router-dom'; 
 import styled from 'styled-components';
 
 const LayoutContainer = styled.div`
