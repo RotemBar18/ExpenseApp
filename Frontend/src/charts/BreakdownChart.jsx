@@ -22,15 +22,15 @@ left:20px;
 `;
 
 const BreakdownChart = ({ filteredExpenses, selectedRange }) => {
-  const theme = useTheme(); // Access the current theme
+  const theme = useTheme(); 
   
 
   const expenseArray = Array.isArray(filteredExpenses) ? filteredExpenses : [];
 
   const chartData = expenseArray.map((expense, index) => ({
-    id: expense.Category || `category-${index}`,  // Unique id for each expense
-    label: expense.Category || `category-${index}`, // Fallback if no Category
-    value: parseFloat(expense.Amount),   // Parsing the amount as a number
+    id: expense.Category || `category-${index}`, 
+    label: expense.Category || `category-${index}`,
+    value: parseFloat(expense.Amount),  
   }));
 
 
@@ -43,11 +43,11 @@ const BreakdownChart = ({ filteredExpenses, selectedRange }) => {
       <Title>{selectedRange}</Title>
       <ResponsivePie
         data={chartData}
-        margin={{ top: 10, right: -100, bottom: 10, left: 0 }} // Adjust margin for the legend
+        margin={{ top: 10, right: -100, bottom: 10, left: 0 }}
         innerRadius={0.4}
         padAngle={1.5}
         cornerRadius={2}
-        colors={theme.chartColors}  // Apply the theme's chart colors
+        colors={theme.chartColors}  
         borderWidth={1}
         borderColor={{ from: 'color', modifiers: [['darker', 0.3]] }}
         enableArcLinkLabels={false}
@@ -63,7 +63,7 @@ const BreakdownChart = ({ filteredExpenses, selectedRange }) => {
         }}
         legends={[
           {
-            anchor: 'right',  // Place the legend on the right side
+            anchor: 'right',  
             direction: 'column',
             justify: false,
             translateX: -455,
@@ -71,7 +71,7 @@ const BreakdownChart = ({ filteredExpenses, selectedRange }) => {
             itemsSpacing: 2,
             itemWidth: 100,
             itemHeight: 18,
-            itemTextColor: theme.headerTextColor, // Use the theme's text color
+            itemTextColor: theme.headerTextColor, 
             itemDirection: 'left-to-right',
             itemOpacity: 1,
             symbolSize: 18,

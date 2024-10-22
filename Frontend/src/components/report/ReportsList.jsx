@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserReports, deleteExistingReport } from '../redux/actions/reportsActions';
-import useAuth from '../hooks/useAuth';
+import { fetchUserReports, deleteExistingReport } from '../../redux/actions/reportsActions';
+import useAuth from '../../hooks/useAuth';
 import Report from './Report';
 
 const ReportsContainer = styled.div`

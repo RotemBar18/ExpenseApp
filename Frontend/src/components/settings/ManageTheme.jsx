@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { updateBoardPreferences } from '../redux/actions/preferenceAction';
-import { themes } from '../styles/themes';
-import useAuth from '../hooks/useAuth';
+import { updateBoardPreferences } from '../../redux/actions/preferenceAction';
+import { themes } from '../../styles/themes';
+import useAuth from '../../hooks/useAuth';
 import { useSelector } from 'react-redux';
 const ManageThemeContainer = styled.div`
   display: flex;

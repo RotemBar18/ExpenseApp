@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import AddExpense from './AddExpense';
-import GeneralDataBoard from './GeneralDataBoard';
-import RecentExpenses from './RecentExpenses';
-import BreakdownChart from '../charts/BreakdownChart'; 
-import useExpenses from '../hooks/useExpenses'; 
+import AddExpense from '../expense/AddExpense';
+import GeneralDataBoard from '../board/GeneralDataBoard';
+import RecentExpenses from '../board/RecentExpenses';
+import BreakdownChart from '../../charts/BreakdownChart'; 
+import useExpenses from '../../hooks/useExpenses'; 
 
 const MainBoardContainer = styled.div`
   display: flex;

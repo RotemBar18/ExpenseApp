@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { fetchCollaborators, removeBoardCollaborator } from '../utils/boardMembersService'; 
-import { deleteBoard } from '../utils/boardService'; 
-import useAuth from '../hooks/useAuth';
+import { fetchCollaborators, removeBoardCollaborator } from '../../utils/boardMembersService'; 
+import { deleteBoard } from '../../utils/boardService'; 
+import useAuth from '../../hooks/useAuth';
 import AddCollaborator from './AddCollaborator';
 import CollaboratorCard from './CollaboratorCard';
 import { useSelector } from 'react-redux';

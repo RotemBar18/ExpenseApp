@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Signup from '../components/signup';
+import Signup from '../components/mainBoards/signup';
 import React from 'react';
 import LogoBg from '../components/assets/logo1.jpg'
 

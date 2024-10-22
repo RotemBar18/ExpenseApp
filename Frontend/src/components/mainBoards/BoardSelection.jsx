@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { selectBoard } from '../redux/actions/boardActions';
-import { fetchBoardPreferences } from '../redux/actions/preferenceAction';
-import { createBoard } from '../utils/boardService';
+import { selectBoard } from '../../redux/actions/boardActions';
+import { fetchBoardPreferences } from '../../redux/actions/preferenceAction';
+import { createBoard } from '../../utils/boardService';
 import { Plus, X, ChevronRight } from 'lucide-react';
-import BoardCollaborators from './BoardCollaborators';
+import BoardCollaborators from '../collaborator/BoardCollaborators';
 
 const BoardContainer = styled.div`
   background: #1a1a1a;

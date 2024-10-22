@@ -27,7 +27,6 @@ const verifyToken = (req, res, next) => {
     });
 };
 
-// Fetch all expenses for a specific board
 router.get('/:boardId', async (req, res) => {
     try {
         const { boardId } = req.params;
@@ -40,21 +39,19 @@ router.get('/:boardId', async (req, res) => {
 });
 
 
-// Add a new expense
 router.post('/', async (req, res) => {
     const { Amount: amount, Description: description, Category: category, Name: name, UserId: userId, ExpenseBoardId: ExpenseBoardId } = req.body;
 
-    // Function to get today's date in 'YYYY-MM-DD' format
     const getTodayDate = () => {
         const today = new Date();
         const year = today.getFullYear();
-        const month = String(today.getMonth() + 1).padStart(2, '0');  // Month is zero-based, so add 1
-        const day = String(today.getDate()).padStart(2, '0');         // Day of the month
+        const month = String(today.getMonth() + 1).padStart(2, '0');  
+        const day = String(today.getDate()).padStart(2, '0');         
 
-        return `${year}-${month}-${day}`;  // Return date as 'YYYY-MM-DD'
+        return `${year}-${month}-${day}`;  
     };
 
-    const formattedDate = getTodayDate();  // Get today's date
+    const formattedDate = getTodayDate(); 
     
     try {
         const result = await req.db.query(
@@ -71,7 +68,6 @@ router.post('/', async (req, res) => {
 
 
 
-// Update an existing expense
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
     const { Name, Amount, Description, Category, Date, IsVisible } = req.body;
@@ -93,7 +89,6 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// Soft-delete an expense
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
     try {

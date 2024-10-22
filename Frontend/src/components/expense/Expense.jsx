@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import deleteIconWhite from "./assets/deleteWhite.png";
-import deleteIconBlack from "./assets/deleteBlack.png";
+import deleteIconWhite from "../assets/deleteWhite.png";
+import deleteIconBlack from "../assets/deleteBlack.png";
 import React from 'react';
 import { useState } from 'react';
 import ExpenseModal from './ExpenseModal'
-import { formatToLocalDatePresent } from '../utils/utilService';
+import { formatToLocalDatePresent } from '../../utils/utilService';
 
 const ExpenseContainer = styled.div`
 `

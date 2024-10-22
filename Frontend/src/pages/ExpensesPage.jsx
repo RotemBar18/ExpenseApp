@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ExpenseList from "../components/ExpenseList";
+import ExpenseList from "../components/mainBoards/ExpenseList";
 import useExpenses from '../hooks/useExpenses';
 import styled from "styled-components";
 import useAuth from '../hooks/useAuth';  

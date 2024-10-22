@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import user_icon from "./assets/username.png";
-import password_icon from "./assets/password.png";
-import email_icon from "./assets/email.png";
+import user_icon from "../assets/username.png";
+import password_icon from "../assets/password.png";
+import email_icon from "../assets/email.png";
 import { useNavigate } from "react-router-dom";
-import { handleAuthSubmit } from '../utils/authHandlers'; 
+import { handleAuthSubmit } from '../../utils/authHandlers'; 
 import { useDispatch } from "react-redux"; 
 
 const PageContainer = styled.div`

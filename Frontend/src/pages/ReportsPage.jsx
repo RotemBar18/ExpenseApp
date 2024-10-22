@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import ReportsBoard from '../components/ReportsBoard'
+import ReportsBoard from '../components/mainBoards/ReportsBoard'
 const PageContainer = styled.div`
   width: 100%;
   height: 100%;

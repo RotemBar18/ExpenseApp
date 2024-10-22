@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import Expense from './Expense';
+import Expense from '../expense/Expense';
 import { useState, useEffect } from 'react';
-import { filterAndSortExpenses } from '../utils/sortAndFilterService';
-import FilterModal from './FilterExpensesModal';
+import { filterAndSortExpenses } from '../../utils/sortAndFilterService';
+import FilterModal from '../expense//FilterExpensesModal';
 
 const Boardcontainer = styled.div`
   display: flex;

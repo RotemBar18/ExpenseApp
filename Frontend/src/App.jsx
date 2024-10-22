@@ -11,7 +11,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import ThemeProviderWrapper from './components/ThemeProviderWrapper';
-import Layout from './components/Layout'; 
+import Layout from './components/mainBoards/Layout'; 
 
 const GlobalStyle = createGlobalStyle`
   @font-face {

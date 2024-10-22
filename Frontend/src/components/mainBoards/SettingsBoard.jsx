@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled, { useTheme } from 'styled-components';  
-import BoardInfoSettings from './BoardInfoSettings';  
-import LoginAndSecuritySettings from './LoginAndSecuritySettings';  
-import CustomizationSettings from './CustomizationSettings'; 
-import UserInfoSettings from './UserInfoSettings'; 
+import BoardInfoSettings from '../settings/BoardInfoSettings';  
+import LoginAndSecuritySettings from '../settings/LoginAndSecuritySettings';  
+import CustomizationSettings from '../settings/CustomizationSettings'; 
+import UserInfoSettings from '../settings/UserInfoSettings'; 
 
 const SettingBoardContainer = styled.div`
   display: flex;

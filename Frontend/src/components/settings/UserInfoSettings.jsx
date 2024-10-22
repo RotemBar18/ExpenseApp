@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import useAuth from '../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 import { useDispatch } from 'react-redux';
-import { updateUserProfile } from '../redux/actions/userActions'; 
+import { updateUserProfile } from '../../redux/actions/userActions'; 
 
 const UserInfoContainer = styled.div`
   display: flex;

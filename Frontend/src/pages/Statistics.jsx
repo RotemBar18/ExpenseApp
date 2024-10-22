@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import StatsBoard from '../components/StatsBoard';
+import StatsBoard from '../components/mainBoards/StatsBoard';
 import useAuth from '../hooks/useAuth';
 import useExpenses from '../hooks/useExpenses';
 import { useSelector } from 'react-redux';

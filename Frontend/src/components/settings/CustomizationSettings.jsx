@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ManageCategories from './ManageCategories';
 import ManageTheme from './ManageTheme';
-import useAuth from '../hooks/useAuth'; 
+import useAuth from '../../hooks/useAuth'; 
 import { useDispatch } from 'react-redux';
-import { updateBoardPreferences } from '../redux/actions/preferenceAction'; 
+import { updateBoardPreferences } from '../../redux/actions/preferenceAction'; 
 
 const CustomizationContainer = styled.div`
   padding-bottom: 10px;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import SettingsBoard from "../components/SettingsBoard";
+import SettingsBoard from "../components/mainBoards/SettingsBoard";
 import useAuth from "../hooks/useAuth";
 import { useSelector } from "react-redux";
 const PageContainer = styled.div`

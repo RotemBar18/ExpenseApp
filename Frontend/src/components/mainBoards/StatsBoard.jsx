@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import DailyExpensesChart from '../charts/MonthlyExpensesChart';
-import MonthlyExpensesChart from '../charts/YearlyExpensesChart';
-import YearlyExpensesChart from '../charts/FullYearExpensesChart'
+import DailyExpensesChart from '../../charts/MonthlyExpensesChart';
+import MonthlyExpensesChart from '../../charts/YearlyExpensesChart';
+import YearlyExpensesChart from '../../charts/FullYearExpensesChart'
 
 const StatsBoardContainer = styled.div`
 display:flex;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import ReportsList from '../components/ReportsList';
+import ReportsList from '../report/ReportsList';
 import styled from 'styled-components';
-import CreateReportModal from '../components/CreateReportModal';
+import CreateReportModal from '../report/CreateReportModal';
 
 const ReportsBoardContainer = styled.div`
   display: flex;

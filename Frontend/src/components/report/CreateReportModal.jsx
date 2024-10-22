@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
 import { useDispatch } from 'react-redux';
-import { saveReport } from '../redux/actions/reportsActions';
-import useAuth from '../hooks/useAuth';
-import useExpenses from '../hooks/useExpenses';
-import { filterCategories, filterYears, filterExpenses, filterMonths, createNewReport,} from '../utils/reportService';
+import { saveReport } from '../../redux/actions/reportsActions';
+import useAuth from '../../hooks/useAuth';
+import useExpenses from '../../hooks/useExpenses';
+import { filterCategories, filterYears, filterExpenses, filterMonths, createNewReport,} from '../../utils/reportService';
 
 const ModalBack = styled.div`
   position: fixed;

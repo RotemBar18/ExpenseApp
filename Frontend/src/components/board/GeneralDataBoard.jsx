@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import MonthlyInsights from "./MonthlyInsights";
 import DailyInsights from "./DailyInsights";
 import ExpenseBreakdown from "./ExpenseBreakdown";
-import { getSuffix } from "../utils/utilService";
+import { getSuffix } from "../../utils/utilService";
 
 const DataContainer = styled.div`
   display: flex;

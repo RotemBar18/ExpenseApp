@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, {  useEffect } from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import MainBoard from '../components/MainBoard';
+import {  useSelector } from 'react-redux';
+import MainBoard from '../components/mainBoards/MainBoard';
 import useBoards from '../hooks/useBoards'; 
 import useAuth from '../hooks/useAuth';
-import BoardSelection from '../components/BoardSelection'; 
+import BoardSelection from '../components/mainBoards/BoardSelection'; 
 
 const PageContainer = styled.div`
   display: flex;

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { updateBoard } from '../utils/boardService';
+import { updateBoard } from '../../utils/boardService';
 import { useDispatch } from 'react-redux';
-import { selectBoard } from '../redux/actions/boardActions';
-import useAuth from '../hooks/useAuth';
-import BoardCollaborators from './BoardCollaborators';
+import { selectBoard } from '../../redux/actions/boardActions';
+import useAuth from '../../hooks/useAuth';
+import BoardCollaborators from '../collaborator/BoardCollaborators';
 
 const BoardInfoContainer = styled.div`
   display: flex;

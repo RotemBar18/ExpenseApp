@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Home, DollarSign, BarChart2, FileText, Settings ,ArrowLeft  } from 'lucide-react';
-import useAuth from '../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearPreferences } from '../redux/actions/preferenceAction';
-import { clearBoard } from '../redux/actions/boardActions';
+import { clearPreferences } from '../../redux/actions/preferenceAction';
+import { clearBoard } from '../../redux/actions/boardActions';
 const NavContainer = styled.nav`
-  background-color: ${props => props.board ? props.theme.navBarBackground : '#333'}; /* Default color for board selection */
+  background-color: ${props => props.board ? props.theme.navBarBackground : '#333'}; 
   width: ${props => props.isOpen ? '200px' : '60px'};
   display: flex;
   flex-direction: column;
@@ -25,7 +25,7 @@ const NavContainer = styled.nav`
 `;
 
 const Logo = styled.div`
-  color: ${props => props.board ? props.theme.navBarTextColor : '#fff'}; /* Fallback to white if no theme */
+  color: ${props => props.board ? props.theme.navBarTextColor : '#fff'}; 
   font-size: 1.5rem;
   margin-bottom: 2rem;
   white-space: nowrap;
@@ -40,7 +40,7 @@ const NavItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: ${props => props.isOpen ? 'flex-start' : 'center'};
-  color: ${props => props.board ? props.theme.navBarTextColor : '#fff'}; /* Fallback to white if no theme */
+  color: ${props => props.board ? props.theme.navBarTextColor : '#fff'};
   padding: 0.75rem;
   margin-bottom: 0.5rem;
   cursor: pointer;
@@ -48,7 +48,7 @@ const NavItem = styled.div`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${props => props.board ? props.theme.buttonHoverBackground : '#444'}; /* Fallback hover color */
+    background-color: ${props => props.board ? props.theme.buttonHoverBackground : '#444'};
   }
 
   svg {
@@ -71,12 +71,12 @@ const Image = styled.img`
   width: ${props => props.isOpen ? '60px' : '20px'};
   height: ${props => props.isOpen ? '60px' : '20px'};
   border-radius: 50%;
-  border: 2px solid ${props => props.board ? props.theme.navBarTextColor : '#00A86B'}; /* Add default border if no theme */
+  border: 2px solid ${props => props.board ? props.theme.navBarTextColor : '#00A86B'};
 `;
 
 const Name = styled.span`
   transform: ${props => props.isOpen ? 'rotate(0deg)  translateY(0px)' : 'rotate(90deg) translateX(20px)'};
-  color: ${props => props.board ? props.theme.navBarTextColor : '#fff'}; /* Fallback to white if no theme */
+  color: ${props => props.board ? props.theme.navBarTextColor : '#fff'}; 
   font-size: 0.9rem;
  
 `;

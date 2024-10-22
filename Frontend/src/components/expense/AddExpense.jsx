@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { addExpense } from '../utils/expenseService';
+import { addExpense } from '../../utils/expenseService';
 
 
 const AddExpenseContainer = styled.div`

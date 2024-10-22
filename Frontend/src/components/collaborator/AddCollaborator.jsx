@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { fetchUsers } from '../utils/userService';
-import { addBoardCollaborator } from '../utils/boardMembersService';
-import useAuth from '../hooks/useAuth';
+import { fetchUsers } from '../../utils/userService';
+import { addBoardCollaborator } from '../../utils/boardMembersService';
+import useAuth from '../../hooks/useAuth';
 import { useSelector } from 'react-redux';
 
 const Overlay = styled.div`
