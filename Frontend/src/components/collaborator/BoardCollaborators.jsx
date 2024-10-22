@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { fetchCollaborators, removeBoardCollaborator } from '../../utils/boardMembersService'; 
-import { deleteBoard } from '../../utils/boardService'; 
+import { fetchCollaborators, removeBoardCollaborator } from '../../utils/boardMembersService';
+import { deleteBoard } from '../../utils/boardService';
+import { clearPreferences } from '../../redux/actions/preferenceAction';
+import { clearBoard } from '../../redux/actions/boardActions';
 import useAuth from '../../hooks/useAuth';
 import AddCollaborator from './AddCollaborator';
 import CollaboratorCard from './CollaboratorCard';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const CollaboratorsContainer = styled.div`
   display: flex;
@@ -65,11 +68,12 @@ const AddCollaboratorButton = styled.button`
 
 export default function BoardCollaborators({ board, reloadBoards }) {
   const { token, user } = useAuth();
+  const navigate = useNavigate();
   const selectedBoard = useSelector((state) => state.board.selectedBoard);
   const [collaborators, setCollaborators] = useState([]);
   const [showAddCollaborator, setShowAddCollaborator] = useState(false);
-  const [selectedCollaborator, setSelectedCollaborator] = useState(null); 
-
+  const [selectedCollaborator, setSelectedCollaborator] = useState(null);
+  const dispatch = useDispatch()
   useEffect(() => {
     const loadCollaborators = async () => {
       try {
@@ -108,9 +112,18 @@ export default function BoardCollaborators({ board, reloadBoards }) {
       if (reloadBoards) {
         reloadBoards();
       }
+      if (collaborator.UserId === user.Id) {
+        handleBackClick()
+      }
     } catch (error) {
       console.error('Error removing collaborator or deleting board:', error);
     }
+  };
+
+  const handleBackClick = () => {
+    dispatch(clearPreferences());
+    dispatch(clearBoard());
+    navigate('/main')
   };
 
   const handleCollaboratorClick = (collaborator) => {
@@ -127,7 +140,7 @@ export default function BoardCollaborators({ board, reloadBoards }) {
         {collaborators.map((collaborator, index) => (
           <CollaboratorItem
             key={collaborator.UserId}
-            index={index} 
+            index={index}
             onClick={() => handleCollaboratorClick(collaborator)}
           >
             <CollaboratorImage
