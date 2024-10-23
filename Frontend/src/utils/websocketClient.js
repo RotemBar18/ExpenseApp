@@ -8,7 +8,7 @@ export const initWebSocket = (addAlert, boardId, reloadExpenses) => {
   addAlertCallback = addAlert;
   // Check if WebSocket is already open
   if (!socket || socket.readyState === WebSocket.CLOSED) {
-    socket = new WebSocket('wss://https://neon-long-octagon.glitch.me');
+    socket = new WebSocket('wss://neon-long-octagon.glitch.me');
 
     socket.onopen = () => console.log('WebSocket connected');
     socket.onclose = () => console.log('WebSocket closed');
