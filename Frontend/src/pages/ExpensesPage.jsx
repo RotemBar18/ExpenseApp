@@ -17,13 +17,13 @@ const Expenses = () => {
   const [isLoading, setIsLoading] = useState(true); 
 
   const { expenses, updateExpense, deleteExpense, reloadExpenses } = useExpenses({
-    boardId: board?.ExpenseBoardId, 
-    userId
+    boardId: board.ExpenseBoardId
   });
 
   useEffect(() => {
     if (board && user) {
       reloadExpenses(); 
+      console.log(expenses)
       setIsLoading(false);
     }
   }, [board, user]);

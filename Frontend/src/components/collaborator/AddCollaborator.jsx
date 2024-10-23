@@ -4,6 +4,7 @@ import { fetchUsers } from '../../utils/userService';
 import { addBoardCollaborator } from '../../utils/boardMembersService';
 import useAuth from '../../hooks/useAuth';
 import { useSelector } from 'react-redux';
+import { sendAddCollaboratorMessage } from '../../utils/websocketClient';
 
 const Overlay = styled.div`
   position: fixed;
@@ -54,7 +55,7 @@ const CloseButton = styled.button`
 
   &:hover {
     color: ${(props) =>
-      props.selectedBoard ? props.theme.closeButtonHoverColor : '#fff'};
+    props.selectedBoard ? props.theme.closeButtonHoverColor : '#fff'};
   }
 `;
 
@@ -75,7 +76,7 @@ const AddCollaboratorInput = styled.input`
   &:focus {
     outline: none;
     border-color: ${(props) =>
-      props.selectedBoard ? props.theme.inputFocusBorderColor : '#007bff'};
+    props.selectedBoard ? props.theme.inputFocusBorderColor : '#007bff'};
   }
 `;
 
@@ -103,7 +104,7 @@ const AddButton = styled.button`
 
   &:hover {
     background-color: ${(props) =>
-      props.selectedBoard ? props.theme.buttonHoverBackground : '#22cc88'};
+    props.selectedBoard ? props.theme.buttonHoverBackground : '#22cc88'};
       transform: scale(0.95);
   }
 
@@ -135,7 +136,7 @@ const SuggestionItem = styled.li`
 
   &:hover {
     background-color: ${(props) =>
-      props.selectedBoard ? props.theme.suggestionHoverBackground : '#555'};
+    props.selectedBoard ? props.theme.suggestionHoverBackground : '#555'};
   }
 `;
 
@@ -148,104 +149,105 @@ const ProfilePic = styled.img`
 
 
 const AddCollaboratorModal = ({ board, onCollaboratorAdded, closeModal }) => {
-    const { token } = useAuth();
+  const { token } = useAuth();
   const selectedBoard = useSelector((state) => state.board.selectedBoard);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
-    const [selectedUser, setSelectedUser] = useState(null);
-    const [users, setUsers] = useState([]);
-
-    useEffect(() => {
-        const fetchAllUsers = async () => {
-            try {
-                const fetchedUsers = await fetchUsers(token);
-                setUsers(fetchedUsers);
-            } catch (error) {
-                console.error('Error fetching users:', error);
-            }
-        };
-
-        fetchAllUsers();
-    }, []);
-
-    const handleSearchChange = async (e) => {
-        const term = e.target.value;
-        setSearchTerm(term);
-
-        if (term.length > 0) {
-            const filteredResults = users.filter((user) =>
-                user.Name.toLowerCase().includes(term.toLowerCase())
-            );
-            setSearchResults(filteredResults);
-        } else {
-            setSearchResults([]);
-        }
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [users, setUsers] = useState([]);
+  const { user } = useAuth()
+  useEffect(() => {
+    const fetchAllUsers = async () => {
+      try {
+        const fetchedUsers = await fetchUsers(token);
+        setUsers(fetchedUsers);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
     };
 
-    const handleUserSelect = (user) => {
-        setSelectedUser(user);
-        setSearchTerm(user.Name);
-        setSearchResults([]);
-    };
+    fetchAllUsers();
+  }, []);
 
-    const handleAddCollaborator = async () => {
-        try {
-            if (selectedUser) {
-                await addBoardCollaborator(token, selectedUser.Id, board.ExpenseBoardId);
-                setSearchTerm('');
-                setSelectedUser(null);
-                onCollaboratorAdded();
-                closeModal();
-            }
-        } catch (error) {
-            console.error('Error adding collaborator:', error);
-        }
-    };
+  const handleSearchChange = async (e) => {
+    const term = e.target.value;
+    setSearchTerm(term);
 
-    const handleClose = (e) => {
-        e.stopPropagation();
+    if (term.length > 0) {
+      const filteredResults = users.filter((user) =>
+        user.Name.toLowerCase().includes(term.toLowerCase())
+      );
+      setSearchResults(filteredResults);
+    } else {
+      setSearchResults([]);
+    }
+  };
+
+  const handleUserSelect = (user) => {
+    setSelectedUser(user);
+    setSearchTerm(user.Name);
+    setSearchResults([]);
+  };
+
+  const handleAddCollaborator = async () => {
+    try {
+      if (selectedUser) {
+        await addBoardCollaborator(token, selectedUser.Id, board.ExpenseBoardId);
+        onCollaboratorAdded();
+        sendAddCollaboratorMessage(user, selectedUser, board);
+        setSearchTerm('');
+        setSelectedUser(null);
         closeModal();
-    };
-    
+      }
+    } catch (error) {
+      console.error('Error adding collaborator:', error);
+    }
+  };
 
-    return (
-        <Overlay onClick={handleClose} >
-            <ModalContainer selectedBoard={selectedBoard} onClick={(e) => e.stopPropagation()}>
-                <ModalHeader >
-                    <Title selectedBoard={selectedBoard}>Add Collaborator</Title>
-                    <CloseButton  selectedBoard={selectedBoard} onClick={closeModal}>&times;</CloseButton>
-                </ModalHeader>
-                <UserBox>
-                    <AddCollaboratorInput
-                    selectedBoard={selectedBoard}
-                        type="text"
-                        value={searchTerm}
-                        onChange={handleSearchChange}
-                        placeholder="Search user by name"
-                    />
-                    {selectedUser && (
-                        <SelectedUser>
-                            <ProfilePic src={selectedUser.ProfilePic || 'default_profile_pic_url'} alt="Profile" />
-                            {selectedUser.Name}
-                        </SelectedUser>
-                    )}
-                </UserBox>
+  const handleClose = (e) => {
+    e.stopPropagation();
+    closeModal();
+  };
 
-                {searchResults.length > 0 && (
-                    <SuggestionsList selectedBoard={selectedBoard}>
-                        {searchResults.map((user) => (
-                            <SuggestionItem selectedBoard={selectedBoard} key={user.Id} onClick={() => handleUserSelect(user)}>
-                                <ProfilePic src={user.ProfilePic || 'default_profile_pic_url'} alt="Profile" />
-                                {user.Name}
-                            </SuggestionItem>
-                        ))}
-                    </SuggestionsList>
-                )}
 
-                <AddButton selectedBoard={selectedBoard} onClick={handleAddCollaborator}>Add Collaborator</AddButton>
-            </ModalContainer>
-        </Overlay>
-    );
+  return (
+    <Overlay onClick={handleClose} >
+      <ModalContainer selectedBoard={selectedBoard} onClick={(e) => e.stopPropagation()}>
+        <ModalHeader >
+          <Title selectedBoard={selectedBoard}>Add Collaborator</Title>
+          <CloseButton selectedBoard={selectedBoard} onClick={closeModal}>&times;</CloseButton>
+        </ModalHeader>
+        <UserBox>
+          <AddCollaboratorInput
+            selectedBoard={selectedBoard}
+            type="text"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            placeholder="Search user by name"
+          />
+          {selectedUser && (
+            <SelectedUser>
+              <ProfilePic src={selectedUser.ProfilePic || 'default_profile_pic_url'} alt="Profile" />
+              {selectedUser.Name}
+            </SelectedUser>
+          )}
+        </UserBox>
+
+        {searchResults.length > 0 && (
+          <SuggestionsList selectedBoard={selectedBoard}>
+            {searchResults.map((user) => (
+              <SuggestionItem selectedBoard={selectedBoard} key={user.Id} onClick={() => handleUserSelect(user)}>
+                <ProfilePic src={user.ProfilePic || 'default_profile_pic_url'} alt="Profile" />
+                {user.Name}
+              </SuggestionItem>
+            ))}
+          </SuggestionsList>
+        )}
+
+        <AddButton selectedBoard={selectedBoard} onClick={handleAddCollaborator}>Add Collaborator</AddButton>
+      </ModalContainer>
+    </Overlay>
+  );
 };
 
 export default AddCollaboratorModal;

@@ -1,7 +1,5 @@
- 
- 
- 
- export const filterAndSortExpenses = (expenses, filterOptions, sortOption) => {
+export const filterAndSortExpenses = (expenses, filterOptions, sortOption) => {
+
     const filteredExpenses = applyFilter(expenses, filterOptions);
 
 
@@ -28,18 +26,20 @@
 };
 
 export const applyFilter = (expenses, filter) => {
+
     const { category, dateRange, minAmount, maxAmount } = filter;
-        
+    
     return expenses.filter(expense => {
+        
         let isMatch = true;
 
         if (category && expense.Category !== category) {
             isMatch = false;
         }
-        if (dateRange.start && new Date(expense.Date) < new Date(dateRange.start)) {
+        if (dateRange?.start && new Date(expense.Date) < new Date(dateRange.start)) {
             isMatch = false;
         }
-        if (dateRange.end && new Date(expense.Date) > new Date(dateRange.end)) {
+        if (dateRange?.end && new Date(expense.Date) > new Date(dateRange.end)) {
             isMatch = false;
         }
         if (minAmount !== undefined && !isNaN(minAmount) && expense.Amount < minAmount) {

@@ -53,23 +53,24 @@ export default function MainBoard({ board, categories, expensesThemeColor, userI
   const [showAddExpense, setShowAddExpense] = useState(false);
   const [filteredExpenses, setFilteredExpenses] = useState([]);
   const [selectedRange, setSelectedRange] = useState("This Week");
-  const { expenses, reloadExpenses, updateExpense } = useExpenses({ boardId: board.ExpenseBoardId, userId });
+  const { expenses, reloadExpenses, updateExpense } = useExpenses({ boardId: board.ExpenseBoardId });
   const [users, setUsers] = useState([]);
-const {token} = useAuth()
-    useEffect(() => {
-      reloadExpenses();
-      
-      const fetchAllUsers = async () => {
-        try {
-          const fetchedUsers = await fetchUsers(token);
-          setUsers(fetchedUsers);
-        } catch (error) {
-          console.error('Error fetching users:', error);
-        }
-      };
+  const { token } = useAuth()
 
-      fetchAllUsers();
-    }, [board.ExpenseBoardId]);
+  useEffect(() => {
+    reloadExpenses();
+
+    const fetchAllUsers = async () => {
+      try {
+        const fetchedUsers = await fetchUsers(token);
+        setUsers(fetchedUsers);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+    };
+
+    fetchAllUsers();
+  }, [board.ExpenseBoardId]);
 
   const handleUpdateExpense = (expense) => {
     updateExpense(expense);
@@ -93,6 +94,7 @@ const {token} = useAuth()
 
   return (
     <MainBoardContainer>
+
       <Header>
         {showAddExpense ? (
           <AddExpense
@@ -102,7 +104,7 @@ const {token} = useAuth()
             userId={userId}
             onClose={() => setShowAddExpense(false)}
             onExpenseAdded={reloadExpenses}
-            boardId={board.ExpenseBoardId}
+            board={board}
           />
         ) : (
           <AddButton onClick={() => setShowAddExpense(true)}>
@@ -110,7 +112,7 @@ const {token} = useAuth()
           </AddButton>
         )}
 
-        <GeneralDataBoard 
+        <GeneralDataBoard
           users={users}
           expenses={expenses}
           onFilterChange={handleFilterChange}

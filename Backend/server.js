@@ -1,18 +1,25 @@
 require('dotenv').config();
-const expenseRoutes = require('./routes/expenseRoutes');
-const preferencesRoutes = require('./routes/prefrencesRoutes')
-const reportsRoutes = require('./routes/reportsRoutes.js')
-const boardsRoutes = require('./routes/boardsRoutes.js')
-const boardMembersRoutes = require('./routes/boardMemberRoutes.js')
 const express = require('express');
 const cors = require('cors');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const dbConnection = require('./utils/db.js');
 const { jwtSecret } = require('./config/config.js');
-const bodyParser = require('body-parser');
+const expenseRoutes = require('./routes/expenseRoutes');
+const preferencesRoutes = require('./routes/prefrencesRoutes');
+const reportsRoutes = require('./routes/reportsRoutes.js');
+const boardsRoutes = require('./routes/boardsRoutes.js');
+const boardMembersRoutes = require('./routes/boardMemberRoutes.js');
+const http = require('http');
+const { setupWebSocketServer } = require('./websocketServer'); // Importing WebSocket server setup
+const port = 8081
+// Create an Express app and HTTP server
 const app = express();
-const port = 8081;
+const server = http.createServer(app);
+
+// Setting up WebSocket server
+setupWebSocketServer(server);
+
 
 
 app.use(cors());
@@ -180,3 +187,7 @@ app.get("/users/Id/:id", async (req, res) => {
 app.listen(port, () => {
     console.log("Server is listening on port 8081");
 });
+
+server.listen(3000, () => {
+    console.log('Server running on port 3000');
+  });

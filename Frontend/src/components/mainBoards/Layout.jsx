@@ -1,8 +1,8 @@
 import React from 'react';
-import Navbar from './Navbar'; 
-import { Outlet } from 'react-router-dom'; 
+import Navbar from './Navbar';
+import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-
+import WebSocketClient from '../websocketClient';
 const LayoutContainer = styled.div`
   display: flex;
   height:100%;
@@ -44,6 +44,7 @@ const Layout = () => {
     <LayoutContainer>
       <Navbar />
       <Content>
+        <WebSocketClient />
         <Outlet />
       </Content>
     </LayoutContainer>

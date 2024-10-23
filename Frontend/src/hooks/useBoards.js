@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchBoardById, fetchBoards } from '../utils/boardService';
+import {  fetchBoards } from '../utils/boardService';
 
 const useBoards = (userId) => {
   const [boards, setBoards] = useState([]);

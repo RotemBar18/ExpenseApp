@@ -1,64 +1,49 @@
-import { useState, useEffect } from 'react';
-import { fetchExpensesForBoard, deleteExpenseById, updateExpenseById } from '../utils/expenseService';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    fetchExpensesForBoardAction,
+    deleteExpenseAction,
+    updateExpenseAction,
+} from '../redux/actions/expenseActions';
 
-const useExpenses = ({boardId,userId}) => {
-    const [expenses, setExpenses] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+const useExpenses = ({ boardId }) => {
+    const dispatch = useDispatch();
+    const { expenses, loading, error } = useSelector((state) => state.expenses); // 'state.expenses' should exist
 
-    const loadExpenses = async () => {
-        if (!boardId) return; 
-
-        setLoading(true);
-        const token = localStorage.getItem('token');
-        try {
-            const expenseData = await fetchExpensesForBoard(token,boardId);
-            setExpenses(expenseData);
-        } catch (error) {
-            setError(error);
-            console.error('Error fetching expenses:', error);
-        } finally {
-            setLoading(false); 
-        }
-    };
-
-    const deleteExpense = async (expenseId) => {
-        const token = localStorage.getItem('token');
-        try {
-            await deleteExpenseById(token, expenseId); 
-            setExpenses((prevExpenses) => prevExpenses.filter(exp => exp.ExpenseId !== expenseId));
-        } catch (error) {
-            setError(error);
-            console.error('Error deleting expense:', error);
-        }
-        loadExpenses(); 
-    };
-
-    const updateExpense = async (expense) => {
-        const token = localStorage.getItem('token');
-
-        try {
-            await updateExpenseById(token, expense); 
-            setExpenses((prevExpenses) =>
-                prevExpenses.map((exp) =>
-                    exp.ExpenseId === expense.ExpenseId ? { ...exp, ...expense } : exp
-                )
-            );
-        } catch (error) {
-            setError(error);
-            console.error('Error updating expense:', error);
-        }
-
-        loadExpenses(); 
-    };
 
     useEffect(() => {
-        if (userId) {
-            loadExpenses();  
+        if (boardId) {
+            dispatch(fetchExpensesForBoardAction(boardId));
         }
-    }, [userId]); 
+    }, [dispatch, boardId]);
 
-    return { expenses, loading, error, reloadExpenses: loadExpenses, deleteExpense, updateExpense };
+    const reloadExpenses = () => {
+        console.log(boardId)
+
+        if (boardId) {
+            console.log('reload')
+            dispatch(fetchExpensesForBoardAction(boardId)); // Re-dispatch to reload expenses
+        }
+    };
+
+    const deleteExpense = (expenseId) => {
+        dispatch(deleteExpenseAction(expenseId));
+    };
+
+    const updateExpense = (expense) => {
+        dispatch(updateExpenseAction(expense));
+    };
+
+    
+
+    return {
+        expenses,
+        loading,
+        error,
+        reloadExpenses,
+        deleteExpense,
+        updateExpense,
+    };
 };
 
 export default useExpenses;

@@ -6,6 +6,8 @@ import { fetchBoardPreferences } from '../../redux/actions/preferenceAction';
 import { createBoard } from '../../utils/boardService';
 import { Plus, X, ChevronRight } from 'lucide-react';
 import BoardCollaborators from '../collaborator/BoardCollaborators';
+import { sendJoinBoardMessage } from '../../utils/websocketClient'; 
+import useAuth from '../../hooks/useAuth';
 
 const BoardContainer = styled.div`
   background: #1a1a1a;
@@ -151,7 +153,7 @@ export default function BoardSelection({ boards, reloadBoards, userId }) {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [boardName, setBoardName] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const {user} = useAuth()
   const handleCreateBoard = async () => {
     if (!boardName) return;
     setIsSubmitting(true);
@@ -170,6 +172,8 @@ export default function BoardSelection({ boards, reloadBoards, userId }) {
   const handleBoardChoice = (board) => {
     dispatch(fetchBoardPreferences(board.ExpenseBoardId, token));
     dispatch(selectBoard(board));
+    sendJoinBoardMessage(user, board);
+
   };
 
   return (

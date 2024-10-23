@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { addExpense } from '../../utils/expenseService';
+import useAuth from '../../hooks/useAuth';
+import { sendAddExpenseMessage} from '../../utils/websocketClient'
 
 
 const AddExpenseContainer = styled.div`
@@ -87,12 +89,12 @@ const CloseButton = styled(ButtonBase)`
 
 
 
-const AddExpense = ({ boardId,categories, userId, onAdd, onClose }) => {
+const AddExpense = ({ board,categories, userId, onAdd, onClose }) => {
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
-
+const {user} = useAuth()
   const handleSubmit = async (event) => {
     event.preventDefault();
     const token = localStorage.getItem('token');
@@ -103,11 +105,12 @@ const AddExpense = ({ boardId,categories, userId, onAdd, onClose }) => {
       Category: category,
       Description: description,
       UserId: userId,
-      ExpenseBoardId: boardId
+      ExpenseBoardId: board.ExpenseBoardId
     };
 
     try {
       await addExpense(token, newExpense);
+      sendAddExpenseMessage(user, newExpense, board);
       onAdd();
       setName('');
       setAmount('');
