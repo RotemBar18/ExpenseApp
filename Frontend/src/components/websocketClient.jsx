@@ -9,9 +9,7 @@ const WebSocketClient = () => {
   const [alerts, setAlerts] = useState([]);
   const selectedBoard = useSelector((state) => state.board.selectedBoard);
   const { reloadExpenses } = useExpenses({ boardId: selectedBoard?.ExpenseBoardId });
-
   useEffect(() => {
-    // Initialize WebSocket and pass the addAlert function
     initWebSocket(addAlert,selectedBoard.ExpenseBoardId,reloadExpenses);
   }, []);
 
