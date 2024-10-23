@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import AddExpense from '../expense/AddExpense';
-import GeneralDataBoard from '../board/GeneralDataBoard';
-import RecentExpenses from '../board/RecentExpenses';
-import BreakdownChart from '../../charts/BreakdownChart'; 
-import useExpenses from '../../hooks/useExpenses'; 
+import GeneralDataBoard from '../general/GeneralDataBoard';
+import RecentExpenses from '../general/RecentExpenses';
+import BreakdownChart from '../../charts/BreakdownChart';
+import useExpenses from '../../hooks/useExpenses';
+import useAuth from '../../hooks/useAuth';
+import { fetchUsers } from '../../utils/userService';
 
 const MainBoardContainer = styled.div`
   display: flex;
@@ -46,27 +48,28 @@ const AddButton = styled.button`
   transition: background-color 0.3s ease, transform 0.2s ease;
 `;
 
-const BackButton = styled.button`
-  background-color: ${props => props.theme.buttonBackground};
-  color: ${props => props.theme.buttonTextColor};
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  &:hover {
-    background-color: ${props => props.theme.buttonHoverBackground};
-  }
-`;
 
 export default function MainBoard({ board, categories, expensesThemeColor, userId }) {
-  const [showAddExpense, setShowAddExpense] = useState(false); 
+  const [showAddExpense, setShowAddExpense] = useState(false);
   const [filteredExpenses, setFilteredExpenses] = useState([]);
   const [selectedRange, setSelectedRange] = useState("This Week");
-  const { expenses, reloadExpenses, updateExpense } = useExpenses({ boardId: board.ExpenseBoardId, userId }); 
+  const { expenses, reloadExpenses, updateExpense } = useExpenses({ boardId: board.ExpenseBoardId, userId });
+  const [users, setUsers] = useState([]);
+const {token} = useAuth()
+    useEffect(() => {
+      reloadExpenses();
+      
+      const fetchAllUsers = async () => {
+        try {
+          const fetchedUsers = await fetchUsers(token);
+          setUsers(fetchedUsers);
+        } catch (error) {
+          console.error('Error fetching users:', error);
+        }
+      };
 
-  useEffect(() => {
-    reloadExpenses(); 
-  }, [board.ExpenseBoardId]);
+      fetchAllUsers();
+    }, [board.ExpenseBoardId]);
 
   const handleUpdateExpense = (expense) => {
     updateExpense(expense);
@@ -97,7 +100,7 @@ export default function MainBoard({ board, categories, expensesThemeColor, userI
             categories={categories}
             expensesThemeColor={expensesThemeColor}
             userId={userId}
-            onClose={() => setShowAddExpense(false)} 
+            onClose={() => setShowAddExpense(false)}
             onExpenseAdded={reloadExpenses}
             boardId={board.ExpenseBoardId}
           />
@@ -107,7 +110,8 @@ export default function MainBoard({ board, categories, expensesThemeColor, userI
           </AddButton>
         )}
 
-        <GeneralDataBoard
+        <GeneralDataBoard 
+          users={users}
           expenses={expenses}
           onFilterChange={handleFilterChange}
         />
@@ -116,6 +120,7 @@ export default function MainBoard({ board, categories, expensesThemeColor, userI
       <MainData>
         <RecentExpenses
           categories={categories}
+          users={users}
           expenses={expenses}
           onUpdate={handleUpdateExpense}
         />

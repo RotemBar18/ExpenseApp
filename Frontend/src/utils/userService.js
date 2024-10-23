@@ -4,6 +4,9 @@ const BASE_URL = process.env.NODE_ENV === 'development'
     ? 'http://localhost:8081' 
     : 'https://expenseapp-production.up.railway.app';
     
+
+
+
 export const fetchUser = async (userId, token) => {
     try {
       const response = await axios.get(`${BASE_URL}/users/Id/${userId}`, {

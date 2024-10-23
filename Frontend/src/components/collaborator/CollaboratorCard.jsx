@@ -93,8 +93,7 @@ const CollaboratorCard = ({ board, collaborator, onRemove, onClose }) => {
         onClose();
     };
 
-    const shouldRenderRemoveButton =
-        user.Id === board.OwnerId || user.Id === collaborator.UserId;
+    const shouldRenderRemoveButton = user.Id === board.OwnerId || user.Id === collaborator.UserId;
 
     return (
         <ModalBackground onClick={handleClose}>

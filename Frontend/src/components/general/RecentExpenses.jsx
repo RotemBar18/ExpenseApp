@@ -30,6 +30,14 @@ const Header = styled.div`
   text-align: center;
 `;
 
+const OwnerPic = styled.img`
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin-right:10px;
+  border: 1px solid ${(props) => props.theme.navBarTextColor};
+`;
+
 const Expenses = styled.div`
   display: flex;
   flex-direction: column;
@@ -101,7 +109,7 @@ const ExpenseAmount = styled.div`
   text-align: right;
 `;
 
-const RecentExpenses = ({ expenses }) => {
+const RecentExpenses = ({ users, expenses }) => {
   const expensesForDisplay = [...expenses]
     .sort((a, b) => new Date(b.Date) - new Date(a.Date))
     .slice(0, 5);
@@ -109,6 +117,11 @@ const RecentExpenses = ({ expenses }) => {
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options);
+  };
+
+  const getOwnerPic = (userId) => {
+    const owner = users.find((u) => u.Id === userId);
+    return owner?.ProfilePic || "/default_profile.png"; // Use default profile pic if not found
   };
 
   return (
@@ -122,6 +135,7 @@ const RecentExpenses = ({ expenses }) => {
                 <ExpenseName>{expense.Name}</ExpenseName>
                 <ExpenseDate>{formatDate(expense.Date)}</ExpenseDate>
               </ExpenseDetails>
+              <OwnerPic src={getOwnerPic(expense.UserId)} alt="Owner" />
               <ExpenseCategory>{expense.Category}</ExpenseCategory>
               <ExpenseAmount>${expense.Amount}</ExpenseAmount>
             </Expense>

@@ -38,7 +38,7 @@ const CardTitle = styled.div`
 `;
 
 
-const GeneralDataBoard = ({ expenses,onFilterChange }) => {
+const GeneralDataBoard = ({users, expenses,onFilterChange }) => {
   const today = new Date();
   const currentDayOfMonth = today.getDate();
   const currDay = today.toLocaleString('en-US', { weekday: 'long' });
@@ -46,7 +46,7 @@ const GeneralDataBoard = ({ expenses,onFilterChange }) => {
     <DataContainer>
       <DataCard className="daily">
         <CardTitle>{currDay} The {currentDayOfMonth}{getSuffix(currentDayOfMonth)} </CardTitle>
-        <DailyInsights expenses={expenses} />
+        <DailyInsights users={users} expenses={expenses} />
       </DataCard>
 
       <DataCard className="breakdown">
