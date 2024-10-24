@@ -4,10 +4,10 @@ let socket = null;
 let addAlertCallback = null;
 let activeAlerts = new Set();  // Track active alerts to prevent duplicates
 
-export const initWebSocket = (addAlert, reloadExpenses, reloadCollaborators,boardId) => {
+export const initWebSocket = (addAlert, reloadExpenses, reloadCollaborators, boardId) => {
   addAlertCallback = addAlert;
   // Check if WebSocket is already open
-if (!socket || socket.readyState === WebSocket.CLOSED) {
+  if (!socket || socket.readyState === WebSocket.CLOSED) {
     socket = new WebSocket(`wss://neon-long-octagon.glitch.me?boardId=${boardId}`);
     socket.onopen = () => console.log(`WebSocket connected to board ${boardId}`);
     socket.onclose = () => {
@@ -56,19 +56,19 @@ const handleIncomingMessage = (data, reloadExpenses, reloadCollaborators) => {
   let message;
   switch (data.type) {
     case 'joinBoard':
-      message = `${data.user.Name} has joined the board ${data.board.Name}`;
+      message = `${data.userName} has joined the board ${data.boardName}`;
       break;
     case 'addExpense':
-      message = `${data.user.Name} added a new expense: ${data.expense.Name} that costs: ${data.expense.Amount}`;
+      message = `${data.userName} added a new expense: ${data.expenseName} that costs: ${data.amount}`;
       break;
     case 'removeExpense':
-      message = `${data.user.Name} removed an expense: ${data.expense.Name} that costs: ${data.expense.Amount}`;
+      message = `${data.userName} removed an expense: ${data.expenseName} that costs: ${data.amount}`;
       break;
     case 'addCollaborator':
-      message = `${data.user.Name} added a new collaborator: ${data.collaborator.Name} to board ${data.board.Name}`;
+      message = `${data.userName} added a new collaborator: ${data.collaboratorName} to board ${data.boardName}`;
       break;
     case 'removeCollaborator':
-      message = `${data.user.Name} removed a collaborator: ${data.collaborator.Name} from board ${data.board.Name}`;
+      message = `${data.userName} removed a collaborator: ${data.collaboratorName} from board ${data.boardName}`;
       break;
     default:
       console.log('Unknown message type:', data.type);
@@ -91,12 +91,12 @@ const handleIncomingMessage = (data, reloadExpenses, reloadCollaborators) => {
   }
 };
 
-// Function to send a joinBoard message
 export const sendJoinBoardMessage = async (user, board) => {
   const message = {
     type: 'joinBoard',
-    user,
-    board,
+    userName: user.Name,   // Only send user name
+    boardName: board.Name, // Only send board name
+    boardId: board.ExpenseBoardId, // Send the boardId
   };
 
   try {
@@ -110,70 +110,60 @@ export const sendJoinBoardMessage = async (user, board) => {
   }
 };
 
-export const sendAddExpenseMessage = async (user, expense, board) => {
+export const sendAddExpenseMessage = (user, expense, board) => {
   const message = {
     type: 'addExpense',
-    user,
-    board,
-    expense,
+    userName: user.Name,        // Only send user name
+    boardName: board.Name,      // Only send board name
+    expenseName: expense.Name,  // Only send expense name
+    amount: expense.Amount,     // Send the essential expense data
+    boardId: board.ExpenseBoardId, // Send the boardId
   };
-  try {
-    await waitForSocketConnection();  // Wait for WebSocket to be open
-    if (socket && socket.readyState === WebSocket.OPEN) {
-      socket.send(JSON.stringify(message));
-    }
-  } catch (error) {
-    console.error('Failed to send addExpense message:', error);
+
+  if (socket && socket.readyState === WebSocket.OPEN) {
+    socket.send(JSON.stringify(message));
   }
 };
 
-export const sendRemoveExpenseMessage = async (user, expense, board) => {
+export const sendRemoveExpenseMessage = (user, expense, board) => {
   const message = {
     type: 'removeExpense',
-    user,
-    board,
-    expense,
+    userName: user.Name,        // Only send user name
+    boardName: board.Name,      // Only send board name
+    expenseName: expense.Name,  // Only send expense name
+    amount: expense.Amount,     // Send the essential expense data
+    boardId: board.ExpenseBoardId, // Send the boardId
   };
-  try {
-    await waitForSocketConnection();  // Wait for WebSocket to be open
-    if (socket && socket.readyState === WebSocket.OPEN) {
-      socket.send(JSON.stringify(message));
-    }
-  } catch (error) {
-    console.error('Failed to send removeExpense message:', error);
+
+  if (socket && socket.readyState === WebSocket.OPEN) {
+    socket.send(JSON.stringify(message));
   }
 };
 
-export const sendAddCollaboratorMessage = async (user, collaborator, board) => {
+export const sendAddCollaboratorMessage = (user, collaborator, board) => {
   const message = {
     type: 'addCollaborator',
-    user,
-    board,
-    collaborator,
+    userName: user.Name,             // Only send user name
+    boardName: board.Name,           // Only send board name
+    collaboratorName: collaborator.Name, // Only send collaborator name
+    boardId: board.ExpenseBoardId, // Send the boardId
   };
-  try {
-    await waitForSocketConnection();  // Wait for WebSocket to be open
-    if (socket && socket.readyState === WebSocket.OPEN) {
-      socket.send(JSON.stringify(message));
-    }
-  } catch (error) {
-    console.error('Failed to send addCollaborator message:', error);
+
+  if (socket && socket.readyState === WebSocket.OPEN) {
+    socket.send(JSON.stringify(message));
   }
 };
 
-export const sendRemoveCollaboratorMessage = async (user, collaborator, board) => {
+export const sendRemoveCollaboratorMessage = (user, collaborator, board) => {
   const message = {
     type: 'removeCollaborator',
-    user,
-    board,
-    collaborator,
+    userName: user.Name,             // Only send user name
+    boardName: board.Name,           // Only send board name
+    collaboratorName: collaborator.Name, // Only send collaborator name
+    boardId: board.ExpenseBoardId, // Send the boardId
   };
-  try {
-    await waitForSocketConnection();  // Wait for WebSocket to be open
-    if (socket && socket.readyState === WebSocket.OPEN) {
-      socket.send(JSON.stringify(message));
-    }
-  } catch (error) {
-    console.error('Failed to send removeCollaborator message:', error);
+
+  if (socket && socket.readyState === WebSocket.OPEN) {
+    socket.send(JSON.stringify(message));
   }
 };

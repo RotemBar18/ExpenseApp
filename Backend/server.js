@@ -32,20 +32,18 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-    const originalSend = res.send;
+    let requestSize = 0;
 
-    res.send = function (body) {
-        console.log(`[Outbound HTTP Response] URL: ${req.originalUrl}`);
-        console.log(`[Status Code]: ${res.statusCode}`);
-        if (typeof body === 'object') {
-            console.log(`[Payload Size]: ${JSON.stringify(body).length} bytes`);
-        } else {
-            console.log(`[Payload Size]: ${body.length} bytes`);
-        }
-        console.log(`[Payload]:`, body);
+    // Log size for JSON body
+    if (req.body) {
+        const bodyString = JSON.stringify(req.body);
+        requestSize = Buffer.byteLength(bodyString, 'utf8');
+    }
 
-        originalSend.call(this, body);
-    };
+    console.log(`[Inbound HTTP Request] URL: ${req.originalUrl}`);
+    console.log(`[Method]: ${req.method}`);
+    console.log(`[Request Size]: ${requestSize} bytes`);
+
     next();
 });
 
