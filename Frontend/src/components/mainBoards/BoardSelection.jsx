@@ -169,13 +169,19 @@ export default function BoardSelection({ boards, reloadBoards, userId }) {
     }
   };
 
-  const handleBoardChoice = (board) => {
-    dispatch(fetchBoardPreferences(board.ExpenseBoardId, token));
-    dispatch(selectBoard(board));
-    sendJoinBoardMessage(user, board);
-
+  const handleBoardChoice = async (board) => {
+    try {
+      // Wait for both dispatches to complete before proceeding
+      await dispatch(fetchBoardPreferences(board.ExpenseBoardId, token));
+      await dispatch(selectBoard(board));
+      
+      // Once dispatches are done, send the WebSocket message
+      sendJoinBoardMessage(user, board);
+    } catch (error) {
+      console.error('Error handling board choice:', error);
+    }
   };
-
+  
   return (
     <BoardContainer>
       <Title>Select a Board</Title>

@@ -53,7 +53,7 @@ export default function MainBoard({ board, categories, expensesThemeColor, userI
   const [showAddExpense, setShowAddExpense] = useState(false);
   const [filteredExpenses, setFilteredExpenses] = useState([]);
   const [selectedRange, setSelectedRange] = useState("This Week");
-  const { expenses, reloadExpenses, updateExpense } = useExpenses({ boardId: board.ExpenseBoardId });
+  const { expenses, reloadExpenses, updateExpense } = useExpenses({ board: board });
   const [users, setUsers] = useState([]);
   const { token } = useAuth()
 

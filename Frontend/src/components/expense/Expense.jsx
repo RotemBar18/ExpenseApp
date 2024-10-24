@@ -104,7 +104,7 @@ const Expense = ({ color, expense, onDelete, onUpdate, categories }) => {
             color={color}
             onClick={(e) => {
               e.stopPropagation();
-              onDelete(expense.ExpenseId);
+              onDelete(expense);
             }} />
         </Buttons>
 

@@ -46,22 +46,46 @@ function setupWebSocketServer(server) {
           }, ws.boardId);
           break;
 
-        case 'addCollaborator':
-          // Broadcast the add collaborator event
+        case 'removeExpense':
+          // Broadcast the remove expense event
           broadcastMessage({
-            type: 'addCollaborator',
+            type: 'removeExpense',
             user: parsedData.user,
             board: parsedData.board,
-            collaborator: parsedData.collaborator,
-            message: `${parsedData.user.Name} added a new collaborator: ${parsedData.collaborator.Name} to: ${parsedData.board.Name}`,
+            expense: parsedData.expense,
+            message: `${parsedData.user.Name} removed an expense: ${parsedData.expense.Name} that costs: ${parsedData.expense.Amount}`,
           }, ws.boardId);
           break;
 
-        default:
-          console.log('Unknown message type:', parsedData.type);
-          break;
-      }
-    });
+          case 'addCollaborator':
+            // Broadcast the add collaborator event
+            broadcastMessage({
+              type: 'addCollaborator',
+              user: parsedData.user,
+              board: parsedData.board,
+              collaborator: parsedData.collaborator,
+              message: `${parsedData.user.Name} added a new collaborator: ${parsedData.collaborator.Name} to: ${parsedData.board.Name}`,
+            }, ws.boardId);
+            break;
+
+            case 'removeCollaborator':
+              // Broadcast the add collaborator event
+              broadcastMessage({
+                type: 'removeCollaborator',
+                user: parsedData.user,
+                board: parsedData.board,
+                collaborator: parsedData.collaborator,
+                message: `${parsedData.user.Name} removed a collaborator: ${parsedData.collaborator.Name} from: ${parsedData.board.Name}`,
+              }, ws.boardId);
+              break;
+  
+          default:
+            console.log('Unknown message type:', parsedData.type);
+            break;
+        }
+      });
+
+      
 
     // Handle client disconnect
     ws.on('close', () => {

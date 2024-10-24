@@ -9,6 +9,7 @@ import AddCollaborator from './AddCollaborator';
 import CollaboratorCard from './CollaboratorCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { sendRemoveCollaboratorMessage } from '../../utils/websocketClient';
 
 const CollaboratorsContainer = styled.div`
   display: flex;
@@ -74,18 +75,6 @@ export default function BoardCollaborators({ board, reloadBoards }) {
   const [showAddCollaborator, setShowAddCollaborator] = useState(false);
   const [selectedCollaborator, setSelectedCollaborator] = useState(null);
   const dispatch = useDispatch()
-  useEffect(() => {
-    const loadCollaborators = async () => {
-      try {
-        const boardCollaborators = await fetchCollaborators(token, board.ExpenseBoardId);
-        setCollaborators(boardCollaborators);
-      } catch (error) {
-        console.error('Error fetching collaborators:', error);
-      }
-    };
-
-    loadCollaborators();
-  }, [board.ExpenseBoardId, token]);
 
   const refreshCollaborators = async () => {
     try {
@@ -94,10 +83,17 @@ export default function BoardCollaborators({ board, reloadBoards }) {
     } catch (error) {
       console.error('Error refreshing collaborators:', error);
     }
+    
     if (reloadBoards) {
       reloadBoards();
     }
   };
+  
+  useEffect(() => {
+    refreshCollaborators()
+  }, [collaborators,board.ExpenseBoardId, token]);
+
+ 
 
   const handleRemoveCollaborator = async (collaborator) => {
     try {
@@ -115,6 +111,7 @@ export default function BoardCollaborators({ board, reloadBoards }) {
       if (collaborator.UserId === user.Id) {
         handleBackClick()
       }
+      sendRemoveCollaboratorMessage(user,collaborator,board)
     } catch (error) {
       console.error('Error removing collaborator or deleting board:', error);
     }

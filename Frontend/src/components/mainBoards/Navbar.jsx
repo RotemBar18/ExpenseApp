@@ -6,6 +6,7 @@ import useAuth from '../../hooks/useAuth';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearPreferences } from '../../redux/actions/preferenceAction';
 import { clearBoard } from '../../redux/actions/boardActions';
+import { disconnectWebSocket } from '../../utils/websocketClient';
 const NavContainer = styled.nav`
   background-color: ${props => props.board ? props.theme.navBarBackground : '#333'}; 
   width: ${props => props.isOpen ? '200px' : '60px'};
@@ -113,7 +114,8 @@ const Navbar = () => {
 
   const handleBackClick = () => {
     dispatch(clearPreferences());  
-    dispatch(clearBoard());       
+    dispatch(clearBoard());  
+    disconnectWebSocket();     
   };
 
   const navItems = [

@@ -5,6 +5,7 @@ export const selectBoard = (board) => (dispatch) => {
         payload: board,
     });
 };
+
 export const clearBoard = () => (dispatch) => {
     localStorage.removeItem('selectedBoard');  
     dispatch({

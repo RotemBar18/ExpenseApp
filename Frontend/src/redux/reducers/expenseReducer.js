@@ -16,7 +16,6 @@ const initialState = {
 const expenseReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_EXPENSES_SUCCESS:
-            console.log(action.payload)
             return {
                 ...state,
                 expenses: action.payload,

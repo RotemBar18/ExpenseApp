@@ -5,8 +5,12 @@ import {
     deleteExpenseAction,
     updateExpenseAction,
 } from '../redux/actions/expenseActions';
+import { sendRemoveExpenseMessage } from '../utils/websocketClient';
+import useAuth from './useAuth';
 
-const useExpenses = ({ boardId }) => {
+const useExpenses = ({ board }) => {
+    const boardId = board?.ExpenseBoardId
+    const { user } = useAuth()
     const dispatch = useDispatch();
     const { expenses, loading, error } = useSelector((state) => state.expenses); // 'state.expenses' should exist
 
@@ -18,23 +22,21 @@ const useExpenses = ({ boardId }) => {
     }, [dispatch, boardId]);
 
     const reloadExpenses = () => {
-        console.log(boardId)
-
         if (boardId) {
-            console.log('reload')
             dispatch(fetchExpensesForBoardAction(boardId)); // Re-dispatch to reload expenses
         }
     };
 
-    const deleteExpense = (expenseId) => {
-        dispatch(deleteExpenseAction(expenseId));
+    const deleteExpense = (expense) => {
+        dispatch(deleteExpenseAction(expense.ExpenseId));
+        sendRemoveExpenseMessage(user, expense, board);
     };
 
     const updateExpense = (expense) => {
         dispatch(updateExpenseAction(expense));
     };
 
-    
+
 
     return {
         expenses,

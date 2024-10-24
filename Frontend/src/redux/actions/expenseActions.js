@@ -45,7 +45,6 @@ export const fetchExpensesForBoardAction = (boardId) => async (dispatch) => {
     dispatch(setLoading(true));
     try {
         const expenses = await fetchExpensesForBoard(token, boardId);
-        console.log(expenses)
         dispatch(fetchExpensesSuccess(expenses));
     } catch (error) {
         dispatch(setError(error));

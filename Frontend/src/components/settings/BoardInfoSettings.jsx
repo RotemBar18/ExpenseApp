@@ -133,6 +133,7 @@ const BoardInfoSettings = ({ user, board }) => {
 
       const updatedBoardFromServer = await updateBoard(board.ExpenseBoardId, updatedBoardData);
       const updatedBoard = updatedBoardFromServer.updatedBoard;
+      
       if (updatedBoard) {
         setBoardInfo({
           Name: updatedBoard.Name || boardInfo.Name,

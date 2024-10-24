@@ -12,18 +12,17 @@ const ExpensePageContainer = styled.div`
 `;
 
 const Expenses = () => {
-  const { user, preferences, userId } = useAuth();
+  const { user, preferences } = useAuth();
   const board = useSelector((state) => state.board.selectedBoard); 
   const [isLoading, setIsLoading] = useState(true); 
 
   const { expenses, updateExpense, deleteExpense, reloadExpenses } = useExpenses({
-    boardId: board.ExpenseBoardId
+    board: board
   });
 
   useEffect(() => {
     if (board && user) {
       reloadExpenses(); 
-      console.log(expenses)
       setIsLoading(false);
     }
   }, [board, user]);
@@ -32,8 +31,8 @@ const Expenses = () => {
     return <div>Loading data...</div>;
   }
 
-  const handleDeleteExpense = (expenseId) => {
-    deleteExpense(expenseId);
+  const handleDeleteExpense = (expense) => {
+    deleteExpense(expense);
   };
 
   const handleUpdateExpense = (expense) => {

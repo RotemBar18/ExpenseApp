@@ -4,13 +4,17 @@ import { initWebSocket } from '../utils/websocketClient';
 import { v4 as uuidv4 } from 'uuid'; // For generating unique alert IDs
 import { useSelector } from 'react-redux';
 import useExpenses from '../hooks/useExpenses';
+import useBoards from '../hooks/useBoards';
+import useAuth from '../hooks/useAuth';
 
 const WebSocketClient = () => {
+  const { userId } = useAuth
   const [alerts, setAlerts] = useState([]);
   const selectedBoard = useSelector((state) => state.board.selectedBoard);
   const { reloadExpenses } = useExpenses({ boardId: selectedBoard?.ExpenseBoardId });
+  const { reloadBoards } = useBoards(userId)
   useEffect(() => {
-    initWebSocket(addAlert,selectedBoard.ExpenseBoardId,reloadExpenses);
+    initWebSocket(addAlert, reloadExpenses, reloadBoards,selectedBoard.ExpenseBoardId);
   }, []);
 
   // Function to add an alert
