@@ -5,13 +5,15 @@ function setupWebSocketServer(server) {
   const wss = new WebSocket.Server({ server });
 
   // Function to broadcast messages to all connected clients
-  function broadcastMessage(message, boardId) {
-    wss.clients.forEach((client) => {
-      if (client.readyState === WebSocket.OPEN && client.boardId === boardId) {
-        client.send(JSON.stringify(message));
-      }
-    });
-  }
+function broadcastMessage(message, boardId) {
+  wss.clients.forEach((client) => {
+    if (client.readyState === WebSocket.OPEN && client.boardId === boardId) {
+      console.log(`[Outbound WebSocket] Board ID: ${boardId}`);
+      console.log(`[Payload]:`, message);
+      client.send(JSON.stringify(message));
+    }
+  });
+}
 
   // Handle WebSocket connections
   wss.on('connection', (ws) => {

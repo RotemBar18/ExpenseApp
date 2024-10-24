@@ -79,13 +79,11 @@ export default function BoardCollaborators({ board, reloadBoards }) {
   const refreshCollaborators = async () => {
     try {
       const boardCollaborators = await fetchCollaborators(token, board.ExpenseBoardId);
-      setCollaborators(boardCollaborators);
+      if (JSON.stringify(boardCollaborators) !== JSON.stringify(collaborators)) {
+        setCollaborators(boardCollaborators);
+      }
     } catch (error) {
       console.error('Error refreshing collaborators:', error);
-    }
-    
-    if (reloadBoards) {
-      reloadBoards();
     }
   };
   
@@ -112,6 +110,7 @@ export default function BoardCollaborators({ board, reloadBoards }) {
         handleBackClick()
       }
       sendRemoveCollaboratorMessage(user,collaborator,board)
+      refreshCollaborators()
     } catch (error) {
       console.error('Error removing collaborator or deleting board:', error);
     }

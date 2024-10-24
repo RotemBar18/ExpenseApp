@@ -31,6 +31,24 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use((req, res, next) => {
+    const originalSend = res.send;
+
+    res.send = function (body) {
+        console.log(`[Outbound HTTP Response] URL: ${req.originalUrl}`);
+        console.log(`[Status Code]: ${res.statusCode}`);
+        if (typeof body === 'object') {
+            console.log(`[Payload Size]: ${JSON.stringify(body).length} bytes`);
+        } else {
+            console.log(`[Payload Size]: ${body.length} bytes`);
+        }
+        console.log(`[Payload]:`, body);
+
+        originalSend.call(this, body);
+    };
+    next();
+});
+
 app.use('/expenses', (req, res, next) => {
     next();
 }, expenseRoutes);
@@ -127,11 +145,11 @@ app.get("/users/:email", async (req, res) => {
         if (rows.length > 0) {
             return res.status(200).json({ userId: rows[0].Id });
         } else {
-            return res.status(404).json({ error: "User not found" }); 
+            return res.status(404).json({ error: "User not found" });
         }
     } catch (error) {
         console.error('Error fetching user ID:', error);
-        return res.status(500).json({ error: "Internal server error" }); 
+        return res.status(500).json({ error: "Internal server error" });
     }
 
 });
@@ -139,7 +157,7 @@ app.get("/users/:email", async (req, res) => {
 app.put('/users/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const { Name, Email, Password, ProfilePic } = req.body; 
+        const { Name, Email, Password, ProfilePic } = req.body;
         const query = `
             UPDATE users 
             SET Name = ?, Email = ?, Password = ?, ProfilePic = ?
@@ -190,4 +208,4 @@ app.listen(port, () => {
 
 server.listen(3000, () => {
     console.log('Server running on port 3000');
-  });
+});
