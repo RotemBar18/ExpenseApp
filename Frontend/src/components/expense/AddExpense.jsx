@@ -142,7 +142,6 @@ const {user} = useAuth()
               </option>
             ))}
         </ExpenseSelect>
-
         <ExpenseInput
           type="text"
           name="name"

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import AddExpense from '../expense/AddExpense';
-import GeneralDataBoard from '../general/GeneralDataBoard';
-import RecentExpenses from '../general/RecentExpenses';
+import GeneralDataBoard from '../board/GeneralDataBoard';
+import RecentExpenses from '../board/RecentExpenses';
 import BreakdownChart from '../../charts/BreakdownChart';
 import useExpenses from '../../hooks/useExpenses';
 import useAuth from '../../hooks/useAuth';
@@ -79,7 +79,7 @@ export default function MainBoard({ board, categories, expensesThemeColor, userI
   const handleAddExpense = async () => {
     try {
       setShowAddExpense(false);
-      reloadExpenses();
+      reloadExpenses(board.ExpenseBoardId);
     } catch (error) {
       console.error('Error adding expense:', error);
     }

@@ -83,6 +83,7 @@ export const fetchExpensesForBoard = async (token, boardId) => {
                 'Authorization': `Bearer ${token}`
             }
         });
+        console.log('fetched:',response)
         return response.data;
     } catch (error) {
         console.error('Error fetching board expenses:', error);

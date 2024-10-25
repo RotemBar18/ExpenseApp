@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 const InsightsContainer = styled.div`
@@ -107,7 +107,9 @@ const TotalAmount = styled.div`
 
 const DailyInsights = ({ users, expenses }) => {
   const today = new Date();
-
+  useEffect(() => {
+    console.log("Expenses updated:", expenses);  // Log to check if re-renders
+  }, [expenses]);
   const currentDateString = today.toLocaleDateString("en-CA");
 
   const getOwnerPic = (userId) => {

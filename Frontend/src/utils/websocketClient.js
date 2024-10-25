@@ -19,7 +19,7 @@ export const initWebSocket = (addAlert, reloadExpenses, reloadCollaborators, boa
     // Listen for incoming WebSocket messages
     socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      handleIncomingMessage(data, reloadExpenses, reloadCollaborators);
+      handleIncomingMessage(data, reloadExpenses, reloadCollaborators,boardId);
     };
   }
 };
@@ -52,17 +52,17 @@ const waitForSocketConnection = () => {
   });
 };
 
-const handleIncomingMessage = (data, reloadExpenses, reloadCollaborators) => {
+const handleIncomingMessage = (data, reloadExpenses, reloadCollaborators,boardId) => {
   let message;
   switch (data.type) {
     case 'joinBoard':
       message = `${data.userName} has joined the board ${data.boardName}`;
       break;
     case 'addExpense':
-      message = `${data.userName} added a new expense: ${data.expenseName} that costs: ${data.amount}`;
+      message = `${data.userName} added a new expense: ${data.expenseName} that costs: ${data.expenseAmount}`;
       break;
     case 'removeExpense':
-      message = `${data.userName} removed an expense: ${data.expenseName} that costs: ${data.amount}`;
+      message = `${data.userName} removed an expense:  ${data.expenseName} that costs: ${data.expenseAmount}`;
       break;
     case 'addCollaborator':
       message = `${data.userName} added a new collaborator: ${data.collaboratorName} to board ${data.boardName}`;
@@ -82,10 +82,11 @@ const handleIncomingMessage = (data, reloadExpenses, reloadCollaborators) => {
     setTimeout(() => activeAlerts.delete(message), 5000); // Clear alert from activeAlerts after 5 seconds
   }
   
-  // Reload expenses for the board
-  if (data.type === 'addExpense' || data.type === 'removeExpense') {
-    reloadExpenses();
+   if (data.type === 'addExpense' || data.type === 'removeExpense') {
+    console.log(reloadExpenses)
+    reloadExpenses(boardId);
   }
+  // Reload expenses for the board
   if (data.type === 'addCollaborator' || data.type === 'removeCollaborator') {
     reloadCollaborators();
   }
@@ -116,7 +117,7 @@ export const sendAddExpenseMessage = (user, expense, board) => {
     userName: user.Name,        // Only send user name
     boardName: board.Name,      // Only send board name
     expenseName: expense.Name,  // Only send expense name
-    amount: expense.Amount,     // Send the essential expense data
+    expenseAmount: expense.Amount,  // Only send expense name
     boardId: board.ExpenseBoardId, // Send the boardId
   };
 
@@ -131,7 +132,7 @@ export const sendRemoveExpenseMessage = (user, expense, board) => {
     userName: user.Name,        // Only send user name
     boardName: board.Name,      // Only send board name
     expenseName: expense.Name,  // Only send expense name
-    amount: expense.Amount,     // Send the essential expense data
+    expenseAmount: expense.Amount, // Only send expense name
     boardId: board.ExpenseBoardId, // Send the boardId
   };
 
