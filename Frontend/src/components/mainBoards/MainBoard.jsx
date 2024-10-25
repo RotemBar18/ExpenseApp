@@ -58,7 +58,7 @@ export default function MainBoard({ board, categories, expensesThemeColor, userI
   const { token } = useAuth()
 
   useEffect(() => {
-    reloadExpenses();
+    reloadExpenses(board.ExpenseBoardId);
 
     const fetchAllUsers = async () => {
       try {
