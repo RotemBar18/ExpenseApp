@@ -25,3 +25,9 @@ export const updateUserProfile = (userId, token, updatedUserData) => async (disp
     dispatch({ type: 'ERROR', payload: error.message });
   }
 };
+
+
+export const logoutUser = () => (dispatch) => {
+  dispatch({ type: 'LOGOUT_USER' });
+  localStorage.removeItem('token');
+};

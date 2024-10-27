@@ -1,7 +1,6 @@
 import { login, signup } from './authService';
 import { fetchUserData } from '../redux/actions/userActions';
 import { getUserIdFromToken } from './jwtService';
-import { fetchUserReports } from '../redux/actions/reportsActions';
 
 export const handleAuthSubmit = async (event, action, email, password, name, navigate, dispatch, setAction) => {
     event.preventDefault();

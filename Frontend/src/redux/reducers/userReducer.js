@@ -17,7 +17,7 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.payload,
-                loading: false,  
+                loading: false,
             };
         case 'UPDATE_USER_SUCCESS':
             const updatedState = { ...state, ...action.payload };
@@ -29,6 +29,8 @@ const userReducer = (state = initialState, action) => {
                 loading: false,
                 error: action.payload,
             };
+        case 'LOGOUT_USER': // Reset state on logout
+            return initialState;
         default:
             return state;
     }

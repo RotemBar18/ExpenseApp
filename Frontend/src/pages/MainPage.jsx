@@ -1,10 +1,13 @@
-import React, {  useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import MainBoard from '../components/mainBoards/MainBoard';
-import useBoards from '../hooks/useBoards'; 
+import useBoards from '../hooks/useBoards';
 import useAuth from '../hooks/useAuth';
-import BoardSelection from '../components/mainBoards/BoardSelection'; 
+import BoardSelection from '../components/mainBoards/BoardSelection';
+import useAutoLogout from '../hooks/useAutoLogout';
+import InactivityModal from '../components/inactivityModal';
+
 
 const PageContainer = styled.div`
   display: flex;
@@ -19,11 +22,12 @@ const MainPage = () => {
   const { userId } = useAuth();
   const { boards, reloadBoards } = useBoards(userId);
   const selectedPreferences = useSelector((state) => state.preferences);
+  const { showModal, handleCloseModal } = useAutoLogout();
 
   useEffect(() => {
     reloadBoards();
   }, [selectedBoard]);
-
+  useAutoLogout()
   return (
     <PageContainer>
       {selectedBoard ? (
@@ -31,15 +35,17 @@ const MainPage = () => {
           categories={selectedPreferences.DefaultCategories}
           expensesThemeColor={selectedPreferences.ExpensesThemeColor}
           userId={userId}
-          board={selectedBoard} 
+          board={selectedBoard}
         />
       ) : (
-        <BoardSelection 
-          boards={boards} 
+        <BoardSelection
+          boards={boards}
           reloadBoards={reloadBoards}
-          userId={userId} 
+          userId={userId}
         />
       )}
+      {showModal && <InactivityModal onClose={handleCloseModal} />}
+
     </PageContainer>
   );
 };

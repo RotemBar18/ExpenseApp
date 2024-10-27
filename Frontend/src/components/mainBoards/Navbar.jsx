@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { Home, DollarSign, BarChart2, FileText, Settings ,ArrowLeft  } from 'lucide-react';
+import { Home, DollarSign, BarChart2, FileText, Settings, ArrowLeft, LogOut } from 'lucide-react';
 import useAuth from '../../hooks/useAuth';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearPreferences } from '../../redux/actions/preferenceAction';
 import { clearBoard } from '../../redux/actions/boardActions';
 import { disconnectWebSocket } from '../../utils/websocketClient';
+import { logoutUser } from '../../redux/actions/userActions';
+
 const NavContainer = styled.nav`
   background-color: ${props => props.board ? props.theme.navBarBackground : '#333'}; 
   width: ${props => props.isOpen ? '200px' : '60px'};
@@ -113,9 +115,13 @@ const Navbar = () => {
   };
 
   const handleBackClick = () => {
-    dispatch(clearPreferences());  
-    dispatch(clearBoard());  
-    disconnectWebSocket();     
+    dispatch(clearPreferences());
+    dispatch(clearBoard());
+    disconnectWebSocket();
+  };
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
   };
 
   const navItems = [
@@ -130,11 +136,12 @@ const Navbar = () => {
   const altNavItems = [
     { name: 'MyBoards', icon: <Home size={24} />, path: '/main' },
     { name: 'Settings', icon: <Settings size={24} />, path: '/settings' },
+    { name: 'Logout', icon: <LogOut size={24} />, path: '/', func: handleLogout },
   ];
 
   return (
     <NavContainer isOpen={isOpen} board={board}>
-      <Logo onClick={toggleMenu}  board={board}> {isOpen ? 'Expense Tracker' : 'ET'}</Logo>
+      <Logo onClick={toggleMenu} board={board}> {isOpen ? 'Expense Tracker' : 'ET'}</Logo>
 
       {board ? (
         <>
@@ -171,6 +178,7 @@ const Navbar = () => {
               onClick={() => {
                 navigate(item.path);
                 if (window.innerWidth <= 764) setIsOpen(false);
+                if (item.func) item.func();
               }}
             >
               {item.icon}
