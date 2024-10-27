@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { formatDateForMySQL, formatToLocalDate } from '../../utils/utilService';
+import { formatDateForMySQL,  formatToLocalDate } from '../../utils/utilService';
 
 const ModalBack = styled.div`
   position: fixed;
@@ -183,7 +183,7 @@ const ExpenseModal = ({ categories, isOpen, onClose, onUpdate, initialData }) =>
   };
 
   const handleSubmit = (e) => {
-    onUpdate(expense);
+    onUpdate(expense,initialData);
     onClose();
     e.preventDefault();
   };

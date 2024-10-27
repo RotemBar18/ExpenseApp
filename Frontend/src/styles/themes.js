@@ -29,11 +29,14 @@ export const themes = {
       '#F0E68C',  // Khaki
       '#ADD8E6',  // Light Blue
       '#FFDAB9'   // Peach Puff
-   ],
+    ],
     tagBackground: '#42a5f5',
     tagColor: '#FFFFFF',
+    alertBg: '#dfe3e8', // Soft light grey
+    alertText: '#2e3a45', // Dark grey text
+    alertBorder: '#b0bec5', // Light grey border
   },
-   Dark : {
+  Dark: {
     name: 'Dark',
     background: '#1a1a1a',  // Matches BoardContainer background
     navBarBackground: '#2a2a2a',  // Slightly darker for the nav bar
@@ -63,9 +66,12 @@ export const themes = {
       '#DA70D6',  // Orchid
       '#20B2AA',  // Light Sea Green
       '#FF4500'   // Orange Red
-    ],   
+    ],
     tagBackground: '#42a5f5',  // Blue for tag background
-    tagColor: '#FFFFFF',  // White text for tags
+    tagColor: '#FFFFFF',
+    alertBg: '#2a2a2a', // Dark grey
+    alertText: '#f1f1f1', // White text
+    alertBorder: '#777777', // Medium grey border 
   },
 
   Green: {
@@ -98,9 +104,12 @@ export const themes = {
       '#8FBC8F',  // Dark Sea Green
       '#2E8B57',  // Sea Green
       '#7FFF00'   // Chartreuse
-   ],
+    ],
     tagBackground: '#42a5f5',
     tagColor: '#FFFFFF',
+    alertBg: '#e8f5e9', // Soft green
+  alertText: '#2e7d32', // Dark green text
+  alertBorder: '#a5d6a7', // Light green border
   },
   Blue: {
     name: 'Blue',
@@ -132,9 +141,12 @@ export const themes = {
       '#7B68EE',  // Medium Slate Blue
       '#6495ED',  // Cornflower Blue
       '#00CED1'   // Dark Turquoise
-   ],   
+    ],
     tagBackground: '#42a5f5',
     tagColor: '#FFFFFF',
+    alertBg: '#e1f5fe', // Light blue
+  alertText: '#1565c0', // Dark blue text
+  alertBorder: '#90caf9', // Light blue border
   },
   Red: {
     name: 'Red',
@@ -166,9 +178,12 @@ export const themes = {
       '#FF4040',  // Bright Red
       '#FF8C00',  // Dark Orange
       '#FA8072'   // Salmon
-   ],   
+    ],
     tagBackground: '#42a5f5',
     tagColor: '#FFFFFF',
+    alertBg: '#ffebee', // Soft red
+  alertText: '#c62828', // Dark red text
+  alertBorder: '#ef9a9a', // Light red border
   },
   Purple: {
     name: 'Purple',
@@ -200,9 +215,12 @@ export const themes = {
       '#FF00FF',  // Magenta
       '#9370DB',  // Medium Purple
       '#C71585'   // Medium Violet Red
-   ],   
+    ],
     tagBackground: '#42a5f5',
     tagColor: '#FFFFFF',
+    alertBg: '#f3e5f5', // Light purple
+  alertText: '#6a1b9a', // Dark purple text
+  alertBorder: '#ce93d8', // Light purple border
   },
   Teal: {
     name: 'Teal',
@@ -234,9 +252,12 @@ export const themes = {
       '#7FFFD4',  // Aquamarine
       '#66CDAA',  // Medium Aquamarine
       '#4682B4'   // Steel Blue
-   ],
+    ],
     tagBackground: '#42a5f5',
     tagColor: '#FFFFFF',
+    alertBg: '#e0f7fa', // Light teal
+  alertText: '#004d40', // Dark teal text
+  alertBorder: '#80cbc4', // Light teal border
   },
   Orange: {
     name: 'Orange',
@@ -268,9 +289,12 @@ export const themes = {
       '#FFDAB9',  // Peach Puff
       '#FFB347',  // Yellow Orange
       '#FFAE42'   // Yellow Orange (Deep)
-   ],   
+    ],
     tagBackground: '#42a5f5',
     tagColor: '#FFFFFF',
+    alertBg: '#ffccbc', // Soft orange
+  alertText: '#d84315', // Darker orange text
+  alertBorder: '#ffab91', // Light orange border
   },
   TealOrangeGrey: {
     name: 'TealOrangeGrey',
@@ -302,9 +326,12 @@ export const themes = {
       '#FF6347',  // Tomato
       '#D3D3D3',  // Light Gray
       '#B0C4DE'   // Light Steel Blue (touch of gray)
-   ],    
+    ],
     tagBackground: '#42a5f5',
     tagColor: '#FFFFFF',
+    alertBg: '#E0F2F1', // Soft teal
+  alertText: '#004D40', // Dark teal text
+  alertBorder: '#80CBC4', // Light teal border
   },
   BlueWhiteYellow: {
     name: 'BlueWhiteYellow',
@@ -336,9 +363,12 @@ export const themes = {
       '#FFEB3B',  // Bright Yellow
       '#6495ED',  // Cornflower Blue
       '#F0E68C'   // Khaki (Yellowish)
-   ],   
+    ],
     tagBackground: '#42a5f5',
     tagColor: '#FFFFFF',
+    alertBg: '#E3F2FD', // Light blue background
+    alertText: '#1A237E', // Dark blue text
+    alertBorder: '#BBDEFB', // Light blue border
   },
   DarkGreyPinkBlue: {
     name: 'DarkGreyPinkBlue',
@@ -370,9 +400,12 @@ export const themes = {
       '#6495ED',  // Cornflower Blue
       '#ADD8E6',  // Light Blue
       '#FFB6C1'   // Light Pink
-   ],   
+    ],
     tagBackground: '#42a5f5',
     tagColor: '#FFFFFF',
+    alertBg: '#FAFAFA', // Soft white background
+  alertText: '#424242', // Dark grey text
+  alertBorder: '#BDBDBD', // Light grey border
   },
 };
 

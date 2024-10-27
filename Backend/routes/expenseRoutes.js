@@ -52,7 +52,6 @@ router.post('/', async (req, res) => {
     };
 
     const formattedDate = getTodayDate(); 
-    
     try {
         const result = await req.db.query(
             'INSERT INTO expenses (Amount, Description, Category, Name, UserId, Date, ExpenseBoardId, isVisible) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',

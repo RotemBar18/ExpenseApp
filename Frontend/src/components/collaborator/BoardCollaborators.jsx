@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { fetchCollaborators, removeBoardCollaborator } from '../../utils/boardMembersService';
+import { addBoardCollaborator, removeBoardCollaborator } from '../../utils/boardMembersService';
 import { deleteBoard } from '../../utils/boardService';
 import { clearPreferences } from '../../redux/actions/preferenceAction';
 import { clearBoard } from '../../redux/actions/boardActions';
@@ -9,17 +9,17 @@ import AddCollaborator from './AddCollaborator';
 import CollaboratorCard from './CollaboratorCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { sendRemoveCollaboratorMessage } from '../../utils/websocketClient';
+import { sendRemoveCollaboratorMessage, sendAddCollaboratorMessage } from '../../utils/websocketClient';
+import useCollaborators from '../../hooks/useCollaborators';
 
 const CollaboratorsContainer = styled.div`
   display: flex;
-  flex-grow: 0;  /* Prevent growing to the full container width */
-  overflow: hidden; /* Prevent content spilling outside */
+  flex-grow: 0;
+  overflow: hidden;
   padding: 10px 0;
   align-items: center;
   width: 20%;
   padding-left:10px;
-
 `;
 
 const CollaboratorItem = styled.div`
@@ -27,7 +27,7 @@ const CollaboratorItem = styled.div`
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  transform: ${({ index }) => `translateX(${index * -50}%)`}; /* Dynamic translateX based on index */
+  transform: ${({ index }) => `translateX(${index * -50}%)`};
 `;
 
 const CollaboratorImage = styled.img`
@@ -36,8 +36,8 @@ const CollaboratorImage = styled.img`
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid ${(props) => (props.selectedBoard ? props.theme.border : '#00A86B')};
-  transition: transform 0.3s ease; /* Smooth transition */
-  
+  transition: transform 0.3s ease;
+
   &:hover {
     transform: scale(1.3);
   }
@@ -57,69 +57,58 @@ const AddCollaboratorButton = styled.button`
   cursor: pointer;
   opacity: 0.5;
   transform: ${({ collaboratorsLength }) => `translateX(${collaboratorsLength * -50}%)`};
-  transition: all 0.3s ease, transform 0.3s ease; /* Smooth transition for size and opacity */
+  transition: all 0.3s ease, transform 0.3s ease;
 
   &:hover {
     opacity: 1;
     background: #dddddd;
     border: 1px solid #bbbbbb;
-    transform: ${({ collaboratorsLength }) => `translateX(${collaboratorsLength * -50}%)`} scale(1.3); /* Scale the button by 1.3 on hover */
+    transform: ${({ collaboratorsLength }) => `translateX(${collaboratorsLength * -50}%)`} scale(1.3);
   }
 `;
 
 export default function BoardCollaborators({ board, reloadBoards }) {
   const { token, user } = useAuth();
   const navigate = useNavigate();
-  const selectedBoard = useSelector((state) => state.board.selectedBoard);
-  const [collaborators, setCollaborators] = useState([]);
+  const dispatch = useDispatch();
+  
+  const { collaborators, reloadCollaborators } = useCollaborators({ board });
   const [showAddCollaborator, setShowAddCollaborator] = useState(false);
   const [selectedCollaborator, setSelectedCollaborator] = useState(null);
-  const dispatch = useDispatch()
 
-  const refreshCollaborators = async () => {
+  useEffect(() => {
+    reloadCollaborators(board.ExpenseBoardId);
+  }, [board.ExpenseBoardId]);
+
+  const handleAddCollaborator = async (user,selectedUser,board) => {
     try {
-      const boardCollaborators = await fetchCollaborators(token, board.ExpenseBoardId);
-      if (JSON.stringify(boardCollaborators) !== JSON.stringify(collaborators)) {
-        setCollaborators(boardCollaborators);
-      }
+      await addBoardCollaborator(token, selectedUser.Id, board.ExpenseBoardId);
+      sendAddCollaboratorMessage(user, selectedUser, board);
+      reloadCollaborators(board.ExpenseBoardId);
     } catch (error) {
-      console.error('Error refreshing collaborators:', error);
+      console.error('Error adding collaborator:', error);
     }
   };
-  
-  useEffect(() => {
-    refreshCollaborators()
-  }, [collaborators,board.ExpenseBoardId, token]);
-
- 
 
   const handleRemoveCollaborator = async (collaborator) => {
     try {
       await removeBoardCollaborator(token, collaborator.UserId, board.ExpenseBoardId);
-      setCollaborators((prevCollaborators) =>
-        prevCollaborators.filter((col) => col.UserId !== collaborator.UserId)
-      );
-
       if (collaborators.length - 1 === 0) {
         await deleteBoard(board.ExpenseBoardId, token);
+        if (reloadBoards) reloadBoards();
       }
-      if (reloadBoards) {
-        reloadBoards();
-      }
-      if (collaborator.UserId === user.Id) {
-        handleBackClick()
-      }
-      sendRemoveCollaboratorMessage(user,collaborator,board)
-      refreshCollaborators()
+      if (collaborator.UserId === user.Id) handleBackClick();
+      sendRemoveCollaboratorMessage(user, collaborator, board);
+      reloadCollaborators(board.ExpenseBoardId);
     } catch (error) {
-      console.error('Error removing collaborator or deleting board:', error);
+      console.error('Error removing collaborator:', error);
     }
   };
 
   const handleBackClick = () => {
     dispatch(clearPreferences());
     dispatch(clearBoard());
-    navigate('/main')
+    navigate('/main');
   };
 
   const handleCollaboratorClick = (collaborator) => {
@@ -129,6 +118,7 @@ export default function BoardCollaborators({ board, reloadBoards }) {
   const closeCollaboratorModal = () => {
     setSelectedCollaborator(null);
   };
+
 
   return (
     <>
@@ -140,7 +130,7 @@ export default function BoardCollaborators({ board, reloadBoards }) {
             onClick={() => handleCollaboratorClick(collaborator)}
           >
             <CollaboratorImage
-              selectedBoard={selectedBoard}
+              selectedBoard={board}
               src={collaborator.ProfilePic || '/default_profile.png'}
               alt={collaborator.Name}
             />
@@ -162,7 +152,7 @@ export default function BoardCollaborators({ board, reloadBoards }) {
           board={board}
           user={user}
           closeModal={() => setShowAddCollaborator(false)}
-          onCollaboratorAdded={refreshCollaborators}
+          onCollaboratorAdded={handleAddCollaborator}
         />
       )}
 

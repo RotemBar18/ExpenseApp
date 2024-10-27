@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { fetchUsers } from '../../utils/userService';
-import { addBoardCollaborator } from '../../utils/boardMembersService';
 import useAuth from '../../hooks/useAuth';
 import { useSelector } from 'react-redux';
-import { sendAddCollaboratorMessage } from '../../utils/websocketClient';
 
 const Overlay = styled.div`
   position: fixed;
@@ -156,6 +154,7 @@ const AddCollaboratorModal = ({ board, onCollaboratorAdded, closeModal }) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [users, setUsers] = useState([]);
   const { user } = useAuth()
+  
   useEffect(() => {
     const fetchAllUsers = async () => {
       try {
@@ -184,17 +183,17 @@ const AddCollaboratorModal = ({ board, onCollaboratorAdded, closeModal }) => {
   };
 
   const handleUserSelect = (user) => {
+    console.log(user)
     setSelectedUser(user);
     setSearchTerm(user.Name);
     setSearchResults([]);
   };
 
   const handleAddCollaborator = async () => {
+    console.log(selectedUser)
     try {
       if (selectedUser) {
-        await addBoardCollaborator(token, selectedUser.Id, board.ExpenseBoardId);
-        onCollaboratorAdded();
-        sendAddCollaboratorMessage(user, selectedUser, board);
+        onCollaboratorAdded(user,selectedUser,board);
         setSearchTerm('');
         setSelectedUser(null);
         closeModal();

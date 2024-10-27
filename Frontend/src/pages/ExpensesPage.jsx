@@ -35,8 +35,8 @@ const Expenses = () => {
     deleteExpense(expense);
   };
 
-  const handleUpdateExpense = (expense) => {
-    updateExpense(expense);
+  const handleUpdateExpense = (expense,initialData) => {
+    updateExpense(expense,initialData);
   };
 
   return (

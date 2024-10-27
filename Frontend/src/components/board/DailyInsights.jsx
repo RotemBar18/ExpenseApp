@@ -108,7 +108,6 @@ const TotalAmount = styled.div`
 const DailyInsights = ({ users, expenses }) => {
   const today = new Date();
   useEffect(() => {
-    console.log("Expenses updated:", expenses);  // Log to check if re-renders
   }, [expenses]);
   const currentDateString = today.toLocaleDateString("en-CA");
 

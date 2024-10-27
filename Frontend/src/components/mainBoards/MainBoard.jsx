@@ -79,7 +79,6 @@ export default function MainBoard({ board, categories, expensesThemeColor, userI
   const handleAddExpense = async () => {
     try {
       setShowAddExpense(false);
-      reloadExpenses(board.ExpenseBoardId);
     } catch (error) {
       console.error('Error adding expense:', error);
     }

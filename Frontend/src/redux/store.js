@@ -5,6 +5,7 @@ import preferencesReducer from './reducers/preferencesReducer';
 import reportsReducer from './reducers/reportsReducer'; 
 import boardReducer from './reducers/boardReducer'; // Import the board reducer
 import expenseReducer from './reducers/expenseReducer';
+import collaboratorReducer from './reducers/collaboratorsReducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   reports: reportsReducer,
   board: boardReducer, 
   expenses: expenseReducer, 
+  collaborators:collaboratorReducer,
 });
 
 

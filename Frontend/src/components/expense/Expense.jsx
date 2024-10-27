@@ -4,7 +4,7 @@ import deleteIconBlack from "../assets/deleteBlack.png";
 import React from 'react';
 import { useState } from 'react';
 import ExpenseModal from './ExpenseModal'
-import { formatToLocalDatePresent } from '../../utils/utilService';
+import { formatToLocalDate, formatToLocalDatePresent } from '../../utils/utilService';
 
 const ExpenseContainer = styled.div`
 `

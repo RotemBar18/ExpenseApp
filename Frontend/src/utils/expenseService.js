@@ -18,6 +18,7 @@ export const fetchExpenses = async (token,Id) => {
 };
 
 export const addExpense = async (token, expense) => {
+    console.log(token,expense)
     try {
         const response = await axios.post(`${BASE_URL}/expenses`, expense, {
             headers: {
@@ -83,7 +84,6 @@ export const fetchExpensesForBoard = async (token, boardId) => {
                 'Authorization': `Bearer ${token}`
             }
         });
-        console.log('fetched:',response)
         return response.data;
     } catch (error) {
         console.error('Error fetching board expenses:', error);

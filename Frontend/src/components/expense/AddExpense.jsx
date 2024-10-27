@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { addExpense } from '../../utils/expenseService';
-import useAuth from '../../hooks/useAuth';
-import { sendAddExpenseMessage} from '../../utils/websocketClient'
-
+import useExpenses from '../../hooks/useExpenses';
 
 const AddExpenseContainer = styled.div`
   background-color: ${(props) => props.theme.background};
@@ -51,6 +48,7 @@ const ExpenseSelect = styled.select`
   color: ${({ value, theme }) => (value === '' ? theme.inputTextColor : 'black')};
   background-color: ${(props) => props.theme.inputBackground};
 `;
+
 const Buttons = styled.div`
   display: flex;
   justify-content: space-between;
@@ -87,17 +85,15 @@ const CloseButton = styled(ButtonBase)`
   }
 `;
 
-
-
-const AddExpense = ({ board,categories, userId, onAdd, onClose }) => {
+const AddExpense = ({ board, categories, userId, onAdd, onClose }) => {
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
-const {user} = useAuth()
+  const { addExpense } = useExpenses({ board }); // Use addExpense from hook
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const token = localStorage.getItem('token');
 
     const newExpense = {
       Name: name,
@@ -109,9 +105,8 @@ const {user} = useAuth()
     };
 
     try {
-      await addExpense(token, newExpense);
-      sendAddExpenseMessage(user, newExpense, board);
-      onAdd();
+      addExpense(newExpense); 
+      onAdd(); 
       setName('');
       setAmount('');
       setCategory('');
@@ -121,18 +116,16 @@ const {user} = useAuth()
     }
   };
 
-
-
   return (
     <AddExpenseContainer>
       <Header>Add New Expense</Header>
       <Form onSubmit={handleSubmit}>
-
         <ExpenseSelect
           name="category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          required>
+          required
+        >
           <option value="" disabled hidden>Select Category</option>
           {categories
             .filter((cat) => cat !== 'Manage Categories:   ')
@@ -150,9 +143,6 @@ const {user} = useAuth()
           onChange={(e) => setName(e.target.value)}
           required
         />
-
-
-
         <ExpenseInput
           type="number"
           name="amount"
@@ -167,15 +157,11 @@ const {user} = useAuth()
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-
         <Buttons>
           <AddButton type="submit">Add</AddButton>
           <CloseButton onClick={onClose}>Cancel</CloseButton>
         </Buttons>
-
       </Form>
-
-
     </AddExpenseContainer>
   );
 };

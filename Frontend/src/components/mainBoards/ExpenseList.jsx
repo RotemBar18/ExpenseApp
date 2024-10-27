@@ -199,8 +199,8 @@ const ExpenseList = ({ expenses, onDelete, onUpdate, categories }) => {
       expense.Category.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
-  const handleUpdate = (updatedExpense) => {
-    onUpdate(updatedExpense);
+  const handleUpdate = (updatedExpense,initialData) => {
+    onUpdate(updatedExpense,initialData);
   };
 
   const handleFilterApply = (newFilterOptions) => {
