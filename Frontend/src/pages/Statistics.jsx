@@ -39,10 +39,8 @@ background-color: ${(props) => props.theme.background};
 const Statistics = () => {
   const { userId } = useAuth();
   const board = useSelector((state) => state.board.selectedBoard); 
-  const { expenses, updateExpense, deleteExpense, reloadExpenses } = useExpenses({
-    boardId: board?.ExpenseBoardId, 
-    userId
-  });
+  const { expenses } = useExpenses({
+    board: board});
 
 
   return (

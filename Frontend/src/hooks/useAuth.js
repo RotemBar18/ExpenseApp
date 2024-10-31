@@ -24,7 +24,7 @@ const useAuth = () => {
         (Array.isArray(preferences.DefaultCategories) && preferences.DefaultCategories.length === 0))
     ) {
     }
-  }, [dispatch, token, userId, user.Id, preferences.DefaultCategories]);
+  }, [dispatch, token, userId, user.Id, preferences]);
 
   return { user, preferences, userId, token };
 };

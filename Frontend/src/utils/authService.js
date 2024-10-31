@@ -1,4 +1,5 @@
 import axios from 'axios';
+import axiosInstance from './axiosInstance';
 
 const BASE_URL = process.env.NODE_ENV === 'development'
     ? 'http://localhost:8081'
@@ -66,3 +67,23 @@ export const fetchUser = async (userId) => {
         throw error;
     }
 };
+
+export async function refreshAccessToken() {
+    const refreshToken = localStorage.getItem('refreshToken'); // Confirm retrieval
+    console.log("Retrieved Refresh Token:", refreshToken);
+    if (!refreshToken) {
+        throw new Error("No refresh token available");
+    }
+
+    try {
+        console.log(`Attempting refresh at: ${BASE_URL}/refresh-token`);
+        const response = await axios.post(`${BASE_URL}/refresh-token`, { refreshToken });
+        const newAccessToken = response.data.accessToken;
+        console.log("New Access Token:", newAccessToken);
+        localStorage.setItem('token', newAccessToken);
+        return newAccessToken;
+    } catch (error) {
+        console.error("Error refreshing access token:", error);
+        throw error;
+    }
+}

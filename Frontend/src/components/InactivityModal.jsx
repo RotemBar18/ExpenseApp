@@ -87,7 +87,7 @@ const InactivityModal = ({ onClose }) => (
       </IconWrapper>
       <ModalTitle>Session Expired</ModalTitle>
       <ModalMessage>For your security, you've been logged out due to inactivity.</ModalMessage>
-      <ModalMessage>Please log in again to continue your session.</ModalMessage>
+      <ModalMessage>Please log in again to continue.</ModalMessage>
       <ActionButton onClick={onClose}>Go to Login</ActionButton>
     </ModalContainer>
   </Overlay>

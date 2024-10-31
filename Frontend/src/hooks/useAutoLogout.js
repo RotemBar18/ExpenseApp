@@ -4,7 +4,9 @@ import { useDispatch } from 'react-redux';
 import { logoutUser } from '../redux/actions/userActions';
 import { useNavigate } from 'react-router-dom';
 
-const INACTIVITY_LIMIT = 1800000; // 1 hour in milliseconds
+const INACTIVITY_LIMIT = 1800000; 
+
+let logoutHandler;
 
 export const useAutoLogout = () => {
   const dispatch = useDispatch();
@@ -18,14 +20,17 @@ export const useAutoLogout = () => {
   };
 
   const handleAutoLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('token'); 
+    localStorage.removeItem('refreshToken'); 
     dispatch(logoutUser());
     setShowModal(true);
   };
 
+  logoutHandler = handleAutoLogout;
+
   const handleCloseModal = () => {
     setShowModal(false);
-    navigate('../');
+    navigate('/');
   };
 
   useEffect(() => {
@@ -47,3 +52,4 @@ export const useAutoLogout = () => {
 };
 
 export default useAutoLogout;
+export { logoutHandler };

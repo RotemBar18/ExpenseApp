@@ -4,8 +4,10 @@ import user_icon from "../assets/username.png";
 import password_icon from "../assets/password.png";
 import email_icon from "../assets/email.png";
 import { useNavigate } from "react-router-dom";
-import { handleAuthSubmit } from '../../utils/authHandlers'; 
-import { useDispatch } from "react-redux"; 
+import { handleAuthSubmit } from '../../utils/authHandlers';
+import { useDispatch } from "react-redux";
+import { clearBoard } from "../../redux/actions/boardActions";
+import { clearPreferences } from "../../redux/actions/preferenceAction";
 
 const PageContainer = styled.div`
   display: flex;
@@ -119,7 +121,7 @@ const SwitchMode = styled.div`
 const Signup = () => {
   const [action, setAction] = useState("Login");
   const navigate = useNavigate();
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -131,8 +133,14 @@ const Signup = () => {
     setPassword("");
   }, [action]);
 
-  const handleSubmit = (event) => {
-    handleAuthSubmit(event, action, email, password, name, navigate, dispatch, setAction); 
+  const handleSubmit = async (event) => {
+
+    if (action === 'Login') {
+        await dispatch(clearBoard());
+        await dispatch(clearPreferences());
+    }
+
+    handleAuthSubmit(event, action, email, password, name, navigate, dispatch, setAction);
   };
 
   const handleSwitch = (newAction) => {

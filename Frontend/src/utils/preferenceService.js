@@ -1,12 +1,14 @@
 import axios from 'axios';
 import { alterCategoriesToArray } from './utilService'
+import axiosInstance from './axiosInstance';
+
 const BASE_URL = process.env.NODE_ENV === 'development'
     ? 'http://localhost:8081'
     : 'https://expenseapp-production.up.railway.app';
 
 export const fetchPreferences = async (boardId, token) => {
     try {
-        const response = await axios.get(`${BASE_URL}/preferences/${boardId}`, {
+        const response = await axiosInstance.get(`/preferences/${boardId}`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
@@ -23,7 +25,7 @@ export const fetchPreferences = async (boardId, token) => {
 
 export const updatePreferences = async (boardId, token, preferences) => {
     try {
-        const response = await axios.put(`${BASE_URL}/preferences/${boardId}`, preferences, {
+        const response = await axiosInstance.put(`/preferences/${boardId}`, preferences, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
@@ -48,7 +50,7 @@ export const createDefaultPreferences = async (boardId) => {
     };
 
     try {
-        const response = await axios.post(`${BASE_URL}/preferences/${boardId}`, defaultPreferences, {
+        const response = await axiosInstance.post(`/preferences/${boardId}`, defaultPreferences, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',

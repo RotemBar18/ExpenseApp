@@ -9,6 +9,7 @@ const LayoutContainer = styled.div`
   display: flex;
   height:100%;
 
+  flex-direction: ${props => props.selectedBoard ? 'row':'column'};
   @media (max-width: 450px) {
     flex-direction:column;
   }
@@ -41,7 +42,7 @@ const Layout = () => {
   const selectedBoard = useSelector((state) => state.board.selectedBoard); // Get selectedBoard from Redux
 
   return (
-    <LayoutContainer>
+    <LayoutContainer selectedBoard={selectedBoard}>
       <Navbar />
       <Content>
         {selectedBoard && <WebSocketClient />} {/* Only render WebSocketClient if selectedBoard exists */}

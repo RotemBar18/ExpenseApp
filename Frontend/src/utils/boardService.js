@@ -2,6 +2,7 @@ import axios from 'axios';
 import { fetchBoardPreferences } from '../redux/actions/preferenceAction';
 import { createDefaultPreferences } from './preferenceService';
 import { addBoardCollaborator } from './boardMembersService'
+import axiosInstance from './axiosInstance';
 const BASE_URL = process.env.NODE_ENV === 'development'
     ? 'http://localhost:8081'
     : 'https://expenseapp-production.up.railway.app';
@@ -10,7 +11,7 @@ const BASE_URL = process.env.NODE_ENV === 'development'
 
 export const fetchBoards = async (token, userId) => {
     try {
-        const response = await axios.get(`${BASE_URL}/boards/${userId}`, {
+        const response = await axiosInstance.get(`/boards/${userId}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -24,7 +25,7 @@ export const fetchBoards = async (token, userId) => {
 
 export const fetchBoardById = async (boardId) => {
     try {
-        const response = await axios.get(`${BASE_URL}/boards/${boardId}`);
+        const response = await axiosInstance.get(`/boards/${boardId}`);
         dispatch(fetchBoardPreferences(boardId, token));
         return response.data;
     } catch (error) {
@@ -36,7 +37,7 @@ export const fetchBoardById = async (boardId) => {
 
 export const createBoard = async (token, boardName, OwnerId) => {
     try {
-        const boardResponse = await axios.post(`${BASE_URL}/boards/`,
+        const boardResponse = await axiosInstance.post(`/boards/`,
             { boardName, OwnerId },
             {
                 headers: {
@@ -65,7 +66,7 @@ export const updateBoard = async (boardId, updatedData, token) => {
     }
 
     try {
-        const response = await axios.put(`${BASE_URL}/boards/${boardId}`, updatedData, {
+        const response = await axiosInstance.put(`/boards/${boardId}`, updatedData, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
@@ -83,7 +84,7 @@ export const updateBoard = async (boardId, updatedData, token) => {
 };
 export const deleteBoard = async (boardId, token) => {
     try {
-        const response = await axios.delete(`${BASE_URL}/boards/${boardId}`,  {
+        const response = await axiosInstance.delete(`/boards/${boardId}`,  {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',

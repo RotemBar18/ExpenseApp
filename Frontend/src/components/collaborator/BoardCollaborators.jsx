@@ -18,8 +18,8 @@ const CollaboratorsContainer = styled.div`
   overflow: hidden;
   padding: 10px 0;
   align-items: center;
-  width: 20%;
   padding-left:10px;
+  justify-content: center;
 `;
 
 const CollaboratorItem = styled.div`
@@ -35,7 +35,7 @@ const CollaboratorImage = styled.img`
   height: 30px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid ${(props) => (props.selectedBoard ? props.theme.border : '#00A86B')};
+  border: 1px solid ${(props) => (props.selectedBoard ? props.theme.border : '#00A86B')};
   transition: transform 0.3s ease;
 
   &:hover {
@@ -60,10 +60,10 @@ const AddCollaboratorButton = styled.button`
   transition: all 0.3s ease, transform 0.3s ease;
 
   &:hover {
-    opacity: 1;
-    background: #dddddd;
-    border: 1px solid #bbbbbb;
-    transform: ${({ collaboratorsLength }) => `translateX(${collaboratorsLength * -50}%)`} scale(1.3);
+    opacity: 0.8;
+    background: #ffffff;
+    border: 1px solid #aaaaaa;
+    transform: ${({ collaboratorsLength }) => `translateX(${collaboratorsLength * -50}%)` } scale(1.2);
   }
 `;
 
@@ -71,8 +71,7 @@ export default function BoardCollaborators({ board, reloadBoards }) {
   const { token, user } = useAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
-  const { collaborators, reloadCollaborators } = useCollaborators({ board });
+  const { collaborators, reloadCollaborators, loading } = useCollaborators({ board });
   const [showAddCollaborator, setShowAddCollaborator] = useState(false);
   const [selectedCollaborator, setSelectedCollaborator] = useState(null);
 

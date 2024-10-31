@@ -26,8 +26,7 @@ const MainPage = () => {
 
   useEffect(() => {
     reloadBoards();
-  }, [selectedBoard]);
-  useAutoLogout()
+  }, [selectedBoard, showModal]);
   return (
     <PageContainer>
       {selectedBoard ? (

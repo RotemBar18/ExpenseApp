@@ -1,11 +1,13 @@
 import axios from 'axios';
+import axiosInstance from './axiosInstance';
+
 const BASE_URL = process.env.NODE_ENV === 'development' 
     ? 'http://localhost:8081' 
     : 'https://expenseapp-production.up.railway.app';
 
 export const fetchExpenses = async (token,Id) => {
     try {
-        const response = await axios.get(`${BASE_URL}/expenses/${Id}`, {
+        const response = await axiosInstance.get(`/expenses/${Id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -18,9 +20,8 @@ export const fetchExpenses = async (token,Id) => {
 };
 
 export const addExpense = async (token, expense) => {
-    console.log(token,expense)
     try {
-        const response = await axios.post(`${BASE_URL}/expenses`, expense, {
+        const response = await axiosInstance.post(`/expenses`, expense, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
@@ -34,7 +35,7 @@ export const addExpense = async (token, expense) => {
 };
 export const deleteExpenseById = async (token, expenseId) => {
     try {
-        const response = await axios.delete(`${BASE_URL}/expenses/${expenseId}`, {
+        const response = await axiosInstance.delete(`/expenses/${expenseId}`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
             }
@@ -48,7 +49,7 @@ export const deleteExpenseById = async (token, expenseId) => {
 
 export const updateExpenseById = async (token, expense) => {
     try {
-        const response = await axios.put(`${BASE_URL}/expenses/${expense.ExpenseId}`, expense, {
+        const response = await axiosInstance.put(`/expenses/${expense.ExpenseId}`, expense, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
@@ -79,7 +80,7 @@ export const totalMonthExpenses = (expenses) => {
 
 export const fetchExpensesForBoard = async (token, boardId) => {
     try {
-        const response = await axios.get(`${BASE_URL}/expenses/${boardId}`, {
+        const response = await axiosInstance.get(`/expenses/${boardId}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

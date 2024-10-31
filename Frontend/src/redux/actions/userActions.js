@@ -30,4 +30,7 @@ export const updateUserProfile = (userId, token, updatedUserData) => async (disp
 export const logoutUser = () => (dispatch) => {
   dispatch({ type: 'LOGOUT_USER' });
   localStorage.removeItem('token');
+  localStorage.removeItem('selectedBoard');
+  localStorage.removeItem('preferences');
+  localStorage.removeItem('refreshToken');
 };

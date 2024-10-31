@@ -13,7 +13,7 @@ justify-content: space-around;
 
 `;
 const StatsBoard = ({ expenses }) => {
-
+console.log(expenses)
     return (
         <StatsBoardContainer>
             <DailyExpensesChart expenses={expenses} />

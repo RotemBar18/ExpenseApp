@@ -4,16 +4,23 @@ import { getUserIdFromToken } from './jwtService';
 
 export const handleAuthSubmit = async (event, action, email, password, name, navigate, dispatch, setAction) => {
     event.preventDefault();
+    localStorage.removeItem('selectedBoard');
+    localStorage.removeItem('preferences');
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
+
     try {
       if (action === "Login") {
+       
         const response = await login(email, password);
   
   
         if (response.success) {
-          const { token } = response;
+          const { token,refreshToken } = response;
           const userId = getUserIdFromToken(token)
   
           localStorage.setItem('token', token);
+          localStorage.setItem('refreshToken', refreshToken);
 
           dispatch(fetchUserData(userId, token));
           

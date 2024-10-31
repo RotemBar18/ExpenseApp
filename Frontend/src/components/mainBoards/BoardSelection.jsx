@@ -1,150 +1,182 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { selectBoard } from '../../redux/actions/boardActions';
 import { fetchBoardPreferences } from '../../redux/actions/preferenceAction';
 import { createBoard } from '../../utils/boardService';
-import { Plus, X, ChevronRight } from 'lucide-react';
+import { Plus, ChevronRight, ChevronLeft, X, ChevronDown } from 'lucide-react';
 import BoardCollaborators from '../collaborator/BoardCollaborators';
-import { sendJoinBoardMessage } from '../../utils/websocketClient'; 
+import { sendJoinBoardMessage } from '../../utils/websocketClient';
 import useAuth from '../../hooks/useAuth';
 
 const BoardContainer = styled.div`
-  background: #1a1a1a;
-  color: #ffffff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  width: 100%;
-  max-width: 100%; /* Ensures no content leaking */
-  height: 100vh; /* Restricting container height */
+  background: #f9f9f9;
+  color: #333;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  height: 100%;
   display: flex;
   flex-direction: column;
+  width: 100%;
   margin: auto;
-
+  align-items: center;
+  position: relative;
 `;
 
 const Title = styled.h3`
   font-size: 1.5rem;
-  margin-bottom: 1.5rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  border-bottom: 2px solid #00A86B;
-  padding-bottom: 0.5rem;
+  color: ${(props) => props.theme.primary || '#4A90E2'};
   text-align: center;
+  margin: 2rem 0;
 `;
 
 const BoardListContainer = styled.div`
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  border: 1px solid #2a2a2a;
-  border-radius: 5px;
-  &::-webkit-scrollbar {
-  width: 8px;
-}
-
-&::-webkit-scrollbar-track {
-  background: ${(props) => props.theme.scrollBarTrack};
-  border-radius: 10px;
-  
-  
-}
-
-&::-webkit-scrollbar-thumb {
-  background:#00A86B;
-  border-radius: 10px;
-  
-}
-
-&::-webkit-scrollbar-thumb:hover {
-  background: ${(props) => props.theme.scrollBarThumbHover || props.theme.scrollBarThumb};
-  cursor: pointer;
-}
-`;
-
-const BoardList = styled.ul`
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  padding-right: 10px;
-
-`;
-
-const BoardItem = styled.li`
-  display: flex;
-  align-items: center;
-  background: #2a2a2a;
-  margin-bottom: 0.5rem;
-  padding: 1rem;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  &:hover {
-    background: #00A86B;
-    color: #fff;
-    
-  }
-
-`;
-
-const BoardImage = styled.img`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 1rem;
-  object-fit: cover;
-`;
-
-const BoardName = styled.span`
-width :70%;
-  font-size: 1.1rem;
-  font-weight: 500;
-`;
-
-const CreateBoardButton = styled.button`
-  background: #00A86B;
-  color: white;
-  border: none;
-  padding: 0.75rem 1rem;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
-  letter-spacing: 1px;
   width: 100%;
+  max-width: 600px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
 
-  &:hover {
-    background: #008080;
-  }
+`;
+
+const BoardItem = styled.div`
+  display: flex;
+  height:250px;
+  flex-direction: column;
+  background: #fff;
+  min-width: 100%;
+  max-width: 100%;
+  transition: transform 0.3s ease;
+cursor:pointer;
+`;
+
+const BoardHeader = styled.div`
+display:flex;
+gap:10px;
+align-items: center;
+
+`;
+const BoardImage = styled.img`
+width: 100px;
+height: 100px;
+padding: 20px;
+border-radius: 50%;
+margin-bottom: 1rem;
+object-fit: cover;
+`;
+
+const BoardName = styled.span`
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: ${(props) => props.theme.textColor || '#333'};
+  margin-bottom: 0.5rem;
+`;
+
+const ArrowButton = styled.button`
+  background: none;
+  border: none;
+  color: ${(props) => props.theme.primary || '#4A90E2'};
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  ${(props) => (props.direction === 'left' ? 'left: 10px;' : 'right: 10px;')}
+  z-index: 10;
+  font-size: 2rem;
 
   &:disabled {
-    background: #4a4a4a;
+    color: #ccc;
     cursor: not-allowed;
   }
 `;
 
-const FormContainer = styled.div`
+const FloatingButton = styled.button`
+  background: ${(props) => props.theme.primary || '#4A90E2'};
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 50%;
+  cursor: pointer;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    background: ${(props) => props.theme.primaryHover || '#357ABD'};
+  }
+`;
+const FormContainer = styled.div`
+  z-index: 2500; /* Ensure it's on top of ModalOptionBack */
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
-  padding:10px
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+  max-width: 350px;
+  width: 100%;
 `;
 
 const Input = styled.input`
-  flex-grow: 1;
-  padding: 0.75rem;
-  border: none;
-  border-radius: 5px;
-  background: #2a2a2a;
-  color: white;
+  padding: 0.6rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f0f0f0;
   font-size: 1rem;
+  color: #333;
+  transition: border-color 0.3s ease;
 
   &:focus {
-    outline: 2px solid #00A86B;
+    outline: none;
+    border-color: ${(props) => props.theme.primary || '#4A90E2'};
+    background-color: #fff;
+    box-shadow: 0 0 6px rgba(0, 122, 255, 0.2);
   }
 `;
 
-const IconWrapper = styled.span`
-  margin-right: 0.5rem;
+const CreateBoardButton = styled.button`
+  background: ${(props) => props.theme.primary || '#4A90E2'};
+  color: #ffffff;
+  border: none;
+  padding: 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background 0.3s ease, transform 0.2s ease;
+  
+  &:hover {
+    background: ${(props) => props.theme.primaryHover || '#357ABD'};
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 122, 255, 0.3);
+  }
+
+  &:disabled {
+    background: #e0e0e0;
+    color: #999;
+    cursor: not-allowed;
+  }
+`;
+const ModalOptionBack = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity:0;
+  z-index: 2000; /* Ensure it's on top of ModalOptionBack */
+  background-color: rgba(0, 0, 0, 0.2);
 `;
 
 export default function BoardSelection({ boards, reloadBoards, userId }) {
@@ -153,7 +185,19 @@ export default function BoardSelection({ boards, reloadBoards, userId }) {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [boardName, setBoardName] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const {user} = useAuth()
+  const { user } = useAuth();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  useEffect(() => {
+    console.log('here')
+    const savedIndex = localStorage.getItem('currentIndex');
+    if (savedIndex !== null) {
+      setCurrentIndex(Number(savedIndex));
+    }
+  }, []);
+  useEffect(() => {
+    localStorage.setItem('currentIndex', currentIndex);
+  }, [currentIndex]);
+
   const handleCreateBoard = async () => {
     if (!boardName) return;
     setIsSubmitting(true);
@@ -171,57 +215,68 @@ export default function BoardSelection({ boards, reloadBoards, userId }) {
 
   const handleBoardChoice = async (board) => {
     try {
-      // Wait for both dispatches to complete before proceeding
       await dispatch(fetchBoardPreferences(board.ExpenseBoardId, token));
       await dispatch(selectBoard(board));
-      
-      // Once dispatches are done, send the WebSocket message
       sendJoinBoardMessage(user, board);
     } catch (error) {
       console.error('Error handling board choice:', error);
     }
   };
-  
+
+  const goToPrevious = () => {
+    setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex < boards.length - 1 ? prevIndex + 1 : prevIndex));
+  };
+
   return (
     <BoardContainer>
       <Title>Select a Board</Title>
-
       <BoardListContainer>
-        <BoardList>
-          {boards.map((board) => (
-            <BoardItem key={board.ExpenseBoardId} onClick={() => handleBoardChoice(board)}>
-              <BoardImage src={board.ProfilePic || '/placeholder.svg?height=40&width=40'} alt="Board Profile" />
-              <BoardName>{board.Name}</BoardName>
-              <BoardCollaborators reloadBoards={reloadBoards} board={board }/>
-              <ChevronRight size={20} />
-            </BoardItem>
-          ))}
-        </BoardList>
+        <ArrowButton direction="left" onClick={goToPrevious} disabled={currentIndex === 0}>
+          <ChevronLeft />
+        </ArrowButton>
+        <BoardItem key={boards[currentIndex]?.ExpenseBoardId} onClick={() => handleBoardChoice(boards[currentIndex])}>
+          <BoardHeader>
+            <BoardImage src={boards[currentIndex]?.ProfilePic || '/placeholder.svg?height=40&width=40'} alt="Board Profile" />
+            <BoardName>{boards[currentIndex]?.Name}</BoardName>
+          </BoardHeader>
+          {boards[currentIndex] && (<BoardCollaborators reloadBoards={reloadBoards} board={boards[currentIndex]} />)}
+          <ChevronDown size={20} style={{alignSelf: 'center'}}/>
+        </BoardItem>
+        <ArrowButton direction="right" onClick={goToNext} disabled={currentIndex === boards.length - 1}>
+          <ChevronRight />
+        </ArrowButton>
       </BoardListContainer>
 
       {!showCreateForm && (
-        <CreateBoardButton onClick={() => setShowCreateForm(true)}>
-          <IconWrapper><Plus size={18} /></IconWrapper>
-          Create New Board
-        </CreateBoardButton>
+        <FloatingButton onClick={() => setShowCreateForm(true)}>
+          <Plus size={18} />
+        </FloatingButton>
       )}
 
       {showCreateForm && (
-        <FormContainer>
-          <Input
-            type="text"
-            placeholder="Enter Board Name"
-            value={boardName}
-            onChange={(e) => setBoardName(e.target.value)}
-          />
-          <CreateBoardButton disabled={isSubmitting} onClick={handleCreateBoard}>
-            {isSubmitting ? 'Creating...' : 'Create'}
-          </CreateBoardButton>
-          <CreateBoardButton onClick={() => setShowCreateForm(false)}>
-            <X size={18} />
-          </CreateBoardButton>
-        </FormContainer>
+        <>
+          <ModalOptionBack onClick={(e) => {
+            e.stopPropagation();
+            setShowCreateForm(false);
+          }} />
+          <FormContainer>
+            <Input
+              type="text"
+              placeholder="Enter Board Name"
+              value={boardName}
+              onChange={(e) => setBoardName(e.target.value)}
+            />
+            <CreateBoardButton disabled={isSubmitting} onClick={handleCreateBoard}>
+              {isSubmitting ? 'Creating...' : 'Create'}
+            </CreateBoardButton>
+          </FormContainer>
+        </>
       )}
+
     </BoardContainer>
   );
 }

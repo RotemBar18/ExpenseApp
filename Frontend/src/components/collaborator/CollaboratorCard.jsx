@@ -1,6 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import useAuth from '../../hooks/useAuth';
+
+const fadeInSlideDown = keyframes`
+  0% {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -8,7 +19,7 @@ const ModalBackground = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,111 +27,130 @@ const ModalBackground = styled.div`
 `;
 
 const ModalContent = styled.div`
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
+  background-color: #f8f9fa;
+  padding: 25px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  max-width: 500px;
-  width: 100%;
+  align-items: center;
+  max-width: 480px;
+  width: 90%;
+  animation: ${fadeInSlideDown} 0.4s ease-out;
+  /* Adjust padding and width for smaller screens */
+  @media (max-width: 600px) {
+    padding: 20px;
+    max-width: 90%;
+  }
 `;
 
 const CollaboratorImage = styled.img`
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #00A86B;
-`;
-
-const CollaboratorDetails = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  margin-bottom: 20px;
+  border: 3px solid #1abc9c;
+  /* Smaller image size for mobile */
+  @media (max-width: 600px) {
+    width: 70px;
+    height: 70px;
+  }
 `;
 
 const CollaboratorName = styled.h3`
-  margin: 0;
-  font-size: 1.2rem;
+  margin: 10px 0 5px;
+  font-size: 1.6rem;
+  color: #2c3e50;
+  font-weight: 600;
+  text-align: center;
+  /* Adjust font size for mobile */
+  @media (max-width: 600px) {
+    font-size: 1.4rem;
+  }
 `;
 
 const CollaboratorEmail = styled.p`
-  font-size: 0.9rem;
-  color: #555;
-`;
-
-const RemoveButton = styled.button`
-  background-color: red;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: darkred;
-  }
-`;
-
-const CloseButton = styled.button`
-  background-color: #333;
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #555;
-  }
-`;
-
-const Text = styled.span`
   font-size: 1rem;
+  color: #7f8c8d;
+  margin: 0;
+  text-align: center;
+  /* Adjust font size for mobile */
+  @media (max-width: 600px) {
+    font-size: 0.9rem;
+  }
+`;
+
+const Button = styled.button`
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 15px;
+  width: 100%;
+  max-width: 200px;
+  transition: background-color 0.3s ease;
+  /* Adjust padding and font size for mobile */
+  @media (max-width: 600px) {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    max-width: 160px;
+  }
+`;
+
+const RemoveButton = styled(Button)`
+  background-color: #e74c3c;
+  color: #fff;
+  &:hover {
+    background-color: #c0392b;
+  }
+`;
+
+const CloseButton = styled(Button)`
+  background-color: #95a5a6;
+  color: #fff;
+  &:hover {
+    background-color: #7f8c8d;
+  }
 `;
 
 const CollaboratorCard = ({ board, collaborator, onRemove, onClose }) => {
-    const { user } = useAuth(); 
+  const { user } = useAuth();
 
-    const onRemoveBtn = (collaborator) => {
-        onRemove(collaborator);
-        onClose();
-    };
+  const onRemoveBtn = () => {
+    onRemove(collaborator);
+    onClose();
+  };
 
-    const handleClose = (e) => {
-        e.stopPropagation();
-        onClose();
-    };
+  const onCloseBtn = (e) => {
+    e.stopPropagation()
+    onClose();
+  };
 
-    const shouldRenderRemoveButton = user.Id === board.OwnerId || user.Id === collaborator.UserId;
+  const shouldRenderRemoveButton = user.Id === board.OwnerId || user.Id === collaborator.UserId;
 
-    return (
-        <ModalBackground onClick={handleClose}>
-            <ModalContent onClick={(e) => e.stopPropagation()}>
-                <CollaboratorImage
-                    src={collaborator.ProfilePic || '/default_profile.png'}
-                    alt={collaborator.Name}
-                />
-                <CollaboratorDetails>
-                    <CollaboratorName>{collaborator.Name}</CollaboratorName>
-                    <CollaboratorEmail>{collaborator.Email}</CollaboratorEmail>
-                </CollaboratorDetails>
+  return (
+    <ModalBackground onClick={(e) => onCloseBtn(e)}>
+      <ModalContent onClick={(e) => e.stopPropagation()}>
+        <CollaboratorImage
+          src={collaborator.ProfilePic || '/default_profile.png'}
+          alt={collaborator.Name}
+        />
+        <CollaboratorName>{collaborator.Name}</CollaboratorName>
+        <CollaboratorEmail>{collaborator.Email}</CollaboratorEmail>
 
-                {shouldRenderRemoveButton && (
-                    <RemoveButton onClick={() => onRemoveBtn(collaborator)}>
-                        {user.Id === collaborator.UserId ? (
-                            <Text>Remove Myself</Text>
-                        ) : (
-                            <Text>Remove {collaborator.Name}</Text>
-                        )}
-                    </RemoveButton>
-                )}
+        {shouldRenderRemoveButton && (
+          <RemoveButton onClick={onRemoveBtn}>
+            {user.Id === collaborator.UserId ? "Remove Myself" : `Remove ${collaborator.Name}`}
+          </RemoveButton>
+        )}
 
-                <CloseButton onClick={onClose}>Close</CloseButton>
-            </ModalContent>
-        </ModalBackground>
-    );
+        <CloseButton onClick={onClose}>Close</CloseButton>
+      </ModalContent>
+    </ModalBackground>
+  );
 };
 
 export default CollaboratorCard;

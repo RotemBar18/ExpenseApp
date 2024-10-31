@@ -4,7 +4,7 @@ const cors = require('cors');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const dbConnection = require('./utils/db.js');
-const { jwtSecret } = require('./config/config.js');
+const { jwtSecret, refreshSecret } = require('./config/config.js');
 const expenseRoutes = require('./routes/expenseRoutes');
 const preferencesRoutes = require('./routes/prefrencesRoutes');
 const reportsRoutes = require('./routes/reportsRoutes.js');
@@ -12,6 +12,7 @@ const boardsRoutes = require('./routes/boardsRoutes.js');
 const boardMembersRoutes = require('./routes/boardMemberRoutes.js');
 const http = require('http');
 const { setupWebSocketServer } = require('./websocketServer'); // Importing WebSocket server setup
+const authenticateToken = require('./middleware/auth');
 const port = 8081
 // Create an Express app and HTTP server
 const app = express();
@@ -34,7 +35,6 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
     let requestSize = 0;
 
-    // Log size for JSON body
     if (req.body) {
         const bodyString = JSON.stringify(req.body);
         requestSize = Buffer.byteLength(bodyString, 'utf8');
@@ -49,24 +49,45 @@ app.use((req, res, next) => {
 
 app.use('/expenses', (req, res, next) => {
     next();
-}, expenseRoutes);
+}, authenticateToken, expenseRoutes);
 
 app.use('/preferences', (req, res, next) => {
     next();
-}, preferencesRoutes);
+}, authenticateToken, preferencesRoutes);
 
 app.use('/reports', (req, res, next) => {
     next();
-}, reportsRoutes);
+}, authenticateToken, reportsRoutes);
 
 app.use('/boards', (req, res, next) => {
     next();
-}, boardsRoutes);
+}, authenticateToken, boardsRoutes);
 
 app.use('/boardmembers', (req, res, next) => {
     next();
-}, boardMembersRoutes);
+}, authenticateToken, boardMembersRoutes);
 
+app.post('/refresh-token', (req, res) => {
+    const refreshToken = req.body.refreshToken; // Get refresh token from request body
+
+    // Check if refresh token is provided
+    if (!refreshToken) {
+        return res.status(403).json({ message: "Refresh Token required" });
+    }
+
+    // Verify the refresh token
+    jwt.verify(refreshToken, refreshSecret, (err, user) => {
+        if (err) {
+            return res.status(403).json({ message: "Invalid Refresh Token" });
+        }
+
+        // Generate a new JWT (access token)
+        const newAccessToken = jwt.sign({ userId: user.userId }, jwtSecret, { expiresIn: '15m' });
+
+        // Send the new access token back to the client
+        res.json({ accessToken: newAccessToken });
+    });
+});
 
 app.get("/users", async (req, res) => {
     const sql = "SELECT Id, Name, ProfilePic FROM users";
@@ -119,8 +140,11 @@ app.post('/login', async (req, res) => {
 
         if (results.length > 0) {
             const userId = results[0].Id;
-            const token = jwt.sign({ userId }, jwtSecret, { expiresIn: '6h' });
-            return res.status(200).json({ success: true, token });
+
+            const token = jwt.sign({ userId }, jwtSecret, { expiresIn: '15m' });
+            const refreshToken = jwt.sign({ userId }, refreshSecret, { expiresIn: '7d' });
+
+            return res.status(200).json({ success: true, token, refreshToken });
         } else {
             return res.status(400).json({ success: false, message: 'Invalid email or password.' });
         }

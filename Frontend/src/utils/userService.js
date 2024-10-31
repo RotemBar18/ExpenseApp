@@ -1,4 +1,5 @@
 import axios from 'axios';
+import axiosInstance from './axiosInstance';
 
 const BASE_URL = process.env.NODE_ENV === 'development' 
     ? 'http://localhost:8081' 
@@ -9,7 +10,7 @@ const BASE_URL = process.env.NODE_ENV === 'development'
 
 export const fetchUser = async (userId, token) => {
     try {
-      const response = await axios.get(`${BASE_URL}/users/Id/${userId}`, {
+      const response = await  axiosInstance.get(`/users/Id/${userId}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -29,7 +30,7 @@ export const fetchUser = async (userId, token) => {
       updatedUserData.ProfilePic = ''
   }
     try {
-      const response =  await axios.put(`${BASE_URL}/users/${userId}`,updatedUserData,
+      const response =  await  axiosInstance.put(`/users/${userId}`,updatedUserData,
         {
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -51,7 +52,7 @@ export const fetchUser = async (userId, token) => {
 
   export const fetchUsers = async (token) => {
     try {
-      const response = await axios.get(`${BASE_URL}/users`, {
+      const response = await  axiosInstance.get(`/users`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
