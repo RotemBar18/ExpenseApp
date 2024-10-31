@@ -6,7 +6,7 @@ import useBoards from '../hooks/useBoards';
 import useAuth from '../hooks/useAuth';
 import BoardSelection from '../components/mainBoards/BoardSelection';
 import useAutoLogout from '../hooks/useAutoLogout';
-import InactivityModal from '../components/inactivityModal';
+import InactivityModal from '../components/InactivityModal';
 
 
 const PageContainer = styled.div`
