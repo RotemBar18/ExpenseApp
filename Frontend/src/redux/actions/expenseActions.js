@@ -7,7 +7,7 @@ export const DELETE_EXPENSE_SUCCESS = 'DELETE_EXPENSE_SUCCESS';
 export const UPDATE_EXPENSE_SUCCESS = 'UPDATE_EXPENSE_SUCCESS';
 export const SET_LOADING = 'SET_LOADING';
 export const SET_ERROR = 'SET_ERROR';
-
+export const CLEAR_EXPENSES = 'CLEAR_EXPENSES';
 // Action creators
 export const fetchExpensesSuccess = (expenses) => ({
     type: FETCH_EXPENSES_SUCCESS,
@@ -39,6 +39,11 @@ export const setError = (error) => ({
     payload: error,
 });
 
+export const clearExpenses = () => {
+    return {
+        type: CLEAR_EXPENSES,
+    };
+};
 // Thunks
 export const fetchExpensesForBoardAction = (boardId) => async (dispatch) => {
     const token = localStorage.getItem('token');

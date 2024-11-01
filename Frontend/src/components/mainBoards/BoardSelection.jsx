@@ -173,6 +173,12 @@ const ModalOptionBack = styled.div`
   background-color: rgba(0, 0, 0, 0.2);
 `;
 
+const NoBoardsMessage = styled.div`
+  text-align: center;
+  font-size: 1.2rem;
+  color: ${(props) => props.theme.textColor || '#333'};
+  margin-top: 20px;
+`;
 export default function BoardSelection({ boards, reloadBoards, userId }) {
   const dispatch = useDispatch();
   const token = localStorage.getItem('token');
@@ -227,28 +233,36 @@ export default function BoardSelection({ boards, reloadBoards, userId }) {
 
   return (
     <BoardContainer>
-      <Title>Select a Board</Title>
-      <BoardListContainer>
+      {boards.length === 0 ? (
+        <NoBoardsMessage>
+          No boards available. Click below to add a new board.
+        </NoBoardsMessage>) : (
+        <>
+          <Title>Select a Board</Title>
 
-        <ArrowButton direction="left" onClick={goToPrevious} disabled={currentIndex === 0}>
-          <ChevronLeft />
-        </ArrowButton>
+          <BoardListContainer>
 
-        <BoardItem key={boards[currentIndex]?.ExpenseBoardId} onClick={() => handleBoardChoice(boards[currentIndex])}>
-          <BoardHeader>
-            <BoardImage src={boards[currentIndex]?.ProfilePic || '/placeholder.svg?height=40&width=40'} alt="Board Profile" />
-            <BoardName>{boards[currentIndex]?.Name}</BoardName>
-          </BoardHeader>
-          {boards[currentIndex] && (<BoardCollaborators reloadBoards={reloadBoards} board={boards[currentIndex]} />)}
-          <ChevronDown size={20} style={{ alignSelf: 'center' }} />
-        </BoardItem>
+            <ArrowButton direction="left" onClick={goToPrevious} disabled={currentIndex === 0}>
+              <ChevronLeft />
+            </ArrowButton>
 
-        <ArrowButton direction="right" onClick={goToNext} disabled={currentIndex === boards.length - 1}>
-          <ChevronRight />
-        </ArrowButton>
+            <BoardItem key={boards[currentIndex]?.ExpenseBoardId} onClick={() => handleBoardChoice(boards[currentIndex])}>
+              <BoardHeader>
+                <BoardImage src={boards[currentIndex]?.ProfilePic || '/placeholder.svg?height=40&width=40'} alt="Board Profile" />
+                <BoardName>{boards[currentIndex]?.Name}</BoardName>
+              </BoardHeader>
+              {boards[currentIndex] && (<BoardCollaborators reloadBoards={reloadBoards} board={boards[currentIndex]} />)}
+              <ChevronDown size={20} style={{ alignSelf: 'center' }} />
+            </BoardItem>
 
-      </BoardListContainer>
+            <ArrowButton direction="right" onClick={goToNext} disabled={currentIndex === boards.length - 1}>
+              <ChevronRight />
+            </ArrowButton>
 
+          </BoardListContainer>
+        </>
+
+      )}
       {!showCreateForm && (
         <FloatingButton onClick={() => setShowCreateForm(true)}>
           <Plus size={18} />

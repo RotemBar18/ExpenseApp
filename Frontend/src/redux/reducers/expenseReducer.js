@@ -1,6 +1,7 @@
 import {
     FETCH_EXPENSES_SUCCESS,
     ADD_EXPENSE_SUCCESS,
+    CLEAR_EXPENSES,
     DELETE_EXPENSE_SUCCESS,
     UPDATE_EXPENSE_SUCCESS,
     SET_LOADING,
@@ -32,6 +33,10 @@ const expenseReducer = (state = initialState, action) => {
                 ...state,
                 expenses: state.expenses.filter((expense) => expense.ExpenseId !== action.payload),
                 error: null,
+            };
+        case CLEAR_EXPENSES:
+            return {
+                ...initialState,
             };
         case UPDATE_EXPENSE_SUCCESS:
             return {

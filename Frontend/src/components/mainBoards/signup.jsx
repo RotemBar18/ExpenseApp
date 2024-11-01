@@ -8,14 +8,13 @@ import { handleAuthSubmit } from '../../utils/authHandlers';
 import { useDispatch } from "react-redux";
 import { clearBoard } from "../../redux/actions/boardActions";
 import { clearPreferences } from "../../redux/actions/preferenceAction";
+import { clearExpenses } from "../../redux/actions/expenseActions";
 
 const PageContainer = styled.div`
-  display: flex;
 `;
 
 const FormContainer = styled.div`
   background: rgba(255, 255, 255, 0.8);
-  padding: 40px 50px;
   border-radius: 20px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   z-index: 1;
@@ -30,7 +29,6 @@ const Header = styled.div`
 `;
 
 const Title = styled.h1`
-  color: #fff;
   font-size: 40px;
   font-family: 'Poppins', sans-serif;
   color: #334e68;
@@ -45,18 +43,16 @@ const Underline = styled.div`
 `;
 
 const Inputs = styled.div`
-  width: 100%;
 `;
 
 const Input = styled.div`
   display: flex;
   align-items: center;
-  margin: 15px 0;
-  width: 100%;
+  margin-bottom: 15px ;
   height: 50px;
+  padding:0 10px;
   background: #f5f5f5;
   border-radius: 30px;
-  padding: 0 15px;
   box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
@@ -107,8 +103,8 @@ const SubmitButton = styled.button`
 `;
 
 const SwitchMode = styled.div`
-  margin-top: 20px;
-  color: #fff;
+margin: 20px 0;
+  color: #334e68;
   font-size: 14px;
   text-align: center;
   cursor: pointer;
@@ -136,8 +132,11 @@ const Signup = () => {
   const handleSubmit = async (event) => {
 
     if (action === 'Login') {
-        await dispatch(clearBoard());
-        await dispatch(clearPreferences());
+      await dispatch(clearBoard());
+      await dispatch(clearPreferences());
+      await dispatch(clearExpenses());
+      localStorage.setItem('currentIndex', 0)
+
     }
 
     handleAuthSubmit(event, action, email, password, name, navigate, dispatch, setAction);

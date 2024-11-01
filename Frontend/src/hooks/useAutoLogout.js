@@ -22,6 +22,7 @@ export const useAutoLogout = () => {
   const handleAutoLogout = () => {
     localStorage.removeItem('token'); 
     localStorage.removeItem('refreshToken'); 
+    localStorage.removeItem('currentIndex')
     dispatch(logoutUser());
     setShowModal(true);
   };
