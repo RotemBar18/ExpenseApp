@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { formatDateForMySQL,  formatToLocalDate } from '../../utils/utilService';
+import { formatDateForMySQL, formatToLocalDate } from '../../utils/utilService';
 
 const ModalBack = styled.div`
   position: fixed;
@@ -18,24 +18,22 @@ const ModalBack = styled.div`
 const BoardContainer = styled.div`
   border-radius: 10px;
   display: flex;
+  position: relative;
   flex-direction: column;
   background: ${(props) => props.theme.modalBackground};
   padding: 20px;
-  width: 90%; 
-  max-width: 400px; 
-  max-height: 90%;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-  position: relative;
-  overflow-y: auto; 
-
-  @media (max-width: 768px) {
-    width: 95%; 
+  width: 70%; 
+  max-height: 70%;
+flex-wrap: wrap;
+  
+@media (max-width: 768px) {
+    width: 90%; 
     padding: 15px;
   }
 
-  @media (max-width: 480px) {
-    width: 100%; 
-    padding: 10px; 
+  @media (max-width: 500px) {
+  max-height: 90%;
+
   }
       &::-webkit-scrollbar {
     width: 6px;
@@ -66,6 +64,7 @@ const CloseButton = styled.button`
   font-size: 16px;
   cursor: pointer;
   color: ${(props) => props.theme.modalTextColor};
+   
 `;
 
 const DetailSection = styled.div`
@@ -76,6 +75,7 @@ const DetailSection = styled.div`
 
   @media (max-width: 480px) {
     padding: 8px; 
+    
       }
 `;
 
@@ -101,6 +101,7 @@ const DetailInput = styled.input`
   @media (max-width: 480px) {
     font-size: 14px;
     padding: 6px;
+    width:100%;
   }
 `;
 
@@ -116,6 +117,8 @@ const DetailSelect = styled.select`
   @media (max-width: 480px) {
     font-size: 14px;
     padding: 6px;
+    width:105%;
+
   }
 `;
 
@@ -131,6 +134,8 @@ const DetailText = styled.textarea`
   @media (max-width: 480px) {
     font-size: 14px;
     padding: 6px;
+    width:100%;
+
   }
 `;
 
@@ -143,6 +148,9 @@ const ButtonGroup = styled.div`
     justify-content: center; 
     gap: 5px; 
   }
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 `;
 
 const Button = styled.button`
@@ -183,7 +191,7 @@ const ExpenseModal = ({ categories, isOpen, onClose, onUpdate, initialData }) =>
   };
 
   const handleSubmit = (e) => {
-    onUpdate(expense,initialData);
+    onUpdate(expense, initialData);
     onClose();
     e.preventDefault();
   };

@@ -23,6 +23,8 @@ const NavContainer = styled.nav`
   @media (max-width: 450px) {
     flex-direction: row;
     width: 100%;
+  height:10%;
+
   }
 `;
 
@@ -33,7 +35,7 @@ const Logo = styled.div`
   white-space: nowrap;
   cursor:${props => props.board ? 'pointer' : 'default'};
   padding: ${props => props.board ? '20px 0' : '0'};
-
+margin-left: ${props => props.board ? '0' : '10px'};
   @media (max-width: 450px) {
     margin-bottom: 0;
   }
@@ -167,6 +169,7 @@ const Navbar = () => {
   const toggleUserModal = () => {
     setToggleModal(!toggleModal)
   };
+
   const navItems = [
     { name: board ? board.Name : 'Board', icon: <NotepadText size={24} />, path: '/main' },
     { name: 'Expenses', icon: <DollarSign size={24} />, path: '/expenses' },
@@ -233,10 +236,20 @@ const Navbar = () => {
                   <ModalOptionBack onClick={(e) => {
                     e.stopPropagation();
                     toggleUserModal();
-                  }} />                  <UserModal>
-                    <ModalOption onClick={() => navigate('/settings')}><Settings size={20} />Settings</ModalOption>
-                    <ModalOption onClick={handleLogout}><LogOut size={20} />Logout</ModalOption>
-
+                  }} />
+                  <UserModal>
+                    <ModalOption onClick={() => {
+                      navigate('/settings')
+                      toggleUserModal();
+                    }}>
+                      <Settings size={20} />Settings
+                    </ModalOption>
+                    <ModalOption onClick={() => {
+                      handleLogout();
+                      toggleUserModal();
+                    }}>
+                      <LogOut size={20} />Logout
+                    </ModalOption>
                   </UserModal>
                 </>
 

@@ -10,23 +10,36 @@ const Overlay = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 3000;
+  animation: fadeIn 0.3s ease;
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
 `;
 
 const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${(props) =>
-    props.selectedBoard ? props.theme.modalBackground : '#333'};
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  width: 400px;
+    props.selectedBoard ? props.theme.modalBackground : '#ffffff'};
+  padding: 20px 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 450px;
   z-index: 1001;
+  animation: slideIn 0.3s ease;
+
+  @keyframes slideIn {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
 `;
 
 const ModalHeader = styled.div`
@@ -37,10 +50,10 @@ const ModalHeader = styled.div`
 
 const Title = styled.h2`
   color: ${(props) =>
-    props.selectedBoard ? props.theme.modalTextColor : '#fff'};
-  font-size: 1.2rem;
+    props.selectedBoard ? props.theme.modalTextColor : '#333'};
+  font-size: 1.4rem;
   font-weight: bold;
-  margin-bottom: 15px;
+  margin: 0;
 `;
 
 const CloseButton = styled.button`
@@ -48,103 +61,102 @@ const CloseButton = styled.button`
   border: none;
   font-size: 1.5rem;
   color: ${(props) =>
-    props.selectedBoard ? props.theme.closeButtonColor : '#aaa'};
+    props.selectedBoard ? props.theme.closeButtonColor : '#999'};
   cursor: pointer;
 
   &:hover {
     color: ${(props) =>
-    props.selectedBoard ? props.theme.closeButtonHoverColor : '#fff'};
+    props.selectedBoard ? props.theme.closeButtonHoverColor : '#000'};
   }
 `;
 
 const UserBox = styled.div`
   display: flex;
-  justify-content: space-between;
+  gap: 10px;
+  margin-top: 15px;
+  width: 100%;
+  align-items: center;
 `;
 
 const AddCollaboratorInput = styled.input`
-  padding: 8px;
-  margin-bottom: 15px;
-  width: 40%;
+  flex-grow: 1;
+  padding: 10px;
   border: 1px solid
-    ${(props) => (props.selectedBoard ? props.theme.inputBorderColor : '#555')};
-  border-radius: 4px;
-  font-size: 0.9rem;
+    ${(props) => (props.selectedBoard ? props.theme.inputBorderColor : '#ddd')};
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
 
   &:focus {
     outline: none;
     border-color: ${(props) =>
     props.selectedBoard ? props.theme.inputFocusBorderColor : '#007bff'};
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
   }
 `;
 
 const SelectedUser = styled.div`
   display: flex;
   gap: 5px;
-  margin-bottom: 10px;
   align-items: center;
-  flex-grow: 1;
-  justify-content: center;
 `;
 
 const AddButton = styled.button`
   background-color: ${(props) =>
-    props.selectedBoard ? props.theme.buttonBackground : '#00A86B'};
+    props.selectedBoard ? props.theme.buttonBackground : '#007bff'};
   color: ${(props) =>
-    props.selectedBoard ? props.theme.buttonTextColor : '#fff'};
+    props.selectedBoard ? props.theme.buttonTextColor : '#ffffff'};
   border: none;
-  padding: 10px;
-  width: 100%;
+  padding: 12px;
   font-size: 1rem;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 8px;
   font-weight: bold;
+  width: 100%;
+  margin-top: 20px;
+  transition: background 0.3s ease;
 
   &:hover {
     background-color: ${(props) =>
-    props.selectedBoard ? props.theme.buttonHoverBackground : '#22cc88'};
-      transform: scale(0.95);
+    props.selectedBoard ? props.theme.buttonHoverBackground : '#0056b3'};
+    transform: scale(0.98);
   }
-
 `;
 
 const SuggestionsList = styled.ul`
   list-style-type: none;
   padding: 0;
-  margin: 0;
+  margin: 10px 0;
   background: ${(props) =>
-    props.selectedBoard ? props.theme.suggestionsBackground : '#444'};
+    props.selectedBoard ? props.theme.suggestionsBackground : '#f8f9fa'};
   border: 1px solid
-    ${(props) => (props.selectedBoard ? props.theme.suggestionsBorder : '#555')};
-  border-radius: 4px;
-  width: 100%;
+    ${(props) => (props.selectedBoard ? props.theme.suggestionsBorder : '#ddd')};
+  border-radius: 6px;
   max-height: 150px;
   overflow-y: auto;
-  margin-bottom:10px;
 `;
 
 const SuggestionItem = styled.li`
   display: flex;
   align-items: center;
-  padding: 8px;
+  padding: 10px;
   cursor: pointer;
-  font-size: 0.85em;
+  font-size: 0.95em;
   color: ${(props) =>
-    props.selectedBoard ? props.theme.suggestionTextColor : '#fff'};
+    props.selectedBoard ? props.theme.suggestionTextColor : '#333'};
 
   &:hover {
     background-color: ${(props) =>
-    props.selectedBoard ? props.theme.suggestionHoverBackground : '#555'};
+    props.selectedBoard ? props.theme.suggestionHoverBackground : '#e9ecef'};
   }
 `;
 
 const ProfilePic = styled.img`
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   margin-right: 10px;
 `;
-
 
 const AddCollaboratorModal = ({ board, onCollaboratorAdded, closeModal }) => {
   const { token } = useAuth();

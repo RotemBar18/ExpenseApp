@@ -82,7 +82,7 @@ app.post('/refresh-token', (req, res) => {
         }
 
         // Generate a new JWT (access token)
-        const newAccessToken = jwt.sign({ userId: user.userId }, jwtSecret, { expiresIn: '15m' });
+        const newAccessToken = jwt.sign({ userId: user.userId }, jwtSecret, { expiresIn: '30m' });
 
         // Send the new access token back to the client
         res.json({ accessToken: newAccessToken });
@@ -141,7 +141,7 @@ app.post('/login', async (req, res) => {
         if (results.length > 0) {
             const userId = results[0].Id;
 
-            const token = jwt.sign({ userId }, jwtSecret, { expiresIn: '15m' });
+            const token = jwt.sign({ userId }, jwtSecret, { expiresIn: '30m' });
             const refreshToken = jwt.sign({ userId }, refreshSecret, { expiresIn: '7d' });
 
             return res.status(200).json({ success: true, token, refreshToken });

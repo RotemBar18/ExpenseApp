@@ -14,12 +14,13 @@ import useCollaborators from '../../hooks/useCollaborators';
 
 const CollaboratorsContainer = styled.div`
   display: flex;
+  width: fit-content;
   flex-grow: 0;
   overflow: hidden;
   padding: 10px 0;
   align-items: center;
   padding-left:10px;
-  justify-content: center;
+  justify-content:${(props) => (props.selectedBoard ?'flex-start':'center')};
 `;
 
 const CollaboratorItem = styled.div`
@@ -121,7 +122,7 @@ export default function BoardCollaborators({ board, reloadBoards }) {
 
   return (
     <>
-      <CollaboratorsContainer onClick={(e) => e.stopPropagation()}>
+      <CollaboratorsContainer selectedBoard={board} onClick={(e) => e.stopPropagation()}>
         {collaborators.map((collaborator, index) => (
           <CollaboratorItem
             key={collaborator.UserId}

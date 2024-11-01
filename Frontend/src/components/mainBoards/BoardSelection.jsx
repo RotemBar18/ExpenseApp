@@ -12,12 +12,10 @@ import useAuth from '../../hooks/useAuth';
 const BoardContainer = styled.div`
   background: #f9f9f9;
   color: #333;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   height: 100%;
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin: auto;
   align-items: center;
   position: relative;
 `;
@@ -31,26 +29,25 @@ const Title = styled.h3`
 `;
 
 const BoardListContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 600px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 20px;
-
+ display:flex;
+ justify-content:space-around;
+ width:100%;
 `;
 
 const BoardItem = styled.div`
   display: flex;
-  height:250px;
+  max-height:200px;
+  padding:10px;
   flex-direction: column;
   background: #fff;
-  min-width: 100%;
-  max-width: 100%;
   transition: transform 0.3s ease;
-cursor:pointer;
+  cursor:pointer;
+  width: 400px;
+  border-radius: 20px;
+  justify-content: space-between;
+      &:hover {
+    background-color: ${(props) => props.theme.buttonHoverBackground || '#fff'};
+  }
 `;
 
 const BoardHeader = styled.div`
@@ -61,8 +58,8 @@ align-items: center;
 `;
 const BoardImage = styled.img`
 width: 100px;
+padding:10px;
 height: 100px;
-padding: 20px;
 border-radius: 50%;
 margin-bottom: 1rem;
 object-fit: cover;
@@ -80,9 +77,6 @@ const ArrowButton = styled.button`
   border: none;
   color: ${(props) => props.theme.primary || '#4A90E2'};
   cursor: pointer;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   ${(props) => (props.direction === 'left' ? 'left: 10px;' : 'right: 10px;')}
   z-index: 10;
   font-size: 2rem;
@@ -235,20 +229,24 @@ export default function BoardSelection({ boards, reloadBoards, userId }) {
     <BoardContainer>
       <Title>Select a Board</Title>
       <BoardListContainer>
+
         <ArrowButton direction="left" onClick={goToPrevious} disabled={currentIndex === 0}>
           <ChevronLeft />
         </ArrowButton>
+
         <BoardItem key={boards[currentIndex]?.ExpenseBoardId} onClick={() => handleBoardChoice(boards[currentIndex])}>
           <BoardHeader>
             <BoardImage src={boards[currentIndex]?.ProfilePic || '/placeholder.svg?height=40&width=40'} alt="Board Profile" />
             <BoardName>{boards[currentIndex]?.Name}</BoardName>
           </BoardHeader>
           {boards[currentIndex] && (<BoardCollaborators reloadBoards={reloadBoards} board={boards[currentIndex]} />)}
-          <ChevronDown size={20} style={{alignSelf: 'center'}}/>
+          <ChevronDown size={20} style={{ alignSelf: 'center' }} />
         </BoardItem>
+
         <ArrowButton direction="right" onClick={goToNext} disabled={currentIndex === boards.length - 1}>
           <ChevronRight />
         </ArrowButton>
+
       </BoardListContainer>
 
       {!showCreateForm && (
