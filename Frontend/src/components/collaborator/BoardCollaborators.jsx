@@ -68,7 +68,7 @@ const AddCollaboratorButton = styled.button`
   }
 `;
 
-export default function BoardCollaborators({ board, reloadBoards }) {
+export default function BoardCollaborators({ board, reloadBoards ,currentIndex}) {
   const { token, user } = useAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -158,6 +158,8 @@ export default function BoardCollaborators({ board, reloadBoards }) {
 
       {selectedCollaborator && (
         <CollaboratorCard
+        reloadBoards={reloadBoards}
+        currentIndex={currentIndex}
           board={board}
           collaborator={selectedCollaborator}
           onRemove={handleRemoveCollaborator}

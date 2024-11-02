@@ -187,13 +187,14 @@ export default function BoardSelection({ boards, reloadBoards, userId }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { user } = useAuth();
   const [currentIndex, setCurrentIndex] = useState(0);
+  
   useEffect(() => {
-    console.log('here')
     const savedIndex = localStorage.getItem('currentIndex');
     if (savedIndex !== null) {
       setCurrentIndex(Number(savedIndex));
     }
-  }, []);
+  }, [boards]);
+
   useEffect(() => {
     localStorage.setItem('currentIndex', currentIndex);
   }, [currentIndex]);
@@ -204,6 +205,7 @@ export default function BoardSelection({ boards, reloadBoards, userId }) {
     try {
       await createBoard(token, boardName, userId);
       setBoardName('');
+      setCurrentIndex(boards.length)
       setShowCreateForm(false);
       reloadBoards();
     } catch (error) {
@@ -251,7 +253,7 @@ export default function BoardSelection({ boards, reloadBoards, userId }) {
                 <BoardImage src={boards[currentIndex]?.ProfilePic || '/placeholder.svg?height=40&width=40'} alt="Board Profile" />
                 <BoardName>{boards[currentIndex]?.Name}</BoardName>
               </BoardHeader>
-              {boards[currentIndex] && (<BoardCollaborators reloadBoards={reloadBoards} board={boards[currentIndex]} />)}
+              {boards[currentIndex] && (<BoardCollaborators reloadBoards={reloadBoards} currentIndex={currentIndex} board={boards[currentIndex]} />)}
               <ChevronDown size={20} style={{ alignSelf: 'center' }} />
             </BoardItem>
 

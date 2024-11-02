@@ -11,106 +11,115 @@ import { clearPreferences } from "../../redux/actions/preferenceAction";
 import { clearExpenses } from "../../redux/actions/expenseActions";
 
 const PageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  height: 100%;
 `;
 
 const FormContainer = styled.div`
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 20px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
   z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 350px;
+  justify-content: center;
 `;
 
 const Header = styled.div`
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 `;
 
 const Title = styled.h1`
-  font-size: 40px;
+  font-size: 28px;
   font-family: 'Poppins', sans-serif;
-  color: #334e68;
+  color: #ffffff; // White color to stand out on dark background
+  margin: 0;
 `;
 
 const Underline = styled.div`
-  width: 50px;
-  height: 4px;
-  background: #6c91c2;
+  width: 40px;
+  height: 3px;
+  background: #6c91c2; // Matches the blue accent color from your theme
   border-radius: 9px;
-  margin: 10px auto;
+  margin: 8px auto;
 `;
 
 const Inputs = styled.div`
+  width: 100%;
 `;
 
 const Input = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 15px ;
-  height: 50px;
-  padding:0 10px;
-  background: #f5f5f5;
-  border-radius: 30px;
-  box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 12px;
+  height: 45px;
+  padding: 0 8px;
+  background: rgba(255, 255, 255, 0.1); // Light transparent input background
+  border-radius: 20px;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.2);
 `;
 
 const StyledInput = styled.input`
-  width: 90%;
+  width: 85%;
   background: transparent;
   border: none;
   outline: none;
-  font-size: 16px;
-  color: #333;
-  padding-left: 10px;
+  font-size: 14px;
+  color: #ffffff; // White input text color
+  padding-left: 8px;
 
   &::placeholder {
-    color: #bdbdbd;
+    color: #d3d3d3; // Light gray for placeholders
   }
 `;
 
 const Icon = styled.img`
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1); // Inverts the color to match dark background
 `;
 
 const SubmitContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 15px;
 `;
 
 const SubmitButton = styled.button`
-  background-color: #6c91c2;
-  color: #fff;
-  padding: 15px 30px;
-  border-radius: 30px;
+  background-color: #6c91c2; // Blue color matching the overall theme
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 20px;
   border: none;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
-  width: 200px;
+  width: 160px;
 
   &:hover {
-    background-color: #5583a9;
+    background-color: #5583a9; // Slightly darker blue on hover
   }
 
   &:active {
-    transform: translateY(3px);
+    transform: translateY(2px);
   }
 `;
 
 const SwitchMode = styled.div`
-margin: 20px 0;
-  color: #334e68;
-  font-size: 14px;
+  margin: 15px 0;
+  color: #d3d3d3; // Light gray text color for switch mode
+  font-size: 12px;
   text-align: center;
   cursor: pointer;
 
   &:hover {
     text-decoration: underline;
+    color: #ffffff; // White color on hover for emphasis
   }
 `;
 
@@ -130,13 +139,13 @@ const Signup = () => {
   }, [action]);
 
   const handleSubmit = async (event) => {
+    event.preventDefault();
 
     if (action === 'Login') {
       await dispatch(clearBoard());
       await dispatch(clearPreferences());
       await dispatch(clearExpenses());
-      localStorage.setItem('currentIndex', 0)
-
+      localStorage.setItem('currentIndex', 0);
     }
 
     handleAuthSubmit(event, action, email, password, name, navigate, dispatch, setAction);

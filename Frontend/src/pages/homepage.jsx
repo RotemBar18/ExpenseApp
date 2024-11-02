@@ -27,6 +27,7 @@ const PageContainer = styled.div`
   position: relative;
   color: #fff;
   overflow-y: auto;
+  overflow-x: hidden;
 
   &::before {
     content: "";
@@ -35,37 +36,41 @@ const PageContainer = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom right, rgba(50, 50, 70, 0.4), rgba(20, 20, 40, 0.3));
+    background: linear-gradient(to bottom right, rgba(50, 50, 70, 0.1), rgba(20, 20, 40, 0.3));
     z-index: 0;
+    
   }
 `;
 
 
-const MainContent = styled.div`
-  display: flex;
-  align-items: center;
-  max-width: 1200px;
-  padding: 1.5rem;
-  z-index: 1;
-  height: 100vh;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: center;
-    overflow-y: auto;
-  }
-`;
 
 const InfoSection = styled.div`
   text-align: left;
-  padding-right: 1.5rem;
   animation: ${fadeIn} 1s ease forwards;
 display: flex;
+height:100vh;
+    padding: 1rem;
+
     flex-direction: column;
-  @media (max-width: 768px) {
+  
+    @media (max-width: 768px) {
     width: 100%;
-    padding-right: 0;
     text-align: center;
+
+  }
+
+`;
+
+const MainContent = styled.div`
+display:flex;
+font-size:1rem;
+gap: 1rem;
+
+  @media (max-width: 768px) {
+flex-direction:column;
+  align-items: center;
+
   }
 `;
 
@@ -94,8 +99,12 @@ const InfoCardContainer = styled.div`
   }
 `;
 
+const cardContainer = styled.div`
+  filter:blur(1px)
+}
+`;
 const InfoCard = styled.div`
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.22);
   padding: 1rem;
   border-radius: 12px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
@@ -103,8 +112,7 @@ const InfoCard = styled.div`
   align-items: center;
   gap: 0.8rem;
   color: #ffffff;
-backdrop-filter: blur(5px);
--webkit-backdrop-filter: blur(5px);
+}
 `;
 
 const IconWrapper = styled.div`
@@ -123,29 +131,35 @@ const InfoText = styled.p`
 `;
 
 const SignupSection = styled.div`
-  width: 35%;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.22);
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.3);
   animation: ${fadeIn} 1s ease forwards;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+
 
   @media (max-width: 768px) {
-    width: 90%;
-    margin-top: 1.5rem;
+  width: 90%;
+  margin-bottom: 1rem;
+
   }
 `;
 
 const HomePage = () => {
   return (
     <PageContainer>
-      <MainContent>
-        <InfoSection>
-          <HeroTitle>Welcome to Expense Tracker</HeroTitle>
-          <HeroSubtitle>
-            Track, manage, and optimize your finances with ease. Collaborate with your team, set budgets, and gain insights into your spending.
-          </HeroSubtitle>
+      <InfoSection>
+        <HeroTitle>Welcome to Expense Tracker</HeroTitle>
+        <HeroSubtitle>
+          Track, manage, and optimize your finances with ease. Collaborate with your team, set budgets, and gain insights into your spending.
+        </HeroSubtitle>
+        <MainContent>
+
           <InfoCardContainer>
+
             <InfoCard>
               <IconWrapper><FaChartLine /></IconWrapper>
               <div>
@@ -183,11 +197,13 @@ const HomePage = () => {
               </div>
             </InfoCard>
           </InfoCardContainer>
-        </InfoSection>
-        <SignupSection>
-          <Signup />
-        </SignupSection>
-      </MainContent>
+          <SignupSection>
+            <Signup />
+          </SignupSection>
+
+        </MainContent>
+      </InfoSection>
+
     </PageContainer>
   );
 };
