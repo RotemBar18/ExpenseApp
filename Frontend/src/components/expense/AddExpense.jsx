@@ -10,6 +10,7 @@ const AddExpenseContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding:10px;
+  
 `;
 
 const Form = styled.form`

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { saveReport } from '../../redux/actions/reportsActions';
 import useAuth from '../../hooks/useAuth';
 import useExpenses from '../../hooks/useExpenses';
-import { filterCategories, filterYears, filterExpenses, filterMonths, createNewReport,} from '../../utils/reportService';
+import { filterCategories, filterYears, filterExpenses, filterMonths, createNewReport, } from '../../utils/reportService';
 
 const ModalBack = styled.div`
   position: fixed;
@@ -90,7 +90,7 @@ const Button = styled.button`
 
   &:hover {
     background-color: ${(props) =>
-      props.primary ? props.theme.primaryHoverColor || '#0056b3' : props.theme.secondaryHoverColor || '#5a6268'};
+    props.primary ? props.theme.primaryHoverColor || '#0056b3' : props.theme.secondaryHoverColor || '#5a6268'};
     transform: translateY(-2px);
   }
 
@@ -121,8 +121,12 @@ const SelectStyled = styled(Select)`
 const CreateReportModal = ({ onClose }) => {
   const dispatch = useDispatch();
   const { userId, token } = useAuth();
-  const { expenses } = useExpenses(userId);
-
+  const board = useSelector((state) => state.board.selectedBoard);
+  const boardId = board.ExpenseBoardId
+  const { expenses } = useExpenses({board});
+  
+  console.log(board)
+  console.log(expenses)
   const [reportName, setReportName] = useState('');
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedMonths, setSelectedMonths] = useState([]);
@@ -196,7 +200,7 @@ const CreateReportModal = ({ onClose }) => {
       filteredExpenses
     );
 
-    dispatch(saveReport(userId, newReport, token));
+    dispatch(saveReport(boardId,userId, newReport, token));
     onClose();
   };
 

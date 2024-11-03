@@ -6,11 +6,11 @@ import {
     deleteReport,
   } from '../../utils/reportsService';
   
-  export const fetchUserReports = (userId, token) => async (dispatch) => {
+  export const fetchBoardReports = (boradId, token) => async (dispatch) => {
     dispatch({ type: 'LOADING_REPORTS' });
   
     try {
-      const reportsData = await fetchReports(userId, token);
+      const reportsData = await fetchReports(boradId, token);
   
       dispatch({ type: 'SET_REPORTS_DATA', payload: reportsData });
     } catch (error) {
@@ -19,11 +19,11 @@ import {
     }
   };
   
-  export const fetchSingleReport = (userId, reportId, token) => async (dispatch) => {
+  export const fetchSingleReport = (boradId, reportId, token) => async (dispatch) => {
     dispatch({ type: 'LOADING_REPORT' });
   
     try {
-      const reportData = await fetchReportById(userId, reportId, token);
+      const reportData = await fetchReportById(boradId, reportId, token);
   
       dispatch({ type: 'SET_SINGLE_REPORT_DATA', payload: reportData });
     } catch (error) {
@@ -32,12 +32,13 @@ import {
     }
   };
   
-  export const saveReport = (userId, reportData, token) => async (dispatch) => {
+  export const saveReport = (boradId,userId, reportData, token) => async (dispatch) => {
     dispatch({ type: 'SAVING_REPORT' });
   
     try {
-      const createdReport = await createReport(userId, reportData, token);
-  
+  console.log(reportData)
+
+      const createdReport = await createReport(boradId,userId, reportData, token);
       if (createdReport) {
         dispatch({ type: 'ADD_REPORT', payload: createdReport });
       } else {
@@ -49,11 +50,11 @@ import {
     }
   };
   
-  export const updateExistingReport = (userId, reportId, updatedReportData, token) => async (dispatch) => {
+  export const updateExistingReport = (boradId, reportId, updatedReportData, token) => async (dispatch) => {
     dispatch({ type: 'UPDATING_REPORT' });
   
     try {
-      const response = await updateReport(userId, reportId, updatedReportData, token);
+      const response = await updateReport(boradId, reportId, updatedReportData, token);
   
       if (response.success) {
         dispatch({ type: 'UPDATE_REPORT', payload: response.updatedReport });
@@ -66,11 +67,11 @@ import {
     }
   };
   
-  export const deleteExistingReport = (userId, reportId, token) => async (dispatch) => {
+  export const deleteExistingReport = (boradId, reportId, token) => async (dispatch) => {
     dispatch({ type: 'DELETING_REPORT' });
   
     try {
-      await deleteReport(userId, reportId, token); 
+      await deleteReport(boradId, reportId, token); 
   
       dispatch({ type: 'DELETE_REPORT', payload: reportId });
     } catch (error) {

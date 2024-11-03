@@ -9,7 +9,6 @@ const useExpenses = ({ board }) => {
     const { user } = useAuth()
     const dispatch = useDispatch();
     const { expenses, loading, error } = useSelector((state) => state.expenses); // 'state.expenses' should exist
-
     useEffect(() => {
         dispatch(fetchExpensesForBoardAction(boardId));
     }, [boardId, dispatch]);

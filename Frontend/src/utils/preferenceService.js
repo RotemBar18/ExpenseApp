@@ -1,11 +1,5 @@
-import axios from 'axios';
 import { alterCategoriesToArray } from './utilService'
 import axiosInstance from './axiosInstance';
-
-const BASE_URL = process.env.NODE_ENV === 'development'
-    ? 'http://localhost:8081'
-    : 'https://expenseapp-production.up.railway.app';
-
 export const fetchPreferences = async (boardId, token) => {
     try {
         const response = await axiosInstance.get(`/preferences/${boardId}`, {

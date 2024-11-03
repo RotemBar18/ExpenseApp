@@ -3,11 +3,6 @@ import { fetchBoardPreferences } from '../redux/actions/preferenceAction';
 import { createDefaultPreferences } from './preferenceService';
 import { addBoardCollaborator } from './boardMembersService'
 import axiosInstance from './axiosInstance';
-const BASE_URL = process.env.NODE_ENV === 'development'
-    ? 'http://localhost:8081'
-    : 'https://expenseapp-production.up.railway.app';
-
-
 
 export const fetchBoards = async (token, userId) => {
     try {
@@ -60,23 +55,23 @@ export const createBoard = async (token, boardName, OwnerId) => {
     }
 };
 
-export const updateBoard = async (boardId, updatedData, token) => {
-    if(!updatedData.ProfilePic ){
+export const updateBoardService = async (token,updatedData) => {
+    if (!updatedData.ProfilePic) {
         updatedData.ProfilePic = ''
     }
-
+    const boardId = updatedData.ExpenseBoardId
     try {
         const response = await axiosInstance.put(`/boards/${boardId}`, updatedData, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
+            
         });
-
         if (!response.status === 200) {
             throw new Error('Error updating board');
         }
-        return response.data; 
+        return response.data;
     } catch (error) {
         console.error('Error updating board:', error);
         throw error;
@@ -84,7 +79,7 @@ export const updateBoard = async (boardId, updatedData, token) => {
 };
 export const deleteBoard = async (boardId, token) => {
     try {
-        const response = await axiosInstance.delete(`/boards/${boardId}`,  {
+        const response = await axiosInstance.delete(`/boards/${boardId}`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
@@ -94,7 +89,7 @@ export const deleteBoard = async (boardId, token) => {
         if (!response.status === 200) {
             throw new Error('Error updating board');
         }
-        return response.data; 
+        return response.data;
     } catch (error) {
         console.error('Error updating board:', error);
         throw error;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { updateBoard } from '../../utils/boardService';
+import { updateBoardService } from '../../utils/boardService';
 import { useDispatch } from 'react-redux';
 import { selectBoard } from '../../redux/actions/boardActions';
 import useAuth from '../../hooks/useAuth';
@@ -9,24 +9,25 @@ import BoardCollaborators from '../collaborator/BoardCollaborators';
 const BoardInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
   color: ${(props) => props.theme.modalTextColor};
-  padding: 0 20px;`
-;
+  padding: 0 20px;
+`;
 
 const Section = styled.div`
   margin-top: 20px;
-  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  padding-bottom: 10px;
-  border-bottom: 1px solid ${(props) => props.theme.border};`
-;
+  padding: 10px;
+  border-radius: 10px;
+  border :1px solid  ${(props) => props.theme.modalTextColor};
+  `
+
+  ;
 
 const SectionLabel = styled.div`
   font-weight: bold;
   color: ${(props) => props.theme.headerTextColor};`
-;
+  ;
 
 const SectionValue = styled.div`
   color: #555;
@@ -34,7 +35,7 @@ const SectionValue = styled.div`
   flex-direction: row;
   gap: 30px;
   align-items: center;`
-;
+  ;
 
 const EditButton = styled.button`
   background: none;
@@ -45,7 +46,7 @@ const EditButton = styled.button`
   &:hover {
     text-decoration: underline;
   }`
-;
+  ;
 
 const InputField = styled.input`
   padding: 5px;
@@ -54,7 +55,7 @@ const InputField = styled.input`
   border: 1px solid ${(props) => props.theme.inputBorderColor};
   border-radius: 4px;
   font-size: 14px;`
-;
+  ;
 
 const SaveButton = styled.button`
   padding: 5px 10px;
@@ -67,16 +68,16 @@ const SaveButton = styled.button`
   &:hover {
     background-color: ${(props) => props.theme.buttonHoverBackground};
   }`
-;
+  ;
 
 const ProfilePic = styled.img`
   width: 80px;
   height: 80px;
   border-radius: 50%;
   margin-bottom: 10px;`
-;
+  ;
 
-const BoardInfoSettings = ({ user, board }) => {
+const BoardInfoSettings = ({ board }) => {
   const dispatch = useDispatch();
   const { token } = useAuth();
   const [isEditing, setIsEditing] = useState({
@@ -117,7 +118,7 @@ const BoardInfoSettings = ({ user, board }) => {
       reader.onloadend = () => {
         setBoardInfo((prevState) => ({
           ...prevState,
-          ProfilePic: reader.result, 
+          ProfilePic: reader.result,
         }));
       };
       reader.readAsDataURL(file);
@@ -131,9 +132,9 @@ const BoardInfoSettings = ({ user, board }) => {
         ...boardInfo,
       };
 
-      const updatedBoardFromServer = await updateBoard(board.ExpenseBoardId, updatedBoardData);
+      const updatedBoardFromServer = await updateBoardService(token, updatedBoardData);
       const updatedBoard = updatedBoardFromServer.updatedBoard;
-      
+
       if (updatedBoard) {
         setBoardInfo({
           Name: updatedBoard.Name || boardInfo.Name,
@@ -197,8 +198,10 @@ const BoardInfoSettings = ({ user, board }) => {
           )}
         </SectionValue>
       </Section>
-
-      <BoardCollaborators board={board}  />
+      <Section>
+        <SectionLabel>Collaborators</SectionLabel>
+        <BoardCollaborators board={board} />
+      </Section>
     </BoardInfoContainer>
   );
 };

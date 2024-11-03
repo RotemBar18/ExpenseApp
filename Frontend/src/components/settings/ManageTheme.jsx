@@ -8,10 +8,11 @@ import { useSelector } from 'react-redux';
 const ManageThemeContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width:30%;
   padding:10px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
+  margin-bottom:10px;
+  border :1px solid  ${(props) => props.theme.modalTextColor};
+
 `;
 
 const Select = styled.select`

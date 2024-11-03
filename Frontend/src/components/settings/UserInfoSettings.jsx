@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import useAuth from '../../hooks/useAuth';
 import { useDispatch } from 'react-redux';
-import { updateUserProfile } from '../../redux/actions/userActions'; 
+import { updateUserProfile } from '../../redux/actions/userActions';
 
 const UserInfoContainer = styled.div`
   display: flex;
@@ -17,8 +17,10 @@ const Section = styled.div`
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  padding-bottom: 10px;
-  border-bottom: 1px solid ${(props) => props.theme.border};
+ padding: 10px;
+  border-radius: 10px;
+  border :1px solid  ${(props) => props.theme.modalTextColor};
+
 `;
 
 const SectionLabel = styled.div`
@@ -75,7 +77,7 @@ const ProfilePic = styled.img`
 `;
 
 const UserInfoSettings = () => {
-  const { user, token } = useAuth(); 
+  const { user, token } = useAuth();
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState({
     Name: false,
@@ -115,7 +117,7 @@ const UserInfoSettings = () => {
       reader.onloadend = () => {
         setUserInfo((prevState) => ({
           ...prevState,
-          ProfilePic: reader.result, 
+          ProfilePic: reader.result,
         }));
       };
       reader.readAsDataURL(file);
@@ -130,7 +132,7 @@ const UserInfoSettings = () => {
       };
 
       setUserInfo({
-        Name: updatedUserData.Name ,
+        Name: updatedUserData.Name,
         ProfilePic: updatedUserData.ProfilePic,
       });
       dispatch(updateUserProfile(updatedUserData.Id, token, updatedUserData));

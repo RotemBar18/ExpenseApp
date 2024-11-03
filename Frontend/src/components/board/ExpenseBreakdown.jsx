@@ -7,7 +7,7 @@ const InsightsContainer = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: ${(props) => props.theme.modalBackground};
-  padding: 20px;
+  padding-top: 10px;
   
 `;
 
@@ -16,6 +16,7 @@ const SelectSection = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 0 10px;
+  align-items: center;
 `;
 
 const Select = styled.select`

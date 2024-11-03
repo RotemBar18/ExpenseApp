@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const InsightsContainer = styled.div`
   border-radius: 5px;
-  padding: 5px;
+  padding: 5px 5px 0px 5px;
   display: flex;
   flex-direction: column;
   align-items: center;

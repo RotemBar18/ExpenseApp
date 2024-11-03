@@ -8,6 +8,8 @@ import { Plus, ChevronRight, ChevronLeft, X, ChevronDown } from 'lucide-react';
 import BoardCollaborators from '../collaborator/BoardCollaborators';
 import { sendJoinBoardMessage } from '../../utils/websocketClient';
 import useAuth from '../../hooks/useAuth';
+import useExpenses from '../../hooks/useExpenses';
+import BudgetModal from '../board/BudgetModal';
 
 const BoardContainer = styled.div`
   background: #f9f9f9;
@@ -28,15 +30,23 @@ const Title = styled.h3`
   margin: 2rem 0;
 `;
 
+const BudgetSection = styled.div`
+ display:flex;
+ height:50px;
+ flex-direction:column;
+ justify-content:space-around;
+ align-items: center;
+`;
+
 const BoardListContainer = styled.div`
  display:flex;
  justify-content:space-around;
  width:100%;
+ align-items: center;
 `;
 
 const BoardItem = styled.div`
   display: flex;
-  max-height:200px;
   padding:10px;
   flex-direction: column;
   background: #fff;
@@ -48,6 +58,14 @@ const BoardItem = styled.div`
       &:hover {
     background-color: ${(props) => props.theme.buttonHoverBackground || '#fff'};
   }
+  align-items: center;
+
+`;
+const DataSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-direction:column;
+
 `;
 
 const BoardHeader = styled.div`
@@ -65,13 +83,22 @@ margin-bottom: 1rem;
 object-fit: cover;
 `;
 
-const BoardName = styled.span`
-  font-size: 1.2rem;
-  font-weight: 600;
+const BoardTextInfo = styled.span`
+  font-size: 1rem;
   color: ${(props) => props.theme.textColor || '#333'};
   margin-bottom: 0.5rem;
+  display:flex;
+  flex-direction:column;
+`;
+const BoardName = styled.span`
+`;
+const BoardBudget = styled.span`
 `;
 
+const Text = styled.span`
+padding-left:10px;
+
+`;
 const ArrowButton = styled.button`
   background: none;
   border: none;
@@ -187,7 +214,7 @@ export default function BoardSelection({ boards, reloadBoards, userId }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { user } = useAuth();
   const [currentIndex, setCurrentIndex] = useState(0);
-  
+  const { expenses } = useExpenses({ board: boards[currentIndex] || {} });
   useEffect(() => {
     const savedIndex = localStorage.getItem('currentIndex');
     if (savedIndex !== null) {
@@ -248,13 +275,29 @@ export default function BoardSelection({ boards, reloadBoards, userId }) {
               <ChevronLeft />
             </ArrowButton>
 
+
+
+
             <BoardItem key={boards[currentIndex]?.ExpenseBoardId} onClick={() => handleBoardChoice(boards[currentIndex])}>
-              <BoardHeader>
-                <BoardImage src={boards[currentIndex]?.ProfilePic || '/placeholder.svg?height=40&width=40'} alt="Board Profile" />
-                <BoardName>{boards[currentIndex]?.Name}</BoardName>
-              </BoardHeader>
-              {boards[currentIndex] && (<BoardCollaborators reloadBoards={reloadBoards} currentIndex={currentIndex} board={boards[currentIndex]} />)}
-              <ChevronDown size={20} style={{ alignSelf: 'center' }} />
+              <DataSection>
+                  <BoardHeader>
+                    <BoardImage src={boards[currentIndex]?.ProfilePic || '/placeholder.svg?height=40&width=40'} alt="Board Profile" />
+                    <BoardTextInfo>
+                      <BoardName>{boards[currentIndex]?.Name}</BoardName>
+                      <BoardBudget>Budget: ${boards[currentIndex]?.Budget}</BoardBudget>
+                      <BudgetSection>
+                        <BudgetModal type={'boardSelection'} board={boards[currentIndex]} expenses={expenses} />
+                      </BudgetSection>
+                    </BoardTextInfo>
+
+                  </BoardHeader>
+                  <Text>Collaborators:</Text>
+                  {boards[currentIndex] &&  (<BoardCollaborators reloadBoards={reloadBoards} currentIndex={currentIndex} board={boards[currentIndex]} />)}
+              </DataSection>
+              <DataSection>
+
+                <ChevronDown size={20} style={{ alignSelf: 'center' }} />
+              </DataSection>
             </BoardItem>
 
             <ArrowButton direction="right" onClick={goToNext} disabled={currentIndex === boards.length - 1}>
@@ -264,33 +307,38 @@ export default function BoardSelection({ boards, reloadBoards, userId }) {
           </BoardListContainer>
         </>
 
-      )}
-      {!showCreateForm && (
-        <FloatingButton onClick={() => setShowCreateForm(true)}>
-          <Plus size={18} />
-        </FloatingButton>
-      )}
+      )
+      }
+      {
+        !showCreateForm && (
+          <FloatingButton onClick={() => setShowCreateForm(true)}>
+            <Plus size={18} />
+          </FloatingButton>
+        )
+      }
 
-      {showCreateForm && (
-        <>
-          <ModalOptionBack onClick={(e) => {
-            e.stopPropagation();
-            setShowCreateForm(false);
-          }} />
-          <FormContainer>
-            <Input
-              type="text"
-              placeholder="Enter Board Name"
-              value={boardName}
-              onChange={(e) => setBoardName(e.target.value)}
-            />
-            <CreateBoardButton disabled={isSubmitting} onClick={handleCreateBoard}>
-              {isSubmitting ? 'Creating...' : 'Create'}
-            </CreateBoardButton>
-          </FormContainer>
-        </>
-      )}
+      {
+        showCreateForm && (
+          <>
+            <ModalOptionBack onClick={(e) => {
+              e.stopPropagation();
+              setShowCreateForm(false);
+            }} />
+            <FormContainer>
+              <Input
+                type="text"
+                placeholder="Enter Board Name"
+                value={boardName}
+                onChange={(e) => setBoardName(e.target.value)}
+              />
+              <CreateBoardButton disabled={isSubmitting} onClick={handleCreateBoard}>
+                {isSubmitting ? 'Creating...' : 'Create'}
+              </CreateBoardButton>
+            </FormContainer>
+          </>
+        )
+      }
 
-    </BoardContainer>
+    </BoardContainer >
   );
 }

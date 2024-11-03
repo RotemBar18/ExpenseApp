@@ -7,6 +7,7 @@ import BreakdownChart from '../../charts/BreakdownChart';
 import useExpenses from '../../hooks/useExpenses';
 import useAuth from '../../hooks/useAuth';
 import { fetchUsers } from '../../utils/userService';
+import BudgetModal from '../board/BudgetModal';
 
 const MainBoardContainer = styled.div`
   display: flex;
@@ -15,6 +16,10 @@ const MainBoardContainer = styled.div`
   justify-content: space-evenly;
   padding: 0 20px;
   color: ${props => props.theme.textColor};
+  overflow-x:hidden;
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
 `;
 
 const Header = styled.div`
@@ -24,7 +29,7 @@ const Header = styled.div`
   gap: 20px;
   align-items: stretch;
   @media (max-width: 768px) {
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 1rem;
   }
 `;
@@ -33,7 +38,8 @@ const MainData = styled.div`
   display: flex;
   width: 100%;
   height: 50%;
-  gap: 20px;
+  gap: 1rem;
+  
 `;
 
 const AddButton = styled.button`
@@ -46,6 +52,9 @@ const AddButton = styled.button`
   font-size: 1rem;
   font-weight: 600;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  &:hover{
+  background-color: ${(props) => props.theme.buttonHoverBackground};
+  }
 `;
 
 
@@ -56,6 +65,7 @@ export default function MainBoard({ board, categories, expensesThemeColor, userI
   const { expenses, reloadExpenses, updateExpense } = useExpenses({ board: board });
   const [users, setUsers] = useState([]);
   const { token } = useAuth()
+  const budget = useState(board.Budget || 0);
 
   useEffect(() => {
     reloadExpenses(board.ExpenseBoardId);
@@ -95,6 +105,13 @@ export default function MainBoard({ board, categories, expensesThemeColor, userI
     <MainBoardContainer>
 
       <Header>
+        
+        <GeneralDataBoard
+        board={board}
+          users={users}
+          expenses={expenses}
+          onFilterChange={handleFilterChange}
+        />
         {showAddExpense ? (
           <AddExpense
             onAdd={handleAddExpense}
@@ -110,15 +127,11 @@ export default function MainBoard({ board, categories, expensesThemeColor, userI
             Add Expense
           </AddButton>
         )}
-
-        <GeneralDataBoard
-          users={users}
-          expenses={expenses}
-          onFilterChange={handleFilterChange}
-        />
       </Header>
 
       <MainData>
+
+
         <RecentExpenses
           categories={categories}
           users={users}

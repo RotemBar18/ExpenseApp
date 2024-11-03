@@ -15,11 +15,19 @@ const fadeIn = keyframes`
   }
 `;
 
-const PageContainer = styled.div`
-  height: 100vh;
+const BackgroundOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
-  background: url(${LogoBg}) center center;
+  height: 100vh;
+  background: linear-gradient(to bottom right, rgba(50, 50, 70, 0.1), rgba(20, 20, 40, 0.3)), url(${LogoBg}) center center;
   background-size: cover;
+  z-index: -1; // Ensures it sits behind all other content
+`;
+
+const PageContainer = styled.div`
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,18 +36,7 @@ const PageContainer = styled.div`
   color: #fff;
   overflow-y: auto;
   overflow-x: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to bottom right, rgba(50, 50, 70, 0.1), rgba(20, 20, 40, 0.3));
-    z-index: 0;
-    
-  }
+  width: 100%;
 `;
 
 
@@ -49,7 +46,6 @@ const InfoSection = styled.div`
   text-align: left;
   animation: ${fadeIn} 1s ease forwards;
 display: flex;
-height:100vh;
     padding: 1rem;
 
     flex-direction: column;
@@ -99,10 +95,6 @@ const InfoCardContainer = styled.div`
   }
 `;
 
-const cardContainer = styled.div`
-  filter:blur(1px)
-}
-`;
 const InfoCard = styled.div`
   background: rgba(255, 255, 255, 0.22);
   padding: 1rem;
@@ -150,6 +142,8 @@ const SignupSection = styled.div`
 
 const HomePage = () => {
   return (
+    <>
+    <BackgroundOverlay/>
     <PageContainer>
       <InfoSection>
         <HeroTitle>Welcome to Expense Tracker</HeroTitle>
@@ -205,6 +199,8 @@ const HomePage = () => {
       </InfoSection>
 
     </PageContainer>
+    </>
+
   );
 };
 

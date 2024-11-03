@@ -84,12 +84,12 @@ router.delete('/:boardId', async (req, res) => {
 router.put('/:boardId', async (req, res) => {
     try {
         const { boardId } = req.params;
-        const { Name, ProfilePic } = req.body;
+        const { Name, ProfilePic,Budget } = req.body;
         if (!Name || ProfilePic == null) {
             return res.status(400).json({ message: 'Board name and profile picture are required.' });
         }
 
-        await req.db.query('UPDATE expenseboards SET Name = ?, ProfilePic = ? WHERE ExpenseBoardId = ?', [Name, ProfilePic, boardId]);
+        await req.db.query('UPDATE expenseboards SET Name = ?, ProfilePic = ?, Budget = ? WHERE ExpenseBoardId = ?', [Name, ProfilePic,Budget, boardId]);
 
         const [updatedBoard] = await req.db.query('SELECT * FROM expenseboards WHERE ExpenseBoardId = ?', [boardId]);
 

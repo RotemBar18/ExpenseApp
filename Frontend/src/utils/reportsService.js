@@ -1,11 +1,9 @@
-import axios from 'axios';
 import axiosInstance from './axiosInstance';
-const BASE_URL = process.env.NODE_ENV === 'development' 
-    ? 'http://localhost:8081' 
-    : 'https://expenseapp-production.up.railway.app';
-export const fetchReports = async (userId, token) => {
+
+
+export const fetchReports = async (boradId, token) => {
   try {
-    const response = await  axiosInstance.get(`/reports/${userId}`, {
+    const response = await  axiosInstance.get(`/reports/${boradId}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -18,9 +16,9 @@ export const fetchReports = async (userId, token) => {
   }
 };
 
-export const fetchReportById = async (userId, reportId, token) => {
+export const fetchReportById = async (boradId, reportId, token) => {
   try {
-    const response = await  axiosInstance.get(`/reports/${userId}/${reportId}`, {
+    const response = await  axiosInstance.get(`/reports/${boradId}/${reportId}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -33,9 +31,9 @@ export const fetchReportById = async (userId, reportId, token) => {
   }
 };
 
-export const createReport = async (userId, reportData, token) => {
+export const createReport = async (boradId,userId, reportData, token) => {
   try {
-    const response = await  axiosInstance.put(`/reports/${userId}`, reportData, {
+    const response = await  axiosInstance.post(`/reports/${userId}/${boradId}`, reportData, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -48,9 +46,9 @@ export const createReport = async (userId, reportData, token) => {
   }
 };
 
-export const updateReport = async (userId, reportId, updatedReportData, token) => {
+export const updateReport = async (boradId, reportId, updatedReportData, token) => {
   try {
-    const response = await  axiosInstance.put(`/reports/${userId}/${reportId}`, updatedReportData, {
+    const response = await  axiosInstance.put(`/reports/${boradId}/${reportId}`, updatedReportData, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -63,9 +61,9 @@ export const updateReport = async (userId, reportId, updatedReportData, token) =
   }
 };
 
-export const deleteReport = async (userId, reportId, token) => {
+export const deleteReport = async (boradId, reportId, token) => {
   try {
-    const response = await  axiosInstance.delete(`/reports/${userId}/${reportId}`, {
+    const response = await  axiosInstance.delete(`/reports/${boradId}/${reportId}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',

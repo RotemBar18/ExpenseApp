@@ -1,17 +1,21 @@
 import { useState, useEffect } from 'react';
-import {  fetchBoards } from '../utils/boardService';
+import { fetchBoards, updateBoardService } from '../utils/boardService';
+import { useDispatch } from 'react-redux';
+import { selectBoard } from '../redux/actions/boardActions';
+import useAuth from './useAuth';
 
 const useBoards = (userId) => {
   const [boards, setBoards] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const dispatch = useDispatch()
+  const { token } = useAuth();
 
   const fetchAllBoards = async () => {
     setLoading(true);
 
-    const token = localStorage.getItem('token');
     try {
-      
+
       const data = await fetchBoards(token, userId);
       setBoards(data);
     } catch (err) {
@@ -39,14 +43,11 @@ const useBoards = (userId) => {
     }
   };
 
-  const updateBoard = async (boardId, updatedData) => {
+  const updateBoard = async (updatedData) => {
     try {
-      const updatedBoard = await updateBoardService(boardId, updatedData); 
-      setBoards((prevBoards) =>
-        prevBoards.map((board) =>
-          board.ExpenseBoardId === boardId ? updatedBoard : board
-        )
-      );
+      const updatedBoardFromServer = await updateBoardService(token, updatedData);
+      dispatch(selectBoard(updatedBoardFromServer.updatedBoard));
+
     } catch (err) {
       setError(err.message || 'Error updating board');
     }

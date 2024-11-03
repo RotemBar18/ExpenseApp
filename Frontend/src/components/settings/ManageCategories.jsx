@@ -6,10 +6,9 @@ const ManageCategoriesContainer = styled.div`
   border-radius: 10px;
   padding:0px 10px 10px 0px ;
   margin-top: 20px;
-  width:30%;
   padding:10px;
   background-color: ${(props) => props.theme.background};
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+  border :1px solid  ${(props) => props.theme.modalTextColor};
 `;
 
 const CategoryList = styled.ul`
