@@ -286,7 +286,7 @@ export default function BoardSelection({ boards, reloadBoards, userId }) {
                       <BoardName>{boards[currentIndex]?.Name}</BoardName>
                       <BoardBudget>Budget: ${boards[currentIndex]?.Budget}</BoardBudget>
                       <BudgetSection>
-                        <BudgetModal type={'boardSelection'} board={boards[currentIndex]} expenses={expenses} />
+                        <BudgetModal type={'boardSelection'} outBoard={boards[currentIndex]} expenses={expenses} />
                       </BudgetSection>
                     </BoardTextInfo>
 

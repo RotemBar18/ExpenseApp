@@ -80,16 +80,15 @@ const RemainingText = styled.span`
   color: ${props => (props.remainingBudget >= 0 ? props.theme.buttonBackground || 'green' : props.theme.tagBackground || '#ff6b6b')};
 `;
 
-const BudgetModal = ({ type,  expenses }) => {
+const BudgetModal = ({ type,outBoard ,expenses }) => {
   const { updateBoard } = useBoards(useAuth().userId);
   const [isEditing, setIsEditing] = useState(false);
-  const board = useSelector((state) => state.board.selectedBoard);
+  const board = useSelector((state) => state.board.selectedBoard||outBoard);
   const [newBudget, setNewBudget] = useState(board?.Budget || 0);
   const budget = parseFloat(board?.Budget) || 0;
   const totalExpenses = expenses.reduce((acc, expense) => acc + parseFloat(expense.Amount || 0), 0);
   const remainingBudget = budget - totalExpenses;
   const percentage = budget ? Math.min((totalExpenses / budget) * 100, 100) : 0;
-
   const handleLabelClick = () => setIsEditing(true);
 
   const handleInputChange = (e) => setNewBudget(e.target.value);
