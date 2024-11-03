@@ -47,7 +47,7 @@ const AddButton = styled.button`
   color: ${props => props.theme.buttonTextColor};
   border: none;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
+  border-radius: 15px;
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;

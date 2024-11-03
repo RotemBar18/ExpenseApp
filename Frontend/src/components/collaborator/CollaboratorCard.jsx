@@ -116,13 +116,19 @@ const CloseButton = styled(Button)`
   }
 `;
 
-const CollaboratorCard = ({ board, collaborator, onRemove, onClose ,reloadBoards, currentIndex}) => {
+const CollaboratorCard = ({ board, collaborator, onRemove, onClose, reloadBoards, currentIndex }) => {
   const { user } = useAuth();
 
   const onRemoveBtn = () => {
     onRemove(collaborator);
-    if(user.Id === collaborator.UserId) {
-      localStorage.setItem('currentIndex',currentIndex-1)
+    if (user.Id === collaborator.UserId) {
+      if (localStorage.getItem('currentIndex') == 0) {
+
+      }
+      else {
+        localStorage.setItem('currentIndex', currentIndex - 1)
+      }
+
       reloadBoards()
     }
     onClose();

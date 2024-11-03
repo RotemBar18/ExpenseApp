@@ -17,7 +17,7 @@ const DataContainer = styled.div`
 
 const DataCard = styled.div`
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 15px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
   background-color: ${(props) => props.theme.modalBackground};
   display: flex;

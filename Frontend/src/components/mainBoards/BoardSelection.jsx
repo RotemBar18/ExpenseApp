@@ -262,12 +262,13 @@ export default function BoardSelection({ boards, reloadBoards, userId }) {
 
   return (
     <BoardContainer>
+      <Title>{user.Name}'s Board</Title>
       {boards.length === 0 ? (
         <NoBoardsMessage>
           No boards available. Click below to add a new board.
         </NoBoardsMessage>) : (
         <>
-          <Title>Select a Board</Title>
+          
 
           <BoardListContainer>
 

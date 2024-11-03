@@ -6,7 +6,7 @@ const ExpenseListContainer = styled.div`
   background-color: ${(props) => props.theme.modalBackground}; 
   display: flex;
   flex-direction: column;
-  border-radius: 5px;
+  border-radius: 15px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
   overflow-x: hidden;
   padding: 15px;

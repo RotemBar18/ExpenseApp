@@ -5,7 +5,6 @@ import useAuth from '../../hooks/useAuth';
 import { useSelector } from 'react-redux';
 
 const ModalContent = styled.div`
-  border-radius: 8px;
   display: flex;
   flex-direction: column;
   gap: ${props => (props.type === 'mainBoard' ? '12px' : '')};
