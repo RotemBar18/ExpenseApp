@@ -72,11 +72,11 @@ const BudgetOverview = styled.div`
 `;
 
 const SpentText = styled.span`
-  color: ${props => (props.percentage >= 100 ? props.theme.tagBackground || '#ff6b6b' : props.theme.chartColors[1] || '#4fa3f7')};
+  color: ${props => (props.percentage >= 100 ? props.theme.exceededBudgetColor : props.theme.withinBudgetColor )};
 `;
 
 const RemainingText = styled.span`
-  color: ${props => (props.remainingBudget >= 0 ? props.theme.buttonBackground || 'green' : props.theme.tagBackground || '#ff6b6b')};
+  color: ${props => (props.remainingBudget >= 0 ? props.theme.withinBudgetColor  : props.theme.exceededBudgetColor )};
 `;
 
 const BudgetModal = ({ type,outBoard ,expenses }) => {

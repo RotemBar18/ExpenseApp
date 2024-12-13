@@ -35,6 +35,8 @@ export const themes = {
     alertBg: '#dfe3e8', // Soft light grey
     alertText: '#2e3a45', // Dark grey text
     alertBorder: '#b0bec5', // Light grey border
+    exceededBudgetColor: '#e53935',
+    withinBudgetColor: '#1b5e20'
   },
   Dark: {
     name: 'Dark',
