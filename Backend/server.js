@@ -31,6 +31,10 @@ app.use((req, res, next) => {
     next();
 });
 
+app.get('/', (_req, res) => res.status(200).send('ok'));
+app.get('/healthz', (_req, res) => res.status(200).json({ ok: true }));
+
+
 app.use((req, res, next) => {
     let requestSize = 0;
 
@@ -38,7 +42,6 @@ app.use((req, res, next) => {
         const bodyString = JSON.stringify(req.body);
         requestSize = Buffer.byteLength(bodyString, 'utf8');
     }
-
     console.log(`[Inbound HTTP Request] URL: ${req.originalUrl}`);
     console.log(`[Method]: ${req.method}`);
     console.log(`[Request Size]: ${requestSize} bytes`);
