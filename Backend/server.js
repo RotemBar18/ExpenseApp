@@ -66,17 +66,6 @@ app.use('/boardmembers', (req, res, next) => {
     next();
 }, authenticateToken, boardMembersRoutes);
 
-app.get('/', (_req, res) => res.status(200).send('ok'));
-app.get('/healthz', (_req, res) => res.status(200).json({ ok: true }));
-app.get('/dbping', async (req, res) => {
-    try {
-        const [rows] = await req.db.query('SELECT 1 AS ok');
-        res.status(200).json(rows[0]);
-    } catch (e) {
-        console.error('DB ping failed:', e.code || e.message || e);
-        res.status(500).json({ error: e.code || String(e) });
-    }
-});
 
 app.post('/refresh-token', (req, res) => {
     const refreshToken = req.body.refreshToken; // Get refresh token from request body
@@ -234,6 +223,12 @@ app.get("/users/Id/:id", async (req, res) => {
 
 
 
-server.listen(PORT, () => {
-    console.log(`HTTP + WS listening on ${PORT}`);
-});;
+// health checks (put near the bottom, before listen)
+app.get('/', (_req, res) => res.status(200).send('ok'));
+app.get('/healthz', (_req, res) => res.status(200).json({ ok: true }));
+
+const PORT = process.env.PORT || 8081;
+// IMPORTANT: bind to all IPv4 interfaces so Railway can reach you
+server.listen(PORT, '0.0.0.0', () => {
+    console.log(`HTTP + WS listening on :${PORT}`);
+});
