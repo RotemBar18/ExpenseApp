@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\server.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\server.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\utils\\db.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\utils\\db.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\axiosInstance.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\axiosInstance.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\server.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\server.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -145,7 +145,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 336,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -197,18 +197,17 @@
               "RelativeToolTip": "Frontend\\src\\utils\\authService.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T13:51:59.563Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-10T13:51:59.563Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "server.js",
               "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\server.js",
               "RelativeDocumentMoniker": "Backend\\server.js",
               "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\server.js",
               "RelativeToolTip": "Backend\\server.js",
-              "ViewState": "AgIAACkAAAAAAAAAAAAAACsAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAAACUAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2024-12-13T14:32:05.953Z",
               "EditorCaption": ""
@@ -223,12 +222,11 @@
               "RelativeToolTip": "Backend\\package.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-10T13:13:25.127Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-10T13:13:25.127Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "axiosInstance.js",
               "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\axiosInstance.js",
               "RelativeDocumentMoniker": "Frontend\\src\\utils\\axiosInstance.js",
@@ -236,18 +234,17 @@
               "RelativeToolTip": "Frontend\\src\\utils\\axiosInstance.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T13:53:32.8Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-10T13:53:32.8Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "db.js",
               "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\utils\\db.js",
               "RelativeDocumentMoniker": "Backend\\utils\\db.js",
               "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\utils\\db.js",
               "RelativeToolTip": "Backend\\utils\\db.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAgwBgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-08-10T13:25:51.452Z",
               "EditorCaption": ""
@@ -580,11 +577,11 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "Name": "ST:11:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:11:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             }
           ]
         }

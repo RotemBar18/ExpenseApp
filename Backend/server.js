@@ -31,9 +31,6 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/', (_req, res) => res.status(200).send('ok'));
-app.get('/healthz', (_req, res) => res.status(200).json({ ok: true }));
-
 
 app.use((req, res, next) => {
     let requestSize = 0;
@@ -68,6 +65,18 @@ app.use('/boards', (req, res, next) => {
 app.use('/boardmembers', (req, res, next) => {
     next();
 }, authenticateToken, boardMembersRoutes);
+
+app.get('/', (_req, res) => res.status(200).send('ok'));
+app.get('/healthz', (_req, res) => res.status(200).json({ ok: true }));
+app.get('/dbping', async (req, res) => {
+    try {
+        const [rows] = await req.db.query('SELECT 1 AS ok');
+        res.status(200).json(rows[0]);
+    } catch (e) {
+        console.error('DB ping failed:', e.code || e.message || e);
+        res.status(500).json({ error: e.code || String(e) });
+    }
+});
 
 app.post('/refresh-token', (req, res) => {
     const refreshToken = req.body.refreshToken; // Get refresh token from request body
