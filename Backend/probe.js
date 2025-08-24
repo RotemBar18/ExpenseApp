@@ -1,4 +1,4 @@
-// probe.js � minimal server to prove Railway wiring
+﻿// probe.js — minimal server to prove Railway wiring
 const express = require('express');
 const http = require('http');
 
