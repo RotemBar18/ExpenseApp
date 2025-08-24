@@ -1,6 +1,75 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8081'
+
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8081';
+
+export const signup = async (name, password, email) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/signup`, {
+            Name: name,
+            Email: email,
+            Password: password,
+        }, {
+            headers: { 'Content-Type': 'application/json' }
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error during sign-up:", error);
+        throw error;
+    }
+};
+
+export const login = async (email, password) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/login`, {
+            Email: email,
+            Password: password,
+        }, {
+            headers: { 'Content-Type': 'application/json' }
+        });
+        if (response.data.success) {
+            return response.data;
+        } else {
+            alert(response.data.message);
+            return null;
+        }
+    } catch (error) {
+        console.error("Error in login request:", error);
+        alert('Login failed. Please try again.');
+        return null;
+    }
+};
+
+export const fetchUser = async (userId) => {
+    try {
+        const response = await axios.get(`${BASE_URL}/users/Id/${userId}`, {
+            headers: { 'Content-Type': 'application/json' }
+        });
+        if (response.status === 200) {
+            return response.data.user;
+        } else {
+            alert(response.data.error);
+        }
+    } catch (error) {
+        console.error("Error fetching user ID:", error);
+        throw error;
+    }
+};
+
+export async function refreshAccessToken() {
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (!refreshToken) throw new Error("No refresh token available");
+
+    try {
+        const response = await axios.post(`${BASE_URL}/refresh-token`, { refreshToken });
+        const newAccessToken = response.data.accessToken;
+        localStorage.setItem('token', newAccessToken);
+        return newAccessToken;
+    } catch (error) {
+        console.error("Error refreshing access token:", error);
+        throw error;
+    }
+}
 
 export const signup = async (name, password, email) => {
     try {
