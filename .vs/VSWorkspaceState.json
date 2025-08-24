@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Backend",
+    "\\Backend\\config",
+    "\\Backend\\middleware",
+    "\\Backend\\routes",
+    "\\Backend\\utils",
+    "\\Frontend",
+    "\\Frontend\\public",
+    "\\Frontend\\src",
+    "\\Frontend\\src\\utils"
+  ],
+  "PreviewInSolutionExplorer": false
+}

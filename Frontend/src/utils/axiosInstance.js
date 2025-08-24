@@ -4,9 +4,8 @@ import store from '../redux/store';
 import { refreshAccessToken } from '../utils/authService';
 
 // Set the base URL based on environment
-const BASE_URL = process.env.NODE_ENV === 'development'
-    ? 'http://localhost:8081'
-    : 'https://expenseapp-production.up.railway.app';
+const BASE_URL = 'http://localhost:8081'
+
 
 const axiosInstance = axios.create({
     baseURL: BASE_URL,

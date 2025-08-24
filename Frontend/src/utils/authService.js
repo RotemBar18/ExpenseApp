@@ -1,9 +1,6 @@
 import axios from 'axios';
-import axiosInstance from './axiosInstance';
 
-const BASE_URL = process.env.NODE_ENV === 'development'
-    ? 'http://localhost:8081'
-    : 'https://expenseapp-production.up.railway.app';
+const BASE_URL = 'http://localhost:8081'
 
 export const signup = async (name, password, email) => {
     try {
