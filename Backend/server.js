@@ -13,8 +13,7 @@ const boardMembersRoutes = require('./routes/boardMemberRoutes.js');
 const http = require('http');
 const { setupWebSocketServer } = require('./websocketServer'); // Importing WebSocket server setup
 const authenticateToken = require('./middleware/auth');
-const port = 8081
-// Create an Express app and HTTP server
+const PORT = process.env.PORT || 8081;// Create an Express app and HTTP server
 const app = express();
 const server = http.createServer(app);
 
@@ -223,11 +222,6 @@ app.get("/users/Id/:id", async (req, res) => {
 
 
 
-
-app.listen(port, () => {
-    console.log("Server is listening on port 8081");
-});
-
-server.listen(3000, () => {
-    console.log('Server running on port 3000');
-});
+server.listen(PORT, () => {
+    console.log(`HTTP + WS listening on ${PORT}`);
+});;
