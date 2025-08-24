@@ -11,6 +11,6 @@
     "\\Frontend\\src",
     "\\Frontend\\src\\utils"
   ],
-  "SelectedNode": "\\Frontend\\src\\utils\\websocketClient.js",
+  "SelectedNode": "\\Frontend\\src\\utils\\authService.js",
   "PreviewInSolutionExplorer": false
 }
