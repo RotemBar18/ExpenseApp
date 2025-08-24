@@ -207,7 +207,7 @@
               "RelativeDocumentMoniker": "Backend\\server.js",
               "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\server.js",
               "RelativeToolTip": "Backend\\server.js",
-              "ViewState": "AgIAABQAAAAAAAAAAAAAACUAAAATAAAAAAAAAA==",
+              "ViewState": "AgIAAM0AAAAAAAAAAAAgwNsAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2024-12-13T14:32:05.953Z",
               "EditorCaption": ""
@@ -246,8 +246,7 @@
               "RelativeToolTip": "Backend\\utils\\db.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T13:25:51.452Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-10T13:25:51.452Z"
             },
             {
               "$type": "Document",

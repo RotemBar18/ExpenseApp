@@ -227,7 +227,7 @@ app.get("/users/Id/:id", async (req, res) => {
 app.get('/', (_req, res) => res.status(200).send('ok'));
 app.get('/healthz', (_req, res) => res.status(200).json({ ok: true }));
 
-const PORT = process.env.PORT || 8081;
+
 // IMPORTANT: bind to all IPv4 interfaces so Railway can reach you
 server.listen(PORT, '0.0.0.0', () => {
     console.log(`HTTP + WS listening on :${PORT}`);
