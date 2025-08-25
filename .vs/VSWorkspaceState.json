@@ -11,6 +11,6 @@
     "\\Frontend\\src\\hooks",
     "\\Frontend\\src\\utils"
   ],
-  "SelectedNode": "\\Frontend\\src\\utils\\boardService.js",
+  "SelectedNode": "\\Backend\\routes\\expenseRoutes.js",
   "PreviewInSolutionExplorer": false
 }

@@ -29,7 +29,7 @@ const verifyToken = (req, res, next) => {
 router.get('/:userId', verifyToken, async (req, res) => {
     try {
         const { userId } = req.params;
-        const boards = await req.db.query('SELECT * FROM expenseboards WHERE expenseboardid IN (SELECT expenseboardid FROM boardmembers WHERE userid = ?)', [userId, userId]);
+        const boards = await req.db.query('SELECT * FROM expenseboards WHERE expenseboardid IN (SELECT expenseboardid FROM boardmembers WHERE userid = ?)', [ userId]);
         res.status(200).json(boards);
     } catch (error) {
         console.error(error);
