@@ -90,7 +90,7 @@ app.post('/refresh-token', (req, res) => {
 });
 
 app.get("/users", async (req, res) => {
-    const sql = "SELECT Id, Name, ProfilePic FROM users";
+    const sql = 'SELECT id, name, profilepic FROM users'
     try {
         const [data] = await req.db.query(sql);
         res.json(data);
@@ -110,13 +110,13 @@ app.post('/signup', async (req, res) => {
     const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
 
     try {
-        const [results] = await req.db.query('SELECT Id FROM users WHERE Email = ?', [email]);
+        const [results] = await req.db.query('SELECT id FROM users WHERE email = ?', [email]);
 
         if (results.length > 0) {
             return res.status(400).json({ success: false, message: 'Email already exists.' });
         }
 
-        await req.db.query('INSERT INTO users (Name, Password, Email) VALUES (?, ?, ?)', [username, hashedPassword, email]);
+        await req.db.query('INSERT INTO users (name, password, email) VALUES (?, ?, ?)', [username, hashedPassword, email]);
         res.status(201).json({ success: true, message: 'User registered successfully!' });
 
     } catch (error) {
@@ -135,7 +135,7 @@ app.post('/login', async (req, res) => {
     const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
 
     try {
-        const [results] = await req.db.query('SELECT Id FROM users WHERE Email = ? AND Password = ?', [email, hashedPassword]);
+        const [results] = await req.db.query('SELECT id AS "Id" FROM users WHERE email = ? AND password = ?', [email, hashedPassword]);
 
 
         if (results.length > 0) {
@@ -144,7 +144,7 @@ app.post('/login', async (req, res) => {
             const token = jwt.sign({ userId }, jwtSecret, { expiresIn: '30m' });
             const refreshToken = jwt.sign({ userId }, refreshSecret, { expiresIn: '7d' });
 
-            return res.status(200).json({ success: true, token, refreshToken });
+            return res.status(200).json({ success: true, token, refreshToken, userId });
         } else {
             return res.status(400).json({ success: false, message: 'Invalid email or password.' });
         }
@@ -161,7 +161,7 @@ app.get("/users/:email", async (req, res) => {
         return res.status(400).json({ error: "Email is required" });
     }
 
-    const sql = "SELECT Id FROM users WHERE Email = ?";
+    const sql = `SELECT id AS "Id" FROM users WHERE email = ?`;
     try {
         const [rows] = await req.db.query(sql, [email]);
         if (rows.length > 0) {
@@ -182,8 +182,8 @@ app.put('/users/:id', async (req, res) => {
         const { Name, Email, Password, ProfilePic } = req.body;
         const query = `
             UPDATE users 
-            SET Name = ?, Email = ?, Password = ?, ProfilePic = ?
-            WHERE Id = ?
+            SET name = ?, email = ?, password = ?, profilepic = ?
+            WHERE id = ?
         `;
         const values = [Name, Email, Password, ProfilePic, id];
 
@@ -193,7 +193,7 @@ app.put('/users/:id', async (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        const [updatedUser] = await req.db.query('SELECT * FROM users WHERE Id = ?', [id]);
+        const [updatedUser] = await req.db.query('SELECT * FROM users WHERE id = ?', [id]);
 
         res.json({ success: true, user: updatedUser[0], message: 'User updated successfully' });
     } catch (error) {
@@ -208,7 +208,7 @@ app.get("/users/Id/:id", async (req, res) => {
     const { id } = req.params;
 
 
-    const sql = "SELECT * FROM users WHERE Id = ?"; try {
+    const sql = "SELECT * FROM users WHERE id = ?"; try {
         const [rows] = await req.db.query(sql, [id]);
         if (rows.length > 0) {
             return res.status(200).json({ user: rows[0] });
@@ -227,7 +227,16 @@ app.get("/users/Id/:id", async (req, res) => {
 app.get('/', (_req, res) => res.status(200).send('ok'));
 app.get('/healthz', (_req, res) => res.status(200).json({ ok: true }));
 
-
+app.get('/dbinfo', async (req, res) => {
+    try {
+        const [rows] = await req.db.query(
+            'SELECT version(), current_database() AS db, current_user AS user, now() AS ts'
+        );
+        res.json(rows[0]);
+    } catch (e) {
+        res.status(500).json({ error: e.code || String(e) });
+    }
+});
 // IMPORTANT: bind to all IPv4 interfaces so Railway can reach you
 server.listen(PORT, '0.0.0.0', () => {
     console.log(`HTTP + WS listening on :${PORT}`);

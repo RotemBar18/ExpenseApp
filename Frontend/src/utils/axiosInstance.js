@@ -5,7 +5,6 @@ import { refreshAccessToken } from '../utils/authService';
 
 // Set the base URL based on environment
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8081';
-console.log(BASE_URL);
 const axiosInstance = axios.create({
     baseURL: BASE_URL,
     headers: {

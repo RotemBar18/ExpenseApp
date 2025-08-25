@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\Backend",
-    "\\Backend\\config",
     "\\Backend\\middleware",
     "\\Backend\\routes",
     "\\Backend\\utils",
     "\\Frontend",
     "\\Frontend\\public",
     "\\Frontend\\src",
+    "\\Frontend\\src\\hooks",
     "\\Frontend\\src\\utils"
   ],
-  "SelectedNode": "\\Backend\\package.json",
+  "SelectedNode": "\\Backend\\server.js",
   "PreviewInSolutionExplorer": false
 }

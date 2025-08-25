@@ -3,56 +3,60 @@
   "WorkspaceRootPath": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\server.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\server.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\userService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\userService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\boardMemberRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\routes\\boardMemberRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\utils\\db.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\utils\\db.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\boardsRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\routes\\boardsRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\axiosInstance.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\axiosInstance.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\expenseRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\routes\\expenseRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\prefrencesRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\routes\\prefrencesRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\reportsRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\routes\\reportsRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\authService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\authService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\websocketClient.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\websocketClient.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\authHandlers.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\authHandlers.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\utilService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\utilService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\hooks\\useAuth.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\hooks\\useAuth.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\sortAndFilterService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\sortAndFilterService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\axiosInstance.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\axiosInstance.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\utils\\db.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\utils\\db.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\boardMembersService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\boardMembersService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\reportsService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\reportsService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\reportService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\reportService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\preferenceService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\preferenceService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\jwtService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\jwtService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\expenseService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -63,32 +67,56 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\boardService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\boardMembersService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\boardMembersService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\redux\\actions\\reportsActions.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\redux\\actions\\reportsActions.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\authHandlers.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\authHandlers.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\websocketServer.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\websocketServer.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\config\\config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\config\\config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\middleware\\auth.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\middleware\\auth.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\reportsRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\routes\\reportsRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\websocketClient.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\websocketClient.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\websocketServer.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\websocketServer.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\userService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\userService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\utilService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\utilService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\sortAndFilterService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\sortAndFilterService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\reportService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\reportService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\jwtService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\src\\utils\\jwtService.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\middleware\\auth.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\middleware\\auth.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\utils\\generateJwtSecret.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -104,22 +132,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\vite.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend\\vite.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\prefrencesRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\routes\\prefrencesRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\expenseRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\routes\\expenseRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\boardsRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\routes\\boardsRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\boardMemberRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Backend\\routes\\boardMemberRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\main.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -145,7 +157,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 336,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -153,117 +165,150 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "userService.js",
-              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\userService.js",
-              "RelativeDocumentMoniker": "Frontend\\src\\utils\\userService.js",
-              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\userService.js",
-              "RelativeToolTip": "Frontend\\src\\utils\\userService.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T14:01:34.966Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "utilService.js",
-              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\utilService.js",
-              "RelativeDocumentMoniker": "Frontend\\src\\utils\\utilService.js",
-              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\utilService.js",
-              "RelativeToolTip": "Frontend\\src\\utils\\utilService.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T14:01:39.995Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "websocketClient.js",
-              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\websocketClient.js",
-              "RelativeDocumentMoniker": "Frontend\\src\\utils\\websocketClient.js",
-              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\websocketClient.js",
-              "RelativeToolTip": "Frontend\\src\\utils\\websocketClient.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T14:01:42.798Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "authService.js",
               "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\authService.js",
               "RelativeDocumentMoniker": "Frontend\\src\\utils\\authService.js",
               "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\authService.js",
               "RelativeToolTip": "Frontend\\src\\utils\\authService.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T13:51:59.563Z"
+              "WhenOpened": "2025-08-10T13:51:59.563Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "server.js",
               "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\server.js",
               "RelativeDocumentMoniker": "Backend\\server.js",
               "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\server.js",
               "RelativeToolTip": "Backend\\server.js",
-              "ViewState": "AgIAAN4AAAAAAAAAAAAAAOgAAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAAL0AAAAAAAAAAAAAALUAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2024-12-13T14:32:05.953Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "package.json",
-              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\package.json",
-              "RelativeDocumentMoniker": "Backend\\package.json",
-              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\package.json",
-              "RelativeToolTip": "Backend\\package.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-10T13:13:25.127Z",
+              "DocumentIndex": 5,
+              "Title": "reportsRoutes.js",
+              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\reportsRoutes.js",
+              "RelativeDocumentMoniker": "Backend\\routes\\reportsRoutes.js",
+              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\reportsRoutes.js",
+              "RelativeToolTip": "Backend\\routes\\reportsRoutes.js",
+              "ViewState": "AgIAAHIAAAAAAAAAAAAAAH0AAABVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-08-10T13:23:30.06Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "axiosInstance.js",
-              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\axiosInstance.js",
-              "RelativeDocumentMoniker": "Frontend\\src\\utils\\axiosInstance.js",
-              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\axiosInstance.js",
-              "RelativeToolTip": "Frontend\\src\\utils\\axiosInstance.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAUAAAAAAAAAA==",
+              "Title": "prefrencesRoutes.js",
+              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\prefrencesRoutes.js",
+              "RelativeDocumentMoniker": "Backend\\routes\\prefrencesRoutes.js",
+              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\prefrencesRoutes.js",
+              "RelativeToolTip": "Backend\\routes\\prefrencesRoutes.js",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAAAEUAAABfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T13:53:32.8Z"
+              "WhenOpened": "2025-08-10T13:23:28.502Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "expenseRoutes.js",
+              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\expenseRoutes.js",
+              "RelativeDocumentMoniker": "Backend\\routes\\expenseRoutes.js",
+              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\expenseRoutes.js",
+              "RelativeToolTip": "Backend\\routes\\expenseRoutes.js",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAAAF0AAABbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-08-10T13:23:27.831Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "boardsRoutes.js",
+              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\boardsRoutes.js",
+              "RelativeDocumentMoniker": "Backend\\routes\\boardsRoutes.js",
+              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\boardsRoutes.js",
+              "RelativeToolTip": "Backend\\routes\\boardsRoutes.js",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAAAF0AAABjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-08-10T13:23:27.08Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "boardMemberRoutes.js",
+              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\boardMemberRoutes.js",
+              "RelativeDocumentMoniker": "Backend\\routes\\boardMemberRoutes.js",
+              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\boardMemberRoutes.js",
+              "RelativeToolTip": "Backend\\routes\\boardMemberRoutes.js",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAAAEMAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-12-13T14:31:39.844Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "authHandlers.js",
+              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\authHandlers.js",
+              "RelativeDocumentMoniker": "Frontend\\src\\utils\\authHandlers.js",
+              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\authHandlers.js",
+              "RelativeToolTip": "Frontend\\src\\utils\\authHandlers.js",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAAAkAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-08-10T13:52:16.317Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "useAuth.js",
+              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\hooks\\useAuth.js",
+              "RelativeDocumentMoniker": "Frontend\\src\\hooks\\useAuth.js",
+              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\hooks\\useAuth.js",
+              "RelativeToolTip": "Frontend\\src\\hooks\\useAuth.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-08-25T09:40:33.135Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "db.js",
               "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\utils\\db.js",
               "RelativeDocumentMoniker": "Backend\\utils\\db.js",
               "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\utils\\db.js",
               "RelativeToolTip": "Backend\\utils\\db.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T13:25:51.452Z"
+              "WhenOpened": "2025-08-10T13:25:51.452Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "sortAndFilterService.js",
-              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\sortAndFilterService.js",
-              "RelativeDocumentMoniker": "Frontend\\src\\utils\\sortAndFilterService.js",
-              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\sortAndFilterService.js",
-              "RelativeToolTip": "Frontend\\src\\utils\\sortAndFilterService.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 11,
+              "Title": "boardMembersService.js",
+              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\boardMembersService.js",
+              "RelativeDocumentMoniker": "Frontend\\src\\utils\\boardMembersService.js",
+              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\boardMembersService.js",
+              "RelativeToolTip": "Frontend\\src\\utils\\boardMembersService.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T14:01:32.208Z"
+              "WhenOpened": "2025-08-10T13:52:21.167Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "reportsService.js",
               "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\reportsService.js",
               "RelativeDocumentMoniker": "Frontend\\src\\utils\\reportsService.js",
@@ -271,23 +316,25 @@
               "RelativeToolTip": "Frontend\\src\\utils\\reportsService.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T14:01:29.011Z"
+              "WhenOpened": "2025-08-10T14:01:29.011Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "reportService.js",
-              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\reportService.js",
-              "RelativeDocumentMoniker": "Frontend\\src\\utils\\reportService.js",
-              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\reportService.js",
-              "RelativeToolTip": "Frontend\\src\\utils\\reportService.js",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 9,
+              "Title": "axiosInstance.js",
+              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\axiosInstance.js",
+              "RelativeDocumentMoniker": "Frontend\\src\\utils\\axiosInstance.js",
+              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\axiosInstance.js",
+              "RelativeToolTip": "Frontend\\src\\utils\\axiosInstance.js",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAAA4AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T13:54:45.629Z"
+              "WhenOpened": "2025-08-10T13:53:32.8Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "preferenceService.js",
               "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\preferenceService.js",
               "RelativeDocumentMoniker": "Frontend\\src\\utils\\preferenceService.js",
@@ -295,23 +342,12 @@
               "RelativeToolTip": "Frontend\\src\\utils\\preferenceService.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T13:54:43.388Z"
+              "WhenOpened": "2025-08-10T13:54:43.388Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "jwtService.js",
-              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\jwtService.js",
-              "RelativeDocumentMoniker": "Frontend\\src\\utils\\jwtService.js",
-              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\jwtService.js",
-              "RelativeToolTip": "Frontend\\src\\utils\\jwtService.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T13:53:22.448Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "expenseService.js",
               "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\expenseService.js",
               "RelativeDocumentMoniker": "Frontend\\src\\utils\\expenseService.js",
@@ -319,11 +355,12 @@
               "RelativeToolTip": "Frontend\\src\\utils\\expenseService.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T13:53:10.291Z"
+              "WhenOpened": "2025-08-10T13:53:10.291Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "boardService.js",
               "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\boardService.js",
               "RelativeDocumentMoniker": "Frontend\\src\\utils\\boardService.js",
@@ -331,47 +368,38 @@
               "RelativeToolTip": "Frontend\\src\\utils\\boardService.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T13:53:01.946Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "boardMembersService.js",
-              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\boardMembersService.js",
-              "RelativeDocumentMoniker": "Frontend\\src\\utils\\boardMembersService.js",
-              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\boardMembersService.js",
-              "RelativeToolTip": "Frontend\\src\\utils\\boardMembersService.js",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T13:52:21.167Z"
+              "WhenOpened": "2025-08-10T13:53:01.946Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 16,
-              "Title": "authHandlers.js",
-              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\authHandlers.js",
-              "RelativeDocumentMoniker": "Frontend\\src\\utils\\authHandlers.js",
-              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\authHandlers.js",
-              "RelativeToolTip": "Frontend\\src\\utils\\authHandlers.js",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "reportsActions.js",
+              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\redux\\actions\\reportsActions.js",
+              "RelativeDocumentMoniker": "Frontend\\src\\redux\\actions\\reportsActions.js",
+              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\redux\\actions\\reportsActions.js",
+              "RelativeToolTip": "Frontend\\src\\redux\\actions\\reportsActions.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T13:52:16.317Z"
+              "WhenOpened": "2025-08-24T12:39:11.694Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "package.json",
+              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\package.json",
+              "RelativeDocumentMoniker": "Frontend\\package.json",
+              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\package.json",
+              "RelativeToolTip": "Frontend\\package.json",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-24T12:36:48.626Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 18,
-              "Title": ".gitignore",
-              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\.gitignore",
-              "RelativeDocumentMoniker": "Frontend\\.gitignore",
-              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\.gitignore",
-              "RelativeToolTip": "Frontend\\.gitignore",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-08-10T13:25:46.064Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
               "Title": "config.js",
               "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\config\\config.js",
               "RelativeDocumentMoniker": "Backend\\config\\config.js",
@@ -383,19 +411,115 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "reportsRoutes.js",
-              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\reportsRoutes.js",
-              "RelativeDocumentMoniker": "Backend\\routes\\reportsRoutes.js",
-              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\reportsRoutes.js",
-              "RelativeToolTip": "Backend\\routes\\reportsRoutes.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T13:23:30.06Z"
+              "DocumentIndex": 19,
+              "Title": "package.json",
+              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\package.json",
+              "RelativeDocumentMoniker": "Backend\\package.json",
+              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\package.json",
+              "RelativeToolTip": "Backend\\package.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-10T13:13:25.127Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 20,
+              "Title": "websocketClient.js",
+              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\websocketClient.js",
+              "RelativeDocumentMoniker": "Frontend\\src\\utils\\websocketClient.js",
+              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\websocketClient.js",
+              "RelativeToolTip": "Frontend\\src\\utils\\websocketClient.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-08-10T14:01:42.798Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "websocketServer.js",
+              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\websocketServer.js",
+              "RelativeDocumentMoniker": "Backend\\websocketServer.js",
+              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\websocketServer.js",
+              "RelativeToolTip": "Backend\\websocketServer.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-08-10T12:55:03.738Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "utilService.js",
+              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\utilService.js",
+              "RelativeDocumentMoniker": "Frontend\\src\\utils\\utilService.js",
+              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\utilService.js",
+              "RelativeToolTip": "Frontend\\src\\utils\\utilService.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-08-10T14:01:39.995Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "userService.js",
+              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\userService.js",
+              "RelativeDocumentMoniker": "Frontend\\src\\utils\\userService.js",
+              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\userService.js",
+              "RelativeToolTip": "Frontend\\src\\utils\\userService.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-08-10T14:01:34.966Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "sortAndFilterService.js",
+              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\sortAndFilterService.js",
+              "RelativeDocumentMoniker": "Frontend\\src\\utils\\sortAndFilterService.js",
+              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\sortAndFilterService.js",
+              "RelativeToolTip": "Frontend\\src\\utils\\sortAndFilterService.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-08-10T14:01:32.208Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "reportService.js",
+              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\reportService.js",
+              "RelativeDocumentMoniker": "Frontend\\src\\utils\\reportService.js",
+              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\reportService.js",
+              "RelativeToolTip": "Frontend\\src\\utils\\reportService.js",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-08-10T13:54:45.629Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "jwtService.js",
+              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\jwtService.js",
+              "RelativeDocumentMoniker": "Frontend\\src\\utils\\jwtService.js",
+              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\utils\\jwtService.js",
+              "RelativeToolTip": "Frontend\\src\\utils\\jwtService.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-08-10T13:53:22.448Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\.gitignore",
+              "RelativeDocumentMoniker": "Frontend\\.gitignore",
+              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\.gitignore",
+              "RelativeToolTip": "Frontend\\.gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-08-10T13:25:46.064Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
               "Title": "auth.js",
               "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\middleware\\auth.js",
               "RelativeDocumentMoniker": "Backend\\middleware\\auth.js",
@@ -407,19 +531,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "websocketServer.js",
-              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\websocketServer.js",
-              "RelativeDocumentMoniker": "Backend\\websocketServer.js",
-              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\websocketServer.js",
-              "RelativeToolTip": "Backend\\websocketServer.js",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAkwGkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T12:55:03.738Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 29,
               "Title": "generateJwtSecret.js",
               "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\utils\\generateJwtSecret.js",
               "RelativeDocumentMoniker": "Backend\\utils\\generateJwtSecret.js",
@@ -431,7 +543,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 30,
               "Title": "process.d.ts",
               "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\node_modules\\@types\\node\\process.d.ts",
               "RelativeDocumentMoniker": "Frontend\\node_modules\\@types\\node\\process.d.ts",
@@ -443,7 +555,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 31,
               "Title": "process.d.ts",
               "DocumentMoniker": "C:\\Users\\Rotem\\AppData\\Local\\Microsoft\\TypeScript\\5.2\\node_modules\\@types\\node\\process.d.ts",
               "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Microsoft\\TypeScript\\5.2\\node_modules\\@types\\node\\process.d.ts",
@@ -455,43 +567,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "prefrencesRoutes.js",
-              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\prefrencesRoutes.js",
-              "RelativeDocumentMoniker": "Backend\\routes\\prefrencesRoutes.js",
-              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\prefrencesRoutes.js",
-              "RelativeToolTip": "Backend\\routes\\prefrencesRoutes.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T13:23:28.502Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "expenseRoutes.js",
-              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\expenseRoutes.js",
-              "RelativeDocumentMoniker": "Backend\\routes\\expenseRoutes.js",
-              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\expenseRoutes.js",
-              "RelativeToolTip": "Backend\\routes\\expenseRoutes.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T13:23:27.831Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "boardsRoutes.js",
-              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\boardsRoutes.js",
-              "RelativeDocumentMoniker": "Backend\\routes\\boardsRoutes.js",
-              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\boardsRoutes.js",
-              "RelativeToolTip": "Backend\\routes\\boardsRoutes.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-10T13:23:27.08Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 32,
               "Title": "vite.config.js",
               "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\vite.config.js",
               "RelativeDocumentMoniker": "Frontend\\vite.config.js",
@@ -503,7 +579,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 35,
               "Title": "index.js",
               "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\index.js",
               "RelativeDocumentMoniker": "Frontend\\src\\index.js",
@@ -515,7 +591,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 34,
               "Title": "App.jsx",
               "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\App.jsx",
               "RelativeDocumentMoniker": "Frontend\\src\\App.jsx",
@@ -527,7 +603,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 33,
               "Title": "main.jsx",
               "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Frontend\\src\\main.jsx",
               "RelativeDocumentMoniker": "Frontend\\src\\main.jsx",
@@ -539,7 +615,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 36,
               "Title": "package-lock.json",
               "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\package-lock.json",
               "RelativeDocumentMoniker": "Backend\\package-lock.json",
@@ -548,18 +624,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-12-13T14:37:42.803Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "boardMemberRoutes.js",
-              "DocumentMoniker": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\boardMemberRoutes.js",
-              "RelativeDocumentMoniker": "Backend\\routes\\boardMemberRoutes.js",
-              "ToolTip": "C:\\Users\\Rotem\\Desktop\\react\\ExpenseApp\\Backend\\routes\\boardMemberRoutes.js",
-              "RelativeToolTip": "Backend\\routes\\boardMemberRoutes.js",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-12-13T14:31:39.844Z"
             }
           ]
         },
@@ -578,10 +642,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:11:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             }
           ]
         }

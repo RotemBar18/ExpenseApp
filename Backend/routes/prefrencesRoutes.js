@@ -33,7 +33,7 @@ const verifyToken = (req, res, next) => {
 router.get('/:boardId', verifyToken, async (req, res) => {
     try {
         const boardId =req.params.boardId
-        const [preferences] = await req.db.query('SELECT * FROM board_preferences WHERE ExpenseBoardId = ?', [boardId]);
+        const [preferences] = await req.db.query('SELECT * FROM boardpreferences WHERE expenseboardid = ?', [boardId]);
 
         res.status(200).json(preferences[0]);
     } catch (error) {
@@ -47,9 +47,9 @@ router.put('/:boardId', async (req, res) => {
         const {boardId} = req.params;
         const { ExpensesThemeColor, DefaultCategories } = req.body; 
         const query = `
-            UPDATE board_preferences 
-            SET ExpensesThemeColor = ?, DefaultCategories = ?
-            WHERE ExpenseBoardId = ?
+            UPDATE boardpreferences
+            SET expensesthemecolor = ?, defaultcategories = ?
+            WHERE expenseboardid = ?
         `;
 
         await req.db.query(query, [ExpensesThemeColor, DefaultCategories, boardId]);
@@ -67,7 +67,7 @@ router.post('/:boardId', verifyToken, async (req, res) => {
         const { ExpensesThemeColor, DefaultCategories } = req.body;  
 
         const query = `
-            INSERT INTO board_preferences (ExpenseBoardId, ExpensesThemeColor, DefaultCategories) 
+            INSERT INTO boardpreferences (expenseboardid, expensesthemecolor, defaultcategories)
             VALUES (?, ?, ?)
         `;
 

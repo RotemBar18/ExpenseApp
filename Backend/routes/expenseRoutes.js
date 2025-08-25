@@ -30,7 +30,7 @@ const verifyToken = (req, res, next) => {
 router.get('/:boardId', async (req, res) => {
     try {
         const { boardId } = req.params;
-        const [rows] = await req.db.query('SELECT * FROM expenses WHERE isVisible = 1 AND ExpenseBoardId = ?', [boardId]);
+        const [rows] = await req.db.query('SELECT * FROM expenses WHERE isvisible = 1 AND expenseboardid = ?', [boardId]);
         res.status(200).json(rows);
     } catch (error) {
         console.error('Error fetching board expenses:', error);
@@ -54,7 +54,7 @@ router.post('/', async (req, res) => {
     const formattedDate = getTodayDate(); 
     try {
         const result = await req.db.query(
-            'INSERT INTO expenses (Amount, Description, Category, Name, UserId, Date, ExpenseBoardId, isVisible) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+            'INSERT INTO expenses (amount, description, category, name, userid, date, expenseboardid, isvisible) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
             [amount, description, category, name, userId, formattedDate, ExpenseBoardId, 1]
         );
 
@@ -73,7 +73,7 @@ router.put('/:id', async (req, res) => {
 
     try {
         const [result] = await req.db.query(
-            'UPDATE expenses SET Name = ?, Amount = ?, Description = ?, Category = ?, Date = ?, IsVisible = ? WHERE ExpenseId = ?',
+            'UPDATE expenses SET name = ?, amount = ?, description = ?, category = ?, date = ?, isvisible = ? WHERE expenseid = ?',
             [Name, Amount, Description, Category, Date, IsVisible, id]
         );
 
@@ -91,7 +91,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        const result = await req.db.query('UPDATE expenses SET IsVisible = 0 WHERE ExpenseId = ?', [id]);
+        const result = await req.db.query('UPDATE expenses SET isvisible = 0 WHERE expenseid = ?', [id]);
         res.status(200).json({ message: 'Expense deleted' });
     } catch (error) {
         console.error('Error deleting expense:', error);

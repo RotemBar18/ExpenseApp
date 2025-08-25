@@ -29,7 +29,7 @@ const verifyToken = (req, res, next) => {
 router.get('/:userId', verifyToken, async (req, res) => {
     try {
         const { userId } = req.params;
-        const boards = await req.db.query('SELECT * FROM expenseboards WHERE ExpenseBoardId IN (SELECT ExpenseBoardId FROM boardmembers WHERE UserId = ?)', [userId, userId]);
+        const boards = await req.db.query('SELECT * FROM expenseboards WHERE expenseboardid IN (SELECT expenseboardid FROM boardmembers WHERE userid = ?)', [userId, userId]);
         res.status(200).json(boards);
     } catch (error) {
         console.error(error);
@@ -41,7 +41,7 @@ router.get('/:userId', verifyToken, async (req, res) => {
 router.get('/:boardId', async (req, res) => {
     try {
         const { boardId } = req.params;
-        const board = await req.db.query('SELECT * FROM expenseboards WHERE ExpenseBoardId = ?', [boardId]);
+        const board = await req.db.query('SELECT * FROM expenseboards WHERE expenseboardid = ?', [boardId]);
         if (board.length === 0) {
             return res.status(404).json({ error: 'Board not found' });
         }
@@ -55,11 +55,11 @@ router.post('/', async (req, res) => {
     try {
         const { boardName, OwnerId } = req.body;
 
-        const result = await req.db.query('INSERT INTO expenseboards (Name, OwnerId) VALUES (?, ?)', [boardName, OwnerId]);
+        const result = await req.db.query('INSERT INTO expenseboards (name, ownerid) VALUES (?, ?)', [boardName, OwnerId]);
 
         const newBoardId = result[0].insertId;
 
-        const [newBoard] = await req.db.query('SELECT * FROM expenseboards WHERE ExpenseBoardId = ?', [newBoardId]);
+        const [newBoard] = await req.db.query('SELECT * FROM expenseboards WHERE expenseboardid = ?', [newBoardId]);
 
         res.status(201).json({ message: 'Board created and collaborator added', newBoard: newBoard[0] });
     } catch (error) {
@@ -74,7 +74,7 @@ router.post('/', async (req, res) => {
 router.delete('/:boardId', async (req, res) => {
     try {
         const { boardId } = req.params;
-        await req.db.query('DELETE FROM expenseboards WHERE ExpenseBoardId = ?', [boardId]);
+        await req.db.query('DELETE FROM expenseboards WHERE expenseboardid = ?', [boardId]);
         res.status(200).json({ message: 'Board deleted' });
     } catch (error) {
         res.status(500).json({ error: 'Failed to delete board' });
@@ -89,9 +89,9 @@ router.put('/:boardId', async (req, res) => {
             return res.status(400).json({ message: 'Board name and profile picture are required.' });
         }
 
-        await req.db.query('UPDATE expenseboards SET Name = ?, ProfilePic = ?, Budget = ? WHERE ExpenseBoardId = ?', [Name, ProfilePic,Budget, boardId]);
+        await req.db.query('UPDATE expenseboards SET name = ?, profilepic = ?, budget = ? WHERE expenseboardid = ?', [Name, ProfilePic,Budget, boardId]);
 
-        const [updatedBoard] = await req.db.query('SELECT * FROM expenseboards WHERE ExpenseBoardId = ?', [boardId]);
+        const [updatedBoard] = await req.db.query('SELECT * FROM expenseboards WHERE expenseboardid = ?', [boardId]);
 
         if (!updatedBoard || updatedBoard.length === 0) {
             return res.status(404).json({ message: 'Board not found.' });

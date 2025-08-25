@@ -1,24 +1,29 @@
-const mysql = require('mysql2/promise');
+// utils/db.js — PostgreSQL only
+const { Pool } = require('pg');
 
-const host = process.env.DB_HOST || process.env.MYSQLHOST || 'localhost';
-const port = Number(process.env.DB_PORT || process.env.MYSQLPORT || 3306);
-const user = process.env.DB_USER || process.env.MYSQLUSER;
-const password = process.env.DB_PASSWORD || process.env.MYSQLPASSWORD;
-const database = process.env.DB_NAME || process.env.MYSQLDATABASE;
+// Convert "?" placeholders to $1,$2,... so your existing SQL keeps working
+function toPgParams(sql) {
+    let i = 0;
+    return sql.replace(/\?/g, () => `$${++i}`);
+}
 
-// set DB_SSL=true in your LOCAL .env only
-const useSSL = process.env.DB_SSL === 'true';
-
-const dbConnection = mysql.createPool({
-    host,
-    port,
-    user,
-    password,
-    database,
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0,
-    ...(useSSL ? { ssl: { rejectUnauthorized: false } } : {})
+const pool = new Pool({
+    host: process.env.PGHOST || '127.0.0.1',
+    port: Number(process.env.PGPORT || 5432),
+    user: process.env.PGUSER || 'postgres',
+    password: process.env.PGPASSWORD || 'postgres',
+    database: process.env.PGDATABASE || 'expenseapp_pg',
+    max: 5,
+    idleTimeoutMillis: 30000,
+    ...(process.env.PGSSL === 'true' ? { ssl: { rejectUnauthorized: false } } : {})
 });
 
-module.exports = dbConnection;
+// Expose a mysql2-like interface: query() returns [rows]
+module.exports = {
+    query: async (sql, params = []) => {
+        const text = toPgParams(sql);
+        const res = await pool.query(text, params);
+        return [res.rows];
+    },
+    _raw: pool
+};

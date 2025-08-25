@@ -30,7 +30,7 @@ const verifyToken = (req, res, next) => {
 router.get('/:boardId', verifyToken, async (req, res) => {
     try {
         const {boardId} = req.params;
-        const [reports] = await req.db.query('SELECT * FROM reports WHERE ExpenseBoardId = ?', [boardId]);
+        const [reports] = await req.db.query('SELECT * FROM reports WHERE expenseboardid = ?', [boardId]);
 
         if (reports.length === 0) {
             return res.status(404).json({ message: 'No reports found' });
@@ -48,7 +48,7 @@ router.get('/:boardId/:reportId', verifyToken, async (req, res) => {
         const { reportId } = req.params;
         const boardId = req.boardId;
 
-        const [report] = await req.db.query('SELECT * FROM reports WHERE ExpenseBoardId = ? AND ReportId = ?', [boardId, reportId]);
+        const [report] = await req.db.query('SELECT * FROM reports WHERE expenseboardid = ? AND reportid = ?', [boardId, reportId]);
 
         if (report.length === 0) {
             return res.status(404).json({ message: 'Report not found' });
@@ -66,7 +66,7 @@ router.post('/:userId/:boardId', verifyToken, async (req, res) => {
         const {userId,boardId} = req.params;
         const { name, categories, months, years, reportData, createdAt } = req.body;
         const query = `
-            INSERT INTO reports (UserId,ExpenseBoardId, ReportName, Categories, Months, Years, CreatedAt, ReportData) 
+            INSERT INTO reports (userid,expenseboardid, reportname, categories, months, years, createdat, reportdata)
             VALUES (?,?, ?, ?, ?, ?, ?, ?)
         `;
 
@@ -82,7 +82,7 @@ router.post('/:userId/:boardId', verifyToken, async (req, res) => {
         ]);
         const newReportId = insertResult.insertId;
 
-        const [newReport] = await req.db.query('SELECT * FROM reports WHERE ReportId = ?', [newReportId]);
+        const [newReport] = await req.db.query('SELECT * FROM reports WHERE reportid = ?', [newReportId]);
 
         res.status(201).json({ report: newReport[0] });
     } catch (error) {
@@ -99,8 +99,8 @@ router.put('/:boardId/:reportId', verifyToken, async (req, res) => {
 
         const query = `
             UPDATE reports 
-            SET Name = ?, Categories = ?, Months = ?, Years = ?, Expenses = ? 
-            WHERE ExpenseBoardId = ? AND ReportId = ?
+            SET Name = ?, categories = ?, months = ?, years = ?, expenses = ? 
+            WHERE expenseboardid = ? AND reportid = ?
         `;
 
         await req.db.query(query, [
@@ -123,7 +123,7 @@ router.put('/:boardId/:reportId', verifyToken, async (req, res) => {
 router.delete('/:boardId/:reportId', verifyToken, async (req, res) => {
     try {
         const { boardId ,reportId} = req.params;
-        await req.db.query('DELETE FROM reports WHERE ExpenseBoardId = ? AND ReportId = ?', [boardId, reportId]);
+        await req.db.query('DELETE FROM reports WHERE expenseboardid = ? AND reportid = ?', [boardId, reportId]);
 
         res.status(200).json({ message: 'Report deleted successfully' });
     } catch (error) {

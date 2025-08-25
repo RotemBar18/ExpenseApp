@@ -30,7 +30,7 @@ const verifyToken = (req, res, next) => {
 router.post('/', verifyToken, async (req, res) => {
     const { userId, boardId } = req.body;
     try {
-        const query = `INSERT INTO boardmembers (UserId, ExpenseBoardId) VALUES (?, ?)`;
+        const query = `INSERT INTO boardmembers (userid, expenseboardid) VALUES (?, ?)`;
         await req.db.query(query, [userId, boardId]);
         
         res.status(201).json({ message: 'Board member added successfully' });
@@ -43,7 +43,7 @@ router.post('/', verifyToken, async (req, res) => {
 router.delete('/', async (req, res) => {
     const { userId, boardId } = req.query;
     try {
-        const query = `DELETE FROM boardmembers WHERE UserId = ? AND ExpenseBoardId = ?`;
+        const query = `DELETE FROM boardmembers WHERE userid = ? AND expenseboardid = ?`;
         const result = await req.db.query(query, [userId, boardId]);
 
         if (result[0].affectedRows === 0) {
@@ -62,10 +62,10 @@ router.get('/:boardId', verifyToken, async (req, res) => {
 
     try {
         const query = `
-            SELECT bm.UserId, u.Name, u.ProfilePic 
+            SELECT bm.userid, u.Name, u.profilepic 
             FROM boardmembers bm 
-            JOIN users u ON bm.UserId = u.Id 
-            WHERE bm.ExpenseBoardId = ?`;
+            JOIN users u ON bm.userid = u.id 
+            WHERE bm.expenseboardid = ?`;
         const [rows] = await req.db.query(query, [boardId]);
 
         res.status(200).json(rows);
