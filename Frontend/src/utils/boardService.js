@@ -1,97 +1,60 @@
-import axios from 'axios';
-import { fetchBoardPreferences } from '../redux/actions/preferenceAction';
-import { createDefaultPreferences } from './preferenceService';
-import { addBoardCollaborator } from './boardMembersService'
+// services/boardService.js
 import axiosInstance from './axiosInstance';
+import { createDefaultPreferences } from './preferenceService';
+import { addBoardCollaborator } from './boardMembersService';
 
+// Get ALL boards (owned or member) for a user
 export const fetchBoards = async (token, userId) => {
-    try {
-        const response = await axiosInstance.get(`/boards/${userId}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
-        return response.data[0];
-    } catch (error) {
-        console.error('Error fetching boards:', error);
-        throw error;
-    }
+    const { data } = await axiosInstance.get(`/boards/user/${userId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    // data is an array of boards with keys: ExpenseBoardId, Name, OwnerId, ...
+    return data;
 };
 
-export const fetchBoardById = async (boardId) => {
-    try {
-        const response = await axiosInstance.get(`/boards/${boardId}`);
-        dispatch(fetchBoardPreferences(boardId, token));
-        return response.data;
-    } catch (error) {
-        console.error('Error fetching board:', error);
-        throw error;
-    }
+// Get a specific board
+export const fetchBoardById = async (boardId, token) => {
+    const { data } = await axiosInstance.get(`/boards/board/${boardId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    return data; // { ExpenseBoardId, Name, ... }
 };
 
-
+// Create a board, then add owner as collaborator and create default prefs
 export const createBoard = async (token, boardName, OwnerId) => {
-    try {
-        const boardResponse = await axiosInstance.post(`/boards/`,
-            { boardName, OwnerId },
-            {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                }
-            }
-        );
+    const { data } = await axiosInstance.post(
+        `/boards/`,
+        { boardName, OwnerId },
+        { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } }
+    );
 
-        const newBoard = boardResponse.data.newBoard;
-
-        await addBoardCollaborator(token, OwnerId, newBoard.ExpenseBoardId);
-
-        await createDefaultPreferences(newBoard.ExpenseBoardId);
-
-        return newBoard;
-    } catch (error) {
-        console.error('Error creating board, adding collaborator, or creating preferences:', error);
-        throw error;
-    }
+    const newBoard = data.newBoard; // has ExpenseBoardId
+    await addBoardCollaborator(token, OwnerId, newBoard.ExpenseBoardId);
+    await createDefaultPreferences(newBoard.ExpenseBoardId);
+    return newBoard;
 };
 
-export const updateBoardService = async (token,updatedData) => {
-    if (!updatedData.ProfilePic) {
-        updatedData.ProfilePic = ''
-    }
-    const boardId = updatedData.ExpenseBoardId
-    try {
-        const response = await axiosInstance.put(`/boards/${boardId}`, updatedData, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            },
-            
-        });
-        if (!response.status === 200) {
-            throw new Error('Error updating board');
-        }
-        return response.data;
-    } catch (error) {
-        console.error('Error updating board:', error);
-        throw error;
-    }
+// Update a board
+export const updateBoardService = async (token, updatedData) => {
+    const boardId = updatedData.ExpenseBoardId;
+    const payload = {
+        ...updatedData,
+        ProfilePic: updatedData.ProfilePic ?? '' // default to empty string
+    };
+
+    const response = await axiosInstance.put(`/boards/board/${boardId}`, payload, {
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+    });
+
+    if (response.status !== 200) throw new Error('Error updating board');
+    return response.data; // { message, updatedBoard }
 };
+
+// Delete a board
 export const deleteBoard = async (boardId, token) => {
-    try {
-        const response = await axiosInstance.delete(`/boards/${boardId}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            },
-        });
-
-        if (!response.status === 200) {
-            throw new Error('Error updating board');
-        }
-        return response.data;
-    } catch (error) {
-        console.error('Error updating board:', error);
-        throw error;
-    }
+    const response = await axiosInstance.delete(`/boards/board/${boardId}`, {
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+    });
+    if (response.status !== 200) throw new Error('Error deleting board');
+    return response.data;
 };

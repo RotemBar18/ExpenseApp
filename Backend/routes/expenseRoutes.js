@@ -26,77 +26,84 @@ const verifyToken = (req, res, next) => {
         next();
     });
 };
+router.get('/:userId', verifyToken, async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const boards = await req.db.query('SELECT * FROM expenseboards WHERE expenseboardid IN (SELECT expenseboardid FROM boardmembers WHERE userid = ?)', [userId, userId]);
+        res.status(200).json(boards);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to fetch boards' });
+    }
+});
+
 
 router.get('/:boardId', async (req, res) => {
     try {
         const { boardId } = req.params;
-        const [rows] = await req.db.query('SELECT * FROM expenses WHERE isvisible = 1 AND expenseboardid = ?', [boardId]);
-        res.status(200).json(rows);
+        const board = await req.db.query('SELECT * FROM expenseboards WHERE expenseboardid = ?', [boardId]);
+        if (board.length === 0) {
+            return res.status(404).json({ error: 'Board not found' });
+        }
+        res.status(200).json(board[0]);
     } catch (error) {
-        console.error('Error fetching board expenses:', error);
-        res.status(500).json({ message: 'Error fetching board expenses' });
+        res.status(500).json({ error: 'Failed to fetch board' });
     }
 });
-
 
 router.post('/', async (req, res) => {
-    const { Amount: amount, Description: description, Category: category, Name: name, UserId: userId, ExpenseBoardId: ExpenseBoardId } = req.body;
-
-    const getTodayDate = () => {
-        const today = new Date();
-        const year = today.getFullYear();
-        const month = String(today.getMonth() + 1).padStart(2, '0');  
-        const day = String(today.getDate()).padStart(2, '0');         
-
-        return `${year}-${month}-${day}`;  
-    };
-
-    const formattedDate = getTodayDate(); 
     try {
-        const result = await req.db.query(
-            'INSERT INTO expenses (amount, description, category, name, userid, date, expenseboardid, isvisible) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-            [amount, description, category, name, userId, formattedDate, ExpenseBoardId, 1]
-        );
+        const { boardName, OwnerId } = req.body;
 
-        res.status(201).json({ id: result[0].insertId });
+        const result = await req.db.query('INSERT INTO expenseboards (name, ownerid) VALUES (?, ?)', [boardName, OwnerId]);
+
+        const newBoardId = result[0].insertId;
+
+        const [newBoard] = await req.db.query('SELECT * FROM expenseboards WHERE expenseboardid = ?', [newBoardId]);
+
+        res.status(201).json({ message: 'Board created and collaborator added', newBoard: newBoard[0] });
     } catch (error) {
-        console.error('Error creating expense:', error);
-        res.status(500).json({ message: 'Error creating expense' });
+        console.error('Error creating board or adding collaborator:', error);
+        res.status(500).json({ error: 'Failed to create board or add collaborator' });
     }
 });
 
 
 
-router.put('/:id', async (req, res) => {
-    const { id } = req.params;
-    const { Name, Amount, Description, Category, Date, IsVisible } = req.body;
 
+router.delete('/:boardId', async (req, res) => {
     try {
-        const [result] = await req.db.query(
-            'UPDATE expenses SET name = ?, amount = ?, description = ?, category = ?, date = ?, isvisible = ? WHERE expenseid = ?',
-            [Name, Amount, Description, Category, Date, IsVisible, id]
-        );
+        const { boardId } = req.params;
+        await req.db.query('DELETE FROM expenseboards WHERE expenseboardid = ?', [boardId]);
+        res.status(200).json({ message: 'Board deleted' });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to delete board' });
+    }
+});
 
-        if (result.affectedRows === 0) {
-            return res.status(404).json({ message: 'No expense found with the given ID' });
+router.put('/:boardId', async (req, res) => {
+    try {
+        const { boardId } = req.params;
+        const { Name, ProfilePic, Budget } = req.body;
+        if (!Name || ProfilePic == null) {
+            return res.status(400).json({ message: 'Board name and profile picture are required.' });
         }
 
-        res.status(200).json({ message: 'Expense updated successfully' });
+        await req.db.query('UPDATE expenseboards SET name = ?, profilepic = ?, budget = ? WHERE expenseboardid = ?', [Name, ProfilePic, Budget, boardId]);
+
+        const [updatedBoard] = await req.db.query('SELECT * FROM expenseboards WHERE expenseboardid = ?', [boardId]);
+
+        if (!updatedBoard || updatedBoard.length === 0) {
+            return res.status(404).json({ message: 'Board not found.' });
+        }
+
+        res.status(200).json({ message: 'Board updated successfully', updatedBoard: updatedBoard[0] });
     } catch (error) {
-        console.error('Error updating expense:', error);
-        res.status(500).json({ message: 'Error updating expense' });
+        console.error('Error updating board:', error);
+        res.status(500).json({ error: 'Failed to update board' });
     }
 });
 
-router.delete('/:id', async (req, res) => {
-    const { id } = req.params;
-    try {
-        const result = await req.db.query('UPDATE expenses SET isvisible = 0 WHERE expenseid = ?', [id]);
-        res.status(200).json({ message: 'Expense deleted' });
-    } catch (error) {
-        console.error('Error deleting expense:', error);
-        res.status(500).json({ message: 'Error deleting expense' });
-    }
-});
+
 
 module.exports = router;
